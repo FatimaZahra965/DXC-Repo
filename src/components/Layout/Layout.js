@@ -31,6 +31,9 @@ import Activites from "../../pages/activites/Activites";
 import Technologies from "../../pages/technologies/Technologies";
 import Projets from "../../pages/projets/Projets";
 import Parametres from "../../pages/parametres/Parametres";
+import AjouterRessource from "../../pages/ressources/Ajouter Ressoure/AjouterRessource";
+import ModiferRessource from "../../pages/ressources/Modifier Ressource/ModiferRessource";
+import AfficherRessource from "../../pages/ressources/Afficher Ressource/AfficherRessource";
 
 function Layout(props) {
   var classes = useStyles();
@@ -69,6 +72,18 @@ function Layout(props) {
             />
             <Route path="/app/prestations/projets" component={Projets} />
             <Route path="/app/parametres" component={Parametres} />
+            <Route
+              path="/app/ressources/AjouterRessource"
+              component={AjouterRessource}
+            />
+            <Route
+              path="/app/ressources/ModiferRessource/:id"
+              component={ModiferRessource}
+            />
+            <Route
+              path="/app/ressources/AfficherRessource/:id"
+              component={AfficherRessource}
+            />
           </Switch>
           <Box
             mt={5}
