@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // styles
 // import useStyles from "./styles";
@@ -19,6 +19,8 @@ import { Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import { useDispatch, useSelector } from "react-redux";
+import { getRessourcesAction } from "../../services/Actions/ressourcesActions";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -102,6 +104,14 @@ export default function Ressources() {
   // local
   const history = useHistory();
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const ressources = useSelector((state) => state.ressources.ressources);
+
+  useEffect(() => {
+    const loadRessources = () => dispatch(getRessourcesAction());
+    loadRessources();
+  }, []);
 
   const addRessource = () => {
     let path = `/app/ressources/AjouterRessource`;
@@ -109,7 +119,6 @@ export default function Ressources() {
   };
 
   const EditRessource = (e) => {
-    console.log("matricule", e);
     let path = `/app/ressources/ModiferRessource/` + e;
     history.push(path);
   };
@@ -138,6 +147,9 @@ export default function Ressources() {
       </Grid>
 
       <TableContainer component={Paper}>
+        {ressources.map((ressource) => {
+          <h1>{ressource.type}</h1>;
+        })}
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>

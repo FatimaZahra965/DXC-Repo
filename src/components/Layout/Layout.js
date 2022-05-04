@@ -34,6 +34,10 @@ import Parametres from "../../pages/parametres/Parametres";
 import AjouterRessource from "../../pages/ressources/Ajouter Ressoure/AjouterRessource";
 import ModiferRessource from "../../pages/ressources/Modifier Ressource/ModiferRessource";
 import AfficherRessource from "../../pages/ressources/Afficher Ressource/AfficherRessource";
+import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
+import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
+import Prestations from "../../pages/prestations/Prestations";
+import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
 
 function Layout(props) {
   var classes = useStyles();
@@ -59,11 +63,10 @@ function Layout(props) {
             <Route path="/app/notifications" component={Notifications} />
 
             <Route
-              exact
-              path="/app/prestations"
-              render={() => <Redirect to="/app/prestations" />}
+              path="/app/prestations/allPrestation"
+              component={Prestations}
             />
-            <Route path="/app/prestations/clients" component={Clients} />
+            <Route path="/app/prestations/clients" component={Prestations} />
             <Route path="/app/prestations/ressources" component={Ressources} />
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
@@ -84,6 +87,19 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
+
+            <Route
+              path="/app/prestations/AjouterPrestation"
+              component={AjouterPrestation}
+            />
+            {/* <Route
+              path="/app/prestations/ModiferPrestation/:id"
+              component={ModiferPrestation}
+            />
+            <Route
+              path="/app/prestations/AficherPrestation/:id"
+              component={AfficherPrestation}
+            /> */}
           </Switch>
           <Box
             mt={5}
@@ -94,7 +110,7 @@ function Layout(props) {
           >
             <div alignItems={"center"}>
               <p>
-                © Copyright 2022 DXC Technology Company. All rights reserved
+                {/* © Copyright 2022 DXC Technology Company. All rights reserved */}
               </p>
             </div>
           </Box>

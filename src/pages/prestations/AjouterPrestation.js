@@ -2,35 +2,35 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import PageTitle from "../../../components/PageTitle/PageTitle";
 import { Button } from "@material-ui/core";
-import useStyles from "./style";
+import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewRessourceAction } from "../../../services/Actions/ressourcesActions";
+
+import { Alert } from "@material-ui/lab";
+import { createNewPrestationAction } from "../../services/Actions/prestationsActions";
 import {
   validacionError,
-  validationSuccess,
   validarFormularioAction,
-} from "../../../services/Actions/validacionActions";
-import Alert from "@material-ui/lab/Alert";
+  validationSuccess,
+} from "../../services/Actions/validacionActions";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
-export default function AjouterRessource() {
+export default function AjouterPrestation() {
   const classes = useStyles();
   const history = useHistory();
   //state
-  const [Matricule, getMatricule] = useState("");
-  const [Status, getStatus] = useState("");
-  const [Prenom, getPrenom] = useState("");
-  const [Nom, getNom] = useState("");
-  const [Genre, getGenre] = useState("homme");
-  const [DateAmbauche, getDateAmbauche] = useState("");
-  const [DateNaissance, getDateNaissance] = useState("");
+  const [Titre, getTitre] = useState("");
+  const [Etat, getEtat] = useState("");
+  const [Type, getType] = useState("");
+  const [Market, getMarket] = useState("");
+  const [DateDebut, getDateDebut] = useState("");
+  const [DateFin, getDateFin] = useState("");
 
   //crar nuevo producto
   const dispatch = useDispatch();
-  const addRessource = (ressource) =>
-    dispatch(createNewRessourceAction(ressource));
+  const addPrestation = (prestation) =>
+    dispatch(createNewPrestationAction(prestation));
   const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
@@ -38,20 +38,19 @@ export default function AjouterRessource() {
   //obtener los datos del state
   const error = useSelector((state) => state.error.error);
 
-  // addnew ressource
-  const submitNewRessource = (e) => {
+  // addnew prestation
+  const submitNewPrestation = (e) => {
     e.preventDefault();
 
     validarForm();
 
     if (
-      Matricule.trim() === "" ||
-      Status.trim() === "" ||
-      Nom.trim() === "" ||
-      Prenom.trim() === "" ||
-      Genre.trim() === "" ||
-      DateAmbauche.trim() === "" ||
-      DateNaissance.trim() === ""
+      Titre.trim() === "" ||
+      Etat.trim() === "" ||
+      Market.trim() === "" ||
+      Type.trim() === "" ||
+      DateDebut.trim() === "" ||
+      DateFin.trim() === ""
     ) {
       errorValidacion();
       return;
@@ -60,120 +59,133 @@ export default function AjouterRessource() {
     SuccessValidation();
 
     //crear el nuevo producto
-    let ressource = {
-      Matricule,
-      Status,
-      Nom,
-      Prenom,
-      Genre,
-      DateAmbauche,
-      DateNaissance,
+    let prestation = {
+      titre: Titre,
+      etat: Etat,
+      market: Market,
+      type: Type,
+      dateDebut: DateDebut,
+      dateFin: DateFin,
     };
-    addRessource(ressource);
+    addPrestation(prestation);
 
-    //redireccionar
-    // history.push("/app/ressources");
+    // history.push("/app/prestations");
   };
 
-  const options = [
+  const etats = [
     {
-      label: "Homme",
-      value: "homme",
+      label: "En cours",
+      value: "en_cours",
     },
     {
-      label: "Femme",
-      value: "femme",
+      label: "Clôture",
+      value: "cloture",
+    },
+    {
+      label: "Démarrage",
+      value: "demarrage",
+    },
+  ];
+  const markets = [
+    {
+      label: "Offshore",
+      value: "offshore",
+    },
+    {
+      label: "Local",
+      value: "local",
     },
   ];
 
   return (
     <>
-      <PageTitle title="Ajouter Ressource" />
-      <form onSubmit={submitNewRessource}>
+      <PageTitle title="Ajouter une prestation" />
+      <form onSubmit={submitNewPrestation}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"
-              label="Matricule"
+              label="Titre"
               size="small"
               variant="outlined"
               fullWidth
-              valur={Matricule}
-              onChange={(e) => getMatricule(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-basic"
-              label="Status"
-              size="small"
-              variant="outlined"
-              fullWidth
-              valur={Status}
-              onChange={(e) => getStatus(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-basic"
-              label="Prénom"
-              size="small"
-              variant="outlined"
-              fullWidth
-              valur={Prenom}
-              onChange={(e) => getPrenom(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-basic"
-              label="Nom"
-              size="small"
-              variant="outlined"
-              fullWidth
-              valur={Nom}
-              onChange={(e) => getNom(e.target.value)}
+              valur={Titre}
+              onChange={(e) => getTitre(e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
               select
-              label="Genre"
+              label="Etat"
               size="small"
               fullWidth
-              valur={Genre}
+              valur={Etat}
               onChange={(e) => {
-                getGenre(e.target.value);
+                getEtat(e.target.value);
               }}
             >
-              {options.map((option) => (
-                <MenuItem value={option.value}>{option.label}</MenuItem>
+              {etats.map((etat) => (
+                <MenuItem value={etat.value}>{etat.label}</MenuItem>
               ))}
             </TextField>
           </Grid>
           <Grid item xs={6}>
-            <label>Date d'ambauche</label>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Type"
+              size="small"
+              fullWidth
+              valur={Type}
+              onChange={(e) => {
+                getType(e.target.value);
+              }}
+            >
+              {etats.map((etat) => (
+                <MenuItem value={etat.value}>{etat.label}</MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Market"
+              size="small"
+              fullWidth
+              valur={Market}
+              onChange={(e) => {
+                getMarket(e.target.value);
+              }}
+            >
+              {markets.map((market) => (
+                <MenuItem value={market.value}>{market.label}</MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <label>Date de début</label>
             <TextField
               id="outlined-basic"
               size="small"
               variant="outlined"
               fullWidth
               type="date"
-              valur={DateAmbauche}
-              onChange={(e) => getDateAmbauche(e.target.value)}
+              valur={DateDebut}
+              onChange={(e) => getDateDebut(e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
-            <label>Date de Naissance</label>
+            <label>Date de Fin</label>
             <TextField
               id="outlined-basic"
               type="date"
               size="small"
               variant="outlined"
               fullWidth
-              valur={DateNaissance}
-              onChange={(e) => getDateNaissance(e.target.value)}
+              valur={DateFin}
+              onChange={(e) => getDateFin(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

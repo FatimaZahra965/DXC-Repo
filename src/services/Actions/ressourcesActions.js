@@ -57,18 +57,16 @@ export const addNewRessourceError = (error) => ({
 export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
-
-    //interroger l'API
-    //   clienteAxios
-    //     .get("/route/api")
-    //     .then((resp) => {
-    //       //console.log(resp);
-    //       dispatch(downloadRessourcesSuccessful(resp.data));
-    //     })
-    //     .catch((error) => {
-    //       //console.log(error);
-    //       dispatch(descargaRessourcesError());
-    //     });
+    clienteAxios
+      .get("prestations/allPrestations")
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(downloadRessourcesSuccessful(resp.data));
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(descargaRessourcesError());
+      });
   };
 }
 
@@ -77,9 +75,9 @@ export const getRessourcesStart = () => ({
 });
 
 //API de requête
-export const downloadRessourcesSuccessful = (products) => ({
+export const downloadRessourcesSuccessful = (ressources) => ({
   type: RESSOURCE_DOWNLOAD_SUCCESSFUL,
-  payload: products,
+  payload: ressources,
 });
 
 export const descargaRessourcesError = () => ({
