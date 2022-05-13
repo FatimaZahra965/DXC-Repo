@@ -1,61 +1,60 @@
 import {
-  ADD_PRESTATION,
-  ADD_PRESTATION_SUCCESS,
-  ADD_PRESTATION_ERROR,
-  DOWNLOAD_PRESTATION__ERROR,
-  START_DOWNLOAD_PRESTATIONS,
-  PRESTATION_DOWNLOAD_SUCCESSFUL,
+  ADD_CERTIFICATE,
+  ADD_CERTIFICATE_SUCCESS,
+  ADD_CERTIFICATE_ERROR,
+  DOWNLOAD_CERTIFICATE__ERROR,
+  START_DOWNLOAD_CERTIFICATIONS,
+  CERTIFICATE_DOWNLOAD_SUCCESSFUL,
 } from "../types";
 
-//chaque réducteur a son propre état
 const initialState = {
-  prestations: [],
+  certifications: [],
   error: null,
   loading: false,
-  prestation: {},
+  certification: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_PRESTATION:
+    case ADD_CERTIFICATE:
       return {
         ...state,
         error: null,
       };
-    case ADD_PRESTATION_SUCCESS:
+    case ADD_CERTIFICATE_SUCCESS:
       return {
         ...state,
         error: null,
-        prestations: [...state.prestations, action.payload],
+        certifications: [...state.certifications, action.payload],
       };
-    case ADD_PRESTATION_ERROR:
+    case ADD_CERTIFICATE_ERROR:
       return {
         ...state,
         error: true,
       };
-    case START_DOWNLOAD_PRESTATIONS:
+    case START_DOWNLOAD_CERTIFICATIONS:
       return {
         ...state,
         loading: true,
         //limpiar y reacrgar el productopara editar
-        prestation: {},
+        certification: {},
       };
-    case PRESTATION_DOWNLOAD_SUCCESSFUL:
+    case CERTIFICATE_DOWNLOAD_SUCCESSFUL:
       return {
         ...state,
-        prestations: action.payload,
+        certifications: action.payload,
         loading: false,
         error: false,
-        prestation: {},
+        certification: {},
       };
-    case DOWNLOAD_PRESTATION__ERROR:
+    case DOWNLOAD_CERTIFICATE__ERROR:
       return {
         ...state,
-        prestations: [],
+        certifications: [],
         loading: false,
         error: true,
-        prestation: {},
+        certification: {},
       };
     default:
       return state;

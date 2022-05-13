@@ -18,25 +18,33 @@ import {
 import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
+import axios from "axios";
 
 //créer un nouveau produit - fonction principale
 export function createNewRessourceAction(ressource) {
   console.log("ressource", ressource);
+  const ressource_date = {
+    matricule: ressource.Matricule,
+    status: ressource.Status,
+    genre: ressource.Genre,
+    dateAmbauche: ressource.DateAmbauche,
+    firstName: ressource.Nom,
+    dateNaissance: ressource.DateNaissance,
+    lastName: ressource.Prenom,
+  };
+  console.log("ressource", ressource_date);
   return (dispatch) => {
     dispatch(newRessource());
-
-    //     clienteAxios
-    //       .post("/route/api", ressource)
-    //       .then((res) => {
-    //         console.log(res);
-    //         //si se inserta correctamente
-    //         dispatch(addNewRessourceSuccess(ressource));
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //         //si hay un error
-    //         dispatch(addNewRessourceError());
-    //       });
+    axios
+      .post("http://localhost:8080/DXC/addRessource", ressource_date)
+      .then((res) => {
+        console.log(res);
+        dispatch(addNewRessourceSuccess(ressource));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(addNewRessourceError());
+      });
   };
 }
 
@@ -57,10 +65,10 @@ export const addNewRessourceError = (error) => ({
 export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
-    clienteAxios
-      .get("prestations/allPrestations")
+    axios
+      .get("http://localhost:8080/DXC/ressource")
       .then((resp) => {
-        //console.log(resp);
+        console.log(resp.data);
         dispatch(downloadRessourcesSuccessful(resp.data));
       })
       .catch((error) => {

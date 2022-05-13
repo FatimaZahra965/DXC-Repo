@@ -31,13 +31,14 @@ import Activites from "../../pages/activites/Activites";
 import Technologies from "../../pages/technologies/Technologies";
 import Projets from "../../pages/projets/Projets";
 import Parametres from "../../pages/parametres/Parametres";
-import AjouterRessource from "../../pages/ressources/Ajouter Ressoure/AjouterRessource";
-import ModiferRessource from "../../pages/ressources/Modifier Ressource/ModiferRessource";
-import AfficherRessource from "../../pages/ressources/Afficher Ressource/AfficherRessource";
 import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
 import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
 import Prestations from "../../pages/prestations/Prestations";
 import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
+import AjouterRessource from "../../pages/ressources/AjouterRessource";
+import ModiferRessource from "../../pages/ressources/ModiferRessource";
+import AfficherRessource from "../../pages/ressources/AfficherRessource";
+import Certifications from "../../pages/certifications/Certifications";
 
 function Layout(props) {
   var classes = useStyles();
@@ -60,6 +61,7 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
             <Route path="/app/competances" component={Competances} />
+            <Route path="/app/certifications" component={Certifications} />
             <Route path="/app/notifications" component={Notifications} />
 
             <Route
@@ -67,7 +69,7 @@ function Layout(props) {
               component={Prestations}
             />
             <Route path="/app/prestations/clients" component={Prestations} />
-            <Route path="/app/prestations/ressources" component={Ressources} />
+            <Route path="/app/ressources" component={Ressources} />
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
               path="/app/prestations/technologies"

@@ -12,6 +12,7 @@ import {
 import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
+import axios from "axios";
 
 //créer un nouveau produit - fonction principale
 export function createNewPrestationAction(prestation) {
@@ -19,7 +20,7 @@ export function createNewPrestationAction(prestation) {
   return (dispatch) => {
     dispatch(newPrestation());
     clienteAxios
-      .post("prestations/addPrestation", prestation)
+      .post("http://localhost:8081/DXC/prestations/addPrestation", prestation)
       .then((res) => {
         console.log(res);
         //dispatch(addNewPrestationSuccess(prestation));
@@ -50,11 +51,10 @@ export function getPrestationsAction() {
   return (dispatch) => {
     dispatch(getPrestationsStart());
 
-    clienteAxios
-      .get("prestations/allPrestations")
+    axios
+      .get("http://localhost:8081/DXC/prestations/allPrestations")
       .then((resp) => {
         console.log("all prestations ----->", resp.data);
-
         dispatch(downloadPrestationsSuccessful(resp.data));
       })
       .catch((error) => {

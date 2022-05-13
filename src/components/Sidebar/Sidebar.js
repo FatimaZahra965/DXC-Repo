@@ -53,7 +53,7 @@ const structure = [
     children: [
       { label: "All Prestations", link: "/app/prestations/allPrestation" },
       { label: "Clients", link: "/app/prestations/clients" },
-      { label: "Ressources", link: "/app/prestations/ressources" },
+      { label: "Ressources", link: "/app/ressources" },
       { label: "Activités", link: "/app/prestations/activites" },
       { label: "Téchnologies", link: "/app/prestations/technologies" },
       { label: "Projets", link: "/app/prestations/projets" },
@@ -63,6 +63,12 @@ const structure = [
     id: 5,
     label: "Parametres",
     link: "/app/parametres",
+    icon: <Settings />,
+  },
+  {
+    id: 6,
+    label: "Certifications",
+    link: "/app/certifications",
     icon: <Settings />,
   },
 ];

@@ -1,32 +1,38 @@
 import React, { useEffect } from "react";
 
-// styles
-// import useStyles from "./styles";
-// components
+//axios
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import EditIcon from "@material-ui/icons/Edit";
-import { Button, Grid } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import { useHistory } from "react-router-dom";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { useDispatch, useSelector } from "react-redux";
+import EditIcon from "@material-ui/icons/Edit";
 import { getRessourcesAction } from "../../services/Actions/ressourcesActions";
+
+const columns = [
+  // { id: "matricule", label: "Matricule", minWidth: 100 },
+  { id: "status", label: "Status", minWidth: 100 },
+  { id: "firstName", label: "Nom", minWidth: 100 },
+  { id: "lastName", label: "Prénom", minWidth: 100 },
+  { id: "genre", label: "Genre", minWidth: 100 },
+  { id: "dateAmbauche", label: "Date d'ambauche", minWidth: 180 },
+  { id: "dateNaissance", label: "Date de naissance", minWidth: 180 },
+];
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
   icons: {
-    margin: "18px",
+    margin: "00px",
   },
   addBtn: {
     display: "flex",
@@ -37,104 +43,67 @@ const useStyles = makeStyles({
     background: "#741F82",
     color: "#FFFFFF",
   },
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
 });
-
-function createData(
-  matricule,
-  status,
-  prenom,
-  nom,
-  genre,
-  dateNaissance,
-  dateAmbauche,
-) {
-  return { matricule, status, prenom, nom, genre, dateNaissance, dateAmbauche };
-}
-
-const rows = [
-  createData(
-    15,
-    "Status",
-    "khalid",
-    "Zennou",
-    "Homme",
-    "24-02-1996",
-    "24-02-2020",
-  ),
-  createData(
-    25,
-    "Status",
-    "khalid",
-    "Zennou",
-    "Homme",
-    "04-05-1996",
-    "24-02-2020",
-  ),
-  createData(
-    44,
-    "Status",
-    "khalid",
-    "Zennou",
-    "Homme",
-    "20-06-1996",
-    "24-02-2020",
-  ),
-  createData(
-    251,
-    "Status",
-    "khalid",
-    "Zennou",
-    "Homme",
-    "24-11-1996",
-    "24-02-2020",
-  ),
-  createData(
-    325,
-    "Status",
-    "khalid",
-    "Zennou",
-    "Homme",
-    "24-12-1996",
-    "24-02-2022",
-  ),
-];
-
-export default function Ressources() {
-  // var classes = useStyles();
-  // local
+const Ressources = () => {
   const history = useHistory();
-  const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const ressources = useSelector((state) => state.ressources.ressources);
-
-  useEffect(() => {
-    const loadRessources = () => dispatch(getRessourcesAction());
-    loadRessources();
-  }, []);
-
+  var classes = useStyles();
   const addRessource = () => {
     let path = `/app/ressources/AjouterRessource`;
     history.push(path);
   };
+  const dispatch = useDispatch();
 
-  const EditRessource = (e) => {
-    let path = `/app/ressources/ModiferRessource/` + e;
-    history.push(path);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  useEffect(() => {
+    //productos cuando el componente este listo
+    const loadRessours = () => dispatch(getRessourcesAction());
+    loadRessours();
+  }, []);
+
+  const loading = useSelector((state) => state.ressources.loading);
+  const error = useSelector((state) => state.ressources.error);
+  const ressources = useSelector((state) => state.ressources.ressources);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
-  const ViewRessource = (e) => {
-    let path = `/app/ressources/AfficherRessource/` + e;
-    history.push(path);
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
+
+  // const EditRessource = (e) => {
+  //   let path = `/app/ressources/ModiferRessource/` + 1;
+  //   history.push(path);
+  // };
+  // const ViewRessource = (e) => {
+  //   let path = `/app/ressources/AfficherRessurce/` + 1;
+  //   history.push(path);
+  // };
   return (
     <>
+      {error ? (
+        <div className="font-wight-bold alert alert-danger text-center mt-5">
+          Hubo un error...
+        </div>
+      ) : null}
+
+      {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <PageTitle title="Ressources" />
         </Grid>
         <Grid item xs={6}>
           <Button
-            size="small"
+            type="small"
             variant="contained"
             color="primary"
             className={classes.addBtn}
@@ -144,66 +113,73 @@ export default function Ressources() {
             Ajouter Ressource
           </Button>
         </Grid>
-      </Grid>
-
-      <TableContainer component={Paper}>
-        {ressources.map((ressource) => {
-          <h1>{ressource.type}</h1>;
-        })}
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>Matricule</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Prénom</TableCell>
-              <TableCell>Nom</TableCell>
-              <TableCell>Genre</TableCell>
-              <TableCell>Date de naissance</TableCell>
-              <TableCell>Date d'aumbauche</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.matricule}>
-                <TableCell component="th" scope="row">
-                  <AccountCircleIcon />
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.matricule}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.status}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.prenom}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.nom}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.genre}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.dateNaissance}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.dateAmbauche}
-                </TableCell>
-                <TableRow component="th" scope="row">
-                  <Button onClick={() => ViewRessource(row.matricule)}>
-                    <VisibilityIcon className={classes.icons} />
-                  </Button>
-                  <Button onClick={() => EditRessource(row.matricule)}>
-                    <EditIcon className={classes.icons} />
-                  </Button>
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                  <TableCell key="actions" style={{ minWidth: "170" }}>
+                    Actions
+                  </TableCell>
                 </TableRow>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </TableHead>
+              <TableBody>
+                {ressources
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.etat}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === "number"
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                        <TableCell>
+                          <Button>
+                            <VisibilityIcon className={classes.icons} />
+                          </Button>
+                          <Button>
+                            <EditIcon className={classes.icons} />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[8, 10, 25, 100]}
+            component="div"
+            count={ressources.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Grid>
     </>
   );
-}
+};
+
+export default Ressources;

@@ -1,4 +1,4 @@
-// export default function Prestations() {
+// export default function Certifications() {
 //   var classes = useStyles();
 
 //   useEffect(() => {
@@ -7,9 +7,9 @@
 //     loedPrestations();
 //   }, []);
 
-//   const loading = useSelector((state) => state.prestations.loading);
-//   const error = useSelector((state) => state.prestations.error);
-//   const prestations = useSelector((state) => state.prestations.prestations);
+//   const loading = useSelector((state) => state.certifications.loading);
+//   const error = useSelector((state) => state.certifications.error);
+//   const certifications = useSelector((state) => state.certifications.certifications);
 
 //   return (
 
@@ -36,12 +36,12 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
 
 const columns = [
+  { id: "code", label: "Code", minWidth: 100 },
   { id: "titre", label: "Titre", minWidth: 100 },
-  { id: "etat", label: "Etat", minWidth: 100 },
-  { id: "market", label: "Market", minWidth: 100 },
-  { id: "type", label: "Type", minWidth: 100 },
-  { id: "dateDebut", label: "Date de Début", minWidth: 180 },
-  { id: "dateFin", label: "Date de Fin", minWidth: 180 },
+  { id: "datecertification", label: "Date Certification", minWidth: 100 },
+  { id: "ressourceid", label: "Ressource id", minWidth: 100 },
+  { id: "niveau", label: "Niveau", minWidth: 180 },
+  { id: "validation", label: "Validation", minWidth: 180 },
 ];
 
 const useStyles = makeStyles({
@@ -67,11 +67,11 @@ const useStyles = makeStyles({
     maxHeight: 440,
   },
 });
-const Prestations = () => {
+const Certifications = () => {
   const history = useHistory();
   var classes = useStyles();
-  const addPrestation = () => {
-    let path = `/app/prestations/AjouterPrestation`;
+  const addCertification = () => {
+    let path = `/app/certifications/AjouterCertification`;
     history.push(path);
   };
   const dispatch = useDispatch();
@@ -79,14 +79,15 @@ const Prestations = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   useEffect(() => {
-    const loadProducts = () => dispatch(getPrestationsAction());
-    loadProducts();
+    const loadCertifications = () => dispatch(getPrestationsAction());
+    loadCertifications();
   }, []);
 
-  //acceder al state
-  const loading = useSelector((state) => state.prestations.loading);
-  const error = useSelector((state) => state.prestations.error);
-  const prestations = useSelector((state) => state.prestations.prestations);
+  const loading = useSelector((state) => state.certifications.loading);
+  const error = useSelector((state) => state.certifications.error);
+  const certifications = useSelector(
+    (state) => state.certifications.certifications,
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -98,11 +99,11 @@ const Prestations = () => {
   };
 
   // const EditPrestation = (e) => {
-  //   let path = `/app/prestations/ModiferPrestation/` + 1;
+  //   let path = `/app/certifications/ModiferPrestation/` + 1;
   //   history.push(path);
   // };
   // const ViewPrestation = (e) => {
-  //   let path = `/app/prestations/AfficherPrestation/` + 1;
+  //   let path = `/app/certifications/AfficherPrestation/` + 1;
   //   history.push(path);
   // };
   return (
@@ -114,7 +115,7 @@ const Prestations = () => {
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Prestations" />
+          <PageTitle title="Certifications" />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -122,10 +123,10 @@ const Prestations = () => {
             variant="contained"
             color="primary"
             className={classes.addBtn}
-            onClick={addPrestation}
+            onClick={addCertification}
           >
             <AddIcon />
-            Ajouter Prestation
+            Ajouter Certification
           </Button>
         </Grid>
         <Paper className={classes.root}>
@@ -148,7 +149,7 @@ const Prestations = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {prestations
+                {certifications
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -185,7 +186,7 @@ const Prestations = () => {
           <TablePagination
             rowsPerPageOptions={[8, 10, 25, 100]}
             component="div"
-            count={prestations.length}
+            count={certifications.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -197,4 +198,4 @@ const Prestations = () => {
   );
 };
 
-export default Prestations;
+export default Certifications;
