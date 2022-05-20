@@ -27,7 +27,7 @@ export default function Contrats() {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9003/DXC/contrats/allContrats", {
+      .get("http://localhost:8080/DXC/contrats/allContrats", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -44,8 +44,8 @@ export default function Contrats() {
   function AjouteContrat() {
     history.push("/app/Contrats/AjouteContrat");
   }
-   function EditContrat() {
-    history.push("/app/Contrats/EditContrat/"+1);
+   function EditContrat(id) {
+    history.push("/app/Contrats/EditContrat/"+id);
   }
   const AfficheContrat = (e) => {
     let path = `/app/Contrats/ContratDetail/` + e;

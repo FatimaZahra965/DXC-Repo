@@ -50,7 +50,7 @@ function AjouteCompetance() {
       
     };
     addCompetance(competance);
-    history.push("/app/competances");
+    // history.push("/app/competances");
   };
   return (
     <div>

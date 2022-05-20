@@ -37,7 +37,7 @@ const structure = [
   {
     id: 2,
     label: "Compétances",
-    link: "/app/competances",
+    link: "/app/competances/allCompetances",
     icon: <Subject />,
   },
   {

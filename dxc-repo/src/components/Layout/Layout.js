@@ -59,7 +59,7 @@ function Layout(props) {
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route path="/app/competances" component={Competances} />
+            <Route path="/app/competances/allCompetances" component={Competances} />
             <Route path="/app/competances/ajouteCompetance" component={AjouteCompetance}/>
             <Route path="/app/certifications" component={Certifications} />
             <Route path="/app/notifications" component={Notifications} />
