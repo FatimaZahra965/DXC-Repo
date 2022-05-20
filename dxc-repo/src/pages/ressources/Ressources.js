@@ -99,7 +99,7 @@ const Ressources = () => {
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Ressources" />
+          <PageTitle title="Ressources"    path="/app/dashboard"/>
         </Grid>
         <Grid item xs={6}>
           <Button

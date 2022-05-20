@@ -11,7 +11,7 @@ export default function Projets(props) {
   // var classes = useStyles();
   return (
     <>
-      <PageTitle title="Projets" />
+      <PageTitle title="Projets"  path="/app/dashboard" />
       <h1>Projets</h1>
     </>
   );

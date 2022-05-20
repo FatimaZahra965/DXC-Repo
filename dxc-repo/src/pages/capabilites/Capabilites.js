@@ -11,7 +11,7 @@ export default function Capabilites() {
 
   return (
     <>
-      <PageTitle title="Capabilites" />
+      <PageTitle title="Capabilites"  path="/app/dashboard"/>
       <h1>Capabilites</h1>
     </>
   );

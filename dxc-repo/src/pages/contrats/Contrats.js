@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import PageTitle from "../../components/PageTitle/PageTitle";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+import useStyles from "./styles";
 import AddIcon from "@material-ui/icons/Add";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,29 +10,30 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import SearchIcon from "@material-ui/icons/Search";
-import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import SearchIcon from "@material-ui/icons/Search";
+import Typography from "@material-ui/core/Typography";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import axios from "axios";
 import EditIcon from "@material-ui/icons/Edit";
-// styles
-import useStyles from "./styles";
-import "./style.css";
-export default function Clients() {
+import './contrat.css';
+export default function Contrats() {
   const classes = useStyles();
   let history = useHistory();
-  const [clients, setClients] = useState([]);
+  const [contrats, setContrats] = useState([]);
   useEffect(() => {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9004/DXC/clients/allClients", {
+      .get("http://localhost:9003/DXC/contrats/allContrats", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
         // handle success
         console.log("res", res.data);
-        setClients(res.data);
+        setContrats(res.data);
       })
       .catch(function (error) {
         // handle error
@@ -41,20 +41,22 @@ export default function Clients() {
       });
   });
   const bull = <span className={classes.bullet}>•</span>;
-  function AjouteClient() {
-    history.push("/app/clients/AjouteClient");
+  function AjouteContrat() {
+    history.push("/app/Contrats/AjouteContrat");
   }
-   
-  const AfficheClient = (e) => {
-    let path = `/app/clients/AffichageClient` + e;
+   function EditContrat() {
+    history.push("/app/Contrats/EditContrat/"+1);
+  }
+  const AfficheContrat = (e) => {
+    let path = `/app/Contrats/ContratDetail/` + e;
     history.push(path);
   };
-
   return (
-    <>
     <div>
-      <PageTitle title="Liste des Clients" path="/app/dashboard" />
+      <div>
+        <PageTitle title="  Liste des contrats"  path="/app/dashboard"/>
       </div>
+
       <div>
         <div className={classes.Search}>
           <Button variant="contained" className={classes.ButtonSearch}>
@@ -63,47 +65,54 @@ export default function Clients() {
           <Input
             className={classes.InputSearch}
             type="text"
-            placeholder="Chercher un client par nom "
+            placeholder="Chercher..."
           />
-        </div>
-        <div className={classes.Bajoute}>
+        </div>    <div className={classes.Bajoute}>
           <Button
             variant="contained"
             className={classes.Button}
-            onClick={AjouteClient}
+            onClick={AjouteContrat}
           >
-            <AddIcon /> Ajouter Client
+          
+            <AddIcon /> Ajouter contrat
           </Button>
         </div>
+    
       </div>
-      <br/>
+      <br />
+     
       <div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead >
             <TableRow className={classes.TableRow}>
-
+              <TableCell>Nom de Contrat</TableCell>
               <TableCell>Nom de Client</TableCell>
-              <TableCell>Market</TableCell>
+              <TableCell>Description</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-          {clients.map((client) => (
-              <TableRow key={client.nomClient}>
+          {contrats.map((contrat) => (
+              <TableRow key={contrat.nomContrat}>
                
                 <TableCell component="th" scope="row">
-                  {client.nomClient}
+                  {contrat.nomContrat}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {client.market}
+                  {contrat.nomClient}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {contrat.description}
                 </TableCell>
                 <TableRow component="th" scope="row" >
                 <Button 
-                onClick={() => AfficheClient(client.id)}>
+                onClick={() => AfficheContrat(contrat.id)}>
                  <VisibilityIcon className={classes.icons} />
                       </Button>
-                 
+                  <Button onClick={() => EditContrat(contrat.id)}>
+                    <EditIcon className={classes.icons} />
+                  </Button>
                 </TableRow>
               </TableRow>
             ))}
@@ -111,11 +120,6 @@ export default function Clients() {
         </Table>
       </TableContainer>
       </div>
-  
-
-
-  
-
-    </>
+    </div>
   );
 }

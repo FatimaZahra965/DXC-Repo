@@ -49,3 +49,69 @@ export const START_DOWNLOAD_CERTIFICATIONS = "START_DOWNLOAD_CERTIFICATIONS";
 export const CERTIFICATE_DOWNLOAD_SUCCESSFUL =
   "CERTIFICATE_DOWNLOAD_SUCCESSFUL";
 export const DOWNLOAD_CERTIFICATE__ERROR = "DOWNLOAD_CERTIFICATE__ERROR";
+
+
+
+// Contrats
+
+// actions pour créer un contrat
+export const ADD_CONTRAT = "ADD_CONTRAT";
+export const ADD_CONTRAT_SUCCESS = "ADD_CONTRAT_SUCCESS";
+export const ADD_CONTRAT_ERROR = "ADD_CONTRAT_ERROR";
+
+// actions pour télécharger des contrats
+export const START_DOWNLOAD_CONTRATS = "START_DOWNLOAD_CONTRATS";
+export const CONTRAT_DOWNLOAD_SUCCESSFUL = "START_DOWNLOAD_SUCCESSFUL";
+export const DOWNLOAD_CONTRAT__ERROR = "START_DOWNLOAD_ERROR";
+
+//actions pour la modification d'un contrat
+export const GET_CONTRAT_EDIT = "GET_CONTRAT_EDIT";
+export const CONTRAT_EDIT_SUCCESS = "CONTRAT_EDIT_SUCCESS";
+export const CONTRAT_EDIT_ERROR = "CONTRAT_EDIT_ERROR";
+
+// lorsque nous appuyons sur le bouton enregistrer les modification d'un contrat 
+export const BEGIN_CONTRAT_EDIT = "BEGIN_CONTRAT_EDIT";
+export const EDITION_CONTRAT_SUCCESS = "EDITION_CONTRAT_SUCCESS";
+export const EDIT_CONTRAT_ERROR = "EDIT_CONTRAT_ERROR";
+
+// clients
+// actions pour créer un client
+export const ADD_CLIENT = "ADD_CLIENT";
+export const ADD_CLIENT_SUCCESS = "ADD_CLIENT_SUCCESS";
+export const ADD_CLIENT_ERROR = "ADD_CLIENT_ERROR";
+
+// actions pour télécharger des clients
+export const START_DOWNLOAD_CLIENTS = "START_DOWNLOAD_CLIENTS";
+export const CLIENT_DOWNLOAD_SUCCESSFUL = "START_DOWNLOAD_SUCCESSFUL";
+export const DOWNLOAD_CLIENT__ERROR = "START_DOWNLOAD_ERROR";
+
+//actions pour la modification d'un client
+export const GET_CLIENT_EDIT = "GET_CLIENT_EDIT";
+export const CLIENT_EDIT_SUCCESS = "CLIENT_EDIT_SUCCESS";
+export const CLIENT_EDIT_ERROR = "CLIENT_EDIT_ERROR";
+
+// lorsque nous appuyons sur le bouton enregistrer les modification d'un client 
+export const BEGIN_CLIENT_EDIT = "BEGIN_CLIENT_EDIT";
+export const EDITION_CLIENT_SUCCESS = "EDITION_CLIENT_SUCCESS";
+export const EDIT_CLIENT_ERROR = "EDIT_CLIENT_ERROR";
+
+// competances
+// actions pour créer une competance
+export const ADD_COMPETANCE = "ADD_COMPETANCE";
+export const ADD_COMPETANCE_SUCCESS = "ADD_COMPETANCE_SUCCESS";
+export const ADD_COMPETANCE_ERROR = "ADD_COMPETANCE_ERROR";
+
+// actions pour télécharger des competances
+export const START_DOWNLOAD_COMPETANCES = "START_DOWNLOAD_COMPETANCES";
+export const COMPETANCE_DOWNLOAD_SUCCESSFUL = "START_DOWNLOAD_SUCCESSFUL";
+export const DOWNLOAD_COMPETANCE__ERROR = "START_DOWNLOAD_ERROR";
+
+//actions pour la modification d'une competance
+export const GET_COMPETANCE_EDIT = "GET_COMPETANCE_EDIT";
+export const COMPETANCE_EDIT_SUCCESS = "COMPETANCE_EDIT_SUCCESS";
+export const COMPETANCE_EDIT_ERROR = "COMPETANCE_EDIT_ERROR";
+
+// lorsque nous appuyons sur le bouton enregistrer les modification d'une competance 
+export const BEGIN_COMPETANCE_EDIT = "BEGIN_COMPETANCE_EDIT";
+export const EDITION_COMPETANCE_SUCCESS = "EDITION_COMPETANCE_SUCCESS";
+export const EDIT_COMPETANCE_ERROR = "EDIT_COMPETANCE_ERROR";

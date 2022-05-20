@@ -11,7 +11,7 @@ export default function Parametres() {
 
   return (
     <>
-      <PageTitle title="Parametres" />
+      <PageTitle title="Parametres"  path="/app/dashboard"/>
       <h1>Parametres</h1>
     </>
   );
