@@ -114,7 +114,7 @@ const Prestations = () => {
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Prestations" />
+          <PageTitle title="Prestations"  path="/app/dashboard" />
         </Grid>
         <Grid item xs={6}>
           <Button

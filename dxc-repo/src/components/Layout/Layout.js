@@ -3,13 +3,6 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import classnames from "classnames";
 import { Box } from "@material-ui/core";
 
-//icons
-// import {
-//   mdiFacebook as FacebookIcon,
-//   mdiTwitter as TwitterIcon,
-//   mdiGithub as GithubIcon,
-// } from "@mdi/js";
-
 // styles
 import useStyles from "./styles";
 
@@ -34,7 +27,13 @@ import Parametres from "../../pages/parametres/Parametres";
 import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
 import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
 import Prestations from "../../pages/prestations/Prestations";
-import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
+import AjouteContrat from "../../pages/contrats/AjouteContrat";
+import AjouteCompetance from "../../pages/competances/AjouteCompetances";
+import Contrats from "../../pages/contrats/Contrats";
+import EditContrat from "../../pages/contrats/EditContrat";
+import ContratDetail from "../../pages/contrats/ContratDetail";
+import AjouteClient from "../../pages/clients/AjouteClient";
+import AffichageClient from "../../pages/clients/AffichageClient";
 import AjouterRessource from "../../pages/ressources/AjouterRessource";
 import ModiferRessource from "../../pages/ressources/ModiferRessource";
 import AfficherRessource from "../../pages/ressources/AfficherRessource";
@@ -61,6 +60,7 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
             <Route path="/app/competances" component={Competances} />
+            <Route path="/app/competances/ajouteCompetance" component={AjouteCompetance}/>
             <Route path="/app/certifications" component={Certifications} />
             <Route path="/app/notifications" component={Notifications} />
 
@@ -68,7 +68,14 @@ function Layout(props) {
               path="/app/prestations/allPrestation"
               component={Prestations}
             />
-            <Route path="/app/prestations/clients" component={Prestations} />
+            <Route path="/app/prestations/ListePrestations" component={Prestations} />
+            <Route path="/app/prestations/clients" component={Clients} />
+            <Route path="/app/clients/AjouteClient" component={AjouteClient} />
+            <Route path="/app/clients/AffichageClients" component={AffichageClient} />
+            <Route path="/app/prestations/Contrats" component={Contrats}/>
+            <Route path="/app/Contrats/ContratDetail/:id" component={ContratDetail}/>
+            <Route path="/app/Contrats/AjouteContrat" component={AjouteContrat}/>
+            <Route path="/app/Contrats/EditContrat/:id" component={EditContrat}/>
             <Route path="/app/ressources" component={Ressources} />
             <Route path="/app/prestations/activites" component={Activites} />
             <Route

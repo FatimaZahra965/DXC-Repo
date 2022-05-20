@@ -51,7 +51,8 @@ const structure = [
     label: "Prestations",
     icon: <Work />,
     children: [
-      { label: "All Prestations", link: "/app/prestations/allPrestation" },
+      { label: "Liste des Prestations", link: "/app/prestations/ListePrestations" },
+      { label: "Contrats", link: "/app/prestations/Contrats" },
       { label: "Clients", link: "/app/prestations/clients" },
       { label: "Ressources", link: "/app/ressources" },
       { label: "Activités", link: "/app/prestations/activites" },

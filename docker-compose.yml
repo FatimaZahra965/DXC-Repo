@@ -10,38 +10,54 @@ services:
     ports:
       - "3000:3000" # Map the exposed port 80 on the container to port 9090 on the host machine
 
-  certif:
-    container_name: microservice-certificat
-    image: microservice-certificat
-    build: ./certificat
+  # certif:
+  #   container_name: microservice-certificat
+  #   image: microservice-certificat
+  #   build: ./certificat
+  #   ports:
+  #     - "9001:9001"
+  #   depends_on:
+  #     - db
+  # ressource:
+  #   container_name: microservice-ressource
+  #   image: microservice-ressource
+  #   build: ./ressource
+  #   ports:
+  #     - "9000:9000"
+  #   depends_on:
+  #     - db
+  # prestation:
+  #   container_name: microservice-prestation
+  #   image: microservice-prestation
+  #   build: ./prestation
+  #   ports:
+  #     - "9002:9002"
+  #   depends_on:
+  #     - db
+  # contrat:
+  #   container_name: microservice-contrat
+  #   image: microservice-contrat
+  #   build: ./contrat
+  #   ports:
+  #     - "9003:9003"
+  #   depends_on:
+  #     - db
+  client:
+    container_name: microservice-client
+    image: microservice-client
+    build: ./client
     ports:
-      - "9001:9001"
+      - "9004:9004"
     depends_on:
       - db
-  ressource:
-    container_name: microservice-ressource
-    image: microservice-ressource
-    build: ./ressource
-    ports:
-      - "9000:9000"
-    depends_on:
-      - db
-  prestation:
-    container_name: microservice-prestation
-    image: microservice-prestation
-    build: ./prestation
-    ports:
-      - "9002:9002"
-    depends_on:
-      - db
-  contrat:
-    container_name: microservice-contrat
-    image: microservice-contrat
-    build: ./contrat
-    ports:
-      - "9003:9003"
-    depends_on:
-      - db
+  # competance:
+  #   container_name: microservice-competance
+  #   image: microservice-competance
+  #   build: ./competance
+  #   ports:
+  #     - "9005:9005"
+  #   depends_on:
+  #     - db
   db:
     build: ./database
     image: postgres:latest

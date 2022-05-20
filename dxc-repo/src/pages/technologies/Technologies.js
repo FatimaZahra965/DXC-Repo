@@ -7,7 +7,7 @@ export default function Technologies(props) {
   // var classes = useStyles();
   return (
     <>
-      <PageTitle title="Technologies" />
+      <PageTitle title="Technologies"  path="/app/dashboard"/>
       <h1>Technologies</h1>
     </>
   );
