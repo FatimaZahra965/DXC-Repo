@@ -1,0 +1,5 @@
+com\DXC\prestation\services\PrestationService.class
+com\DXC\prestation\controllers\PrestationController.class
+com\DXC\prestation\models\Prestation.class
+com\DXC\prestation\PrestationApplication.class
+com\DXC\prestation\repository\PrestationRepository.class
