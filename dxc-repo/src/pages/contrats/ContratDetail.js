@@ -5,10 +5,8 @@ import "./contrat.css";
 function ContratDetail(props) {
   const [contrats, setContrats] = useState([]);
   useEffect(() => {
-    console.log("hello hjjjjj");
-
     axios
-      .get("http://localhost:8080/api/contrats/allContrats", {
+      .get("http://localhost:9004/api/contrats/allContrats", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -32,7 +30,6 @@ function ContratDetail(props) {
 
       <div class="demo">
         <h2 class="penName">Contrat</h2>
-        
       </div>
     </div>
   );

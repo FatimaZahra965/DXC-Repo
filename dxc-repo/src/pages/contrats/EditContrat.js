@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -7,7 +7,11 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editContratAction } from "../../services/Actions/contratActions";
 import { getContratAction } from "../../services/Actions/contratActions";
-import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
+import {
+  validacionError,
+  validationSuccess,
+  validarFormularioAction,
+} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
 import clienteAxios from "../../config/axios";
 import axios from "axios";
@@ -23,20 +27,21 @@ function EditContrat(props) {
   const [currentContrat, setCurrentContrat] = useState(initialContratState);
   const [message, setMessage] = useState("");
 
-
- // créer un nouveau contrat
+  // créer un nouveau contrat
   const dispatch = useDispatch();
   const getContrat = () => {
     axios
-    .get(`http://localhost:8080/DXC/contrats/Contrat/`+props.match.params.id)
-    .then((resp) => {
-      console.log("hhhhkldmdmmdm",resp.data);
-      setCurrentContrat(resp.data);
-      console.log("CurrentContrat",currentContrat); })
-    .catch((error) => {
-      console.log(error);
-     
-    });
+      .get(
+        `http://localhost:9004/DXC/contrats/Contrat/` + props.match.params.id,
+      )
+      .then((resp) => {
+        console.log("hhhhkldmdmmdm", resp.data);
+        setCurrentContrat(resp.data);
+        console.log("CurrentContrat", currentContrat);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const validarForm = () => dispatch(validarFormularioAction());
@@ -46,35 +51,35 @@ function EditContrat(props) {
     getContrat(props.match.params.id);
   }, [props.match.params.id]);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setCurrentContrat({ ...currentContrat, [name]: value });
   };
 
-
   const updateContent = () => {
-    console.log("currentContrat",currentContrat);
+    console.log("currentContrat", currentContrat);
     dispatch(editContratAction(currentContrat))
-      .then(response => {
+      .then((response) => {
         console.log(response);
         history.push("/app/prestations/Contrats");
         setMessage("The Contrat was updated successfully!");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
-      history.push("/app/prestations/Contrats");
-
+    history.push("/app/prestations/Contrats");
   };
   function AnnulerContrat() {
     history.push("/app/prestations/Contrats");
   }
 
-  
   return (
     <div>
       <div>
-        <PageTitle title="Modifier un contrat" path="/app/prestations/Contrats" />
+        <PageTitle
+          title="Modifier un contrat"
+          path="/app/prestations/Contrats"
+        />
       </div>
       <form onSubmit={updateContent}>
         <Grid container spacing={3}>
@@ -90,7 +95,7 @@ function EditContrat(props) {
               onChange={handleInputChange}
             />
           </Grid>
-      
+
           <Grid item xs={6}>
             <TextField
               id="outlined-nomClient"
@@ -114,30 +119,30 @@ function EditContrat(props) {
               value={currentContrat.description}
               onChange={handleInputChange}
             />
-          </Grid>    
+          </Grid>
         </Grid>
       </form>
       <Grid item xs={12}>
-            <Button
-              size="small"
-              variant="contained"
-              type="submit"
-              className={classes.btnAjouter}
-              color="primary"
-              onClick={updateContent}
-            >
-              Modifier 
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              className={classes.btnAnnuler}
-              color="secondary" 
-              onClick={AnnulerContrat}
-            >
-              Annuler
-            </Button>
-          </Grid>
+        <Button
+          size="small"
+          variant="contained"
+          type="submit"
+          className={classes.btnAjouter}
+          color="primary"
+          onClick={updateContent}
+        >
+          Modifier
+        </Button>
+        <Button
+          size="small"
+          variant="contained"
+          className={classes.btnAnnuler}
+          color="secondary"
+          onClick={AnnulerContrat}
+        >
+          Annuler
+        </Button>
+      </Grid>
     </div>
   );
 }

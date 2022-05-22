@@ -12,6 +12,7 @@ import {
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
+import CardMembershipIcon from "@material-ui/icons/CardMembership";
 
 // styles
 import useStyles from "./styles";
@@ -51,10 +52,13 @@ const structure = [
     label: "Prestations",
     icon: <Work />,
     children: [
-      { label: "Liste des Prestations", link: "/app/prestations/ListePrestations" },
+      {
+        label: "Liste des Prestations",
+        link: "/app/prestations/ListePrestations",
+      },
       { label: "Contrats", link: "/app/prestations/Contrats" },
       { label: "Clients", link: "/app/prestations/clients" },
-      { label: "Ressources", link: "/app/ressources" },
+      { label: "Ressources", link: "/app/prestations/ressources" },
       { label: "Activités", link: "/app/prestations/activites" },
       { label: "Téchnologies", link: "/app/prestations/technologies" },
       { label: "Projets", link: "/app/prestations/projets" },
@@ -69,8 +73,8 @@ const structure = [
   {
     id: 6,
     label: "Certifications",
-    link: "/app/certifications",
-    icon: <Settings />,
+    link: "/app/certifications/ListeCertifications",
+    icon: <CardMembershipIcon />,
   },
 ];
 

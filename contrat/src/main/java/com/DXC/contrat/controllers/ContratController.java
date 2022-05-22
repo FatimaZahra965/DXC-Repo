@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping(path = "api/contrats")
+@RequestMapping(path = "DXC/contrats")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ContratController {
         private final ContratService contratService;
 

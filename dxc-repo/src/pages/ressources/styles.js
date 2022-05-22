@@ -12,4 +12,16 @@ export default makeStyles((theme) => ({
   text: {
     marginBottom: theme.spacing(2),
   },
+  btnAjouter: {
+    margin: "5px",
+    float: "right",
+    background: "#741F82",
+    color: "#FFFFFF",
+  },
+  btnAnnuler: {
+    margin: "5px",
+    float: "right",
+    background: "black",
+    color: "white",
+  },
 }));

@@ -20,6 +20,7 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-xhr-backend": "^3.2.2",
     "install": "^0.13.0",
+    "moment": "^2.29.3",
     "npm": "^8.7.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

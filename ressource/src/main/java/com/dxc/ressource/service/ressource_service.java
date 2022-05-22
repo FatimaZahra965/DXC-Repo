@@ -28,13 +28,13 @@ public class ressource_service {
         return  repo.findAll();
     }
 
-    public ressource afficherbyid( String id){
-        return repo.findById(id).orElse(null);
+    public ressource afficherbyid( String matricule){
+        return repo.findById(matricule).orElse(null);
     }
 /*delate route */
-    @DeleteMapping("/delete/{id}")
-    public boolean suppression( String id){
-        repo.deleteById(id);
+    @DeleteMapping("/delete/{matricule}")
+    public boolean suppression( String matricule){
+        repo.deleteById(matricule);
         return true;
 
     }
@@ -44,6 +44,7 @@ public class ressource_service {
         ressourceexist.setFirstName(ressource.getFirstName());
         ressourceexist.setLastName(ressource.getLastName());
         ressourceexist.setStatus(ressource.getStatus());
+        ressourceexist.setGenre(ressource.getGenre());
         ressourceexist.setDateNaissance(ressource.getDateNaissance());
         ressourceexist.setDateAmbauche(ressource.getDateAmbauche());
         return repo.save(ressourceexist);

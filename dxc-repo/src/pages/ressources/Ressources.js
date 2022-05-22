@@ -16,13 +16,14 @@ import TableRow from "@material-ui/core/TableRow";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import { getRessourcesAction } from "../../services/Actions/ressourcesActions";
+import { Alert } from "@material-ui/lab";
 
 const columns = [
   // { id: "matricule", label: "Matricule", minWidth: 100 },
-  { id: "status", label: "Status", minWidth: 100 },
-  { id: "firstName", label: "Nom", minWidth: 100 },
-  { id: "lastName", label: "Prénom", minWidth: 100 },
-  { id: "genre", label: "Genre", minWidth: 100 },
+  { id: "status", label: "Status", minWidth: 80 },
+  { id: "firstName", label: "Nom", minWidth: 80 },
+  { id: "lastName", label: "Prénom", minWidth: 80 },
+  { id: "genre", label: "Genre", minWidth: 80 },
   { id: "dateAmbauche", label: "Date d'ambauche", minWidth: 180 },
   { id: "dateNaissance", label: "Date de naissance", minWidth: 180 },
 ];
@@ -36,8 +37,6 @@ const useStyles = makeStyles({
   },
   addBtn: {
     display: "flex",
-    marginTop: "16px",
-    marginBottom: "8px",
     justifyContent: "space-between",
     float: "right",
     background: "#741F82",
@@ -80,10 +79,11 @@ const Ressources = () => {
     setPage(0);
   };
 
-  // const EditRessource = (e) => {
-  //   let path = `/app/ressources/ModiferRessource/` + 1;
-  //   history.push(path);
-  // };
+  const EditRessource = (e) => {
+    console.log("------>", e);
+    let path = `/app/ressources/ModiferRessource/` + e;
+    history.push(path);
+  };
   // const ViewRessource = (e) => {
   //   let path = `/app/ressources/AfficherRessurce/` + 1;
   //   history.push(path);
@@ -91,15 +91,13 @@ const Ressources = () => {
   return (
     <>
       {error ? (
-        <div className="font-wight-bold alert alert-danger text-center mt-5">
-          Hubo un error...
-        </div>
+        <Alert severity="error">Problème de chargement ...!</Alert>
       ) : null}
 
-      {loading ? <h1>Connecting...</h1> : null}
+      {loading ? <h1>Connexion...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Ressources"    path="/app/dashboard"/>
+          <PageTitle title="Ressources" path="/app/dashboard" />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -109,7 +107,7 @@ const Ressources = () => {
             className={classes.addBtn}
             onClick={addRessource}
           >
-            <AddIcon />
+            <AddIcon></AddIcon>
             Ajouter Ressource
           </Button>
         </Grid>
@@ -141,7 +139,7 @@ const Ressources = () => {
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.etat}
+                        key={row.id}
                       >
                         {columns.map((column) => {
                           const value = row[column.id];
@@ -157,7 +155,11 @@ const Ressources = () => {
                           <Button>
                             <VisibilityIcon className={classes.icons} />
                           </Button>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              EditRessource(row.matricule);
+                            }}
+                          >
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

@@ -23,20 +23,10 @@ import axios from "axios";
 //créer un nouveau produit - fonction principale
 export function createNewRessourceAction(ressource) {
   console.log("ressource", ressource);
-  const ressource_date = {
-    matricule: ressource.Matricule,
-    status: ressource.Status,
-    genre: ressource.Genre,
-    dateAmbauche: ressource.DateAmbauche,
-    firstName: ressource.Nom,
-    dateNaissance: ressource.DateNaissance,
-    lastName: ressource.Prenom,
-  };
-  console.log("ressource", ressource_date);
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("http://localhost:9000/DXC/addRessource", ressource_date)
+      .post("http://localhost:9000/DXC/addRessource", ressource)
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
@@ -125,7 +115,7 @@ export const deleteRessourceError = () => ({
 });
 
 //fonction pour obtenir le produit à modifier
-export function getRessourceAcoution(id) {
+export function getRessourceAction(id) {
   return (dispatch) => {
     dispatch(getEditRessourcesAction());
 
@@ -162,12 +152,25 @@ export function editRessourceAction(ressource) {
     dispatch(startEditRessource());
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
+    const ressource_date = {
+      matricule: ressource.Matricule,
+      status: ressource.Status,
+      genre: ressource.Genre,
+      dateAmbauche: ressource.DateAmbauche,
+      firstName: ressource.Nom,
+      dateNaissance: ressource.DateNaissance,
+      lastName: ressource.Prenom,
+    };
     clienteAxios
-      .put(`route/api/${ressource.id}`, ressource)
+      .put(`http://localhost:9000/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
-        Swal.fire("Stored", "The Product was successfully updated", "success");
+        Swal.fire(
+          "Stored",
+          "The Ressource was successfully updated",
+          "success",
+        );
       })
       .catch((error) => {
         //console.log(error);

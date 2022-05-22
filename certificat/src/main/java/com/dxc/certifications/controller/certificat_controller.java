@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/DXC")
+@RequestMapping("/dxc/certifications")
+@CrossOrigin(origins = "http://localhost:3000")
 
 
 public class certificat_controller {
@@ -24,7 +25,6 @@ public class certificat_controller {
 
     @PostMapping("/valider/{id}")
     public boolean valider_certif(@PathVariable int id){
-
         return service.valider(id);
     }
 

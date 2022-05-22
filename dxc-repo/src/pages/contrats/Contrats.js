@@ -18,16 +18,14 @@ import Typography from "@material-ui/core/Typography";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "axios";
 import EditIcon from "@material-ui/icons/Edit";
-import './contrat.css';
+import "./contrat.css";
 export default function Contrats() {
   const classes = useStyles();
   let history = useHistory();
   const [contrats, setContrats] = useState([]);
   useEffect(() => {
-    console.log("hello hjjjjj");
-
     axios
-      .get("http://localhost:9003/DXC/contrats/allContrats", {
+      .get("http://localhost:9004/DXC/contrats/allContrats", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -44,8 +42,8 @@ export default function Contrats() {
   function AjouteContrat() {
     history.push("/app/Contrats/AjouteContrat");
   }
-   function EditContrat() {
-    history.push("/app/Contrats/EditContrat/"+1);
+  function EditContrat() {
+    history.push("/app/Contrats/EditContrat/" + 1);
   }
   const AfficheContrat = (e) => {
     let path = `/app/Contrats/ContratDetail/` + e;
@@ -54,7 +52,7 @@ export default function Contrats() {
   return (
     <div>
       <div>
-        <PageTitle title="  Liste des contrats"  path="/app/dashboard"/>
+        <PageTitle title="  Liste des contrats" path="/app/dashboard" />
       </div>
 
       <div>
@@ -67,58 +65,55 @@ export default function Contrats() {
             type="text"
             placeholder="Chercher..."
           />
-        </div>    <div className={classes.Bajoute}>
+        </div>{" "}
+        <div className={classes.Bajoute}>
           <Button
             variant="contained"
             className={classes.Button}
             onClick={AjouteContrat}
           >
-          
             <AddIcon /> Ajouter contrat
           </Button>
         </div>
-    
       </div>
       <br />
-     
+
       <div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead >
-            <TableRow className={classes.TableRow}>
-              <TableCell>Nom de Contrat</TableCell>
-              <TableCell>Nom de Client</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {contrats.map((contrat) => (
-              <TableRow key={contrat.nomContrat}>
-               
-                <TableCell component="th" scope="row">
-                  {contrat.nomContrat}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {contrat.nomClient}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {contrat.description}
-                </TableCell>
-                <TableRow component="th" scope="row" >
-                <Button 
-                onClick={() => AfficheContrat(contrat.id)}>
-                 <VisibilityIcon className={classes.icons} />
-                      </Button>
-                  <Button onClick={() => EditContrat(contrat.id)}>
-                    <EditIcon className={classes.icons} />
-                  </Button>
-                </TableRow>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow className={classes.TableRow}>
+                <TableCell>Nom de Contrat</TableCell>
+                <TableCell>Nom de Client</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {contrats.map((contrat) => (
+                <TableRow key={contrat.nomContrat}>
+                  <TableCell component="th" scope="row">
+                    {contrat.nomContrat}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {contrat.nomClient}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {contrat.description}
+                  </TableCell>
+                  <TableRow component="th" scope="row">
+                    <Button onClick={() => AfficheContrat(contrat.id)}>
+                      <VisibilityIcon className={classes.icons} />
+                    </Button>
+                    <Button onClick={() => EditContrat(contrat.id)}>
+                      <EditIcon className={classes.icons} />
+                    </Button>
+                  </TableRow>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );

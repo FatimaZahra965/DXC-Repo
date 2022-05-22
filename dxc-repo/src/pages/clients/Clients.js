@@ -25,9 +25,8 @@ export default function Clients() {
   const [clients, setClients] = useState([]);
   useEffect(() => {
     console.log("hello hjjjjj");
-
     axios
-      .get("http://localhost:9004/DXC/clients/allClients", {
+      .get("http://localhost:8080/DXC/clients/allClients", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -44,7 +43,7 @@ export default function Clients() {
   function AjouteClient() {
     history.push("/app/clients/AjouteClient");
   }
-   
+
   const AfficheClient = (e) => {
     let path = `/app/clients/AffichageClient` + e;
     history.push(path);
@@ -52,8 +51,8 @@ export default function Clients() {
 
   return (
     <>
-    <div>
-      <PageTitle title="Liste des Clients" path="/app/dashboard" />
+      <div>
+        <PageTitle title="Liste des Clients" path="/app/dashboard" />
       </div>
       <div>
         <div className={classes.Search}>
@@ -76,46 +75,37 @@ export default function Clients() {
           </Button>
         </div>
       </div>
-      <br/>
+      <br />
       <div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead >
-            <TableRow className={classes.TableRow}>
-
-              <TableCell>Nom de Client</TableCell>
-              <TableCell>Market</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {clients.map((client) => (
-              <TableRow key={client.nomClient}>
-               
-                <TableCell component="th" scope="row">
-                  {client.nomClient}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {client.market}
-                </TableCell>
-                <TableRow component="th" scope="row" >
-                <Button 
-                onClick={() => AfficheClient(client.id)}>
-                 <VisibilityIcon className={classes.icons} />
-                      </Button>
-                 
-                </TableRow>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow className={classes.TableRow}>
+                <TableCell>Nom de Client</TableCell>
+                <TableCell>Market</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {clients.map((client) => (
+                <TableRow key={client.nomClient}>
+                  <TableCell component="th" scope="row">
+                    {client.nomClient}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {client.market}
+                  </TableCell>
+                  <TableRow component="th" scope="row">
+                    <Button onClick={() => AfficheClient(client.id)}>
+                      <VisibilityIcon className={classes.icons} />
+                    </Button>
+                  </TableRow>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-  
-
-
-  
-
     </>
   );
 }

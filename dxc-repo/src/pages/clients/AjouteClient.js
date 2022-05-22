@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -6,7 +6,11 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewClientAction } from "../../services/Actions/clientActions";
-import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
+import {
+  validacionError,
+  validationSuccess,
+  validarFormularioAction,
+} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
 function AjouteClient() {
   const classes = useStyles();
@@ -14,10 +18,9 @@ function AjouteClient() {
   const [nomClient, getNomClient] = useState("");
   const [market, getMarket] = useState("");
 
- // créer un nouveau Client
+  // créer un nouveau Client
   const dispatch = useDispatch();
-  const addClient = (client) =>
-    dispatch(createNewClientAction(client));
+  const addClient = (client) => dispatch(createNewClientAction(client));
   const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidation = () => dispatch(validacionError());
@@ -31,12 +34,7 @@ function AjouteClient() {
 
     validarForm();
 
-    if (
-    
-      nomClient.trim() === "" ||
-      market.trim() === "" 
-   
-    ) {
+    if (nomClient.trim() === "" || market.trim() === "") {
       errorValidation();
       return;
     }
@@ -45,9 +43,8 @@ function AjouteClient() {
 
     //créer un nouveau Client
     let client = {
-      nomClient : nomClient,
-      market :market,
-      
+      nomClient: nomClient,
+      market: market,
     };
     addClient(client);
     history.push("/app/prestations/clients");
@@ -62,7 +59,6 @@ function AjouteClient() {
       </div>
       <form onSubmit={submitNewClient}>
         <Grid container spacing={3}>
-  
           <Grid item xs={6}>
             <TextField
               id="outlined-nomClient"
@@ -85,31 +81,29 @@ function AjouteClient() {
               onChange={(e) => getMarket(e.target.value)}
             />
           </Grid>
-       
-    
         </Grid>
       </form>
       <Grid item xs={12}>
-            <Button
-              size="small"
-              variant="contained"
-              type="submit"
-              className={classes.btnAjouter}
-              color="primary"
-              onClick={submitNewClient}
-            >
-              Ajouter
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              className={classes.btnAnnuler}
-              color="secondary"
-              onClick={AnnulerClient}
-            >
-              Annuler
-            </Button>
-          </Grid>
+        <Button
+          size="small"
+          variant="contained"
+          type="submit"
+          className={classes.btnAjouter}
+          color="primary"
+          onClick={submitNewClient}
+        >
+          Ajouter
+        </Button>
+        <Button
+          size="small"
+          variant="contained"
+          className={classes.btnAnnuler}
+          color="secondary"
+          onClick={AnnulerClient}
+        >
+          Annuler
+        </Button>
+      </Grid>
     </div>
   );
 }
