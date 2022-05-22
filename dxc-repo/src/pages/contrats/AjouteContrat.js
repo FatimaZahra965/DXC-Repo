@@ -11,9 +11,9 @@ import useStyles from "./styles";
 function AjouteContrat() {
   const classes = useStyles();
   const history = useHistory();
-  const [nomContrat, getNomContrat] = useState("");
-  const [nomClient, getNomClient] = useState("");
-  const [description, getDescription] = useState("");
+  const [nomContrat, setNomContrat] = useState("");
+  const [nomClient, setNomClient] = useState("");
+  const [description, setDescription] = useState("");
 
  // créer un nouveau contrat
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ function AjouteContrat() {
   return (
     <div>
       <div>
-        <PageTitle title="Ajoute contrat" path="/app/prestations/Contrats" />
+        <PageTitle title="Ajouter un nouveau contrat" path="/app/prestations/Contrats" />
       </div>
       <form onSubmit={submitNewContrat}>
         <Grid container spacing={3}>
@@ -72,7 +72,7 @@ function AjouteContrat() {
               variant="outlined"
               fullWidth
               valur={nomContrat}
-              onChange={(e) => getNomContrat(e.target.value)}
+              onChange={(e) => setNomContrat(e.target.value)}
             />
           </Grid>
       
@@ -84,7 +84,7 @@ function AjouteContrat() {
               variant="outlined"
               fullWidth
               valur={nomClient}
-              onChange={(e) => getNomClient(e.target.value)}
+              onChange={(e) => setNomClient(e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -95,23 +95,10 @@ function AjouteContrat() {
               variant="outlined"
               fullWidth
               valur={description}
-              onChange={(e) => getDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-       
       
-          {/* <Grid item xs={6}>
-            <label>Date de Debut</label>
-            <TextField
-              id="outlined-basic"
-              size="small"
-              variant="outlined"
-              fullWidth
-              type="date"
-              valur={DateDebut}
-              onChange={(e) => getDateDebut(e.target.value)}
-            />
-          </Grid> */}
     
         </Grid>
       </form>

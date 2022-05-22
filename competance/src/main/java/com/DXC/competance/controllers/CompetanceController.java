@@ -19,6 +19,7 @@ public class CompetanceController {
             return this.competanceService.getCompetance();
         }
 
+
         @PostMapping(path = "addCompetance")
         public void addCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
             this.competanceService.addCompetance(competance);
@@ -30,6 +31,10 @@ public class CompetanceController {
     @PutMapping("updateCompetance")
     public com.DXC.competance.models.Competance updateCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
         return competanceService.updateCompetance(competance);
+    }
+    @GetMapping("/competanceByTypeComp/{typeComp}")
+    public com.DXC.competance.models.Competance findCompetanceByTypeComp(@PathVariable String typeComp) {
+        return competanceService.getCompetanceByTypeComp(typeComp);
     }
 
 }

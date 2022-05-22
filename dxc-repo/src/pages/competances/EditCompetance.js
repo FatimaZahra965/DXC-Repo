@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -6,67 +6,81 @@ import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewCompetanceAction } from "../../services/Actions/competanceActions";
+import { editCompetanceAction, getCompetanceAction } from "../../services/Actions/competanceActions";
 import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
-function AjouteCompetance() {
+import clienteAxios from "../../config/axios";
+import axios from "axios";
+
+function EditCompetance(props) {
   const classes = useStyles();
   const history = useHistory();
-  const [matriculeRessource, setMatriculeRessource] = useState("");
-  const [nomRessource, setNomRessource] = useState("");
-  const [nomCompetance, setNomCompetance] = useState("");
-  const [typeComp, setTypeComp] = useState("");
-  const [niveau, setNiveau] = useState("");
-  const [evaluationManager, setEvaluationManager] = useState("");
-  
-  
+  const initialCompetanceState = {
+    id: null,
+    nomCompetance : "",
+    matriculeRessource : "",
+    nomRessource : "",
+    typeComp : "",
+    evaluationManager : "",
+    niveau : ""
+  };
+  const editCompetance = (Competance)=> dispatch(editCompetanceAction(Competance));
+  const [currentCompetance, setCurrentCompetance] = useState(initialCompetanceState);
  // créer un nouveau Competance
   const dispatch = useDispatch();
-  const addCompetance = (competance) =>
-    dispatch(createNewCompetanceAction(competance));
+  const getCompetance = () => {
+    axios
+    .get(`http://localhost:8080/DXC/competances/Competance/`+props.match.params.id)
+    .then((resp) => {
+      console.log("hhhhkldmdmmdm",resp.data);
+      setCurrentCompetance(resp.data);
+      console.log("CurrentCompetance",currentCompetance); })
+    .catch((error) => {
+      console.log(error);
+     
+    });
+  };
+
   const validarForm = () => dispatch(validarFormularioAction());
-  const SuccessValidation = () => dispatch(validationSuccess());
-  const errorValidation = () => dispatch(validacionError());
+  const SuccessValidacion = () => dispatch(validationSuccess());
+  const errorValidacion = () => dispatch(validacionError());
+  useEffect(() => {
+    getCompetance(props.match.params.id);
+  }, [props.match.params.id]);
 
-  //récupérer les données de l'état
-  const error = useSelector((state) => state.error.error);
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setCurrentCompetance({ ...currentCompetance, [name]: value });
+  };
 
-  // addnew Competance
-  const submitNewCompetance = (e) => {
-    e.preventDefault();
+
+  const updateCompetance = () => {
+    console.log("currentCompetance",currentCompetance);
 
     validarForm();
 
     if (
-      matriculeRessource.trim() === ""||
-      nomRessource.trim() === ""||
-      nomCompetance.trim() === ""||
-      typeComp.trim() === ""||
-      nomCompetance.trim() === ""||
-      evaluationManager.trim() === ""||
-      niveau.trim() === ""
-   
+      currentCompetance.nomCompetance.trim() === "" ||
+      currentCompetance.matriculeRessource.trim() === "" ||
+      currentCompetance.nomRessource.trim() === "" ||
+      currentCompetance.typeComp.trim() === "" ||
+      currentCompetance.evaluationManager.trim() === "" ||
+      currentCompetance.niveau.trim() === ""
     ) {
-      errorValidation();
+      errorValidacion();
       return;
     }
     //si pasa la validacion//si todo sale bien
-    SuccessValidation();
+    SuccessValidacion();
 
-    //créer un nouveau Competance
-    let competance = {
-      nomCompetance : nomCompetance,
-      matriculeRessource : matriculeRessource,
-      nomRessource : nomRessource,
-      typeComp : typeComp,
-      evaluationManager : evaluationManager,
-      niveau : niveau
+    editCompetance(currentCompetance);
+         history.push("/app/competances/allCompetances");
       
-    };
-    addCompetance(competance);
-    history.push("/app/competances/allCompetances");
+
   };
-  
+  function AnnulerCompetance() {
+    history.push("/app/competances/allCompetances");
+  }
   const niveaux = [
    
     {
@@ -109,15 +123,13 @@ function AjouteCompetance() {
     },
   
   ];
-  function AnnulerCompetance() {
-    history.push("/app/competances/allCompetances");
-  }
+  
   return (
     <div>
       <div>
-        <PageTitle title="Ajouter une nouvelle compétence" path="/app/competances/allCompetances" />
+        <PageTitle title="Modifier une Competance" path="/app/competances/allCompetances" />
       </div>
-      <form onSubmit={submitNewCompetance}>
+      <form onSubmit={updateCompetance}>
         <Grid container spacing={3}>
         <Grid item xs={4}  className={classes.label}>
           <h3>Nom et prénom de ressource </h3>  
@@ -130,8 +142,9 @@ function AjouteCompetance() {
               size="small"
               variant="outlined"
               fullWidth
-              value={nomRessource}
-              onChange={(e) => setNomRessource(e.target.value)}
+              name="nomRessource"
+              value={currentCompetance.nomRessource}
+              onChange={handleInputChange}
             />
           </Grid>
         
@@ -146,8 +159,10 @@ function AjouteCompetance() {
               size="small"
               variant="outlined"
               fullWidth
-              value={matriculeRessource}
-              onChange={(e) => setMatriculeRessource(e.target.value)}
+              name="matriculeRessource"
+              value={currentCompetance.matriculeRessource}
+              onChange={handleInputChange}
+            
             />
           </Grid>
          
@@ -164,10 +179,9 @@ function AjouteCompetance() {
               variant="outlined"
               size="small"
               fullWidth
-              value={typeComp}
-              onChange={(e) => {
-                setTypeComp(e.target.value);
-              }}
+              name="typeComp"
+              value={currentCompetance.typeComp}
+              onChange={handleInputChange}
             >
               {typesCompetances.map((typeCompetance) => (
                 <MenuItem value={typeCompetance.value}>{typeCompetance.label}</MenuItem>
@@ -187,8 +201,10 @@ function AjouteCompetance() {
               size="small"
               variant="outlined"
               fullWidth
-              value={nomCompetance}
-              onChange={(e) => setNomCompetance(e.target.value)}
+              name="nomCompetance"
+              value={currentCompetance.nomCompetance}
+              onChange={handleInputChange}
+             
             />
           </Grid>
           
@@ -204,10 +220,9 @@ function AjouteCompetance() {
               variant="outlined"
               size="small"
               fullWidth
-              value={niveau}
-              onChange={(e) => {
-                setNiveau(e.target.value);
-              }}
+              name="niveau"
+              value={currentCompetance.niveau}
+              onChange={handleInputChange}
             >
               {niveaux.map((niveau) => (
                 <MenuItem value={niveau.value}>{niveau.label}</MenuItem>
@@ -227,41 +242,41 @@ function AjouteCompetance() {
               variant="outlined"
               size="small"
               fullWidth
-              value={evaluationManager}
-              onChange={(e) => setEvaluationManager(e.target.value)}
+              name="evaluationManager"
+              value={currentCompetance.evaluationManager}
+              onChange={handleInputChange}
             >
               {niveaux.map((niveau) => (
                 <MenuItem value={niveau.value}>{niveau.label}</MenuItem>
               ))}
             </TextField>
-         
           </Grid>
           
         </Grid>
       </form>
-      <div className={classes.buttons}  >
+      <Grid item xs={12}>
             <Button
               size="small"
               variant="contained"
               type="submit"
               className={classes.btnAjouter}
               color="primary"
-              onClick={submitNewCompetance}
+              onClick={updateCompetance}
             >
-              Ajouter
+              Modifier 
             </Button>
             <Button
               size="small"
               variant="contained"
               className={classes.btnAnnuler}
-              color="secondary"
+              color="secondary" 
               onClick={AnnulerCompetance}
             >
               Annuler
             </Button>
-          </div>
+          </Grid>
     </div>
   );
 }
 
-export default AjouteCompetance;
+export default EditCompetance;

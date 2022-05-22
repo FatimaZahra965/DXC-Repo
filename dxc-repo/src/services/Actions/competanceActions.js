@@ -23,11 +23,17 @@ import {
       dispatch(newCompetance());
   
           clienteAxios
-            .post("http://localhost:9005/DXC/competances/addCompetance", competance)
+            .post("http://localhost:8080/DXC/competances/addCompetance", competance)
             .then((res) => {
               console.log(res);
               //si se inserta correctamente
               dispatch(addNewCompetanceSuccess(competance));
+              Swal.fire({
+                text: 'la Competance été ajouter avec succés',
+                 timer: 1500 ,
+                  timer: 3000,
+                  timerProgressBar: true,
+                })
             })
             .catch((error) => {
               console.log(error);
@@ -57,7 +63,7 @@ import {
   
       // interroger l'API
         clienteAxios
-          .get("http://localhost:9005/DXC/competances/allCompetances")
+          .get("http://localhost:8080/DXC/competances/allCompetances")
           .then((resp) => {
             //console.log(resp);
             dispatch(downloadCompetancesSuccessful(resp.data));
@@ -83,13 +89,13 @@ import {
     type: DOWNLOAD_COMPETANCE__ERROR,
   });
   //fonction pour obtenir la Competance à modifier
-  export function getCompetanceAcoution(id) {
+  export function getCompetanceAction(id) {
     return (dispatch) => {
       dispatch(getEditCompetanceAction());
   
       //obtenir l'api de  la Competance
       clienteAxios
-        .get(`http://localhost:9005/DXC/competances/competance/${id}`)
+        .get(`http://localhost:8080/DXC/competances/competance/${id}`)
         .then((resp) => {
           console.log(resp.data);
           dispatch(getCompetanceEditSuccess(resp.data));
@@ -100,6 +106,8 @@ import {
         });
     };
   }
+
+  
   
   export const getEditCompetanceAction = (id) => ({
     type: GET_COMPETANCE_EDIT,
@@ -121,11 +129,17 @@ import {
   
       //interrogez l'API et envoyez une méthode put à mettre à jour
       clienteAxios
-        .put(`http://localhost:9005/DXC/contrats/updateContrat${competance.id}`, competance)
+        .put(`http://localhost:8080/DXC/competances/updateCompetance${competance.id}`, competance)
         .then((resp) => {
           //console.log(resp);
           dispatch(editCompetanceSuccess(resp.data));
-          Swal.fire("Stored", "la Competance été modifier avec succés ", "success");
+          Swal.fire({
+            text: 'la Competance été modifier avec succés',
+             timer: 1500 ,
+              timer: 3000,
+              timerProgressBar: true,
+            })
+          
         })
         .catch((error) => {
           //console.log(error);

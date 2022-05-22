@@ -73,6 +73,27 @@ export default makeStyles(theme => ({
     color: "#FFFFFF",
     fontSize: "medium",
   },
+  labelDonnes: {
+    color: "#000000",
+    Stroke: "Solid",
+    marginTop: "inherit",
+  },
+  
+  labelinformation: {
+    color: "#7978BB",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  label: {
+    color: "#741F82",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  buttons: {
+    textAlign:"center",
+  },
   Visib: {
     background: "#741F82",
     minWidth: 30,

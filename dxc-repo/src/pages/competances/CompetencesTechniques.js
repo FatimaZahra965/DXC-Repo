@@ -1,42 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button} from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "./styles";
+import axios from "axios";
 
-function createData(
-    Compétence,
-    NiveauMaitrise,
-    EvaluationManager,
-  ) {
-    return { Compétence, NiveauMaitrise, EvaluationManager };
-  }
-  
-  const rows = [
-    createData(
-      "IBM",
-      " 1",
-      "3",
-    ),
-    createData(
-        "IBM",
-        " 1",
-        "3",
-    ),
-    createData(
-        "IBM",
-        " 1",
-        "3",
-    ),
-  ];
 function CompetencesTechniques(props) {
     var classes = useStyles();
+    let history = useHistory();
+    const [competences, setCompetences] = useState([]);
+  useEffect(() => {
+    console.log("hello hjjjjj");
+
+    axios
+      .get("http://localhost:8080/DXC/competances/allCompetances", {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      })
+      .then(function (res) {
+        // handle success
+        console.log("res", res.data);
+        setCompetences(res.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  });
+    function EditCompetence(id) {
+      history.push("/app/competances/EditCompetance/"+id);
+    }
+    const AfficheCompetence = (e) => {
+      let path = `/app/competances/CompetanceDetail/` + e;
+      history.push(path);
+    };
     return (
         <div>
           <TableContainer component={Paper}>
@@ -50,19 +54,24 @@ function CompetencesTechniques(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.matricule}>
+          {competences.map((competence) => (
+              <TableRow key={competence.nomCompetance}>
+               
                 <TableCell component="th" scope="row">
-                  {row.Compétence}
+                  {competence.nomCompetance}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {row.NiveauMaitrise}
+                  {competence.niveau}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {row.EvaluationManager}
+                  {competence.evaluationManager}
                 </TableCell>
                 <TableRow component="th" scope="row" >
-                  <Button >
+                <Button 
+                onClick={() => AfficheCompetence(competence.id)}>
+                 <VisibilityIcon className={classes.icons} />
+                      </Button>
+                  <Button onClick={() => EditCompetence(competence.id)}>
                     <EditIcon className={classes.icons} />
                   </Button>
                 </TableRow>

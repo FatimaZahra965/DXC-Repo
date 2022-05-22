@@ -18,8 +18,12 @@ public class CompetanceService {
         return this.competanceRepository.findAll();
     }
 
+
     public com.DXC.competance.models.Competance getCompetanceByID(Integer id) {
         return competanceRepository.findById(id).orElse(null);
+    }
+    public com.DXC.competance.models.Competance getCompetanceByTypeComp(String typeComp) {
+        return competanceRepository.findByTypeComp(typeComp);
     }
     public void addCompetance(com.DXC.competance.models.Competance competance) {
         Optional<com.DXC.competance.models.Competance> optionalCompetance = competanceRepository.findCompetanceByNomCompetance(competance.getNomCompetance());
@@ -31,7 +35,11 @@ public class CompetanceService {
     public com.DXC.competance.models.Competance updateCompetance(com.DXC.competance.models.Competance competance) {
         com.DXC.competance.models.Competance existingCompetance = competanceRepository.findById(competance.getId()).orElse(null);
         existingCompetance.setNomCompetance(competance.getNomCompetance());
-        existingCompetance.setMarket(competance.getMarket());
+        existingCompetance.setMatriculeRessource(competance.getMatriculeRessource());
+        existingCompetance.setEvaluationManager(competance.getEvaluationManager());
+        existingCompetance.setTypeComp(competance.getTypeComp());
+        existingCompetance.setNomRessource(competance.getNomRessource());
+        existingCompetance.setNiveau(competance.getNiveau());
 
         return competanceRepository.save(existingCompetance);
     }

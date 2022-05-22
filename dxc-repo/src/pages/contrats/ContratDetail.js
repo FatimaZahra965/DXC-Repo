@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import "./contrat.css";
-function ContratDetail(props) {
-  const [contrats, setContrats] = useState([]);
+import useStyles from "./styles";
+
+function ContratDetail(props) { 
+
+  const classes = useStyles();
+  const [contrat, setContrat] = useState([]);
   useEffect(() => {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:8080/api/contrats/allContrats", {
+      .get(`http://localhost:8080/DXC/contrats/Contrat/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
         // handle success
         console.log("res", res.data);
-        setContrats(res.data);
+        setContrat(res.data);
       })
       .catch(function (error) {
         // handle error
@@ -26,12 +31,39 @@ function ContratDetail(props) {
       <div>
         <PageTitle
           title="Afficher d'un Contrat"
-          path="/app/prestations/Contrats"
+          path="/app/prestations/clients"
         />
       </div>
 
-      <div class="demo">
-        <h2 class="penName">Contrat</h2>
+      <div>
+      <form   className={classes.forminformation}>
+        <Grid container spacing={3}>
+        <Grid item xs={4}  className={classes.labelinformation}>
+          <h3>nom de contrat </h3>  
+          </Grid>
+          <Grid item xs={6} className={classes.labelDonnes}>
+           <h3>{contrat.nomContrat}</h3>
+          </Grid>
+
+             <Grid item xs={4}  className={classes.labelinformation}>
+          <h3>nom de client </h3>  
+          </Grid>
+          <Grid item xs={6} className={classes.labelDonnes}>
+              <h3>{contrat.nomClient}</h3>
+          </Grid>
+
+
+          <Grid item xs={4}  className={classes.labelinformation}>
+          <h3>description de contrat </h3>  
+          </Grid>
+          <Grid item xs={6} className={classes.labelDonnes}>
+          <h3>{contrat.description}</h3>
+          
+          </Grid>
+          
+          
+        </Grid>
+      </form>
         
       </div>
     </div>

@@ -18,20 +18,34 @@ public class Competance {
     )
     private int id;
     private String nomCompetance;
-    private String market;
+    private String matriculeRessource;
+    private String nomRessource;
+    private String typeComp;
+    private String evaluationManager;
+    private String niveau;
 
     public Competance() {
     }
 
-    public Competance(int id, String nomCompetance, String market) {
+    public Competance(int id, String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
-        this.market = market;
+        this.matriculeRessource = matriculeRessource;
+        this.nomRessource = nomRessource;
+        this.typeComp = typeComp;
+        this.evaluationManager = evaluationManager;
+        this.niveau = niveau;
     }
 
-    public Competance(String nomCompetance, String market) {
+    public Competance(String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.nomCompetance = nomCompetance;
-        this.market = market;
+        this.matriculeRessource = matriculeRessource;
+        this.nomRessource = nomRessource;
+        this.typeComp = typeComp;
+        this.evaluationManager = evaluationManager;
+        this.niveau = niveau;
+
+
     }
 
     public int getId() {
@@ -49,11 +63,46 @@ public class Competance {
     public void setNomCompetance(String nomCompetance) {
         this.nomCompetance = nomCompetance;
     }
-    public String getMarket() {
-        return market;
+
+    public String getMatriculeRessource() {
+        return matriculeRessource;
     }
 
-    public void setMarket(String market) {
-        this.market = market;
+    public void setMatriculeRessource(String matriculeRessource) {
+        this.matriculeRessource = matriculeRessource;
+    }
+
+    public String getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
+    }
+
+    public String getNomRessource() {
+        return nomRessource;
+    }
+
+    public void setNomRessource(String nomRessource) {
+        this.nomRessource = nomRessource;
+    }
+
+    public String getTypeComp() {
+        return typeComp;
+    }
+
+    public void setTypeComp(String typeComp) {
+        this.typeComp = typeComp;
+    }
+
+    public String getEvaluationManager() {
+        return evaluationManager;
+    }
+
+    public void setEvaluationManager(String evaluationManager) {
+        this.evaluationManager = evaluationManager;
     }
 }
+
+

@@ -13,13 +13,14 @@ import { useUserState } from "../context/UserContext";
 
 import { Provider } from "react-redux";
 import store from "../store/store";
+import { BrowserRouter } from "react-router-dom";
 
 export default function App() {
   // global
   var { isAuthenticated } = useUserState();
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <Switch>
           <Route
@@ -37,7 +38,7 @@ export default function App() {
           <Route component={Error} />
         </Switch>
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   );
 
   function PrivateRoute({ component, ...rest }) {

@@ -8,10 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editContratAction, getContratAction } from "../../services/Actions/contratActions";
 import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
-import clienteAxios from "../../config/axios";
 import axios from "axios";
-import Contrats from "./Contrats";
-import { Description } from "@material-ui/icons";
 
 function EditContrat(props) {
   const classes = useStyles();

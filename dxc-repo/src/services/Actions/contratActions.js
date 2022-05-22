@@ -94,7 +94,7 @@ import {
   
       //obtenir l'api de  le Contrat
       clienteAxios
-        .get(`http://localhost:9003/DXC/contrats/Contrat/${id}`)
+        .get(`http://localhost:8080/DXC/contrats/Contrat/${id}`)
         .then((resp) => {
           // console.log("reponse data",resp.data);
           dispatch(getContratEditSuccess(resp.data));
