@@ -88,10 +88,15 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <NotificationsIcon
+          <i
+            className="pe-7s-bell"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
+          {/* <NotificationsIcon
+            classes={{ root: classes.headerIcon }}
+            style={{ color: "black" }}
+          /> */}
         </IconButton>
         <IconButton
           aria-haspopup="true"
@@ -99,12 +104,13 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <Language
+          <i
+            className="pe-7s-global"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
-        <IconButton
+        {/* <IconButton
           aria-haspopup="true"
           color="inherit"
           className={classes.headerMenuButton}
@@ -114,7 +120,7 @@ export default function Header(props) {
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
           />
-        </IconButton>
+        </IconButton> */}
         <IconButton
           aria-haspopup="true"
           color="inherit"
@@ -122,10 +128,11 @@ export default function Header(props) {
           aria-controls="profile-menu"
           onClick={(e) => setProfileMenu(e.currentTarget)}
         >
-          <AccountIcon
+          <i
+            className="pe-7s-user"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
 
         <Menu

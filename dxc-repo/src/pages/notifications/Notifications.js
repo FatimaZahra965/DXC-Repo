@@ -11,7 +11,7 @@ export default function NotificationsPage(props) {
 
   return (
     <>
-      <PageTitle title="Notifications" />
+      <PageTitle title="Notifications"  path="/app/dashboard" />
       <h1>Notifications</h1>
     </>
   );

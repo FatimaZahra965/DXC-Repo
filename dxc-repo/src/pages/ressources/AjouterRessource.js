@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { Button } from "@material-ui/core";
-import useStyles from "./style";
+import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewRessourceAction } from "../../services/Actions/ressourcesActions";
@@ -14,6 +14,8 @@ import {
   validarFormularioAction,
 } from "../../services/Actions/validacionActions";
 import Alert from "@material-ui/lab/Alert";
+
+import moment from "moment";
 
 export default function AjouterRessource() {
   const classes = useStyles();
@@ -54,19 +56,24 @@ export default function AjouterRessource() {
       return;
     }
     SuccessValidation();
+    // const dates = {
+    //   DateAmbauche: moment(DateAmbauche).format("L"),
+    //   DateNaissance: moment(DateNaissance).format("L"),
+    // };
 
     let ressource = {
-      Matricule,
-      Status,
-      Nom,
-      Prenom,
-      Genre,
-      DateAmbauche,
-      DateNaissance,
+      matricule: Matricule,
+      status: Status,
+      genre: Genre,
+      dateNaissance: DateNaissance,
+      lastName: Nom,
+      firstName: Prenom,
+      dateAmbauche: DateAmbauche,
     };
+    console.log("ressource", ressource);
     addRessource(ressource);
 
-    // history.push("/app/ressources");
+    history.push("/app/prestations/ressources");
   };
 
   const options = [
@@ -81,7 +88,7 @@ export default function AjouterRessource() {
   ];
 
   const annuler = () => {
-    let path = `/app/ressources`;
+    let path = `/app/prestations/ressources`;
     history.push(path);
   };
 
@@ -190,7 +197,9 @@ export default function AjouterRessource() {
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
-              onClick={annuler()}
+              onClick={() => {
+                annuler();
+              }}
             >
               Annuler
             </Button>

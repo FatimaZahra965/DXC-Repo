@@ -53,8 +53,6 @@ const useStyles = makeStyles({
   },
   addBtn: {
     display: "flex",
-    marginTop: "16px",
-    marginBottom: "8px",
     justifyContent: "space-between",
     float: "right",
     background: "#741F82",
@@ -97,10 +95,10 @@ const Prestations = () => {
     setPage(0);
   };
 
-  // const EditPrestation = (e) => {
-  //   let path = `/app/prestations/ModiferPrestation/` + 1;
-  //   history.push(path);
-  // };
+  const EditPrestation = (e) => {
+    let path = `/app/prestations/ModiferPrestation/` + e;
+    history.push(path);
+  };
   // const ViewPrestation = (e) => {
   //   let path = `/app/prestations/AfficherPrestation/` + 1;
   //   history.push(path);
@@ -114,7 +112,7 @@ const Prestations = () => {
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Prestations" />
+          <PageTitle title="Prestations" path="/app/dashboard" />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -172,7 +170,11 @@ const Prestations = () => {
                           <Button>
                             <VisibilityIcon className={classes.icons} />
                           </Button>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              EditPrestation(row.id);
+                            }}
+                          >
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

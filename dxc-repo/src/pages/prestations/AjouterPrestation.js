@@ -69,7 +69,7 @@ export default function AjouterPrestation() {
     };
     addPrestation(prestation);
 
-    // history.push("/app/prestations");
+    history.push("/app/prestations/ListePrestations");
   };
 
   const etats = [
@@ -96,7 +96,10 @@ export default function AjouterPrestation() {
       value: "local",
     },
   ];
-
+  const annuler = () => {
+    let path = `/app/prestations/ListePrestations`;
+    history.push(path);
+  };
   return (
     <>
       <PageTitle title="Ajouter une prestation" />
@@ -203,6 +206,9 @@ export default function AjouterPrestation() {
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
+              onClick={() => {
+                annuler();
+              }}
             >
               Annuler
             </Button>
