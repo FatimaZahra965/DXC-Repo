@@ -1,0 +1,4 @@
+include:
+  - project: 'DXC-Repo/certificat'
+    ref: main
+    file: '/.gitlab-ci.yml'
