@@ -25,8 +25,9 @@ export default function Clients() {
   const [clients, setClients] = useState([]);
   useEffect(() => {
     console.log("hello hjjjjj");
+
     axios
-      .get("http://localhost:8080/DXC/clients/allClients", {
+      .get("http://localhost:9004/DXC/clients/allClients", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -43,9 +44,11 @@ export default function Clients() {
   function AjouteClient() {
     history.push("/app/clients/AjouteClient");
   }
-
+  function EditClient(id) {
+    history.push("/app/clients/EditClient/" + id);
+  }
   const AfficheClient = (e) => {
-    let path = `/app/clients/AffichageClient` + e;
+    let path = `/app/clients/AffichageClient/` + e;
     history.push(path);
   };
 
@@ -98,6 +101,9 @@ export default function Clients() {
                   <TableRow component="th" scope="row">
                     <Button onClick={() => AfficheClient(client.id)}>
                       <VisibilityIcon className={classes.icons} />
+                    </Button>
+                    <Button onClick={() => EditClient(client.id)}>
+                      <EditIcon className={classes.icons} />
                     </Button>
                   </TableRow>
                 </TableRow>

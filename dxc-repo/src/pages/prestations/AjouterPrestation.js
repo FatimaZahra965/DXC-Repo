@@ -26,6 +26,7 @@ export default function AjouterPrestation() {
   const [Market, getMarket] = useState("");
   const [DateDebut, getDateDebut] = useState("");
   const [DateFin, getDateFin] = useState("");
+  const [valide, setValide] = useState(false);
 
   //crar nuevo producto
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ export default function AjouterPrestation() {
     }
     //si pasa la validacion//si todo sale bien
     SuccessValidation();
+    setValide(true);
 
     //crear el nuevo producto
     let prestation = {
@@ -123,6 +125,7 @@ export default function AjouterPrestation() {
               label="Etat"
               size="small"
               fullWidth
+              variant="outlined"
               valur={Etat}
               onChange={(e) => {
                 getEtat(e.target.value);
@@ -140,6 +143,7 @@ export default function AjouterPrestation() {
               label="Type"
               size="small"
               fullWidth
+              variant="outlined"
               valur={Type}
               onChange={(e) => {
                 getType(e.target.value);
@@ -156,6 +160,7 @@ export default function AjouterPrestation() {
               select
               label="Market"
               size="small"
+              variant="outlined"
               fullWidth
               valur={Market}
               onChange={(e) => {

@@ -15,6 +15,7 @@ import {
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export function createNewcertificationAction(CERTIFICATION) {
   console.log("CERTIFICATION", CERTIFICATION);
@@ -24,12 +25,24 @@ export function createNewcertificationAction(CERTIFICATION) {
       .post("http://localhost:9001/dxc/certifications/addcertif", CERTIFICATION)
       .then((res) => {
         console.log(res);
-        //dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
+        dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
+        Swal.fire({
+          timer: 3000,
+          text: "La certif est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
         //si hay un error
         dispatch(addNewCERTIFICATIONError());
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource n'est pas ajouté",
+          timeerProgressBar: true,
+          icon: "error",
+        });
       });
   };
 }
@@ -78,7 +91,7 @@ export const descargaCertificationsError = () => ({
   type: DOWNLOAD_CERTIFICATION__ERROR,
 });
 
-export function editCERTIFICATIONAction(CERTIFICATION) {
+export function editCertificationction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(startEditCERTIFICATION());
 

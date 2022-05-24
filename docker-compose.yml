@@ -42,8 +42,24 @@ services:
       - "9003:9003"
     depends_on:
       - db
+  client:
+    container_name: microservice-client
+    image: microservice-client
+    build: ./client
+    ports:
+      - "9004:9004"
+    depends_on:
+      - db
+  competance:
+    container_name: microservice-competance
+    image: microservice-competance
+    build: ./competance
+    ports:
+      - "9005:9005"
+    depends_on:
+      - db
   db:
-    build: ./database
+    build: database
     image: postgres:latest
     environment:
       - POSTGRES_USER=postgres

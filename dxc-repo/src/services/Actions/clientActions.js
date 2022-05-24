@@ -26,16 +26,28 @@ export function createNewClientAction(client) {
     dispatch(newClient());
 
     clienteAxios
-      .post("http://localhost:8080/DXC/clients/addClient", client)
+      .post("http://localhost:9004/DXC/clients/addClient", client)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
         dispatch(addNewClientSuccess(client));
+        Swal.fire({
+          timer: 3000,
+          text: "Le client est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
         //si hay un error
         dispatch(addNewClientError());
+        Swal.fire({
+          timer: 3000,
+          text: "Le client n'est ajouté",
+          timeerProgressBar: true,
+          icon: "error",
+        });
       });
   };
 }
@@ -60,7 +72,7 @@ export function getClientsAction() {
 
     //interroger l'API
     clienteAxios
-      .get("http://localhost:8080/DXC/clients/allClients")
+      .get("http://localhost:9004/DXC/clients/allClients")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadClientsSuccessful(resp.data));

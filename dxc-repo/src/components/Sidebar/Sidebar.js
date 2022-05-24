@@ -28,29 +28,54 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Accueil", link: "/app/dashboard", icon: <HomeIcon /> },
+  {
+    id: 0,
+    label: "Accueil",
+    link: "/app/dashboard",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-home" />
+      </IconButton>
+    ),
+  },
   {
     id: 1,
     label: "Capabilités",
     link: "/app/capabilites",
-    icon: <TableIcon />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-photo-gallery" />
+      </IconButton>
+    ),
   },
   {
     id: 2,
     label: "Compétances",
-    link: "/app/competances",
-    icon: <Subject />,
+    link: "/app/competances/allCompetances",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-medal" />
+      </IconButton>
+    ),
   },
   {
     id: 3,
     label: "Notifications",
     link: "/app/notifications",
-    icon: <NotificationsIcon />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-bell" />
+      </IconButton>
+    ),
   },
   {
     id: 4,
     label: "Prestations",
-    icon: <Work />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-folder" />
+      </IconButton>
+    ),
     children: [
       {
         label: "Liste des Prestations",
@@ -68,13 +93,21 @@ const structure = [
     id: 5,
     label: "Parametres",
     link: "/app/parametres",
-    icon: <Settings />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-tools" />
+      </IconButton>
+    ),
   },
   {
     id: 6,
     label: "Certifications",
     link: "/app/certifications/ListeCertifications",
-    icon: <CardMembershipIcon />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-ribbon" />
+      </IconButton>
+    ),
   },
 ];
 

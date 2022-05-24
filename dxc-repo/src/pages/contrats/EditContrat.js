@@ -5,16 +5,18 @@ import { Button } from "@material-ui/core";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editContratAction } from "../../services/Actions/contratActions";
-import { getContratAction } from "../../services/Actions/contratActions";
+import {
+  editContratAction,
+  getContratAction,
+} from "../../services/Actions/contratActions";
 import {
   validacionError,
   validationSuccess,
   validarFormularioAction,
 } from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
-import clienteAxios from "../../config/axios";
 import axios from "axios";
+
 function EditContrat(props) {
   const classes = useStyles();
   const history = useHistory();
@@ -24,6 +26,7 @@ function EditContrat(props) {
     nomContrat: "",
     description: "",
   };
+  const editContrat = (Contrat) => dispatch(editContratAction(Contrat));
   const [currentContrat, setCurrentContrat] = useState(initialContratState);
   const [message, setMessage] = useState("");
 
@@ -32,10 +35,10 @@ function EditContrat(props) {
   const getContrat = () => {
     axios
       .get(
-        `http://localhost:9004/DXC/contrats/Contrat/` + props.match.params.id,
+        `http://localhost:9003/DXC/contrats/Contrat/` + props.match.params.id,
       )
       .then((resp) => {
-        console.log("hhhhkldmdmmdm", resp.data);
+        console.log("resp.data", resp.data);
         setCurrentContrat(resp.data);
         console.log("CurrentContrat", currentContrat);
       })
@@ -45,8 +48,8 @@ function EditContrat(props) {
   };
 
   const validarForm = () => dispatch(validarFormularioAction());
-  const SuccessValidation = () => dispatch(validationSuccess());
-  const errorValidation = () => dispatch(validacionError());
+  const SuccessValidacion = () => dispatch(validationSuccess());
+  const errorValidacion = () => dispatch(validacionError());
   useEffect(() => {
     getContrat(props.match.params.id);
   }, [props.match.params.id]);
@@ -58,15 +61,21 @@ function EditContrat(props) {
 
   const updateContent = () => {
     console.log("currentContrat", currentContrat);
-    dispatch(editContratAction(currentContrat))
-      .then((response) => {
-        console.log(response);
-        history.push("/app/prestations/Contrats");
-        setMessage("The Contrat was updated successfully!");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+
+    validarForm();
+
+    if (
+      currentContrat.nomClient.trim() === "" ||
+      currentContrat.nomContrat.trim() === "" ||
+      currentContrat.description.trim() === ""
+    ) {
+      errorValidacion();
+      return;
+    }
+    //si pasa la validacion//si todo sale bien
+    SuccessValidacion();
+
+    editContrat(currentContrat);
     history.push("/app/prestations/Contrats");
   };
   function AnnulerContrat() {

@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
     width: "75px",
     height: "45px",
   },
+  imgDxc: {
+    marginTop: "11px",
+  },
   appBar: {
     backgroundColor: "white",
     boxShadow: "0px 1px 2px 1px black",
@@ -17,8 +20,8 @@ export default makeStyles((theme) => ({
     }),
   },
   toolbar: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    // paddingLeft: theme.spacing(2),
+    // paddingRight: theme.spacing(2),
   },
   hide: {
     display: "none",
@@ -104,10 +107,10 @@ export default makeStyles((theme) => ({
   },
   headerIcon: {
     fontSize: 28,
-    color: "rgba(255, 255, 255, 0.35)",
+    color: "black",
   },
   headerIconCollapse: {
-    color: "white",
+    color: "black",
   },
   profileMenu: {
     minWidth: 265,

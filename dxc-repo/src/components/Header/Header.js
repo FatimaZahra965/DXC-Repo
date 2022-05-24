@@ -68,7 +68,7 @@ export default function Header(props) {
             />
           )}
         </IconButton>
-        <div>
+        <div className={classes.imgDxc}>
           <img
             src={`${process.env.PUBLIC_URL}/DXC-Logo.svg`}
             alt="logo_dxc"

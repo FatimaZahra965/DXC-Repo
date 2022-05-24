@@ -157,15 +157,13 @@ export default function ModiferRessource({ match }) {
               size="small"
               fullWidth
               name="genre"
-              // ressourcedate.genre[0].toUpperCase() +
-              //   ressourcedate.genre.slice(1)
               value={ressourcedate.genre}
               onChange={handleInputChange}
             >
-              <MenuItem key="1" value="Homme">
+              <MenuItem key="1" value="homme">
                 Homme
               </MenuItem>
-              <MenuItem key="2" value="Femme">
+              <MenuItem key="2" value="femme">
                 Femme
               </MenuItem>
             </TextField>
@@ -176,6 +174,7 @@ export default function ModiferRessource({ match }) {
               id="outlined-basic"
               size="small"
               variant="outlined"
+              format="MM/DD/YYYY"
               fullWidth
               type="date"
               name="dateAmbauche"

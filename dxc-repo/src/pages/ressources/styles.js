@@ -24,4 +24,7 @@ export default makeStyles((theme) => ({
     background: "black",
     color: "white",
   },
+  Alert: {
+    paddingBottom: "inherit",
+  },
 }));

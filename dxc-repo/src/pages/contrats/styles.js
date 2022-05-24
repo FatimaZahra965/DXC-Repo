@@ -26,7 +26,30 @@ export default makeStyles((theme) => ({
     background: "#741F82",
     color: "#FFFFFF",
   },
+  labelDonnes: {
+    color: "#000000",
+    Stroke: "Solid",
+    marginTop: "inherit",
+  },
   
+  labelinformation: {
+    color: "#7978BB",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  
+  forminformation: {
+    backgroundColor: "transparent",
+    maxWidth: 700,
+    border: "3px solid #FFFFFF",
+  },
+  label: {
+    color: "#741F82",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
   text: {
     color: "#5C59E9",
     marginLeft: "8px",

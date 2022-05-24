@@ -16,7 +16,8 @@ export default function Competances() {
   const classes = useStyles();
   let history = useHistory();
   function AjouteCompetance() {
-    history.push("/app/competances/ajouteCompetance");
+    let path = `/app/competances/ajouteCompetance`;
+    history.push(path);
   }
   return (
     <>

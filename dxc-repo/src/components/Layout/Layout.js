@@ -39,6 +39,9 @@ import ModiferRessource from "../../pages/ressources/ModiferRessource";
 import AfficherRessource from "../../pages/ressources/AfficherRessource";
 import Certifications from "../../pages/certifications/Certifications";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
+import EditClient from "../../pages/clients/EditClient";
+import CompetanceDetail from "../../pages/competances/CompetanceDetail";
+import EditCompetance from "../../pages/competances/EditCompetance";
 
 function Layout(props) {
   var classes = useStyles();
@@ -60,11 +63,24 @@ function Layout(props) {
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route path="/app/competances" component={Competances} />
+            {/*  routes Competances  */}
+            <Route
+              path="/app/competances/allCompetances"
+              component={Competances}
+            />
             <Route
               path="/app/competances/ajouteCompetance"
               component={AjouteCompetance}
             />
+            <Route
+              path="/app/competances/CompetanceDetail/:id"
+              component={CompetanceDetail}
+            />
+            <Route
+              path="/app/competances/EditCompetance/:id"
+              component={EditCompetance}
+            />
+
             <Route
               path="/app/certifications/ListeCertifications"
               component={Certifications}
@@ -79,12 +95,16 @@ function Layout(props) {
               path="/app/prestations/ListePrestations"
               component={Prestations}
             />
+            {/*  routes clients  */}
             <Route path="/app/prestations/clients" component={Clients} />
             <Route path="/app/clients/AjouteClient" component={AjouteClient} />
             <Route
-              path="/app/clients/AffichageClients"
+              path="/app/clients/AffichageClient/:id"
               component={AffichageClient}
             />
+            <Route path="/app/clients/EditClient/:id" component={EditClient} />
+
+            {/*  routes Contrats  */}
             <Route path="/app/prestations/Contrats" component={Contrats} />
             <Route
               path="/app/Contrats/ContratDetail/:id"
@@ -98,6 +118,7 @@ function Layout(props) {
               path="/app/Contrats/EditContrat/:id"
               component={EditContrat}
             />
+
             <Route path="/app/prestations/ressources" component={Ressources} />
             <Route path="/app/prestations/activites" component={Activites} />
             <Route

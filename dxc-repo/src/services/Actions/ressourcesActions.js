@@ -30,6 +30,12 @@ export function createNewRessourceAction(ressource) {
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -166,15 +172,22 @@ export function editRessourceAction(ressource) {
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
-        Swal.fire(
-          "Stored",
-          "The Ressource was successfully updated",
-          "success",
-        );
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est modifier avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
+        // Swal.fire({
+        //   timer: 3000,
+        //   text: "La ressource n'est pas modifier !",
+        //   timeerProgressBar: true,
+        //   icon: "error",
+        // });
       });
   };
 }

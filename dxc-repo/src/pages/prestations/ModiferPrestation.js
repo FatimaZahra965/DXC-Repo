@@ -45,7 +45,7 @@ export default function ModiferPrestation({ match }) {
   useEffect(() => {
     console.log("id", id);
     clienteAxios
-      .get(`http://localhost:8081/DXC/prestations/Prestation/${id}`)
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         setPrestationdate(resp.data);
@@ -153,6 +153,7 @@ export default function ModiferPrestation({ match }) {
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Etat"
               size="small"
               fullWidth
@@ -175,6 +176,7 @@ export default function ModiferPrestation({ match }) {
               size="small"
               fullWidth
               name="type"
+              variant="outlined"
               value={prestationdate.type}
               onChange={handleInputChange}
             >
@@ -189,6 +191,7 @@ export default function ModiferPrestation({ match }) {
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Market"
               size="small"
               fullWidth

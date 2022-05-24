@@ -23,10 +23,16 @@ export function createNewPrestationAction(prestation) {
   return (dispatch) => {
     dispatch(newPrestation());
     clienteAxios
-      .post("http://localhost:8081/DXC/prestations/addPrestation", prestation)
+      .post("http://localhost:9002/DXC/prestations/addPrestation", prestation)
       .then((res) => {
         console.log(res);
-        //dispatch(addNewPrestationSuccess(prestation));
+        Swal.fire({
+          timer: 3000,
+          text: "La prestation est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
+        dispatch(addNewPrestationSuccess(prestation));
       })
       .catch((error) => {
         console.log(error);
@@ -55,7 +61,7 @@ export function getPrestationsAction() {
     dispatch(getPrestationsStart());
 
     axios
-      .get("http://localhost:8081/DXC/prestations/allPrestations")
+      .get("http://localhost:9002/DXC/prestations/allPrestations")
       .then((resp) => {
         console.log("all prestations ----->", resp.data);
         dispatch(downloadPrestationsSuccessful(resp.data));
@@ -87,15 +93,16 @@ export function editPrestationAction(prestation) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`http://localhost:8081/DXC/prestations/updatePrestation`, prestation)
+      .put(`http://localhost:9002/DXC/prestations/updatePrestation`, prestation)
       .then((resp) => {
         //console.log(resp);
         dispatch(editPrestationSuccess(resp.data));
-        Swal.fire(
-          "Stored",
-          "The prestation was successfully updated",
-          "success",
-        );
+        Swal.fire({
+          timer: 3000,
+          text: "La prestation est modifier avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         //console.log(error);
@@ -123,7 +130,7 @@ export function getPrestationAction(id) {
 
     //obtenir le produit de l'api
     clienteAxios
-      .get(`http://localhost:8081/DXC/prestations/Prestation/${id}`)
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getPrestationEditSuccess(resp.data));

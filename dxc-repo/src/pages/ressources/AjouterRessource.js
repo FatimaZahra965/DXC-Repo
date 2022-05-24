@@ -95,6 +95,12 @@ export default function AjouterRessource() {
   return (
     <>
       <PageTitle title="Ajouter Ressource" />
+      <Grid item xs={12} className={classes.Alert}>
+        {error ? (
+          <Alert severity="error">Tous les champs sont requis!</Alert>
+        ) : null}
+      </Grid>
+
       <form onSubmit={submitNewRessource}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
@@ -148,6 +154,7 @@ export default function AjouterRessource() {
               label="Genre"
               size="small"
               fullWidth
+              variant="outlined"
               valur={Genre}
               onChange={(e) => {
                 getGenre(e.target.value);
@@ -158,6 +165,7 @@ export default function AjouterRessource() {
               ))}
             </TextField>
           </Grid>
+          <Grid item xs={6}></Grid>
           <Grid item xs={6}>
             <label>Date d'ambauche</label>
             <TextField
@@ -206,9 +214,6 @@ export default function AjouterRessource() {
           </Grid>
         </Grid>
       </form>
-      {error ? (
-        <Alert severity="error">Tous les champs sont requis!</Alert>
-      ) : null}
     </>
   );
 }

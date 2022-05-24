@@ -1,23 +1,5 @@
-// export default function Prestations() {
-//   var classes = useStyles();
-
-//   useEffect(() => {
-//     //productos cuando el componente este listo
-//     const loedPrestations = () => dispatch(getPrestationsAction());
-//     loedPrestations();
-//   }, []);
-
-//   const loading = useSelector((state) => state.prestations.loading);
-//   const error = useSelector((state) => state.prestations.error);
-//   const prestations = useSelector((state) => state.prestations.prestations);
-
-//   return (
-
-//   );
-// }
 import React, { useEffect } from "react";
 
-//axios
 import { useDispatch, useSelector } from "react-redux";
 import { getPrestationsAction } from "../../services/Actions/prestationsActions";
 import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
