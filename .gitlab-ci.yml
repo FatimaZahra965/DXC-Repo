@@ -1,4 +1,4 @@
 include:
-  - project: 'DXC-Repo/certificat'
+  - project: 'dxc-repo'
     ref: main
-    file: '/.gitlab-ci.yml'
+    file: '/certificat/.gitlab-ci.yml'
