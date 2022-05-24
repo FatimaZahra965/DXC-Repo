@@ -1,4 +1,2 @@
 include:
-  - project: 'dxc-repo'
-    ref: main
-    file: '/certificat/.gitlab-ci.yml'
+  - remote: 'https://gitlab.com/houssam_elhazami/dxc-repo/-/blob/main/certificat/.gitlab-ci.yml'
