@@ -1,0 +1,16 @@
+image: docker:latest
+services:
+- docker:dind
+
+stages:
+- build
+
+variables:
+  DOCKER_DRIVER: overlay
+
+release:
+  stage: build
+  script:
+    - docker build -t $DOCKER_REPOSIROTY/certificat-service:latest .
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSIROTY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSIROTY/certificat-service:latest
