@@ -11,6 +11,6 @@ variables:
 release:
   stage: build
   script:
-    - docker build -t $DOCKER_REPOSIROTY/certificat-service:latest ./certificat
+    - docker build -t dxcrepo.azurecr.io/certificat-service ./certificat
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSIROTY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSIROTY/certificat-service:latest
+    - docker push dxcrepo.azurecr.io/certificat-service
