@@ -1,4 +1,17 @@
-include:
-  - project: 'certificat'
-    ref: main
-    file: '/certificat/.gitlab-ci.yml'
+image: creatiwww/docker-compose:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build and deploy
+
+build:
+  stage: build and deploy
+  script:
+    - docker-compose build -t $DOCKER_REPOSITORY/certificat-service:latest .
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker-compose push $DOCKER_REPOSITORY/certificat-service:latest
+    
+  only:
+    - main
