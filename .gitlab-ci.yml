@@ -9,7 +9,7 @@ stages:
 build:
   stage: build and deploy
   script:
-    - docker-compose build $DOCKER_REPOSITORY/certificat-service:latest .
+    - docker-compose build
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker-compose push $DOCKER_REPOSITORY/certificat-service:latest
     
