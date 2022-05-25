@@ -11,6 +11,6 @@ variables:
 release:
   stage: build
   script:
-    - docker build -t $DOCKER_REPOSITORY/certificat-service:latest .
+    - docker build -t $DOCKER_REPOSITORY/certificat-service:latest ./certificat
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/certificat-service:latest
