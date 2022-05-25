@@ -1,17 +1,16 @@
-image: dxcrepo/docker-compose:latest
-
+image: docker:latest
 services:
-  - docker:dind
+- docker:dind
 
 stages:
-  - build and deploy
+- build
 
-build:
-  stage: build and deploy
+variables:
+  DOCKER_DRIVER: overlay
+
+release:
+  stage: build
   script:
-    - docker-compose build
+    - docker build -t $DOCKER_REPOSITORY/certificat-service:latest .
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker-compose push $DOCKER_REPOSITORY/certificat-service:latest
-    
-  only:
-    - main
+    - docker push $DOCKER_REPOSITORY/certificat-service:latest
