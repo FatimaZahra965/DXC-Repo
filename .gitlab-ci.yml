@@ -1,16 +1,4 @@
-image: docker:latest
-services:
-- docker:dind
-
-stages:
-- build
-
-variables:
-  DOCKER_DRIVER: overlay
-
-release:
-  stage: build
-  script:
-    - docker build -t dxcrepo.azurecr.io/certificat-service ./certificat
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push dxcrepo.azurecr.io/certificat-service
+include:
+  - project: 'certificat'
+    ref: main
+    file: '/certificat/.gitlab-ci.yml'
