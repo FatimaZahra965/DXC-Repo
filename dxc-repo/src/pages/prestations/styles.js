@@ -24,4 +24,37 @@ export default makeStyles((theme) => ({
     background: "black",
     color: "white",
   },
+  table: {
+    minWidth: 650,
+  },
+  icons: {
+    margin: "00px",
+  },
+  addBtn: {
+    display: "flex",
+    justifyContent: "space-between",
+    float: "right",
+    background: "#741F82",
+    color: "#FFFFFF",
+    // height: "30px",
+    marginBottom: "10px",
+  },
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
+  grid: {
+    height: "50px",
+  },
+  searchTextField: {
+    display: "flex",
+    justifyContent: "space-between",
+    float: "left",
+    marginTop: "13px",
+  },
+  bText: {
+    padding: "10px",
+  },
 }));

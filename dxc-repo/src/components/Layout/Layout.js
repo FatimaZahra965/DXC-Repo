@@ -42,6 +42,7 @@ import AjouterCertification from "../../pages/certifications/AjouterCertificatio
 import EditClient from "../../pages/clients/EditClient";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import EditCompetance from "../../pages/competances/EditCompetance";
+import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
 
 function Layout(props) {
   var classes = useStyles();
@@ -148,10 +149,10 @@ function Layout(props) {
               path="/app/prestations/ModiferPrestation/:id"
               component={ModiferPrestation}
             />
-            {/* <Route
+            <Route
               path="/app/prestations/AficherPrestation/:id"
               component={AfficherPrestation}
-            /> */}
+            />
           </Switch>
           <Box
             mt={5}

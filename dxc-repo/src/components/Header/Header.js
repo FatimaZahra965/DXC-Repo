@@ -48,24 +48,9 @@ export default function Header(props) {
           )}
         >
           {layoutState.isSidebarOpened ? (
-            <ArrowBackIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-              style={{ color: "black" }}
-            />
+            <i className="pe-7s-left-arrow" style={{ color: "black" }}></i>
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-            />
+            <i className="pe-7s-menu" style={{ color: "black" }}></i>
           )}
         </IconButton>
         <div className={classes.imgDxc}>
