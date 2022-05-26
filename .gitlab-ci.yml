@@ -1,0 +1,16 @@
+image: docker:latest
+services:
+- docker:dind
+
+stages:
+- build
+
+variables:
+  DOCKER_DRIVER: overlay
+
+release:
+  stage: build
+  script:
+    - docker-compose up --no-start
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker-compose push
