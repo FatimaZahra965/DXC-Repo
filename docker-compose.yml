@@ -2,17 +2,14 @@ version: '3.1'
 services:
   # Frontend Service
   dxc-repo-frontend:
-    build:
-      context: dxc-repo # Use an image built from the specified dockerfile in the `polling-app-client` directory.
-      dockerfile: Dockerfile
-      args:
-         REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api
+    container_name: dxc-repo
+    image: dxcrepo.azurecr.io/dxc-repo
+    build: ./dxc-repo
     ports:
-      - "3000:3000" # Map the exposed port 80 on the container to port 9090 on the host machine
-
+      - "3000:3000"
   certif:
     container_name: microservice-certificat
-    image: microservice-certificat
+    image: dxcrepo.azurecr.io/microservice-certificat
     build: ./certificat
     ports:
       - "9001:9001"
@@ -20,7 +17,7 @@ services:
       - db
   ressource:
     container_name: microservice-ressource
-    image: microservice-ressource
+    image: dxcrepo.azurecr.io/microservice-ressource
     build: ./ressource
     ports:
       - "9000:9000"
@@ -28,7 +25,7 @@ services:
       - db
   prestation:
     container_name: microservice-prestation
-    image: microservice-prestation
+    image: dxcrepo.azurecr.io/microservice-prestation
     build: ./prestation
     ports:
       - "9002:9002"
@@ -36,7 +33,7 @@ services:
       - db
   contrat:
     container_name: microservice-contrat
-    image: microservice-contrat
+    image: dxcrepo.azurecr.io/microservice-contrat
     build: ./contrat
     ports:
       - "9003:9003"
@@ -44,7 +41,7 @@ services:
       - db
   client:
     container_name: microservice-client
-    image: microservice-client
+    image: dxcrepo.azurecr.io/microservice-client
     build: ./client
     ports:
       - "9004:9004"
@@ -52,7 +49,7 @@ services:
       - db
   competance:
     container_name: microservice-competance
-    image: microservice-competance
+    image: dxcrepo.azurecr.io/microservice-competance
     build: ./competance
     ports:
       - "9005:9005"
@@ -60,7 +57,7 @@ services:
       - db
   db:
     build: database
-    image: postgres:latest
+    image: dxcrepo.azurecr.io/postgres:latest
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
