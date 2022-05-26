@@ -9,6 +9,8 @@ variables:
   DOCKER_DRIVER: overlay
 
 release:
-  stage: build dxcrepo
+  stage: build
   script:
-    - docker-compose up -d
+    - docker-compose up
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker-compose push
