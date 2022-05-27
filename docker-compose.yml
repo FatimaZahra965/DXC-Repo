@@ -1,0 +1,70 @@
+version: '3.1'
+services:
+  # Frontend Service
+  dxc-repo-frontend:
+    container_name: dxc-repo
+    image: dxcrepo.azurecr.io/dxc-repo
+    build: ./dxc-repo
+    ports:
+      - "3000:3000"
+  certif:
+    container_name: microservice-certificat
+    image: dxcrepo.azurecr.io/microservice-certificat
+    build: ./certificat
+    ports:
+      - "9001:9001"
+    depends_on:
+      - db
+  ressource:
+    container_name: microservice-ressource
+    image: dxcrepo.azurecr.io/microservice-ressource
+    build: ./ressource
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+  prestation:
+    container_name: microservice-prestation
+    image: dxcrepo.azurecr.io/microservice-prestation
+    build: ./prestation
+    ports:
+      - "9002:9002"
+    depends_on:
+      - db
+  contrat:
+    container_name: microservice-contrat
+    image: dxcrepo.azurecr.io/microservice-contrat
+    build: ./contrat
+    ports:
+      - "9003:9003"
+    depends_on:
+      - db
+  client:
+    container_name: microservice-client
+    image: dxcrepo.azurecr.io/microservice-client
+    build: ./client
+    ports:
+      - "9004:9004"
+    depends_on:
+      - db
+  competance:
+    container_name: microservice-competance
+    image: dxcrepo.azurecr.io/microservice-competance
+    build: ./competance
+    ports:
+      - "9005:9005"
+    depends_on:
+      - db
+  db:
+    build: database
+    image: dxcrepo.azurecr.io/postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=Dxc-repo
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+volumes:
+  pgdata:
