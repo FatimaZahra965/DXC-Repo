@@ -14,3 +14,5 @@ release:
     - docker-compose up --no-start
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker-compose push
+  only:
+    - main
