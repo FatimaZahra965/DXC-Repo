@@ -27,4 +27,14 @@ export default makeStyles((theme) => ({
   Alert: {
     paddingBottom: "inherit",
   },
+  textField: {
+    margin: "5px",
+  },
+  gridBorder: {
+    border: "thick double #32a1ce",
+  },
+  Btext: {
+    // padding: "5px",
+    // margin: "5px",
+  },
 }));

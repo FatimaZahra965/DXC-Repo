@@ -98,7 +98,7 @@ export default function ModiferRessource({ match }) {
   };
   return (
     <>
-      <PageTitle title="Modifer Ressource" />
+      <PageTitle title="Modifer Ressource" path="/app/prestations/ressources" />
       <form onSubmit={submitEditRessource}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
