@@ -11,7 +11,7 @@ variables:
 release:
   stage: build
   script:
-    - docker build -t $DOCKER_REPOSIROTY/dxc-repo:latest .
+    - docker build -t $DOCKER_REPOSIROTY/dxc-repo:latest ./dxc-repo
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSIROTY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSIROTY/dxc-repo:latest
   only:
