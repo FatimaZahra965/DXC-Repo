@@ -42,6 +42,7 @@ import AfficherRessource from "../../pages/ressources/AfficherRessource";
 import Certifications from "../../pages/certifications/Certifications";
 import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
+import AjouterCertification from "../../pages/certifications/AjouterCertification";
 
 function Layout(props) {
   var classes = useStyles();
@@ -90,8 +91,8 @@ function Layout(props) {
             <Route path="/app/Contrats/AjouteContrat" component={AjouteContrat}/>
             <Route path="/app/Contrats/EditContrat/:id" component={EditContrat}/>
 
-            {/*  routes Contrats  */}
-            <Route path="/app/ressources" component={Ressources} />
+            {/*  routes Ressources  */}
+            <Route path="/app/prestations/ressources" component={Ressources} />
             <Route path="/app/ressources/AjouterRessource" component={AjouterRessource} />
             <Route path="/app/ressources/ModiferRessource/:id" component={ModiferRessource}/>
             <Route path="/app/ressources/AfficherRessource/:id" component={AfficherRessource}/>
@@ -101,7 +102,8 @@ function Layout(props) {
             <Route path="/app/prestations/technologies"  component={Technologies} />
             <Route path="/app/prestations/projets" component={Projets} />
             <Route path="/app/parametres" component={Parametres} />
-            <Route path="/app/certifications" component={Certifications} />
+            <Route path="/app/certifications/ListeCertifications"   component={Certifications}/>
+            <Route path="/app/certifications/AjouterCertification" component={AjouterCertification}/>
             <Route path="/app/notifications" component={Notifications} />
             <Route path="/app/capabilites" component={Capabilites} />
             

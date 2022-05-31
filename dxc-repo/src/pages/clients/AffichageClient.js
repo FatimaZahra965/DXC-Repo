@@ -11,7 +11,7 @@ function AffichageClient(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get(`http://localhost:8080/DXC/clients/Client/`+props.match.params.id, {
+      .get(`http://localhost:9004/DXC/clients/Client/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -34,8 +34,8 @@ function AffichageClient(props) {
       </div>
 
       <div>
-      <form   className={classes.forminformation}>
-        <Grid container spacing={3}>
+      <form  className={classes.Form} >
+    <Grid container spacing={3} className={classes.GridForm}>
         <Grid item xs={4}  className={classes.labelinformation}>
           <h3>nom de client </h3>  
           </Grid>

@@ -1,26 +1,7 @@
-// export default function Prestations() {
-//   var classes = useStyles();
-
-//   useEffect(() => {
-//     //productos cuando el componente este listo
-//     const loedPrestations = () => dispatch(getPrestationsAction());
-//     loedPrestations();
-//   }, []);
-
-//   const loading = useSelector((state) => state.prestations.loading);
-//   const error = useSelector((state) => state.prestations.error);
-//   const prestations = useSelector((state) => state.prestations.prestations);
-
-//   return (
-
-//   );
-// }
-import React, { useEffect } from "react";
-
-//axios
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPrestationsAction } from "../../services/Actions/prestationsActions";
-import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
+import {Button, Grid,IconButton,InputAdornment,makeStyles,Paper,TextField,} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -34,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
+import useStyles from "./styles";
+import SearchIcon from "@material-ui/icons/Search";
 
 const columns = [
   { id: "titre", label: "Titre", minWidth: 100 },
@@ -44,29 +27,6 @@ const columns = [
   { id: "dateFin", label: "Date de Fin", minWidth: 180 },
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  icons: {
-    margin: "00px",
-  },
-  addBtn: {
-    display: "flex",
-    marginTop: "16px",
-    marginBottom: "8px",
-    justifyContent: "space-between",
-    float: "right",
-    background: "#741F82",
-    color: "#FFFFFF",
-  },
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
 const Prestations = () => {
   const history = useHistory();
   var classes = useStyles();
@@ -78,6 +38,9 @@ const Prestations = () => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [val, setVal] = useState("");
+  const [listFilter, setListFilter] = useState([]);
+
   useEffect(() => {
     const loadProducts = () => dispatch(getPrestationsAction());
     loadProducts();
@@ -97,14 +60,28 @@ const Prestations = () => {
     setPage(0);
   };
 
-  // const EditPrestation = (e) => {
-  //   let path = `/app/prestations/ModiferPrestation/` + 1;
-  //   history.push(path);
-  // };
-  // const ViewPrestation = (e) => {
-  //   let path = `/app/prestations/AfficherPrestation/` + 1;
-  //   history.push(path);
-  // };
+  const EditPrestation = (e) => {
+    let path = `/app/prestations/ModiferPrestation/` + e;
+    history.push(path);
+  };
+  const ViewPrestation = (e) => {
+    let path = `/app/prestations/AficherPrestation/` + e;
+    history.push(path);
+  };
+
+  const Recherche = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = prestations.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.titre.toLowerCase().includes(val);
+    }
+  });
+
   return (
     <>
       {error ? (
@@ -113,8 +90,29 @@ const Prestations = () => {
 
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <PageTitle title="Prestations"  path="/app/dashboard" />
+        <Grid item xs={6} className={classes.grid}>
+          <PageTitle title="Prestations" path="/app/dashboard" />
+        </Grid>
+        <Grid item xs={6} className={classes.grid}></Grid>
+        <Grid xs={6} className={classes.grid}>
+          <TextField
+            id="outlined-basic"
+            onChange={Recherche}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Recherche"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -148,7 +146,7 @@ const Prestations = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {prestations
+                {filteredData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -169,10 +167,18 @@ const Prestations = () => {
                           );
                         })}
                         <TableCell>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              ViewPrestation(row.id);
+                            }}
+                          >
                             <VisibilityIcon className={classes.icons} />
                           </Button>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              EditPrestation(row.id);
+                            }}
+                          >
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

@@ -10,7 +10,7 @@ function CompetanceDetail(props) {
     console.log("hello hjjjjj");
     
     axios
-      .get(`http://localhost:8080/DXC/competances/Competance/`+props.match.params.id, {
+      .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -33,53 +33,53 @@ function CompetanceDetail(props) {
       </div>
 
       <div class="demo">
-      <form >
-        <Grid container spacing={3}>
-        <Grid item xs={4}  className={classes.labelinformation}>
+      <form  className={classes.Form} >
+    <Grid container spacing={3} className={classes.GridForm}>
+        <Grid item xs={4}  >
           <h3>Nom et prénom de ressource </h3>  
           </Grid>
-          <Grid item xs={6} className={classes.labelDonnes}>
+          <Grid item xs={6}>
            <h3>{competance.nomRessource}</h3>
           </Grid>
 
-             <Grid item xs={4}  className={classes.labelinformation}>
+             <Grid item xs={4}  >
           <h3>Matricule de ressource </h3>  
           </Grid>
-          <Grid item xs={6} className={classes.labelDonnes}>
+          <Grid item xs={6}>
               <h3>{competance.matriculeRessource}</h3>
           </Grid>
 
 
-          <Grid item xs={4}  className={classes.labelinformation}>
+          <Grid item xs={4}  >
           <h3>Type de compétence </h3>  
           </Grid>
-          <Grid item xs={6} className={classes.labelDonnes}>
+          <Grid item xs={6}>
           <h3>{competance.typeComp}</h3>
           
           </Grid>
           
 
-          <Grid item xs={4}  className={classes.labelinformation}>
+          <Grid item xs={4}  >
           <h3>Intitulé de compétence</h3>  
           </Grid>
-          <Grid item xs={6} className={classes.labelDonnes}>
+          <Grid item xs={6}>
           <h3>{competance.nomCompetance}</h3>
           </Grid>
           
 
-          <Grid item xs={4}  className={classes.labelinformation}>
+          <Grid item xs={4}  >
           <h3>Niveau  de maitrise attendu </h3>  
           </Grid>
-          <Grid item xs={6} className={classes.labelDonnes}>
+          <Grid item xs={6}>
           <h3>{competance.niveau}</h3>
           </Grid>
           
 
-          <Grid item xs={4}  className={classes.labelinformation}>
+          <Grid item xs={4}  >
           <h3>Evaluation de manager</h3>  
           </Grid>
          
-          <Grid item xs={6} className={classes.labelDonnes}> 
+          <Grid item xs={6}> 
           <h3>{competance.evaluationManager}</h3>
           </Grid>
           

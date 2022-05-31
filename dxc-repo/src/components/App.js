@@ -20,6 +20,7 @@ export default function App() {
   var { isAuthenticated } = useUserState();
 
   return (
+   
     <BrowserRouter>
       <Provider store={store}>
         <Switch>

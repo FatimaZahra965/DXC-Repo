@@ -25,7 +25,7 @@ function EditClient(props) {
   const dispatch = useDispatch();
   const getClient = () => {
     axios
-    .get(`http://localhost:8080/DXC/clients/Client/`+props.match.params.id)
+    .get(`http://localhost:9004/DXC/clients/Client/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
       setCurrentClient(resp.data);
@@ -80,8 +80,9 @@ function EditClient(props) {
         <div>
           <PageTitle title="Modifier un client" path="/app/prestations/clients"/>
         </div>
-        <form onSubmit={updateContent}>
-        <Grid container spacing={3}>
+        
+        <form onSubmit={updateContent}className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-nomContrat"

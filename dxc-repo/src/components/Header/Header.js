@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, IconButton, Menu, MenuItem } from "@material-ui/core";
-import {
-  Menu as MenuIcon,
-  NotificationsNone as NotificationsIcon,
-  Person as AccountIcon,
-  ArrowBack as ArrowBackIcon,
-  Language,
-  Brightness6,
-} from "@material-ui/icons";
+import {  Menu as MenuIcon,  NotificationsNone as NotificationsIcon,  Person as AccountIcon, ArrowBack as ArrowBackIcon,} from "@material-ui/icons";
 import classNames from "classnames";
-
 // styles
 import useStyles from "./styles";
-
 // components
 import { Typography } from "../Wrappers";
 
@@ -48,15 +39,11 @@ export default function Header(props) {
           )}
         >
           {layoutState.isSidebarOpened ? (
-            <ArrowBackIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-              style={{ color: "black" }}
-            />
+             <i
+            className="pe-7s-left-arrow"
+            classes={{ root: classes.headerIcon }}
+            style={{ color: "black" }}
+          ></i>
           ) : (
             <MenuIcon
               classes={{
@@ -88,10 +75,15 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <NotificationsIcon
+          <i
+            className="pe-7s-bell"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
+          {/* <NotificationsIcon
+            classes={{ root: classes.headerIcon }}
+            style={{ color: "black" }}
+          /> */}
         </IconButton>
         <IconButton
           aria-haspopup="true"
@@ -99,12 +91,13 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <Language
+          <i
+            className="pe-7s-global"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
-        <IconButton
+        {/* <IconButton
           aria-haspopup="true"
           color="inherit"
           className={classes.headerMenuButton}
@@ -114,7 +107,8 @@ export default function Header(props) {
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
           />
-        </IconButton>
+        </IconButton> */}
+        
         <IconButton
           aria-haspopup="true"
           color="inherit"
@@ -122,10 +116,11 @@ export default function Header(props) {
           aria-controls="profile-menu"
           onClick={(e) => setProfileMenu(e.currentTarget)}
         >
-          <AccountIcon
+          <i
+            className="pe-7s-user"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
 
         <Menu

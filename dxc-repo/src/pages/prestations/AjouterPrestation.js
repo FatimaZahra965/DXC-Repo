@@ -20,12 +20,42 @@ export default function AjouterPrestation() {
   const classes = useStyles();
   const history = useHistory();
   //state
-  const [Titre, getTitre] = useState("");
-  const [Etat, getEtat] = useState("");
-  const [Type, getType] = useState("");
-  const [Market, getMarket] = useState("");
-  const [DateDebut, getDateDebut] = useState("");
-  const [DateFin, getDateFin] = useState("");
+  const initialPrestationState = {
+    id: null,
+    type: "",
+    etat: "",
+    dateDebut: "",
+    dateFin: "",
+    titre: "",
+    market: "",
+
+    typeEror: "",
+    etatEror: "",
+    dateDebutEror: "",
+    dateFinEror: "",
+    titreEror: "",
+    marketEror: "",
+  };
+  const [Titre, setTitre] = useState(initialPrestationState.titre);
+  const [Etat, setEtat] = useState(initialPrestationState.etat);
+  const [Type, setType] = useState(initialPrestationState.type);
+  const [Market, setMarket] = useState(initialPrestationState.market);
+  const [DateDebut, setDateDebut] = useState(initialPrestationState.dateDebut);
+  const [DateFin, setDateFin] = useState(initialPrestationState.dateFin);
+
+  // Eror states
+  const [TitreEror, setTitreEror] = useState(initialPrestationState.titreEror);
+  const [EtatEror, setEtatEror] = useState(initialPrestationState.etatEror);
+  const [TypeEror, setTypeEror] = useState(initialPrestationState.typeEror);
+  const [MarketEror, setMarketEror] = useState(
+    initialPrestationState.marketEror,
+  );
+  const [DateDebutEror, setDateDebutEror] = useState(
+    initialPrestationState.dateDebutEror,
+  );
+  const [DateFinEror, setDateFinEror] = useState(
+    initialPrestationState.dateFinEror,
+  );
 
   //crar nuevo producto
   const dispatch = useDispatch();
@@ -38,24 +68,53 @@ export default function AjouterPrestation() {
   //obtener los datos del state
   const error = useSelector((state) => state.error.error);
 
-  // addnew prestation
   const submitNewPrestation = (e) => {
     e.preventDefault();
 
-    validarForm();
+    let typeEror = "";
+    let etatEror = "";
+    let dateDebutEror = "";
+    let dateFinEror = "";
+    let titreEror = "";
+    let marketEror = "";
+
+    if (!Type) {
+      typeEror = "le champ Type de la prestation est obligatiore";
+    }
+    if (!Titre) {
+      titreEror = "le champ Titre de la prestation est obligatiore";
+    }
+    if (!Market) {
+      marketEror = "le champ Market de la prestation est obligatiore";
+    }
+    if (!DateDebut) {
+      dateDebutEror = "le champ Date de début de la prestation est obligatiore";
+    }
+    if (!DateFin) {
+      dateFinEror = "le champ Date de fin de la prestation est obligatiore";
+    }
+    if (!Etat) {
+      etatEror = "le champ Etat de la prestation est obligatiore";
+    }
 
     if (
-      Titre.trim() === "" ||
-      Etat.trim() === "" ||
-      Market.trim() === "" ||
-      Type.trim() === "" ||
-      DateDebut.trim() === "" ||
-      DateFin.trim() === ""
+      typeEror ||
+      titreEror ||
+      marketEror ||
+      dateDebutEror ||
+      dateFinEror ||
+      etatEror
     ) {
+      setTitreEror(titreEror);
+      setTypeEror(typeEror);
+      setEtatEror(etatEror);
+      setDateDebutEror(dateDebutEror);
+      setDateFinEror(dateFinEror);
+      setMarketEror(marketEror);
+
       errorValidacion();
       return;
     }
-    //si pasa la validacion//si todo sale bien
     SuccessValidation();
 
     //crear el nuevo producto
@@ -69,7 +128,7 @@ export default function AjouterPrestation() {
     };
     addPrestation(prestation);
 
-    // history.push("/app/prestations");
+    history.push("/app/prestations/allPrestation");
   };
 
   const etats = [
@@ -96,12 +155,34 @@ export default function AjouterPrestation() {
       value: "local",
     },
   ];
+  const types = [
+    {
+      label: "Interne",
+      value: "Interne",
+    },
+    {
+      label: "Externe",
+      value: "Externe",
+    },
+  ];
+  const annuler = () => {
+    setTitre(initialPrestationState.titre);
+    setDateDebut(initialPrestationState.dateDebut);
+    setDateFin(initialPrestationState.dateFin);
+    setEtat(initialPrestationState.etat);
+    setMarket(initialPrestationState.market);
+    setType(initialPrestationState.type);
+  };
 
   return (
     <>
-      <PageTitle title="Ajouter une prestation" />
-      <form onSubmit={submitNewPrestation}>
-        <Grid container spacing={3}>
+      <PageTitle
+        title="Ajouter une prestation"
+        path="/app/prestations/allPrestation"
+      />
+       <form onSubmit={submitNewPrestation} className={classes.Form} >
+        <Grid container spacing={3} className={classes.GridForm}>
+    
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"
@@ -109,9 +190,13 @@ export default function AjouterPrestation() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Titre}
-              onChange={(e) => getTitre(e.target.value)}
+              value={Titre}
+              onChange={(e) => {
+                setTitre(e.target.value);
+                setTitreEror(initialPrestationState.titreEror);
+              }}
             />
+            <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -120,15 +205,20 @@ export default function AjouterPrestation() {
               label="Etat"
               size="small"
               fullWidth
-              valur={Etat}
+              variant="outlined"
+              value={Etat}
               onChange={(e) => {
-                getEtat(e.target.value);
+                setEtat(e.target.value);
+                setEtatEror(initialPrestationState.etatEror);
               }}
             >
               {etats.map((etat) => (
-                <MenuItem value={etat.value}>{etat.label}</MenuItem>
+                <MenuItem key={etat.value} value={etat.value}>
+                  {etat.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{EtatEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -137,15 +227,20 @@ export default function AjouterPrestation() {
               label="Type"
               size="small"
               fullWidth
-              valur={Type}
+              variant="outlined"
+              value={Type}
               onChange={(e) => {
-                getType(e.target.value);
+                setType(e.target.value);
+                setTypeEror(initialPrestationState.typeEror);
               }}
             >
-              {etats.map((etat) => (
-                <MenuItem value={etat.value}>{etat.label}</MenuItem>
+              {types.map((type) => (
+                <MenuItem key={type.value} value={type.value}>
+                  {type.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{TypeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -153,16 +248,21 @@ export default function AjouterPrestation() {
               select
               label="Market"
               size="small"
+              variant="outlined"
               fullWidth
-              valur={Market}
+              value={Market}
               onChange={(e) => {
-                getMarket(e.target.value);
+                setMarket(e.target.value);
+                setMarketEror(initialPrestationState.marketEror);
               }}
             >
               {markets.map((market) => (
-                <MenuItem value={market.value}>{market.label}</MenuItem>
+                <MenuItem key={market.value} value={market.value}>
+                  {market.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{MarketEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de début</label>
@@ -172,9 +272,13 @@ export default function AjouterPrestation() {
               variant="outlined"
               fullWidth
               type="date"
-              valur={DateDebut}
-              onChange={(e) => getDateDebut(e.target.value)}
+              value={DateDebut}
+              onChange={(e) => {
+                setDateDebut(e.target.value);
+                setDateDebutEror(initialPrestationState.dateDebutEror);
+              }}
             />
+            <div style={{ color: "red" }}>{DateDebutEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de Fin</label>
@@ -184,9 +288,13 @@ export default function AjouterPrestation() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={DateFin}
-              onChange={(e) => getDateFin(e.target.value)}
+              value={DateFin}
+              onChange={(e) => {
+                setDateFin(e.target.value);
+                setDateFinEror(initialPrestationState.dateFinEror);
+              }}
             />
+            <div style={{ color: "red" }}>{DateFinEror}</div>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -203,6 +311,9 @@ export default function AjouterPrestation() {
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
+              onClick={() => {
+                annuler();
+              }}
             >
               Annuler
             </Button>
@@ -210,7 +321,7 @@ export default function AjouterPrestation() {
         </Grid>
       </form>
       {error ? (
-        <Alert severity="error">Tous les champs sont requis!</Alert>
+        <Alert severity="error">La prestation n'est pas ajouté!</Alert>
       ) : null}
     </>
   );

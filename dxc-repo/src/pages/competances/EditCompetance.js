@@ -29,8 +29,9 @@ function EditCompetance(props) {
  // créer un nouveau Competance
   const dispatch = useDispatch();
   const getCompetance = () => {
+    
     axios
-    .get(`http://localhost:8080/DXC/competances/Competance/`+props.match.params.id)
+    .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
       setCurrentCompetance(resp.data);
@@ -54,7 +55,7 @@ function EditCompetance(props) {
   };
 
 
-  const updateCompetance = () => {
+  const updateContent = () => {
     console.log("currentCompetance",currentCompetance);
 
     validarForm();
@@ -111,15 +112,15 @@ function EditCompetance(props) {
   const typesCompetances = [
     {
       label: "Compétences techniques",
-      value: "CompetenceTechn",
+      value: "Compétences techniques",
     },
     {
       label: "Compétences transversales",
-      value: "CompetenceTrans",
+      value: "Compétences transversales",
     },
     {
       label: "Compétences linguistiques",
-      value: "CompetenceLing",
+      value: "Compétences linguistiques",
     },
   
   ];
@@ -129,16 +130,14 @@ function EditCompetance(props) {
       <div>
         <PageTitle title="Modifier une Competance" path="/app/competances/allCompetances" />
       </div>
-      <form onSubmit={updateCompetance}>
-        <Grid container spacing={3}>
-        <Grid item xs={4}  className={classes.label}>
-          <h3>Nom et prénom de ressource </h3>  
-          </Grid>
-      
+    
+      <form onSubmit={updateContent}className={classes.Form}>
+        <Grid container spacing={3}className={classes.GridForm}>
+
           <Grid item xs={6}>
             <TextField
               id="outlined-nomRessource"
-              // label="Nom et prénom de ressource"
+              label="Nom et prénom de ressource"
               size="small"
               variant="outlined"
               fullWidth
@@ -147,16 +146,13 @@ function EditCompetance(props) {
               onChange={handleInputChange}
             />
           </Grid>
-        
-
-             <Grid item xs={4}  className={classes.label}>
-          <h3>Matricule de ressource </h3>  
-          </Grid>
+    
       
           <Grid item xs={6}>
           <TextField
               id="outlined-matriculeRessource"
               size="small"
+              label="Matricule de ressource"
               variant="outlined"
               fullWidth
               name="matriculeRessource"
@@ -165,17 +161,12 @@ function EditCompetance(props) {
             
             />
           </Grid>
-         
-      
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Type de compétence </h3>  
-          </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-typeComp"
               select
+              label="Type de compétence"
               variant="outlined"
               size="small"
               fullWidth
@@ -188,17 +179,12 @@ function EditCompetance(props) {
               ))}
             </TextField>
           </Grid>
-          
-
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Intitulé de compétence</h3>  
-          </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-nomCompetance"
               size="small"
+              label="Intitulé de compétence"
               variant="outlined"
               fullWidth
               name="nomCompetance"
@@ -207,16 +193,12 @@ function EditCompetance(props) {
              
             />
           </Grid>
-          
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Niveau  de maitrise attendu </h3>  
-          </Grid>
-      
+     
           <Grid item xs={6}>
           <TextField
               id="outlined-niveau"
               select
+              label="Niveau  de maitrise attendu"
               variant="outlined"
               size="small"
               fullWidth
@@ -229,16 +211,12 @@ function EditCompetance(props) {
               ))}
             </TextField>
           </Grid>
-          
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Evaluation de manager</h3>  
-          </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-evaluationManager"
               select
+              label="Evaluation de manager"
               variant="outlined"
               size="small"
               fullWidth
@@ -261,7 +239,7 @@ function EditCompetance(props) {
               type="submit"
               className={classes.btnAjouter}
               color="primary"
-              onClick={updateCompetance}
+              onClick={updateContent}
             >
               Modifier 
             </Button>

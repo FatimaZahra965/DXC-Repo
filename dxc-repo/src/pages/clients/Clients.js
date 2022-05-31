@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddIcon from "@material-ui/icons/Add";
@@ -10,37 +11,41 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
 import Input from "@material-ui/core/Input";
+import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import { IconButton,InputAdornment,TablePagination,TextField} from "@material-ui/core";
 // styles
 import useStyles from "./styles";
 import "./style.css";
+import { Grid } from "@material-ui/core";
+import { getClientsAction } from "../../services/Actions/clientActions";
 export default function Clients() {
   const classes = useStyles();
   let history = useHistory();
-  const [clients, setClients] = useState([]);
-  useEffect(() => {
-    console.log("hello hjjjjj");
-
-    axios
-      .get("http://localhost:8080/DXC/clients/allClients", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      })
-      .then(function (res) {
-        // handle success
-        console.log("res", res.data);
-        setClients(res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  });
+  const dispatch = useDispatch();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [val, setVal] = useState("");
+    //acceder al state
+    const loading = useSelector((state) => state.clients.loading);
+    const error = useSelector((state) => state.clients.error);
+   const clients = useSelector((state) => state.clients.clients);
+   useEffect(() => {
+     const loadClients = () => dispatch(getClientsAction());
+     loadClients();
+   }, []);
   const bull = <span className={classes.bullet}>•</span>;
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   function AjouteClient() {
     history.push("/app/clients/AjouteClient");
   }
@@ -52,35 +57,60 @@ export default function Clients() {
     history.push(path);
  
   };
+  const RechercheClient = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
 
+  const filteredData = clients.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.nomClient.toLowerCase().includes(val);
+    }
+  });
   return (
     <>
-    <div>
-      <PageTitle title="Liste des Clients" path="/app/dashboard" />
-      </div>
       <div>
-        <div className={classes.Search}>
-          <Button variant="contained" className={classes.ButtonSearch}>
-            <SearchIcon />
-          </Button>
-          <Input
-            className={classes.InputSearch}
-            type="text"
-            placeholder="Chercher un client par nom "
+        <PageTitle title="  Liste des clients"  path="/app/dashboard"/>
+      </div>
+
+      <Grid container spacing={3} >
+        <Grid xs={8} className={classes.Search}>
+          <TextField
+            id="outlined-basic"
+            onChange={RechercheClient}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Recherche"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton  className={classes.addBtn}>
+                    <SearchIcon   className={classes.addBtn}/>
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
-        </div>
-        <div className={classes.Bajoute}>
+        </Grid>
+        <Grid item xs={4} className={classes.Bajoute}>
           <Button
+            type="small"
             variant="contained"
+            color="primary"
             className={classes.Button}
             onClick={AjouteClient}
           >
-            <AddIcon /> Ajouter Client
+            <AddIcon />
+            Ajouter Client
           </Button>
-        </div>
-      </div>
-      <br/>
-      <div>
+        </Grid>
+        </Grid>
+      <br />
+      <Paper>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead >
@@ -92,7 +122,7 @@ export default function Clients() {
             </TableRow>
           </TableHead>
           <TableBody>
-          {clients.map((client) => (
+          {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((client) => (
               <TableRow key={client.nomClient}>
                
                 <TableCell component="th" scope="row">
@@ -116,7 +146,17 @@ export default function Clients() {
           </TableBody>
         </Table>
       </TableContainer>
-      </div>
+      <TablePagination
+            rowsPerPageOptions={[8, 10, 25, 100]}
+            component="div"
+            count={clients.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+      </Paper>
+     
   
 
 

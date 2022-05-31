@@ -19,8 +19,6 @@ import java.util.*;
 
 public class ressource {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String matricule;
     private String status;
     private String firstname;
@@ -33,6 +31,7 @@ public class ressource {
     private List<certificat> certif;
 
 */
+
     public String getMatricule() {
         return matricule;
     }

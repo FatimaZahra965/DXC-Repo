@@ -26,7 +26,7 @@ import {
       dispatch(newClient());
   
           clienteAxios
-            .post("http://localhost:8080/DXC/clients/addClient", client)
+            .post("http://localhost:9004/DXC/clients/addClient", client)
             .then((res) => {
               console.log(res);
               //si se inserta correctamente
@@ -66,7 +66,7 @@ import {
   
       //interroger l'API
         clienteAxios
-          .get("http://localhost:8080/DXC/clients/allClients")
+          .get("http://localhost:9004/DXC/clients/allClients")
           .then((resp) => {
             //console.log(resp);
             dispatch(downloadClientsSuccessful(resp.data));
@@ -98,7 +98,7 @@ import {
   
       //obtenir l'api de  le client
       clienteAxios
-        .get(`http://localhost:8080/DXC/clients/Client/${id}`)
+        .get(`http://localhost:9004/DXC/clients/Client/${id}`)
         .then((resp) => {
           console.log(resp.data);
           dispatch(getClientEditSuccess(resp.data));
@@ -131,7 +131,7 @@ import {
       //interrogez l'API et envoyez une méthode put à mettre à jour
       clienteAxios
       
-        .put(`http://localhost:8080/DXC/clients/updateClient`, client)
+        .put(`http://localhost:9004/DXC/clients/updateClient`, client)
         .then((resp) => {
           //console.log(resp);
           dispatch(editClientSuccess(resp.data));

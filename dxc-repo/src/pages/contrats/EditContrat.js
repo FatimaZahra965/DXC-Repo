@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, MenuItem } from "@material-ui/core";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,9 @@ function EditContrat(props) {
     nomClient: "",
     nomContrat: "",
     description: "",
+    type: "",
+    dateDebut: "",
+    dateFin: ""
   };
   const editContrat = (Contrat)=> dispatch(editContratAction(Contrat));
   const [currentContrat, setCurrentContrat] = useState(initialContratState);
@@ -28,7 +31,7 @@ function EditContrat(props) {
   const dispatch = useDispatch();
   const getContrat = () => {
     axios
-    .get(`http://localhost:8080/DXC/contrats/Contrat/`+props.match.params.id)
+    .get(`http://localhost:9003/DXC/contrats/Contrat/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
       setCurrentContrat(resp.data);
@@ -60,7 +63,10 @@ function EditContrat(props) {
     if (
       currentContrat.nomClient.trim() === "" ||
       currentContrat.nomContrat.trim() === "" ||
-      currentContrat.description.trim() === ""
+      currentContrat.description.trim() === ""||
+      currentContrat.type.trim() === ""||
+      currentContrat.dateDebut.trim() === ""||
+      currentContrat.dateFin.trim() === ""
     ) {
       errorValidacion();
       return;
@@ -76,7 +82,16 @@ function EditContrat(props) {
   function AnnulerContrat() {
     history.push("/app/prestations/Contrats");
   }
-
+  const types = [
+    {
+      label: "Run",
+      value: "Run",
+    },
+    {
+      label: "Projet",
+      value: "Projet",
+    },
+  ];
   
   return (
     <div>
@@ -97,7 +112,23 @@ function EditContrat(props) {
               onChange={handleInputChange}
             />
           </Grid>
-      
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Type"
+              size="small"
+              fullWidth
+              variant="outlined"
+              value={currentContrat.type}
+              onChange={handleInputChange} >
+              {types.map((type) => (
+                <MenuItem key={type.value} value={type.value}>
+                  {type.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-nomClient"
@@ -121,7 +152,36 @@ function EditContrat(props) {
               value={currentContrat.description}
               onChange={handleInputChange}
             />
-          </Grid>    
+          </Grid>   
+          <Grid item xs={6}>
+            <label>Date de début</label>
+            <TextField
+              id="outlined-basic"
+              size="small"
+              format="MM/dd/yyyy"
+              variant="outlined"
+              fullWidth
+              type="date"
+              value={currentContrat.dateDebut}
+              onChange={handleInputChange}
+              
+              />
+          </Grid>
+          <Grid item xs={6}>
+            <label>Date de Fin</label>
+            <TextField
+              id="outlined-basic"
+              type="date"
+              format="MM/dd/yyyy"
+              size="small"
+              variant="outlined"
+              fullWidth
+              value={currentContrat.dateFin}
+              onChange={handleInputChange}
+              />
+            
+          </Grid>
+           
         </Grid>
       </form>
       <Grid item xs={12}>

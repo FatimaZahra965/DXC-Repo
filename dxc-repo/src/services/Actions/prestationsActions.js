@@ -8,6 +8,9 @@ import {
   START_DOWNLOAD_PRESTATIONS,
   PRESTATION_DOWNLOAD_SUCCESSFUL,
   DOWNLOAD_PRESTATION__ERROR,
+  GET_PRESTATION_EDIT,
+  PRESTATION_EDIT_SUCCESS,
+  PRESTATION_EDIT_ERROR,
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -23,7 +26,13 @@ export function createNewPrestationAction(prestation) {
       .post("http://localhost:9002/DXC/prestations/addPrestation", prestation)
       .then((res) => {
         console.log(res);
-        //dispatch(addNewPrestationSuccess(prestation));
+        Swal.fire({
+          timer: 3000,
+          text: "La prestation est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
+        dispatch(addNewPrestationSuccess(prestation));
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +55,7 @@ export const addNewPrestationError = (error) => ({
   type: ADD_PRESTATION_ERROR,
 });
 
-//obtenir la liste des produits de productsReducer (voir API)
+//obtenir la liste des produits de prestationsReducer (voir API)
 export function getPrestationsAction() {
   return (dispatch) => {
     dispatch(getPrestationsStart());
@@ -78,33 +87,70 @@ export const descargaPrestationsError = () => ({
   type: DOWNLOAD_PRESTATION__ERROR,
 });
 
-export function editRessourceAction(prestation) {
+export function editPrestationAction(prestation) {
   return (dispatch) => {
-    dispatch(startEditRessource());
+    dispatch(startEditPrestation());
 
-    // clienteAxios
-    //   .put(`route/api/${prestation.id}`, prestation)
-    //   .then((resp) => {
-    //     //console.log(resp);
-    //     dispatch(editRessourceSuccess(resp.data));
-    //     Swal.fire("Stored", "The Product was successfully updated", "success");
-    //   })
-    //   .catch((error) => {
-    //     //console.log(error);
-    //     dispatch(editRessourceError());
-    //   });
+    //interrogez l'API et envoyez une méthode put à mettre à jour
+    clienteAxios
+      .put(`http://localhost:9002/DXC/prestations/updatePrestation`, prestation)
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(editPrestationSuccess(resp.data));
+        Swal.fire({
+          timer: 3000,
+          text: "La prestation est modifier avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(editPrestationError());
+      });
   };
 }
 
-export const startEditRessource = () => ({
+export const startEditPrestation = () => ({
   type: BEGIN_PRESTATION_EDIT,
 });
 
-export const editRessourceSuccess = (prestation) => ({
+export const editPrestationSuccess = (prestation) => ({
   type: EDITION_PRESTATION_SUCCESS,
   payload: prestation,
 });
 
-export const editRessourceError = () => ({
+export const editPrestationError = () => ({
   type: EDIT_PRESTATION_ERROR,
+});
+
+export function getPrestationAction(id) {
+  return (dispatch) => {
+    dispatch(getEditPrestationsAction());
+
+    //obtenir le produit de l'api
+    clienteAxios
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
+      .then((resp) => {
+        console.log(resp.data);
+        dispatch(getPrestationEditSuccess(resp.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(getPrestationEditError());
+      });
+  };
+}
+
+export const getEditPrestationsAction = (id) => ({
+  type: GET_PRESTATION_EDIT,
+});
+
+export const getPrestationEditSuccess = (prestation) => ({
+  type: PRESTATION_EDIT_SUCCESS,
+  payload: prestation,
+});
+
+export const getPrestationEditError = () => ({
+  type: PRESTATION_EDIT_ERROR,
 });
