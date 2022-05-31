@@ -3,16 +3,26 @@ services:
 - docker:dind
 
 stages:
-- build
+- build front
+- build certificat
 
 variables:
   DOCKER_DRIVER: overlay
 
 release:
-  stage: build
+  stage: build front
   script:
     - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/dxc-repo:latest
+  only:
+    - main
+
+build:
+  stage: build certificat
+  script:
+    - docker build -t $DOCKER_REPOSITORY/certificat-service:latest ./certificat
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/certificat-service:latest
   only:
     - main
