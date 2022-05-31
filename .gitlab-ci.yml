@@ -11,8 +11,8 @@ variables:
 release:
   stage: build
   script:
-    - docker-compose up --no-start
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker-compose push
+    - docker build -t $DOCKER_REPOSIROTY/dxc-repo:latest .
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSIROTY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSIROTY/dxc-repo:latest
   only:
     - main
