@@ -58,7 +58,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>microservice-certificat</finalName>
+		<finalName>certificat-service</finalName>
 	</build>
 
 </project>
