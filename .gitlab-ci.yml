@@ -3,22 +3,22 @@ services:
 - docker:dind
 
 stages:
-- build certificat
+- build competance
 - build front
 
 variables:
   DOCKER_DRIVER: overlay
 
-build:
-  stage: build certificat
+release:
+  stage: build competance
   script:
-    - docker build -t $DOCKER_REPOSITORY/certificat-service:latest ./certificat
+    - docker build -t $DOCKER_REPOSITORY/microservice-competance:latest ./competance
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/certificat-service:latest
+    - docker push $DOCKER_REPOSITORY/microservice-competance:latest
   only:
     - main
 
-release:
+build:
   stage: build front
   script:
     - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
