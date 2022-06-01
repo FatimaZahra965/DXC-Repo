@@ -62,7 +62,7 @@ release_ressource:
 release_prestation:
   stage: build prestation
   script:
-    - docker build -t $DOCKER_REPOSITORY/microservice--prestation:latest ./prestation
+    - docker build -t $DOCKER_REPOSITORY/microservice-prestation:latest ./prestation
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/microservice-prestation:latest
   only:
