@@ -5,5 +5,6 @@ RUN mvn -B -DskipTests clean package
 
 FROM openjdk:11
 WORKDIR /app
+EXPOSE 80
 COPY --from=builder /tmp/src/target/certificat-service.jar .
 CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "certificat-service.jar"]
