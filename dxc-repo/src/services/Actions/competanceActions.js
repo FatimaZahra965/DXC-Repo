@@ -23,7 +23,7 @@ export function createNewCompetanceAction(competance) {
     dispatch(newCompetance());
 
     clienteAxios
-      .post("http://localhost:9005/DXC/competances/addCompetance", competance)
+      .post("https://dxcrepo-competance.azurewebsites.net/DXC/competances/addCompetance", competance)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
@@ -63,7 +63,7 @@ export function getCompetancesAction() {
 
     // interroger l'API
     clienteAxios
-      .get("http://localhost:9005/DXC/competances/allCompetances")
+      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/allCompetances")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadCompetancesSuccessful(resp.data));
@@ -95,7 +95,7 @@ export function getCompetanceAcoution(id) {
 
     //obtenir l'api de  la Competance
     clienteAxios
-      .get(`http://localhost:9005/DXC/competances/competance/${id}`)
+      .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/competance/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getCompetanceEditSuccess(resp.data));
@@ -128,7 +128,7 @@ export function editCompetanceAction(competance) {
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
       .put(
-        `http://localhost:9005/DXC/contrats/updateContrat${competance.id}`,
+        `https://dxcrepo-competance.azurewebsites.net/DXC/contrats/updateContrat${competance.id}`,
         competance,
       )
       .then((resp) => {

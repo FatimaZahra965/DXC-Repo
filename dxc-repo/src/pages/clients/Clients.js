@@ -27,7 +27,7 @@ export default function Clients() {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9004/DXC/clients/allClients", {
+      .get("https://dxcrepo-client.azurewebsites.net/DXC/clients/allClients", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

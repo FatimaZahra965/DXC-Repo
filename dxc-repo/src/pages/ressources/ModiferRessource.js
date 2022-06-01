@@ -39,7 +39,7 @@ export default function ModiferRessource({ match }) {
   useEffect(() => {
     console.log("matricule", match.params.id);
     clienteAxios
-      .get(`http://localhost:9000/DXC/ressource/${match.params.id}`)
+      .get(`https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${match.params.id}`)
       .then((resp) => {
         console.log("resp.data", resp.data);
         setRessourcedate(resp.data);

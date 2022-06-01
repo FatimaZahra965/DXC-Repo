@@ -26,7 +26,7 @@ export function createNewClientAction(client) {
     dispatch(newClient());
 
     clienteAxios
-      .post("http://localhost:9004/DXC/clients/addClient", client)
+      .post("https://dxcrepo-client.azurewebsites.net/DXC/clients/addClient", client)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
@@ -72,7 +72,7 @@ export function getClientsAction() {
 
     //interroger l'API
     clienteAxios
-      .get("http://localhost:9004/DXC/clients/allClients")
+      .get("https://dxcrepo-client.azurewebsites.net/DXC/clients/allClients")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadClientsSuccessful(resp.data));
