@@ -31,6 +31,13 @@ export default function ModiferPrestation({ match }) {
     dateFin: "",
     titre: "",
     market: "",
+
+    typeEror: "",
+    etatEror: "",
+    dateDebutEror: "",
+    dateFinEror: "",
+    titreEror: "",
+    marketEror: "",
   };
   // prestation
   const dispatch = useDispatch();
@@ -40,12 +47,26 @@ export default function ModiferPrestation({ match }) {
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
+  // Eror states
+  const [TitreEror, setTitreEror] = useState(initialPrestationState.titreEror);
+  const [EtatEror, setEtatEror] = useState(initialPrestationState.etatEror);
+  const [TypeEror, setTypeEror] = useState(initialPrestationState.typeEror);
+  const [MarketEror, setMarketEror] = useState(
+    initialPrestationState.marketEror,
+  );
+  const [DateDebutEror, setDateDebutEror] = useState(
+    initialPrestationState.dateDebutEror,
+  );
+  const [DateFinEror, setDateFinEror] = useState(
+    initialPrestationState.dateFinEror,
+  );
+
   const { id } = match.params;
 
   useEffect(() => {
     console.log("id", id);
     clienteAxios
-      .get(`http://localhost:8081/DXC/prestations/Prestation/${id}`)
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         setPrestationdate(resp.data);
@@ -63,36 +84,103 @@ export default function ModiferPrestation({ match }) {
   const submitEditPrestation = (e) => {
     e.preventDefault();
 
-    validarForm();
+    let typeEror = "";
+    let etatEror = "";
+    let dateDebutEror = "";
+    let dateFinEror = "";
+    let titreEror = "";
+    let marketEror = "";
+
+    if (!prestationdate.type) {
+      typeEror = "le champ Type de la prestation est obligatiore";
+    }
+    if (!prestationdate.titre) {
+      titreEror = "le champ Titre de la prestation est obligatiore";
+    }
+    if (!prestationdate.market) {
+      marketEror = "le champ Market de la prestation est obligatiore";
+    }
+    if (!prestationdate.dateDebut) {
+      dateDebutEror = "le champ Date de début de la prestation est obligatiore";
+    }
+    if (!prestationdate.dateFin) {
+      dateFinEror = "le champ Date de fin de la prestation est obligatiore";
+    }
+    if (!prestationdate.etat) {
+      etatEror = "le champ Etat de la prestation est obligatiore";
+    }
 
     if (
-      prestationdate.titre.trim() === "" ||
-      prestationdate.etat.trim() === "" ||
-      prestationdate.market.trim() === "" ||
-      prestationdate.type.trim() === "" ||
-      prestationdate.dateDebut.trim() === "" ||
-      prestationdate.dateFin.trim() === ""
+      typeEror ||
+      titreEror ||
+      marketEror ||
+      dateDebutEror ||
+      dateFinEror ||
+      etatEror
     ) {
+      setTitreEror(titreEror);
+      setTypeEror(typeEror);
+      setEtatEror(etatEror);
+      setDateDebutEror(dateDebutEror);
+      setDateFinEror(dateFinEror);
+      setMarketEror(marketEror);
+
       errorValidacion();
       return;
     }
     SuccessValidation();
-
+    const dates = {
+      dateDebut: moment(prestationdate.dateDebut).format("yyyy-MM-DD"),
+      dateFin: moment(prestationdate.dateFin).format("yyyy-MM-DD"),
+    };
     let prestation = {
       id: id,
       titre: prestationdate.titre,
       etat: prestationdate.etat,
       market: prestationdate.market,
       type: prestationdate.type,
-      dateDebut: prestationdate.dateDebut,
-      dateFin: prestationdate.dateFin,
+      dateDebut: dates.dateDebut,
+      dateFin: dates.dateFin,
     };
     console.log("prestation", prestation);
 
     editPrestation(prestation);
 
-    history.push("/app/prestations/ListePrestations");
+    // history.push("/app/prestations/ListePrestations");
   };
+  // const submitEditPrestation = (e) => {
+  //   e.preventDefault();
+
+  //   validarForm();
+
+  //   if (
+  //     prestationdate.titre.trim() === "" ||
+  //     prestationdate.etat.trim() === "" ||
+  //     prestationdate.market.trim() === "" ||
+  //     prestationdate.type.trim() === "" ||
+  //     prestationdate.dateDebut.trim() === "" ||
+  //     prestationdate.dateFin.trim() === ""
+  //   ) {
+  //     errorValidacion();
+  //     return;
+  //   }
+  //   SuccessValidation();
+
+  //   let prestation = {
+  //     id: id,
+  //     titre: prestationdate.titre,
+  //     etat: prestationdate.etat,
+  //     market: prestationdate.market,
+  //     type: prestationdate.type,
+  //     dateDebut: prestationdate.dateDebut,
+  //     dateFin: prestationdate.dateFin,
+  //   };
+  //   console.log("prestation", prestation);
+
+  //   editPrestation(prestation);
+
+  //   history.push("/app/prestations/ListePrestations");
+  // };
 
   const etats = [
     {
@@ -118,6 +206,16 @@ export default function ModiferPrestation({ match }) {
       value: "local",
     },
   ];
+  const types = [
+    {
+      label: "Interne",
+      value: "Interne",
+    },
+    {
+      label: "Externe",
+      value: "Externe",
+    },
+  ];
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPrestationdate({ ...prestationdate, [name]: value });
@@ -129,12 +227,14 @@ export default function ModiferPrestation({ match }) {
   };
 
   const annuler = () => {
-    let path = `/app/prestations/ListePrestations`;
-    history.push(path);
+    setPrestationdate(initialPrestationState);
   };
   return (
     <>
-      <PageTitle title="Modifer une prestation" />
+      <PageTitle
+        title="Modifer une prestation"
+        path="/app/prestations/ListePrestations"
+      />
       <form onSubmit={submitEditPrestation}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
@@ -146,19 +246,27 @@ export default function ModiferPrestation({ match }) {
               fullWidth
               name="titre"
               value={prestationdate.titre}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e);
+                setTitreEror(initialPrestationState.titreEror);
+              }}
             />
+            <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Etat"
               size="small"
               fullWidth
               name="etat"
               value={prestationdate.etat}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e);
+                setEtatEror(initialPrestationState.etatEror);
+              }}
             >
               {etats.map((etat) => (
                 <MenuItem key={etat.value} value={etat.value}>
@@ -166,6 +274,7 @@ export default function ModiferPrestation({ match }) {
                 </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{EtatEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -175,20 +284,23 @@ export default function ModiferPrestation({ match }) {
               size="small"
               fullWidth
               name="type"
+              variant="outlined"
               value={prestationdate.type}
               onChange={handleInputChange}
             >
-              {etats.map((etat) => (
-                <MenuItem key={etat.value} value={etat.value}>
-                  {etat.label}
+              {types.map((type) => (
+                <MenuItem key={type.value} value={type.value}>
+                  {type.label}
                 </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{TypeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Market"
               size="small"
               fullWidth
@@ -202,6 +314,7 @@ export default function ModiferPrestation({ match }) {
                 </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{MarketEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de début</label>
@@ -215,6 +328,7 @@ export default function ModiferPrestation({ match }) {
               value={prestationdate.dateDebut}
               onChange={handleInputChange}
             />
+            <div style={{ color: "red" }}>{DateDebutEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de Fin</label>
@@ -228,6 +342,7 @@ export default function ModiferPrestation({ match }) {
               value={prestationdate.dateFin}
               onChange={handleInputChange}
             />
+            <div style={{ color: "red" }}>{DateFinEror}</div>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -254,7 +369,7 @@ export default function ModiferPrestation({ match }) {
         </Grid>
       </form>
       {error ? (
-        <Alert severity="error">Tous les champs sont requis!</Alert>
+        <Alert severity="error">La prestation n'est pas modifié!</Alert>
       ) : null}
     </>
   );

@@ -19,6 +19,18 @@ export default makeStyles(theme => ({
    
 
   },
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+    
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
@@ -73,6 +85,28 @@ export default makeStyles(theme => ({
     color: "#FFFFFF",
     fontSize: "medium",
   },
+  labelDonnes: {
+    color: "#000000",
+    Stroke: "Solid",
+    marginTop: "inherit",
+  },
+
+  
+  labelinformation: {
+    color: "#7978BB",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  label: {
+    color: "#741F82",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  buttons: {
+    textAlign:"center",
+  },
   Visib: {
     background: "#741F82",
     minWidth: 30,
@@ -80,6 +114,10 @@ export default makeStyles(theme => ({
   },
   title: {
     fontSize: "9",
+  },
+  Bajoute: {
+    textAlign: "end",
+    marginLeft: "800px",
   },
   btnAjouter: {
     margin: "5px",

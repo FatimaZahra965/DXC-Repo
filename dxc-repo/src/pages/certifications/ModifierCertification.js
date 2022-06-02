@@ -19,7 +19,7 @@ import {
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import moment from "moment";
-import axios from "axios";
+import clienteAxios from "../../config/axios";
 
 const ModiferCertification = ({ match }) => {
   const initialState = {
@@ -41,17 +41,30 @@ const ModiferCertification = ({ match }) => {
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
+  const [imageCertificat, setImageCertificat] = useState("");
+  const [Img, setImg] = useState("");
+  const [file, setFile] = useState("");
+
+  const [fileEror, setFileEror] = useState("");
+
+  const [CodeEror, setCodeEror] = useState("");
+  const [TitreEror, setTitreEror] = useState("");
+  const [DateCertificationEror, setDateCertificationEror] = useState("");
+  const [NiveauEror, setNiveauEror] = useState("");
+
   const error = useSelector((state) => state.error.error);
-  //get id
+
   const { id } = match.params;
   const [certificationdata, setcertificationdata] = useState(initialState);
 
   useEffect(() => {
     console.log("------------------->", id);
     // dispatch(getcertificationAction(id));
-
-    axios
-      .get("http://localhost:8081/DXC/certifications/certification/" + id)
+    //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
+    clienteAxios
+      .get(
+        "http://localhost:9001/dxc/certifications/certificat/" + 1 + "/" + id,
+      )
       .then(function (response) {
         // handle success
         console.log("response---------------->", response.data);
@@ -76,40 +89,85 @@ const ModiferCertification = ({ match }) => {
     ),
   };
 
-  //cuando carga la APi
-  if (!certification) return "Cargando...";
+  const uploadFile = (event) => {
+    event.preventDefault();
+    if (!file) {
+      setFileEror("Please upload a file.");
+      return;
+    }
+
+    if (file.size >= 2000000) {
+      setFileEror("File size exceeds limit of 2MB.");
+      return;
+    }
+    let data = new FormData();
+    data.append("file", file);
+    data.append("name", file.name);
+    //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
+    clienteAxios
+      .post("http://localhost:9001/files/addFile/1", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        setFileEror(error);
+      });
+  };
 
   const submitEditcertification = (e) => {
     e.preventDefault();
-
     validarForm();
 
-    if (
-      certificationdata.titre.trim() === "" ||
-      certificationdata.etat.trim() === "" ||
-      certificationdata.market.trim() === "" ||
-      certificationdata.type.trim() === "" ||
-      certificationdata.dateDebut.trim() === "" ||
-      certificationdata.dateFin.trim() === ""
-    ) {
+    const form = new FormData();
+    if (imageCertificat) {
+      form.append("image", imageCertificat, imageCertificat.name);
+      console.log("------------>", imageCertificat);
+    }
+
+    validarForm();
+    let codeEror = "";
+    let niveauEror = "";
+    let datecertificationEror = "";
+    let titreEror = "";
+
+    if (!certificationdata.code) {
+      codeEror = "le champ code de la certification est obligatiore";
+    }
+    if (!certificationdata.niveau) {
+      niveauEror = "le champ Niveau de la certification est obligatiore";
+    }
+    if (!certificationdata.datecertification) {
+      datecertificationEror = "le champ date de certification est obligatiore";
+    }
+    if (!certificationdata.titre) {
+      titreEror = "le champ titre de la certification est obligatiore";
+    }
+    if (codeEror || niveauEror || datecertificationEror || titreEror) {
+      setCodeEror(codeEror);
+      setTitreEror(titreEror);
+      setNiveauEror(niveauEror);
+      setDateCertificationEror(datecertificationEror);
       errorValidacion();
       return;
     }
     SuccessValidation();
-
+    const dates = {
+      dateCetification: moment(certificationdata).format("yyyy-MM-DD"),
+    };
     let certification = {
       id,
+      code: certificationdata.code,
       titre: certificationdata.titre,
-      etat: certificationdata.etat,
-      market: certificationdata.market,
-      type: certificationdata.type,
-      dateDebut: certificationdata.dateDebut,
-      dateFin: certificationdata.dateFin,
+      niveau: certificationdata.niveau,
+      datecertification: dates.dateCetification,
+      ressourceid: 1,
     };
     console.log(certification);
+    uploadFile(e);
     editcertification(certification);
 
-    history.push("/app/certifications/allcertifications");
+    history.push("/app/certifications/ListeCertifications");
   };
 
   const handlchange = (event) => {
@@ -118,11 +176,15 @@ const ModiferCertification = ({ match }) => {
   };
 
   const Annuler = () => {
-    history.push("/app/certifications/allcertifications");
+    history.push("/app/certifications/ListeCertifications");
   };
   return (
     <>
-      <PageTitle title="Modifer une certification" />
+      <PageTitle
+        title="Modifer une certification"
+        path="/app/certifications/ListeCertifications"
+      />
+
       <form onSubmit={submitEditcertification}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
@@ -134,8 +196,12 @@ const ModiferCertification = ({ match }) => {
               variant="outlined"
               fullWidth
               value={certificationdata.titre}
-              onChange={handlchange}
+              onChange={(e) => {
+                handlchange(e);
+                setTitreEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -146,31 +212,63 @@ const ModiferCertification = ({ match }) => {
               variant="outlined"
               fullWidth
               value={certificationdata.code}
-              onChange={handlchange}
+              onChange={(e) => {
+                handlchange(e);
+                setCodeEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{CodeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="outlined-basic"
-              label="Niveau"
+              className={classes.textField}
+              id="outlined-select-currency"
+              select
+              label="Niveau de maitrise"
+              size="small"
+              fullWidth
               name="niveau"
-              size="small"
               variant="outlined"
-              fullWidth
               value={certificationdata.niveau}
-              onChange={handlchange}
-            />
+              onChange={(e) => {
+                handlchange(e);
+                setNiveauEror("");
+              }}
+            >
+              <MenuItem key="0" value="NE">
+                NE - Non Exigé
+              </MenuItem>
+              <MenuItem key="1" value="0">
+                0 - pas de connaissances
+              </MenuItem>
+              <MenuItem key="2" value="1">
+                1 - connaissances théoriques
+              </MenuItem>
+              <MenuItem key="3" value="2">
+                2 - Basique
+              </MenuItem>
+              <MenuItem key="4" value="3">
+                3 - Maitrisé
+              </MenuItem>
+              <MenuItem key="5" value="4">
+                4 - Expert{" "}
+              </MenuItem>
+            </TextField>
+            <div style={{ color: "red" }}>{NiveauEror}</div>
           </Grid>
           <Grid item xs={6}>
+            <label>Image de certification</label>
             <TextField
-              id="outlined-basic"
-              label="Validation"
-              name="validation"
               size="small"
               variant="outlined"
               fullWidth
-              value={certificationdata.validation}
-              onChange={handlchange}
+              type="file"
+              id="upload-photo"
+              selected={Img}
+              valur={imageCertificat}
+              onChange={(info) => {
+                setFile(info.target.files[0]);
+              }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -183,8 +281,12 @@ const ModiferCertification = ({ match }) => {
               variant="outlined"
               fullWidth
               value={dates.dateCetification}
-              onChange={handlchange}
+              onChange={(e) => {
+                handlchange(e);
+                setDateCertificationEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{DateCertificationEror}</div>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -201,7 +303,9 @@ const ModiferCertification = ({ match }) => {
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
-              onClick={Annuler}
+              onClick={(e) => {
+                Annuler(e);
+              }}
             >
               Annuler
             </Button>

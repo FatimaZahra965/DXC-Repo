@@ -21,12 +21,25 @@ public class ContratService {
     public List<Contrat> getContrat() {
         return this.contratRepository.findAll();
     }
-
+    public com.DXC.contrat.models.Contrat getContratByID(Integer id) {
+        return contratRepository.findById(id).orElse(null);
+    }
     public void addContrat(Contrat contrat) {
         Optional<Contrat> optionalContrat = contratRepository.findContratByNomContrat(contrat.getNomContrat());
         if (optionalContrat.isPresent()) {
             throw new IllegalStateException("already exist");
         }
         contratRepository.save(contrat);
+    }
+    public com.DXC.contrat.models.Contrat updateContrat(com.DXC.contrat.models.Contrat contrat) {
+        com.DXC.contrat.models.Contrat existingContrat = contratRepository.findById(contrat.getId()).orElse(null);
+        existingContrat.setNomContrat(contrat.getNomContrat());
+        existingContrat.setNomClient(contrat.getNomClient());
+        existingContrat.setDescription(contrat.getDescription());
+        existingContrat.setType(contrat.getType());
+        existingContrat.setDateDebut(contrat.getDateDebut());
+        existingContrat.setDateFin(contrat.getDateFin());
+
+        return contratRepository.save(existingContrat);
     }
 }

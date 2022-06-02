@@ -1,4 +1,5 @@
 package com.DXC.competance.controllers;
+import com.DXC.competance.models.Competance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,16 @@ public class CompetanceController {
             return this.competanceService.getCompetance();
         }
 
+    /*@GetMapping(path = "CompetancesLing")
+    public List<com.DXC.competance.models.Competance> afficheCompetancesLing(@PathVariable String typeComp) {
+        return this.competanceService.getCompetanceByTypeComp("Compétences linguistiques");
+    }
+    @GetMapping(path = "CompetancesTran")
+    public List<com.DXC.competance.models.Competance> afficheCompetancesTran(@PathVariable String typeComp) {
+        return this.competanceService.getCompetanceByTypeComp("Compétences transversales");
+    }*/
+
+
         @PostMapping(path = "addCompetance")
         public void addCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
             this.competanceService.addCompetance(competance);
@@ -27,6 +38,12 @@ public class CompetanceController {
     public com.DXC.competance.models.Competance showCompetance(@PathVariable Integer id) {
         return this.competanceService.getCompetanceByID(id);
     }
+    @GetMapping(path = "Competance/type/{typeComp}")
+    public List<com.DXC.competance.models.Competance> afficheCompetancesTechn(@PathVariable String typeComp) {
+        return this.competanceService.getCompetanceByTypeComp(typeComp);
+    }
+
+
     @PutMapping("updateCompetance")
     public com.DXC.competance.models.Competance updateCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
         return competanceService.updateCompetance(competance);

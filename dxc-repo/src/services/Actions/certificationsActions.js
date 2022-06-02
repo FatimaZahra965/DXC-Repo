@@ -15,6 +15,8 @@ import {
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import Swal from "sweetalert2";
+import moment from "moment";
 
 export function createNewcertificationAction(CERTIFICATION) {
   console.log("CERTIFICATION", CERTIFICATION);
@@ -24,12 +26,24 @@ export function createNewcertificationAction(CERTIFICATION) {
       .post("http://localhost:9001/dxc/certifications/addcertif", CERTIFICATION)
       .then((res) => {
         console.log(res);
-        //dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
+        dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
+        Swal.fire({
+          timer: 3000,
+          text: "La certif est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
         //si hay un error
         dispatch(addNewCERTIFICATIONError());
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource n'est pas ajouté",
+          timeerProgressBar: true,
+          icon: "error",
+        });
       });
   };
 }
@@ -51,11 +65,16 @@ export const addNewCERTIFICATIONError = (error) => ({
 export function getCertificationsAction() {
   return (dispatch) => {
     dispatch(getCertficationStart());
-
+    let id = 1;
     axios
-      .get("http://localhost:9001/dxc/certifications/")
+      .get("http://localhost:9001/dxc/certifications/certificats/" + 1)
       .then((resp) => {
-        console.log("all certifications ----->", resp.data);
+        resp.data.forEach((element) => {
+          element.datecertification = moment(element.datecertification).format(
+            "L",
+          );
+        });
+
         dispatch(downloadCertificationsSuccessful(resp.data));
       })
       .catch((error) => {
@@ -78,21 +97,28 @@ export const descargaCertificationsError = () => ({
   type: DOWNLOAD_CERTIFICATION__ERROR,
 });
 
-export function editCERTIFICATIONAction(CERTIFICATION) {
+export function editcertificationAction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(startEditCERTIFICATION());
 
-    // clienteAxios
-    //   .put(`route/api/${CERTIFICATION.id}`, CERTIFICATION)
-    //   .then((resp) => {
-    //     //console.log(resp);
-    //     dispatch(editCERTIFICATIONSuccess(resp.data));
-    //     Swal.fire("Stored", "The Product was successfully updated", "success");
-    //   })
-    //   .catch((error) => {
-    //     //console.log(error);
-    //     dispatch(editCERTIFICATIONError());
-    //   });
+    clienteAxios
+      .put(
+        `http://localhost:9001/dxc/certifications/updatecertif`,
+        CERTIFICATION,
+      )
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(editCERTIFICATIONSuccess(resp.data));
+        Swal.fire(
+          "Stored",
+          "The Certificate was successfully updated",
+          "success",
+        );
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(editCERTIFICATIONError());
+      });
   };
 }
 
@@ -108,12 +134,12 @@ export const editCERTIFICATIONSuccess = (CERTIFICATION) => ({
 export const editCERTIFICATIONError = () => ({
   type: EDIT_CERTIFICATION_ERROR,
 });
-export function getCertificationAction(id) {
+export function getCertificationAction() {
   return (dispatch) => {
     dispatch(getEditCertificationsAction());
-
+    let id = 1;
     clienteAxios
-      .get(`http://localhost:9001/dxc/certifications/Certification/${id}`)
+      .get(`http://localhost:9001/dxc/certifications/certificats/${id}`)
       .then((resp) => {
         console.log("get Certification by id", resp.data);
         dispatch(getCertificationEditExito(resp.data));
@@ -129,9 +155,9 @@ export const getEditCertificationsAction = (id) => ({
   type: GET_CERTIFICATION_EDIT,
 });
 
-export const getCertificationEditExito = (Certification) => ({
+export const getCertificationEditExito = (certifications) => ({
   type: CERTIFICATION_EDIT_SUCCESS,
-  payload: Certification,
+  payload: certifications,
 });
 
 export const getCertificationEditError = () => ({

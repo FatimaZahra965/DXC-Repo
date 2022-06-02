@@ -19,6 +19,7 @@ import { useLayoutState } from "../../context/LayoutContext";
 import Capabilites from "../../pages/capabilites/Capabilites";
 import Competances from "../../pages/competances/Competances";
 import Clients from "../../pages/clients";
+
 import Ressources from "../../pages/ressources/Ressources";
 import Activites from "../../pages/activites/Activites";
 import Technologies from "../../pages/technologies/Technologies";
@@ -33,11 +34,14 @@ import Contrats from "../../pages/contrats/Contrats";
 import EditContrat from "../../pages/contrats/EditContrat";
 import ContratDetail from "../../pages/contrats/ContratDetail";
 import AjouteClient from "../../pages/clients/AjouteClient";
+import EditClient from "../../pages/clients/EditClient";
 import AffichageClient from "../../pages/clients/AffichageClient";
 import AjouterRessource from "../../pages/ressources/AjouterRessource";
 import ModiferRessource from "../../pages/ressources/ModiferRessource";
 import AfficherRessource from "../../pages/ressources/AfficherRessource";
 import Certifications from "../../pages/certifications/Certifications";
+import EditCompetance from "../../pages/competances/EditCompetance";
+import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
 
 function Layout(props) {
@@ -58,6 +62,7 @@ function Layout(props) {
         >
           <div className={classes.fakeToolbar} />
           <Switch>
+            {/*  route dashboard  */}
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
             <Route path="/app/competances" component={Competances} />
@@ -99,6 +104,76 @@ function Layout(props) {
               component={EditContrat}
             />
             <Route path="/app/prestations/ressources" component={Ressources} />
+
+            {/*  routes Competances  */}
+            <Route
+              path="/app/competances/allCompetances"
+              component={Competances}
+            />
+            <Route
+              path="/app/competances/ajouteCompetance"
+              component={AjouteCompetance}
+            />
+            <Route
+              path="/app/competances/CompetanceDetail/:id"
+              component={CompetanceDetail}
+            />
+            <Route
+              path="/app/competances/EditCompetance/:id"
+              component={EditCompetance}
+            />
+
+            {/*  routes prestations  */}
+            <Route
+              path="/app/prestations/allPrestation"
+              component={Prestations}
+            />
+            <Route
+              path="/app/prestations/AjouterPrestation"
+              component={AjouterPrestation}
+            />
+            {/* <Route path="/app/prestations/ModiferPrestation/:id"  component={ModiferPrestation} />
+                <Route path="/app/prestations/AficherPrestation/:id" component={AfficherPrestation}/> */}
+
+            {/*  routes clients  */}
+            <Route path="/app/prestations/clients" component={Clients} />
+            <Route path="/app/clients/AjouteClient" component={AjouteClient} />
+            <Route
+              path="/app/clients/AffichageClient/:id"
+              component={AffichageClient}
+            />
+            <Route path="/app/clients/EditClient/:id" component={EditClient} />
+
+            {/*  routes Contrats  */}
+            <Route path="/app/prestations/Contrats" component={Contrats} />
+            <Route
+              path="/app/Contrats/ContratDetail/:id"
+              component={ContratDetail}
+            />
+            <Route
+              path="/app/Contrats/AjouteContrat"
+              component={AjouteContrat}
+            />
+            <Route
+              path="/app/Contrats/EditContrat/:id"
+              component={EditContrat}
+            />
+
+            {/*  routes Ressources  */}
+            <Route path="/app/prestations/ressources" component={Ressources} />
+            <Route
+              path="/app/ressources/AjouterRessource"
+              component={AjouterRessource}
+            />
+            <Route
+              path="/app/ressources/ModiferRessource/:id"
+              component={ModiferRessource}
+            />
+            <Route
+              path="/app/ressources/AfficherRessource/:id"
+              component={AfficherRessource}
+            />
+
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
               path="/app/prestations/technologies"
@@ -131,6 +206,16 @@ function Layout(props) {
               path="/app/prestations/AficherPrestation/:id"
               component={AfficherPrestation}
             /> */}
+            <Route
+              path="/app/certifications/ListeCertifications"
+              component={Certifications}
+            />
+            <Route
+              path="/app/certifications/AjouterCertification"
+              component={AjouterCertification}
+            />
+            <Route path="/app/notifications" component={Notifications} />
+            <Route path="/app/capabilites" component={Capabilites} />
           </Switch>
           <Box
             mt={5}

@@ -8,7 +8,7 @@ services:
       args:
          REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api
     ports:
-      - "3000:3000" # Map the exposed port 80 on the container to port 9090 on the host machine
+      - "3000:3000" 
 
   certif:
     container_name: microservice-certificat
@@ -63,7 +63,7 @@ services:
     image: postgres:latest
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123
+      - POSTGRES_PASSWORD=abdelhadi123
       - POSTGRES_DB=Dxc-repo
     volumes:
       - pgdata:/var/lib/postgresql/data/

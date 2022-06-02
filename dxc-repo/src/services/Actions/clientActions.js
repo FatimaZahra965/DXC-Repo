@@ -26,11 +26,17 @@ export function createNewClientAction(client) {
     dispatch(newClient());
 
     clienteAxios
-      .post("http://localhost:8080/DXC/clients/addClient", client)
+      .post("http://localhost:9004/DXC/clients/addClient", client)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
         dispatch(addNewClientSuccess(client));
+        Swal.fire({
+          text: "le Client été ajouter avec succés",
+          timer: 1500,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +66,7 @@ export function getClientsAction() {
 
     //interroger l'API
     clienteAxios
-      .get("http://localhost:8080/DXC/clients/allClients")
+      .get("http://localhost:9004/DXC/clients/allClients")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadClientsSuccessful(resp.data));
@@ -92,7 +98,7 @@ export function getClientAcoution(id) {
 
     //obtenir l'api de  le client
     clienteAxios
-      .get(`/route/api/${id}`)
+      .get(`http://localhost:9004/DXC/clients/Client/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getClientEditSuccess(resp.data));
@@ -123,17 +129,23 @@ export function editClientAction(client) {
     dispatch(startEditClient());
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
-    // clienteAxios
-    //   .put(`route/api/${client.id}`, client)
-    //   .then((resp) => {
-    //     //console.log(resp);
-    //     dispatch(editClientSuccess(resp.data));
-    //     Swal.fire("Stored", "le client été modifier avec succés ", "success");
-    //   })
-    //   .catch((error) => {
-    //     //console.log(error);
-    //     dispatch(editClientError());
-    //   });
+    clienteAxios
+
+      .put(`http://localhost:9004/DXC/clients/updateClient`, client)
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(editClientSuccess(resp.data));
+        Swal.fire({
+          text: "le client été modifier avec succés",
+          timer: 1500,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(editClientError());
+      });
   };
 }
 

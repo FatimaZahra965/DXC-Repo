@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import moment from "moment";
 
 //créer un nouveau produit - fonction principale
 export function createNewRessourceAction(ressource) {
@@ -30,6 +31,12 @@ export function createNewRessourceAction(ressource) {
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -59,6 +66,10 @@ export function getRessourcesAction() {
       .get("http://localhost:9000/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
+        resp.data.forEach((element) => {
+          element.dateAmbauche = moment(element.dateAmbauche).format("L");
+          element.dateNaissance = moment(element.dateNaissance).format("L");
+        });
         dispatch(downloadRessourcesSuccessful(resp.data));
       })
       .catch((error) => {
@@ -146,7 +157,6 @@ export const getRessourceEditError = () => ({
   type: RESSOURCE_EDIT_ERROR,
 });
 
-//MODIFIER UN PRODUIT DANS L'API ET L'ETAT
 export function editRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(startEditRessource());
@@ -160,21 +170,31 @@ export function editRessourceAction(ressource) {
       firstName: ressource.Nom,
       dateNaissance: ressource.DateNaissance,
       lastName: ressource.Prenom,
+      technologies: ressource.forms,
+      methodes: ressource.formsMethodes,
+      outils: ressource.formsOutils,
     };
     clienteAxios
       .put(`http://localhost:9000/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
-        Swal.fire(
-          "Stored",
-          "The Ressource was successfully updated",
-          "success",
-        );
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est modifier avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
+        // Swal.fire({
+        //   timer: 3000,
+        //   text: "La ressource n'est pas modifier !",
+        //   timeerProgressBar: true,
+        //   icon: "error",
+        // });
       });
   };
 }

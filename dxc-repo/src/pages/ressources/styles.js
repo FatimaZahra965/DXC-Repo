@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles((theme) => ({
+  body: {
+    color: "#603494",
+  },
   dashedBorder: {
     border: "1px dashed",
     borderColor: theme.palette.primary.main,
@@ -23,5 +26,24 @@ export default makeStyles((theme) => ({
     float: "right",
     background: "black",
     color: "white",
+  },
+  Alert: {
+    paddingBottom: "inherit",
+  },
+  textField: {
+    margin: "5px",
+    width: "500px",
+  },
+  hr: {
+    margin: "5px",
+    width: "500px",
+    float: "left",
+    backgroundColor: "#603494",
+  },
+  gridBorder: {
+    // border: "thick double #32a1ce",
+  },
+  Btext: {
+    color: "#603494",
   },
 }));

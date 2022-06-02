@@ -19,19 +19,23 @@ public class Client {
     private int id;
     private String nomClient;
     private String market;
+    private String label;
+    
 
     public Client() {
     }
 
-    public Client(int id,String nomClient, String market) {
+    public Client(int id,String nomClient, String market, String label) {
         this.id = id;
         this.nomClient = nomClient;
         this.market = market;
+        this.label = label;
     }
 
-    public Client( String nomClient, String market) {
+    public Client( String nomClient, String market, String label) {
         this.nomClient = nomClient;
         this.market = market;
+        this.label = label;
     }
 
     public int getId() {
@@ -55,5 +59,12 @@ public class Client {
 
     public void setMarket(String market) {
         this.market = market;
+    }
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

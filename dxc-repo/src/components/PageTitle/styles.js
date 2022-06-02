@@ -21,4 +21,9 @@ export default makeStyles((theme) => ({
       boxShadow: theme.customShadows.widgetWide,
     },
   },
+
+  headerIcon: {
+    fontSize: 28,
+  },
+ 
 }));

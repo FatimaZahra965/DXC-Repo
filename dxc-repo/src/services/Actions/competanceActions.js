@@ -28,6 +28,12 @@ import {
               console.log(res);
               //si se inserta correctamente
               dispatch(addNewCompetanceSuccess(competance));
+              Swal.fire({
+                text: 'la Competance été ajouter avec succés',
+                 timer: 1500 ,
+                  timer: 3000,
+                  timerProgressBar: true,
+                })
             })
             .catch((error) => {
               console.log(error);
@@ -83,7 +89,7 @@ import {
     type: DOWNLOAD_COMPETANCE__ERROR,
   });
   //fonction pour obtenir la Competance à modifier
-  export function getCompetanceAcoution(id) {
+  export function getCompetanceAction(id) {
     return (dispatch) => {
       dispatch(getEditCompetanceAction());
   
@@ -100,6 +106,8 @@ import {
         });
     };
   }
+
+  
   
   export const getEditCompetanceAction = (id) => ({
     type: GET_COMPETANCE_EDIT,
@@ -121,15 +129,26 @@ import {
   
       //interrogez l'API et envoyez une méthode put à mettre à jour
       clienteAxios
-        .put(`http://localhost:9005/DXC/contrats/updateContrat${competance.id}`, competance)
+        .put(`http://localhost:9005/DXC/competances/updateCompetance`, competance)
         .then((resp) => {
           //console.log(resp);
           dispatch(editCompetanceSuccess(resp.data));
-          Swal.fire("Stored", "la Competance été modifier avec succés ", "success");
+          Swal.fire({
+            text: 'la Competance été modifier avec succés',
+              timer: 3000,
+              timerProgressBar: true,
+            })
+          
         })
         .catch((error) => {
           //console.log(error);
           dispatch(editCompetanceError());
+          Swal.fire({
+            timer: 3000,
+            text: "La competence n'est pas modifié",
+            timeerProgressBar: true,
+            icon: "error",
+          });
         });
     };
   }

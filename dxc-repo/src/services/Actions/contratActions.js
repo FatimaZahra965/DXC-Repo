@@ -23,11 +23,15 @@ export function createNewContratAction(contrat) {
     dispatch(newContrat());
 
     clienteAxios
-      .post("http://localhost:9004/DXC/contrats/addContrat", contrat)
+      .post("http://localhost:9003/DXC/contrats/addContrat", contrat)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
         dispatch(addNewContratSuccess(contrat));
+        Swal.fire({
+          text: "le Contrat été ajouter avec succés",
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +61,7 @@ export function getContratsAction() {
 
     // interroger l'API
     clienteAxios
-      .get("http://localhost:9004/DXC/contrats/allContrats")
+      .get("http://localhost:9003/DXC/contrats/allContrats")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadContratsSuccessful(resp.data));
@@ -89,7 +93,7 @@ export function getContratAction(id) {
 
     //obtenir l'api de  le Contrat
     clienteAxios
-      .get(`http://localhost:9004/DXC/contrats/Contrat/${id}`)
+      .get(`http://localhost:9003/DXC/contrats/Contrat/${id}`)
       .then((resp) => {
         // console.log("reponse data",resp.data);
         dispatch(getContratEditSuccess(resp.data));
@@ -121,11 +125,16 @@ export function editContratAction(contrat) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`http://localhost:9004/DXC/contrats/updateContrat`, contrat)
+      .put(`http://localhost:9003/DXC/contrats/updateContrat`, contrat)
       .then((resp) => {
         //console.log(resp);
         dispatch(editContratSuccess(resp.data));
-        Swal.fire("Stored", "le Contrat été modifier avec succés ", "success");
+        Swal.fire({
+          text: "le Contrat été modifier avec succés",
+          timer: 1500,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       })
       .catch((error) => {
         //console.log(error);

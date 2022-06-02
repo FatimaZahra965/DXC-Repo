@@ -5,14 +5,10 @@ import {
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   ArrowBack as ArrowBackIcon,
-  Language,
-  Brightness6,
 } from "@material-ui/icons";
 import classNames from "classnames";
-
 // styles
 import useStyles from "./styles";
-
 // components
 import { Typography } from "../Wrappers";
 
@@ -48,15 +44,11 @@ export default function Header(props) {
           )}
         >
           {layoutState.isSidebarOpened ? (
-            <ArrowBackIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
+            <i
+              className="pe-7s-left-arrow"
+              classes={{ root: classes.headerIcon }}
               style={{ color: "black" }}
-            />
+            ></i>
           ) : (
             <MenuIcon
               classes={{
@@ -121,6 +113,7 @@ export default function Header(props) {
             style={{ color: "black" }}
           />
         </IconButton> */}
+
         <IconButton
           aria-haspopup="true"
           color="inherit"
