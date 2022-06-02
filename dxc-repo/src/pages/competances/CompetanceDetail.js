@@ -11,7 +11,7 @@ function CompetanceDetail(props) {
 
     axios
       .get(
-        `http://localhost:9005/DXC/competances/Competance/` +
+        `https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/` +
           props.match.params.id,
         {
           headers: { "Access-Control-Allow-Origin": "*" },

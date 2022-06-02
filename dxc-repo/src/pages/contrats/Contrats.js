@@ -27,7 +27,7 @@ export default function Contrats() {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9003/DXC/contrats/allContrats", {
+      .get("https://dxcrepo-contrat.azurewebsites.net/contrats/allContrats", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

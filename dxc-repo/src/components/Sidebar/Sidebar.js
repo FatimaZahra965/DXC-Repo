@@ -30,7 +30,7 @@ import {
 const structure = [
   {
     id: 0,
-    label: "Accueil",
+    label: "Accueil DXC Repo",
     link: "/app/dashboard",
     icon: (
       <IconButton>

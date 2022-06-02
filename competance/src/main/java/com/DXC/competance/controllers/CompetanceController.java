@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "DXC/competances")
 public class CompetanceController {
         private final com.DXC.competance.services.CompetanceService competanceService;

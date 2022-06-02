@@ -21,7 +21,7 @@ function CompetencesTransversales(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9005/DXC/competances/allCompetances", {
+      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/allCompetances", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
