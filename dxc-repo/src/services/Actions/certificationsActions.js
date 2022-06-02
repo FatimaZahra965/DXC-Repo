@@ -16,6 +16,7 @@ import {
 import clienteAxios from "../../config/axios";
 import axios from "axios";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 export function createNewcertificationAction(CERTIFICATION) {
   console.log("CERTIFICATION", CERTIFICATION);
@@ -64,11 +65,16 @@ export const addNewCERTIFICATIONError = (error) => ({
 export function getCertificationsAction() {
   return (dispatch) => {
     dispatch(getCertficationStart());
-
+    let id = 1;
     axios
       .get("https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/")
       .then((resp) => {
-        console.log("all certifications ----->", resp.data);
+        resp.data.forEach((element) => {
+          element.datecertification = moment(element.datecertification).format(
+            "L",
+          );
+        });
+
         dispatch(downloadCertificationsSuccessful(resp.data));
       })
       .catch((error) => {
@@ -91,21 +97,28 @@ export const descargaCertificationsError = () => ({
   type: DOWNLOAD_CERTIFICATION__ERROR,
 });
 
-export function editCertificationction(CERTIFICATION) {
+export function editcertificationAction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(startEditCERTIFICATION());
 
-    // clienteAxios
-    //   .put(`route/api/${CERTIFICATION.id}`, CERTIFICATION)
-    //   .then((resp) => {
-    //     //console.log(resp);
-    //     dispatch(editCERTIFICATIONSuccess(resp.data));
-    //     Swal.fire("Stored", "The Product was successfully updated", "success");
-    //   })
-    //   .catch((error) => {
-    //     //console.log(error);
-    //     dispatch(editCERTIFICATIONError());
-    //   });
+    clienteAxios
+      .put(
+        `https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/updatecertif`,
+        CERTIFICATION,
+      )
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(editCERTIFICATIONSuccess(resp.data));
+        Swal.fire(
+          "Stored",
+          "The Certificate was successfully updated",
+          "success",
+        );
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(editCERTIFICATIONError());
+      });
   };
 }
 
@@ -121,10 +134,10 @@ export const editCERTIFICATIONSuccess = (CERTIFICATION) => ({
 export const editCERTIFICATIONError = () => ({
   type: EDIT_CERTIFICATION_ERROR,
 });
-export function getCertificationAction(id) {
+export function getCertificationAction() {
   return (dispatch) => {
     dispatch(getEditCertificationsAction());
-
+    let id = 1;
     clienteAxios
       .get(`https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/Certification/${id}`)
       .then((resp) => {
@@ -142,9 +155,9 @@ export const getEditCertificationsAction = (id) => ({
   type: GET_CERTIFICATION_EDIT,
 });
 
-export const getCertificationEditExito = (Certification) => ({
+export const getCertificationEditExito = (certifications) => ({
   type: CERTIFICATION_EDIT_SUCCESS,
-  payload: Certification,
+  payload: certifications,
 });
 
 export const getCertificationEditError = () => ({

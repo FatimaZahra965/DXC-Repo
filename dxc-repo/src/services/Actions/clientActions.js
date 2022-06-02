@@ -32,22 +32,16 @@ export function createNewClientAction(client) {
         //si se inserta correctamente
         dispatch(addNewClientSuccess(client));
         Swal.fire({
+          text: "le Client été ajouter avec succés",
+          timer: 1500,
           timer: 3000,
-          text: "Le client est ajouter avec succés",
-          timeerProgressBar: true,
-          icon: "success",
+          timerProgressBar: true,
         });
       })
       .catch((error) => {
         console.log(error);
         //si hay un error
         dispatch(addNewClientError());
-        Swal.fire({
-          timer: 3000,
-          text: "Le client n'est ajouté",
-          timeerProgressBar: true,
-          icon: "error",
-        });
       });
   };
 }
@@ -104,7 +98,7 @@ export function getClientAcoution(id) {
 
     //obtenir l'api de  le client
     clienteAxios
-      .get(`/route/api/${id}`)
+      .get(`https://dxcrepo-client.azurewebsites.net/DXC/clients/Client/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getClientEditSuccess(resp.data));
@@ -135,17 +129,23 @@ export function editClientAction(client) {
     dispatch(startEditClient());
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
-    // clienteAxios
-    //   .put(`route/api/${client.id}`, client)
-    //   .then((resp) => {
-    //     //console.log(resp);
-    //     dispatch(editClientSuccess(resp.data));
-    //     Swal.fire("Stored", "le client été modifier avec succés ", "success");
-    //   })
-    //   .catch((error) => {
-    //     //console.log(error);
-    //     dispatch(editClientError());
-    //   });
+    clienteAxios
+
+      .put(`https://dxcrepo-client.azurewebsites.net/DXC/clients/updateClient`, client)
+      .then((resp) => {
+        //console.log(resp);
+        dispatch(editClientSuccess(resp.data));
+        Swal.fire({
+          text: "le client été modifier avec succés",
+          timer: 1500,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        //console.log(error);
+        dispatch(editClientError());
+      });
   };
 }
 

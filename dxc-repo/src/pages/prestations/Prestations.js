@@ -181,6 +181,7 @@ const Prestations = () => {
                               ViewPrestation(row.id);
                             }}
                           >
+                            {/* <i className="pe-7s-look"></i> */}
                             <VisibilityIcon className={classes.icons} />
                           </Button>
                           <Button
@@ -188,6 +189,7 @@ const Prestations = () => {
                               EditPrestation(row.id);
                             }}
                           >
+                            {/* <i className="pe-7s-note"></i> */}
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

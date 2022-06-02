@@ -27,8 +27,8 @@ function AffichageClient(props) {
         console.log(error);
       });
   });
-  return (
-    <div>
+    return (
+      <div>
       <div>
         <PageTitle
           title="Affichage d'un Client"
@@ -37,26 +37,30 @@ function AffichageClient(props) {
       </div>
 
       <div>
-        <form className={classes.forminformation}>
-          <Grid container spacing={3}>
-            <Grid item xs={4} className={classes.labelinformation}>
-              <h3>nom de client </h3>
-            </Grid>
-            <Grid item xs={6} className={classes.labelDonnes}>
-              <h3>{client.nomClient}</h3>
-            </Grid>
-
-            <Grid item xs={4} className={classes.labelinformation}>
-              <h3>Market de client </h3>
-            </Grid>
-            <Grid item xs={6} className={classes.labelDonnes}>
-              <h3>{client.market}</h3>
-            </Grid>
+      <form  className={classes.Form} >
+    <Grid container spacing={3} className={classes.GridForm}>
+        <Grid item xs={4}  className={classes.labelinformation}>
+          <h3>nom de client </h3>  
           </Grid>
-        </form>
+          <Grid item xs={6} className={classes.labelDonnes}>
+           <h3>{client.nomClient}</h3>
+          </Grid>
+
+             <Grid item xs={4}  className={classes.labelinformation}>
+          <h3>Market de client </h3>  
+          </Grid>
+          <Grid item xs={6} className={classes.labelDonnes}>
+              <h3>{client.market}</h3>
+          </Grid>
+
+          
+          
+        </Grid>
+      </form>
+        
       </div>
     </div>
-  );
+    );
 }
 
 export default AffichageClient;

@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import moment from "moment";
 
 //créer un nouveau produit - fonction principale
 export function createNewRessourceAction(ressource) {
@@ -65,6 +66,10 @@ export function getRessourcesAction() {
       .get("https://dxcrepo-ressource.azurewebsites.net/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
+        resp.data.forEach((element) => {
+          element.dateAmbauche = moment(element.dateAmbauche).format("L");
+          element.dateNaissance = moment(element.dateNaissance).format("L");
+        });
         dispatch(downloadRessourcesSuccessful(resp.data));
       })
       .catch((error) => {
@@ -152,7 +157,6 @@ export const getRessourceEditError = () => ({
   type: RESSOURCE_EDIT_ERROR,
 });
 
-//MODIFIER UN PRODUIT DANS L'API ET L'ETAT
 export function editRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(startEditRessource());
@@ -166,6 +170,9 @@ export function editRessourceAction(ressource) {
       firstName: ressource.Nom,
       dateNaissance: ressource.DateNaissance,
       lastName: ressource.Prenom,
+      technologies: ressource.forms,
+      methodes: ressource.formsMethodes,
+      outils: ressource.formsOutils,
     };
     clienteAxios
       .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)

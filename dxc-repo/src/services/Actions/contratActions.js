@@ -29,22 +29,14 @@ export function createNewContratAction(contrat) {
         //si se inserta correctamente
         dispatch(addNewContratSuccess(contrat));
         Swal.fire({
-          timer: 3000,
-          text: "Contrat est ajouter avec succés",
-          timeerProgressBar: true,
-          icon: "success",
+          text: "le Contrat été ajouter avec succés",
+          timer: 1500,
         });
       })
       .catch((error) => {
         console.log(error);
         //si hay un error
         dispatch(addNewContratError());
-        Swal.fire({
-          timer: 3000,
-          text: "Contrat n'est pas ajouter",
-          timeerProgressBar: true,
-          icon: "error",
-        });
       });
   };
 }
@@ -138,21 +130,15 @@ export function editContratAction(contrat) {
         //console.log(resp);
         dispatch(editContratSuccess(resp.data));
         Swal.fire({
+          text: "le Contrat été modifier avec succés",
+          timer: 1500,
           timer: 3000,
-          text: "Contrat est Modifier avec succés",
-          timeerProgressBar: true,
-          icon: "success",
+          timerProgressBar: true,
         });
       })
       .catch((error) => {
         //console.log(error);
         dispatch(editContratError());
-        Swal.fire({
-          timer: 3000,
-          text: "Contrat n'est pas Modifié",
-          timeerProgressBar: true,
-          icon: "error",
-        });
       });
   };
 }

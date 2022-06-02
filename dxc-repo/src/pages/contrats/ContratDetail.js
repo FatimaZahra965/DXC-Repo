@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import "./contrat.css";
 import useStyles from "./styles";
 
 function ContratDetail(props) {
   const classes = useStyles();
   const [contrat, setContrat] = useState([]);
   useEffect(() => {
-    console.log("hello hjjjjj");
-
     axios
       .get(
         `https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/Contrat/` + props.match.params.id,
@@ -33,13 +30,13 @@ function ContratDetail(props) {
       <div>
         <PageTitle
           title="Afficher d'un Contrat"
-          path="/app/prestations/clients"
+          path="/app/prestations/contrats"
         />
       </div>
 
       <div>
-        <form className={classes.forminformation}>
-          <Grid container spacing={3}>
+        <form className={classes.Form}>
+          <Grid container spacing={3} className={classes.GridForm}>
             <Grid item xs={4} className={classes.labelinformation}>
               <h3>nom de contrat </h3>
             </Grid>
@@ -59,6 +56,27 @@ function ContratDetail(props) {
             </Grid>
             <Grid item xs={6} className={classes.labelDonnes}>
               <h3>{contrat.description}</h3>
+            </Grid>
+
+            <Grid item xs={4} className={classes.labelinformation}>
+              <h3>type d'activité </h3>
+            </Grid>
+            <Grid item xs={6} className={classes.labelDonnes}>
+              <h3>{contrat.type}</h3>
+            </Grid>
+
+            <Grid item xs={4} className={classes.labelinformation}>
+              <h3>date debut de contrat </h3>
+            </Grid>
+            <Grid item xs={6} className={classes.labelDonnes}>
+              <h3>{contrat.dateDebut}</h3>
+            </Grid>
+
+            <Grid item xs={4} className={classes.labelinformation}>
+              <h3>date fin de contrat </h3>
+            </Grid>
+            <Grid item xs={6} className={classes.labelDonnes}>
+              <h3>{contrat.dateFin}</h3>
             </Grid>
           </Grid>
         </form>

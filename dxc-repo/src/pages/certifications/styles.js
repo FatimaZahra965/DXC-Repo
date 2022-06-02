@@ -7,6 +7,17 @@ export default makeStyles((theme) => ({
     background: "#741F82",
     color: "#FFFFFF",
   },
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
   btnAnnuler: {
     margin: "5px",
     float: "right",

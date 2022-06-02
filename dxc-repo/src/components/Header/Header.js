@@ -5,14 +5,10 @@ import {
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   ArrowBack as ArrowBackIcon,
-  Language,
-  Brightness6,
 } from "@material-ui/icons";
 import classNames from "classnames";
-
 // styles
 import useStyles from "./styles";
-
 // components
 import { Typography } from "../Wrappers";
 
@@ -48,12 +44,23 @@ export default function Header(props) {
           )}
         >
           {layoutState.isSidebarOpened ? (
-            <i className="pe-7s-left-arrow" style={{ color: "black" }}></i>
+            <i
+              className="pe-7s-left-arrow"
+              classes={{ root: classes.headerIcon }}
+              style={{ color: "black" }}
+            ></i>
           ) : (
-            <i className="pe-7s-menu" style={{ color: "black" }}></i>
+            <MenuIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse,
+                ),
+              }}
+            />
           )}
         </IconButton>
-        <div className={classes.imgDxc}>
+        <div>
           <img
             src={`${process.env.PUBLIC_URL}/DXC-Logo.svg`}
             alt="logo_dxc"
@@ -106,6 +113,7 @@ export default function Header(props) {
             style={{ color: "black" }}
           />
         </IconButton> */}
+
         <IconButton
           aria-haspopup="true"
           color="inherit"

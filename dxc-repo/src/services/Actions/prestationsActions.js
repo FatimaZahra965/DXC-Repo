@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import moment from "moment";
 
 //créer un nouveau produit - fonction principale
 export function createNewPrestationAction(prestation) {
@@ -64,6 +65,10 @@ export function getPrestationsAction() {
       .get("https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/allPrestations")
       .then((resp) => {
         console.log("all prestations ----->", resp.data);
+        resp.data.forEach((element) => {
+          element.dateDebut = moment(element.dateDebut).format("L");
+          element.dateFin = moment(element.dateFin).format("L");
+        });
         dispatch(downloadPrestationsSuccessful(resp.data));
       })
       .catch((error) => {

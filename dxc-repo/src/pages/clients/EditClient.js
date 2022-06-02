@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState }  from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -7,11 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { editClientAction } from "../../services/Actions/clientActions";
-import {
-  validacionError,
-  validationSuccess,
-  validarFormularioAction,
-} from "../../services/Actions/validacionActions";
+import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
 function EditClient(props) {
   const classes = useStyles();
@@ -19,12 +15,13 @@ function EditClient(props) {
   const initialClientState = {
     id: null,
     nomClient: "",
-    market: "",
+    market: ""
   };
-  const editClient = (Client) => dispatch(editClientAction(Client));
+  const editClient = (Client)=> dispatch(editClientAction(Client));
   const [currentClient, setCurrentClient] = useState(initialClientState);
 
-  // créer un nouveau Client
+
+ // créer un nouveau Client
   const dispatch = useDispatch();
   const getClient = () => {
     axios
@@ -46,13 +43,14 @@ function EditClient(props) {
     getClient(props.match.params.id);
   }, [props.match.params.id]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentClient({ ...currentClient, [name]: value });
   };
 
+
   const updateContent = () => {
-    console.log("currentClient", currentClient);
+    console.log("currentClient",currentClient);
 
     validarForm();
 
@@ -67,19 +65,24 @@ function EditClient(props) {
     SuccessValidacion();
 
     editClient(currentClient);
-    history.push("/app/prestations/clients");
+         history.push("/app/prestations/clients");
+      
+
   };
   function AnnulerClient() {
     history.push("/app/prestations/clients");
   }
 
-  return (
-    <div>
-      <div>
-        <PageTitle title="Modifier un client" path="/app/prestations/clients" />
-      </div>
-      <form onSubmit={updateContent}>
-        <Grid container spacing={3}>
+
+
+    return (
+        <div>
+        <div>
+          <PageTitle title="Modifier un client" path="/app/prestations/clients"/>
+        </div>
+        
+        <form onSubmit={updateContent}className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-nomContrat"
@@ -92,7 +95,7 @@ function EditClient(props) {
               onChange={handleInputChange}
             />
           </Grid>
-
+      
           <Grid item xs={6}>
             <TextField
               id="outlined-nomClient"
@@ -105,31 +108,32 @@ function EditClient(props) {
               onChange={handleInputChange}
             />
           </Grid>
+           
         </Grid>
       </form>
       <Grid item xs={12}>
-        <Button
-          size="small"
-          variant="contained"
-          type="submit"
-          className={classes.btnAjouter}
-          color="primary"
-          onClick={updateContent}
-        >
-          Modifier
-        </Button>
-        <Button
-          size="small"
-          variant="contained"
-          className={classes.btnAnnuler}
-          color="secondary"
-          onClick={AnnulerClient}
-        >
-          Annuler
-        </Button>
-      </Grid>
+            <Button
+              size="small"
+              variant="contained"
+              type="submit"
+              className={classes.btnAjouter}
+              color="primary"
+              onClick={updateContent}
+            >
+              Modifier 
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              className={classes.btnAnnuler}
+              color="secondary" 
+              onClick={AnnulerClient}
+            >
+              Annuler
+            </Button>
+          </Grid>
     </div>
-  );
+    );
 }
 
 export default EditClient;

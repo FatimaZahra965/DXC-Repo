@@ -50,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test local 2305/ressource" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dxc-repo/client" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -70,13 +70,6 @@
     <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="client" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.DXC.client.ClientApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PrestationApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="prestation (1)" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.DXC.prestation.PrestationApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -105,7 +98,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653229842399</updated>
       <workItem from="1653229848855" duration="1435000" />
-      <workItem from="1653308598984" duration="1107000" />
+      <workItem from="1653308598984" duration="710000" />
     </task>
     <servers />
   </component>

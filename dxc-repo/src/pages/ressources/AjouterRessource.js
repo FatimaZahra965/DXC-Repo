@@ -39,6 +39,14 @@ export default function AjouterRessource() {
   const [DateNaissanceEror, setDateNaissanceEror] = useState("");
   const [ProfilEror, setProfilEror] = useState("");
 
+  const [FormsEror, setFormsEror] = useState("");
+  const [FormsMethodesEror, setFormsMethodesEror] = useState("");
+  const [FormsOutilsEror, setFormsOutilsEror] = useState("");
+
+  const [forms, setForms] = useState([]);
+  const [formsMethodes, setFormsMethodes] = useState([]);
+  const [formsOutils, setFormsOutils] = useState([]);
+
   const dispatch = useDispatch();
   const addRessource = (ressource) =>
     dispatch(createNewRessourceAction(ressource));
@@ -49,7 +57,6 @@ export default function AjouterRessource() {
   const error = useSelector((state) => state.error.error);
   const submitNewRessource = (e) => {
     e.preventDefault();
-
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -58,6 +65,9 @@ export default function AjouterRessource() {
     let profilEror = "";
     let dateNaissanceEror = "";
     let dateAmbaucheEror = "";
+    let formsEror = "";
+    let formsMethodesEror = "";
+    let formsOutilsEror = "";
 
     if (!Matricule) {
       matriculeEror = "le champ Matricule de la ressource est obligatiore";
@@ -85,6 +95,15 @@ export default function AjouterRessource() {
     if (!Prenom) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
     }
+    if (!forms) {
+      formsEror = "le champ Technologie de la ressource est obligatiore";
+    }
+    if (!formsMethodes) {
+      formsMethodesEror = "le champ Méthode de la ressource est obligatiore";
+    }
+    if (!formsOutils) {
+      formsOutilsEror = "le champ Outils de la ressource est obligatiore";
+    }
 
     if (
       matriculeEror ||
@@ -94,7 +113,10 @@ export default function AjouterRessource() {
       dateNaissanceEror ||
       genreEror ||
       profilEror ||
-      prenomEror
+      prenomEror ||
+      formsEror ||
+      formsMethodesEror ||
+      formsOutilsEror
     ) {
       setMatriculeEror(matriculeEror);
       setNomEror(nomEror);
@@ -103,7 +125,10 @@ export default function AjouterRessource() {
       setDateNaissanceEror(dateNaissanceEror);
       setStatusEror(statusEror);
       setGenreEror(genreEror);
-      setProfil(profilEror);
+      setProfilEror(profilEror);
+      setFormsEror(formsEror);
+      setFormsMethodesEror(formsMethodesEror);
+      setFormsOutilsEror(formsOutilsEror);
 
       errorValidacion();
       return;
@@ -117,49 +142,15 @@ export default function AjouterRessource() {
       lastName: Nom,
       firstName: Prenom,
       dateAmbauche: DateAmbauche,
-      techno: forms,
+      technologies: forms,
       methodes: formsMethodes,
       outils: formsOutils,
     };
     console.log("ressource", ressource);
-    //addRessource(ressource);
+    addRessource(ressource);
 
-    //history.push("/app/prestations/ressources");
+    history.push("/app/prestations/ressources");
   };
-
-  // const  = (e) => {
-  //   e.preventDefault();
-
-  //   validarForm();
-
-  //   if (
-  //     Matricule.trim() === "" ||
-  //     Status.trim() === "" ||
-  //     Nom.trim() === "" ||
-  //     Prenom.trim() === "" ||
-  //     Genre.trim() === "" ||
-  //     DateAmbauche.trim() === "" ||
-  //     DateNaissance.trim() === ""
-  //   ) {
-  //     errorValidacion();
-  //     return;
-  //   }
-  //   SuccessValidation();
-
-  //   let ressource = {
-  //     matricule: Matricule,
-  //     status: Status,
-  //     genre: Genre,
-  //     dateNaissance: DateNaissance,
-  //     lastName: Nom,
-  //     firstName: Prenom,
-  //     dateAmbauche: DateAmbauche,
-  //   };
-  //   console.log("ressource", ressource);
-  //   addRessource(ressource);
-
-  //   history.push("/app/prestations/ressources");
-  // };
 
   const options = [
     {
@@ -223,21 +214,17 @@ export default function AjouterRessource() {
     history.push(path);
   };
   const technosForm = {
-    name: "",
+    titre: "",
     niveau: "",
   };
   const methodesForm = {
-    name: "",
+    titre: "",
     niveau: "",
   };
   const outilsForm = {
-    name: "",
+    titre: "",
     niveau: "",
   };
-
-  const [forms, setForms] = useState([]);
-  const [formsMethodes, setFormsMethodes] = useState([]);
-  const [formsOutils, setFormsOutils] = useState([]);
 
   const handleInputChange = (e, idform) => {
     const { name, value } = e.target;
@@ -383,7 +370,6 @@ export default function AjouterRessource() {
             </TextField>
             <div style={{ color: "red" }}>{StatusEror}</div>
           </Grid>
-
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
@@ -463,35 +449,112 @@ export default function AjouterRessource() {
               <AddIcon />
             </IconButton>
             Ajouter une Technologie
+            <div style={{ color: "red" }}>{FormsEror}</div>
           </Grid>
 
           {forms.map((form, i) => {
             return (
-              <Grid item xs={6}>
-                <Box border={1}>
-                  <b className={classes.Btext}> Technologie {i + 1}</b>
+              <Grid item xs={12}>
+                <b className={classes.Btext}> Technologie {i + 1}:</b>
+                <br />
+                <hr className={classes.hr}></hr>
+                <br />
+                <TextField
+                  className={classes.textField}
+                  id="outlined-basic"
+                  label="Technologies"
+                  size="small"
+                  name="name"
+                  variant="outlined"
+                  fullWidth
+                  value={form.name}
+                  onChange={(e) => {
+                    handleInputChange(e, i);
+                    setFormsEror("");
+                  }}
+                />
+                <br />
+                <TextField
+                  className={classes.textField}
+                  id="outlined-select-currency"
+                  select
+                  label="Niveau de maitrise"
+                  size="small"
+                  fullWidth
+                  name="niveau"
+                  variant="outlined"
+                  value={form.niveau}
+                  onChange={(e) => handleInputChange(e, i)}
+                >
+                  <MenuItem key="0" value="NE">
+                    NE - Non Exigé
+                  </MenuItem>
+                  <MenuItem key="1" value="0">
+                    0 - pas de connaissances
+                  </MenuItem>
+                  <MenuItem key="2" value="1">
+                    1 - connaissances théoriques
+                  </MenuItem>
+                  <MenuItem key="3" value="2">
+                    2 - Basique
+                  </MenuItem>
+                  <MenuItem key="4" value="3">
+                    3 - Maitrisé
+                  </MenuItem>
+                  <MenuItem key="5" value="4">
+                    4 - Expert{" "}
+                  </MenuItem>
+                </TextField>
+                <br />
+                <IconButton aria-label="delete" onClick={() => remove(i)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
+            );
+          })}
+
+          <Grid item xs={6}>
+            <IconButton aria-label="delete" onClick={addFormMethodes}>
+              <AddIcon />
+            </IconButton>
+            Ajouter une Méthode
+            <div style={{ color: "red" }}>{FormsMethodesEror}</div>
+          </Grid>
+
+          {formsMethodes.map((form, i) => {
+            return (
+              <>
+                <Grid item xs={12}>
+                  <b className={classes.Btext}> Méthode {i + 1} :</b>
+                  <br />
+                  <hr className={classes.hr}></hr>
+                  <br />
                   <TextField
                     className={classes.textField}
                     id="outlined-basic"
-                    label="Technologies"
+                    label="Méthode"
                     size="small"
                     name="name"
                     variant="outlined"
                     fullWidth
                     value={form.name}
-                    onChange={(e) => handleInputChange(e, i)}
+                    onChange={(e) => {
+                      handleInputChangeMethodes(e, i);
+                      setFormsMethodesEror("");
+                    }}
                   />
+                  <br />
                   <TextField
                     className={classes.textField}
                     id="outlined-select-currency"
                     select
                     label="Niveau de maitrise"
                     size="small"
-                    fullWidth
                     name="niveau"
+                    fullWidth
                     variant="outlined"
                     value={form.niveau}
-                    onChange={(e) => handleInputChange(e, i)}
+                    onChange={(e) => handleInputChangeMethodes(e, i)}
                   >
                     <MenuItem key="0" value="NE">
                       NE - Non Exigé
@@ -512,76 +575,13 @@ export default function AjouterRessource() {
                       4 - Expert{" "}
                     </MenuItem>
                   </TextField>
-                  <IconButton aria-label="delete" onClick={() => remove(i)}>
+                  <br />
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => removeMethode(i)}
+                  >
                     <DeleteIcon />
                   </IconButton>
-                </Box>
-              </Grid>
-            );
-          })}
-
-          <Grid item xs={6}>
-            <IconButton aria-label="delete" onClick={addFormMethodes}>
-              <AddIcon />
-            </IconButton>
-            Ajouter une Méthode
-          </Grid>
-
-          {formsMethodes.map((form, i) => {
-            return (
-              <>
-                <Grid item xs={6}>
-                  <Box border={1}>
-                    <b className={classes.Btext}> Méthode {i + 1} </b>
-                    <TextField
-                      className={classes.textField}
-                      id="outlined-basic"
-                      label="Méthode"
-                      size="small"
-                      name="name"
-                      variant="outlined"
-                      fullWidth
-                      value={form.name}
-                      onChange={(e) => handleInputChangeMethodes(e, i)}
-                    />
-                    <TextField
-                      className={classes.textField}
-                      id="outlined-select-currency"
-                      select
-                      label="Niveau de maitrise"
-                      size="small"
-                      name="niveau"
-                      fullWidth
-                      variant="outlined"
-                      value={form.niveau}
-                      onChange={(e) => handleInputChangeMethodes(e, i)}
-                    >
-                      <MenuItem key="0" value="NE">
-                        NE - Non Exigé
-                      </MenuItem>
-                      <MenuItem key="1" value="0">
-                        0 - pas de connaissances
-                      </MenuItem>
-                      <MenuItem key="2" value="1">
-                        1 - connaissances théoriques
-                      </MenuItem>
-                      <MenuItem key="3" value="2">
-                        2 - Basique
-                      </MenuItem>
-                      <MenuItem key="4" value="3">
-                        3 - Maitrisé
-                      </MenuItem>
-                      <MenuItem key="5" value="4">
-                        4 - Expert{" "}
-                      </MenuItem>
-                    </TextField>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => removeMethode(i)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Box>
                 </Grid>
               </>
             );
@@ -592,62 +592,66 @@ export default function AjouterRessource() {
               <AddIcon />
             </IconButton>
             Ajouter un outil
+            <div style={{ color: "red" }}>{FormsOutilsEror}</div>
           </Grid>
 
           {formsOutils.map((form, i) => {
             return (
-              <Grid item xs={6}>
-                <Box border={1}>
-                  <b className={classes.Btext}> outil {i + 1}</b>
-                  <TextField
-                    className={classes.textField}
-                    id="outlined-basic"
-                    label="Outil"
-                    size="small"
-                    name="name"
-                    variant="outlined"
-                    fullWidth
-                    value={form.name}
-                    onChange={(e) => handleInputChangeOutils(e, i)}
-                  />
-                  <TextField
-                    className={classes.textField}
-                    id="outlined-select-currency"
-                    select
-                    label="Niveau de maitrise"
-                    size="small"
-                    fullWidth
-                    name="niveau"
-                    variant="outlined"
-                    value={form.niveau}
-                    onChange={(e) => handleInputChangeOutils(e, i)}
-                  >
-                    <MenuItem key="0" value="NE">
-                      NE - Non Exigé
-                    </MenuItem>
-                    <MenuItem key="1" value="0">
-                      0 - pas de connaissances
-                    </MenuItem>
-                    <MenuItem key="2" value="1">
-                      1 - connaissances théoriques
-                    </MenuItem>
-                    <MenuItem key="3" value="2">
-                      2 - Basique
-                    </MenuItem>
-                    <MenuItem key="4" value="3">
-                      3 - Maitrisé
-                    </MenuItem>
-                    <MenuItem key="5" value="4">
-                      4 - Expert{" "}
-                    </MenuItem>
-                  </TextField>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => removeOutil(i)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
+              <Grid item xs={12}>
+                <b className={classes.Btext}> outil {i + 1} :</b>
+                <br />
+                <hr className={classes.hr}></hr>
+                <br />
+                <TextField
+                  className={classes.textField}
+                  id="outlined-basic"
+                  label="Outil"
+                  size="small"
+                  name="name"
+                  variant="outlined"
+                  fullWidth
+                  value={form.name}
+                  onChange={(e) => {
+                    handleInputChangeOutils(e, i);
+                    setFormsOutilsEror("");
+                  }}
+                />
+                <br />
+                <TextField
+                  className={classes.textField}
+                  id="outlined-select-currency"
+                  select
+                  label="Niveau de maitrise"
+                  size="small"
+                  fullWidth
+                  name="niveau"
+                  variant="outlined"
+                  value={form.niveau}
+                  onChange={(e) => handleInputChangeOutils(e, i)}
+                >
+                  <MenuItem key="0" value="NE">
+                    NE - Non Exigé
+                  </MenuItem>
+                  <MenuItem key="1" value="0">
+                    0 - pas de connaissances
+                  </MenuItem>
+                  <MenuItem key="2" value="1">
+                    1 - connaissances théoriques
+                  </MenuItem>
+                  <MenuItem key="3" value="2">
+                    2 - Basique
+                  </MenuItem>
+                  <MenuItem key="4" value="3">
+                    3 - Maitrisé
+                  </MenuItem>
+                  <MenuItem key="5" value="4">
+                    4 - Expert
+                  </MenuItem>
+                </TextField>
+                <br />
+                <IconButton aria-label="delete" onClick={() => removeOutil(i)}>
+                  <DeleteIcon />
+                </IconButton>
               </Grid>
             );
           })}

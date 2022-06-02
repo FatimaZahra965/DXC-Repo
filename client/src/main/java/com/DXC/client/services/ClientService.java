@@ -32,6 +32,8 @@ public class ClientService {
         com.DXC.client.models.Client existingClient = clientRepository.findById(client.getId()).orElse(null);
         existingClient.setNomClient(client.getNomClient());
         existingClient.setMarket(client.getMarket());
+         existingClient.setLabel(client.getLabel());
+        
 
         return clientRepository.save(existingClient);
     }
