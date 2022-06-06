@@ -9,6 +9,7 @@ stages:
 - build contrat
 - build ressource
 - build prestation
+- build activite
 - build dxcrepo
 
 variables:
@@ -65,6 +66,15 @@ release_prestation:
     - docker build -t $DOCKER_REPOSITORY/microservice-prestation:latest ./prestation
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/microservice-prestation:latest
+  only:
+    - main
+
+release_activite:
+  stage: build activite
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-activite:latest ./activite
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-activite:latest
   only:
     - main
 
