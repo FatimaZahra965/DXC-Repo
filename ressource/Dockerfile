@@ -5,5 +5,5 @@ RUN mvn -B -DskipTests clean package
 
 FROM openjdk:11
 WORKDIR /app
-COPY --from=builder /tmp/src/target/ressource-service.jar .
-CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "ressource-service.jar"]
+COPY --from=builder /tmp/src/target/microservice-ressource.jar .
+CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "microservice-ressource.jar"]
