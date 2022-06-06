@@ -1,10 +1,11 @@
 import { makeStyles } from "@material-ui/styles";
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   root: {
     display: "flex",
     maxWidth: "100vw",
     overflowX: "hidden",
+    backgroundColor: "white",
   },
   content: {
     flexGrow: 1,
@@ -23,8 +24,8 @@ export default makeStyles(theme => ({
     ...theme.mixins.toolbar,
   },
   link: {
-    '&:not(:first-child)': {
-      paddingLeft: 15
-    }
-  }
+    "&:not(:first-child)": {
+      paddingLeft: 15,
+    },
+  },
 }));

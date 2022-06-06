@@ -43,6 +43,8 @@ import Certifications from "../../pages/certifications/Certifications";
 import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
+import AjouterActivite from "../../pages/activites/AjouterActivite";
+import ModifierActivite from "../../pages/activites/ModifierActivité";
 
 function Layout(props) {
   var classes = useStyles();
@@ -65,7 +67,10 @@ function Layout(props) {
             {/*  route dashboard  */}
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route path="/app/competances" component={Competances} />
+            <Route
+              path="/app/competances/allCompetances"
+              component={Competances}
+            />
             <Route
               path="/app/competances/ajouteCompetance"
               component={AjouteCompetance}
@@ -173,8 +178,16 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
-
+            {/* routes activiteés */}
             <Route path="/app/prestations/activites" component={Activites} />
+            <Route
+              path="/app/activites/AjouteAactivite"
+              component={AjouterActivite}
+            />
+            <Route
+              path="/app/activites/ModifierAactivite/:id"
+              component={ModifierActivite}
+            />
             <Route
               path="/app/prestations/technologies"
               component={Technologies}
@@ -217,19 +230,6 @@ function Layout(props) {
             <Route path="/app/notifications" component={Notifications} />
             <Route path="/app/capabilites" component={Capabilites} />
           </Switch>
-          <Box
-            mt={5}
-            width={"100%"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent="space-between"
-          >
-            <div>
-              <p>
-                {/* © Copyright 2022 DXC Technology Company. All rights reserved */}
-              </p>
-            </div>
-          </Box>
         </div>
       </>
     </div>

@@ -19,7 +19,6 @@ public class ActiviteController {
             return this.activiteService.getActivite();
         }
 
-
         @PostMapping(path = "addActivite")
         public void addActivite(@RequestBody com.DXC.activite.models.Activite activite) {
             this.activiteService.addActivite(activite);

@@ -80,13 +80,66 @@ const structure = [
       {
         label: "Liste des Prestations",
         link: "/app/prestations/ListePrestations",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-network" />
+          </IconButton>
+        ),
       },
-      { label: "Contrats", link: "/app/prestations/Contrats" },
-      { label: "Clients", link: "/app/prestations/clients" },
-      { label: "Ressources", link: "/app/prestations/ressources" },
-      { label: "Activités", link: "/app/prestations/activites" },
-      { label: "Téchnologies", link: "/app/prestations/technologies" },
-      { label: "Projets", link: "/app/prestations/projets" },
+      {
+        label: "Contrats",
+        link: "/app/prestations/Contrats",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-id" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Clients",
+        link: "/app/prestations/clients",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-way" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Ressources",
+        link: "/app/prestations/ressources",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-users" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Activités",
+        link: "/app/prestations/activites",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-albums" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Téchnologies",
+        link: "/app/prestations/technologies",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-star" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Projets",
+        link: "/app/prestations/projets",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-news-paper" />
+          </IconButton>
+        ),
+      },
     ],
   },
   {
