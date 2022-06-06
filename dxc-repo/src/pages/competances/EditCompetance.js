@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState }  from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -6,15 +6,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editCompetanceAction,
-  getCompetanceAction,
-} from "../../services/Actions/competanceActions";
-import {
-  validacionError,
-  validationSuccess,
-  validarFormularioAction,
-} from "../../services/Actions/validacionActions";
+import { editCompetanceAction, getCompetanceAction } from "../../services/Actions/competanceActions";
+import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
 import clienteAxios from "../../config/axios";
 import axios from "axios";
@@ -24,34 +17,29 @@ function EditCompetance(props) {
   const history = useHistory();
   const initialCompetanceState = {
     id: null,
-    nomCompetance: "",
-    matriculeRessource: "",
-    nomRessource: "",
-    typeComp: "",
-    evaluationManager: "",
-    niveau: "",
+    nomCompetance : "",
+    matriculeRessource : "",
+    nomRessource : "",
+    typeComp : "",
+    evaluationManager : "",
+    niveau : ""
   };
-  const editCompetance = (Competance) =>
-    dispatch(editCompetanceAction(Competance));
-  const [currentCompetance, setCurrentCompetance] = useState(
-    initialCompetanceState,
-  );
-  // créer un nouveau Competance
+  const editCompetance = (Competance)=> dispatch(editCompetanceAction(Competance));
+  const [currentCompetance, setCurrentCompetance] = useState(initialCompetanceState);
+ // créer un nouveau Competance
   const dispatch = useDispatch();
   const getCompetance = () => {
+    
     axios
-      .get(
-        `http://localhost:9005/DXC/competances/Competance/` +
-          props.match.params.id,
-      )
-      .then((resp) => {
-        console.log("hhhhkldmdmmdm", resp.data);
-        setCurrentCompetance(resp.data);
-        console.log("CurrentCompetance", currentCompetance);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/`+props.match.params.id)
+    .then((resp) => {
+      console.log("hhhhkldmdmmdm",resp.data);
+      setCurrentCompetance(resp.data);
+      console.log("CurrentCompetance",currentCompetance); })
+    .catch((error) => {
+      console.log(error);
+     
+    });
   };
 
   const validarForm = () => dispatch(validarFormularioAction());
@@ -61,13 +49,14 @@ function EditCompetance(props) {
     getCompetance(props.match.params.id);
   }, [props.match.params.id]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentCompetance({ ...currentCompetance, [name]: value });
   };
 
-  const updateCompetance = () => {
-    console.log("currentCompetance", currentCompetance);
+
+  const updateContent = () => {
+    console.log("currentCompetance",currentCompetance);
 
     validarForm();
 
@@ -86,12 +75,15 @@ function EditCompetance(props) {
     SuccessValidacion();
 
     editCompetance(currentCompetance);
-    history.push("/app/competances/allCompetances");
+         history.push("/app/competances/allCompetances");
+      
+
   };
   function AnnulerCompetance() {
     history.push("/app/competances/allCompetances");
   }
   const niveaux = [
+   
     {
       label: "NE - Non Exigé.",
       value: "Non Exigé",
@@ -120,36 +112,32 @@ function EditCompetance(props) {
   const typesCompetances = [
     {
       label: "Compétences techniques",
-      value: "CompetenceTechn",
+      value: "Compétences techniques",
     },
     {
       label: "Compétences transversales",
-      value: "CompetenceTrans",
+      value: "Compétences transversales",
     },
     {
       label: "Compétences linguistiques",
-      value: "CompetenceLing",
+      value: "Compétences linguistiques",
     },
+  
   ];
-
+  
   return (
     <div>
       <div>
-        <PageTitle
-          title="Modifier une Competance"
-          path="/app/competances/allCompetances"
-        />
+        <PageTitle title="Modifier une Competance" path="/app/competances/allCompetances" />
       </div>
-      <form onSubmit={updateCompetance}>
-        <Grid container spacing={3}>
-          <Grid item xs={4} className={classes.label}>
-            <h3>Nom et prénom de ressource </h3>
-          </Grid>
+    
+      <form onSubmit={updateContent}className={classes.Form}>
+        <Grid container spacing={3}className={classes.GridForm}>
 
           <Grid item xs={6}>
             <TextField
               id="outlined-nomRessource"
-              // label="Nom et prénom de ressource"
+              label="Nom et prénom de ressource"
               size="small"
               variant="outlined"
               fullWidth
@@ -158,31 +146,27 @@ function EditCompetance(props) {
               onChange={handleInputChange}
             />
           </Grid>
-
-          <Grid item xs={4} className={classes.label}>
-            <h3>Matricule de ressource </h3>
-          </Grid>
-
+    
+      
           <Grid item xs={6}>
-            <TextField
+          <TextField
               id="outlined-matriculeRessource"
               size="small"
+              label="Matricule de ressource"
               variant="outlined"
               fullWidth
               name="matriculeRessource"
               value={currentCompetance.matriculeRessource}
               onChange={handleInputChange}
+            
             />
           </Grid>
-
-          <Grid item xs={4} className={classes.label}>
-            <h3>Type de compétence </h3>
-          </Grid>
-
+      
           <Grid item xs={6}>
-            <TextField
+          <TextField
               id="outlined-typeComp"
               select
+              label="Type de compétence"
               variant="outlined"
               size="small"
               fullWidth
@@ -191,37 +175,30 @@ function EditCompetance(props) {
               onChange={handleInputChange}
             >
               {typesCompetances.map((typeCompetance) => (
-                <MenuItem value={typeCompetance.value}>
-                  {typeCompetance.label}
-                </MenuItem>
+                <MenuItem value={typeCompetance.value}>{typeCompetance.label}</MenuItem>
               ))}
             </TextField>
           </Grid>
-
-          <Grid item xs={4} className={classes.label}>
-            <h3>Intitulé de compétence</h3>
-          </Grid>
-
+      
           <Grid item xs={6}>
-            <TextField
+          <TextField
               id="outlined-nomCompetance"
               size="small"
+              label="Intitulé de compétence"
               variant="outlined"
               fullWidth
               name="nomCompetance"
               value={currentCompetance.nomCompetance}
               onChange={handleInputChange}
+             
             />
           </Grid>
-
-          <Grid item xs={4} className={classes.label}>
-            <h3>Niveau de maitrise attendu </h3>
-          </Grid>
-
+     
           <Grid item xs={6}>
-            <TextField
+          <TextField
               id="outlined-niveau"
               select
+              label="Niveau  de maitrise attendu"
               variant="outlined"
               size="small"
               fullWidth
@@ -234,15 +211,12 @@ function EditCompetance(props) {
               ))}
             </TextField>
           </Grid>
-
-          <Grid item xs={4} className={classes.label}>
-            <h3>Evaluation de manager</h3>
-          </Grid>
-
+      
           <Grid item xs={6}>
-            <TextField
+          <TextField
               id="outlined-evaluationManager"
               select
+              label="Evaluation de manager"
               variant="outlined"
               size="small"
               fullWidth
@@ -255,29 +229,30 @@ function EditCompetance(props) {
               ))}
             </TextField>
           </Grid>
+          
         </Grid>
       </form>
       <Grid item xs={12}>
-        <Button
-          size="small"
-          variant="contained"
-          type="submit"
-          className={classes.btnAjouter}
-          color="primary"
-          onClick={updateCompetance}
-        >
-          Modifier
-        </Button>
-        <Button
-          size="small"
-          variant="contained"
-          className={classes.btnAnnuler}
-          color="secondary"
-          onClick={AnnulerCompetance}
-        >
-          Annuler
-        </Button>
-      </Grid>
+            <Button
+              size="small"
+              variant="contained"
+              type="submit"
+              className={classes.btnAjouter}
+              color="primary"
+              onClick={updateContent}
+            >
+              Modifier 
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              className={classes.btnAnnuler}
+              color="secondary" 
+              onClick={AnnulerCompetance}
+            >
+              Annuler
+            </Button>
+          </Grid>
     </div>
   );
 }

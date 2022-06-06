@@ -97,11 +97,12 @@ const Prestations = () => {
         <Alert severity="error">Problème de chargement ...!</Alert>
       ) : null}
 
-      {loading ? <h1>Connecting...</h1> : null}
+      {loading ? <h3 style={{ color: "black" }}>Connecting...</h3> : null}
       <Grid container spacing={3}>
         <Grid item xs={6} className={classes.grid}>
           <PageTitle title="Prestations" path="/app/dashboard" />
         </Grid>
+
         <Grid item xs={6} className={classes.grid}></Grid>
         <Grid xs={6} className={classes.grid}>
           <TextField
@@ -112,15 +113,15 @@ const Prestations = () => {
             size="small"
             label="Recherche"
             className={classes.searchTextField}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment>
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+            // InputProps={{
+            //   endAdornment: (
+            //     <InputAdornment>
+            //       <IconButton>
+            //         <SearchIcon />
+            //       </IconButton>
+            //     </InputAdornment>
+            //   ),
+            // }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -181,6 +182,7 @@ const Prestations = () => {
                               ViewPrestation(row.id);
                             }}
                           >
+                            {/* <i className="pe-7s-look"></i> */}
                             <VisibilityIcon className={classes.icons} />
                           </Button>
                           <Button
@@ -188,6 +190,7 @@ const Prestations = () => {
                               EditPrestation(row.id);
                             }}
                           >
+                            {/* <i className="pe-7s-note"></i> */}
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "DXC/prestations")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class PrestationController {
         private final PrestationService prestationService;
 

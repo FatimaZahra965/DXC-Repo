@@ -52,7 +52,8 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     float: "left",
-    marginTop: "13px",
+    marginTop: "27px",
+    width: "auto",
   },
   bText: {
     padding: "10px",

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const clienteAxios = axios.create({
-  baseURL: "http://localhost:",
+  baseURL: "https://dxcrepo-activite.azurewebsites.net::",
 });
 
 export default clienteAxios;

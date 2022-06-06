@@ -19,6 +19,18 @@ export default makeStyles(theme => ({
    
 
   },
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+    
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
@@ -78,6 +90,7 @@ export default makeStyles(theme => ({
     Stroke: "Solid",
     marginTop: "inherit",
   },
+
   
   labelinformation: {
     color: "#7978BB",
@@ -101,6 +114,10 @@ export default makeStyles(theme => ({
   },
   title: {
     fontSize: "9",
+  },
+  Bajoute: {
+    textAlign: "end",
+    marginLeft: "800px",
   },
   btnAjouter: {
     margin: "5px",

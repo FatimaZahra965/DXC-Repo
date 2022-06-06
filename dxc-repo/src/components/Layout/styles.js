@@ -5,12 +5,13 @@ export default makeStyles((theme) => ({
     display: "flex",
     maxWidth: "100vw",
     overflowX: "hidden",
+    backgroundColor: "white",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    width: "300px",
-    minHeight: "300px",
+    width: `calc(100vw - 240px)`,
+    minHeight: "100vh",
   },
   contentShift: {
     width: `calc(100vw - ${240 + theme.spacing(6)}px)`,

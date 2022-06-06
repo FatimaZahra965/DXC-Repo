@@ -15,6 +15,8 @@ import {
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import clienteAxios from "../../config/axios";
+import moment from "moment";
 
 export default function AjouterCertification() {
   const classes = useStyles();
@@ -24,9 +26,16 @@ export default function AjouterCertification() {
   const [titre, setTitre] = useState("");
   const [datecertification, setDatecertification] = useState("");
   const [niveau, setNiveau] = useState("");
-  const [validation, setValidation] = useState("");
+  const [imageCertificat, setImageCertificat] = useState("");
+  const [Img, setImg] = useState("");
+  const [file, setFile] = useState("");
 
-  //crar nuevo producto
+  const [CodeEror, setCodeEror] = useState("");
+  const [TitreEror, setTitreEror] = useState("");
+  const [DateCertificationEror, setDateCertificationEror] = useState("");
+  const [NiveauEror, setNiveauEror] = useState("");
+  const [fileEror, setFileEror] = useState("");
+
   const dispatch = useDispatch();
   const addcertification = (certification) =>
     dispatch(createNewcertificationAction(certification));
@@ -34,45 +43,87 @@ export default function AjouterCertification() {
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
-  //obtener los datos del state
   const error = useSelector((state) => state.error.error);
 
+  //upload file
+  const uploadFile = (event) => {
+    event.preventDefault();
+    if (!file) {
+      setFileEror("Please upload a file.");
+      return;
+    }
+
+    if (file.size >= 2000000) {
+      setFileEror("File size exceeds limit of 2MB.");
+      return;
+    }
+    let data = new FormData();
+    data.append("file", file);
+    data.append("name", file.name);
+    clienteAxios
+      .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
+      .then((res) => {
+        console.log(res);
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        setFileEror(error);
+      });
+  };
   // addnew certification
   const submitNewCertification = (e) => {
     e.preventDefault();
 
     validarForm();
+    let codeEror = "";
+    let niveauEror = "";
+    let datecertificationEror = "";
+    let titreEror = "";
 
-    if (
-      code.trim() === "" ||
-      titre.trim() === "" ||
-      datecertification.trim() === "" ||
-      niveau.trim() === "" ||
-      validation.trim() === ""
-    ) {
+    if (!code) {
+      codeEror = "le champ code de la certification est obligatiore";
+    }
+    if (!niveau) {
+      niveauEror = "le champ Niveau de la certification est obligatiore";
+    }
+    if (!datecertification) {
+      datecertificationEror = "le champ date de certification est obligatiore";
+    }
+    if (!titre) {
+      titreEror = "le champ titre de la certification est obligatiore";
+    }
+    if (codeEror || niveauEror || datecertificationEror || titreEror) {
+      setCodeEror(codeEror);
+      setTitreEror(titreEror);
+      setNiveauEror(niveauEror);
+      setDateCertificationEror(datecertificationEror);
       errorValidacion();
       return;
     }
-    //si pasa la validacion//si todo sale bien
     SuccessValidation();
-
-    //crear el nuevo producto
+    console.log("date", datecertification.slice(0, 10));
+    const dates = {
+      dateCetification: moment(datecertification).format("yyyy-MM-DD"),
+    };
     let certification = {
       code: code,
       titre: titre,
       niveau: niveau,
-      validation: validation,
-      datecertification: datecertification,
-      ressourceid: "ressourceid",
+      datecertification: dates.dateCetification,
+      ressourceid: 1,
     };
+    uploadFile(e);
     addcertification(certification);
-
-    //history.push("/app/certifications/allcertifications");
+    // history.push("/app/certifications/ListeCertifications");
   };
 
   return (
     <>
-      <PageTitle title="Ajouter une certification" />
+      <PageTitle
+        title="Ajouter une certification"
+        path="/app/certifications/ListeCertifications"
+      />
       <form onSubmit={submitNewCertification}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
@@ -83,8 +134,12 @@ export default function AjouterCertification() {
               variant="outlined"
               fullWidth
               valur={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => {
+                setCode(e.target.value);
+                setCodeEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{CodeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -94,31 +149,67 @@ export default function AjouterCertification() {
               variant="outlined"
               fullWidth
               valur={titre}
-              onChange={(e) => setTitre(e.target.value)}
+              onChange={(e) => {
+                setTitre(e.target.value);
+                setTitreEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
 
           <Grid item xs={6}>
             <TextField
-              id="outlined-basic"
-              label="Niveau"
+              className={classes.textField}
+              id="outlined-select-currency"
+              select
+              label="Niveau de maitrise"
               size="small"
-              variant="outlined"
               fullWidth
-              valur={niveau}
-              onChange={(e) => setNiveau(e.target.value)}
-            />
+              name="niveau"
+              variant="outlined"
+              value={niveau}
+              onChange={(e) => {
+                setNiveau(e.target.value);
+                setNiveauEror("");
+              }}
+            >
+              <MenuItem key="0" value="NE">
+                NE - Non Exigé
+              </MenuItem>
+              <MenuItem key="1" value="0">
+                0 - pas de connaissances
+              </MenuItem>
+              <MenuItem key="2" value="1">
+                1 - connaissances théoriques
+              </MenuItem>
+              <MenuItem key="3" value="2">
+                2 - Basique
+              </MenuItem>
+              <MenuItem key="4" value="3">
+                3 - Maitrisé
+              </MenuItem>
+              <MenuItem key="5" value="4">
+                4 - Expert{" "}
+              </MenuItem>
+            </TextField>
+            <div style={{ color: "red" }}>{NiveauEror}</div>
           </Grid>
+          <Grid item xs={6}></Grid>
           <Grid item xs={6}>
+            <label>Image de certification</label>
             <TextField
-              id="outlined-basic"
-              label="Validation"
               size="small"
               variant="outlined"
               fullWidth
-              valur={validation}
-              onChange={(e) => setValidation(e.target.value)}
+              type="file"
+              id="upload-photo"
+              selected={Img}
+              valur={imageCertificat}
+              onChange={(info) => {
+                setFile(info.target.files[0]);
+              }}
             />
+            <div style={{ color: "red" }}>{fileEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de certification</label>
@@ -127,10 +218,15 @@ export default function AjouterCertification() {
               size="small"
               variant="outlined"
               fullWidth
+              format="dd-MM-yyyy"
               type="date"
               valur={datecertification}
-              onChange={(e) => setDatecertification(e.target.value)}
+              onChange={(e) => {
+                setDatecertification(e.target.value);
+                setDateCertificationEror("");
+              }}
             />
+            <div style={{ color: "red" }}>{DateCertificationEror}</div>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -154,7 +250,7 @@ export default function AjouterCertification() {
         </Grid>
       </form>
       {error ? (
-        <Alert severity="error">Tous les champs sont requis!</Alert>
+        <Alert severity="error">La certif n'est pas ajouté!</Alert>
       ) : null}
     </>
   );

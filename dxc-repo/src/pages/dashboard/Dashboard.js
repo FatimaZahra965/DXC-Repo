@@ -11,7 +11,7 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Accueil" />
+     
       <h1>Accueil</h1>
     </>
   );

@@ -6,19 +6,44 @@ import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "@material-ui/lab";
 import { createNewCompetanceAction } from "../../services/Actions/competanceActions";
 import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
 function AjouteCompetance() {
   const classes = useStyles();
   const history = useHistory();
-  const [matriculeRessource, setMatriculeRessource] = useState("");
-  const [nomRessource, setNomRessource] = useState("");
-  const [nomCompetance, setNomCompetance] = useState("");
-  const [typeComp, setTypeComp] = useState("");
-  const [niveau, setNiveau] = useState("");
-  const [evaluationManager, setEvaluationManager] = useState("");
+  const initialCompetanceState = {
+    id: null,
+    matriculeRessource: "",
+    nomRessource: "",
+    nomCompetance: "",
+    typeComp: "",
+    niveau: "",
+    evaluationManager: "",
+
+    matriculeRessourceEror: "",
+    nomRessourceEror: "",
+    nomCompetanceEror: "",
+    typeCompEror: "",
+    niveauEror: "",
+    evaluationManagerEror: "",
+  };
+  const [matriculeRessource, setMatriculeRessource] = useState(initialCompetanceState.matriculeRessource);
+  const [nomRessource, setNomRessource] = useState(initialCompetanceState.nomRessource);
+  const [nomCompetance, setNomCompetance] = useState(initialCompetanceState.nomCompetance);
+  const [typeComp, setTypeComp] = useState(initialCompetanceState.typeComp);
+  const [niveau, setNiveau] = useState(initialCompetanceState.niveau);
+  const [evaluationManager, setEvaluationManager] = useState(initialCompetanceState.evaluationManager);
   
+  // Eror states
+  const [matriculeRessourceEror, setMatriculeRessourceEror] = useState(initialCompetanceState.matriculeRessourceEror);
+  const [nomRessourceEror, setNomRessourceEror] = useState(initialCompetanceState.nomRessourceEror);
+  const [nomCompetanceEror, setNomCompetanceEror] = useState(initialCompetanceState.nomCompetanceEror);
+  const [typeCompEror, setTypeCompEror] = useState(initialCompetanceState.typeCompEror);
+  const [niveauEror, setNiveauEror] = useState(initialCompetanceState.niveauEror);
+  const [evaluationManagerEror, setEvaluationManagerEror] = useState(initialCompetanceState.evaluationManagerEror);
+
   
  // créer un nouveau Competance
   const dispatch = useDispatch();
@@ -26,7 +51,7 @@ function AjouteCompetance() {
     dispatch(createNewCompetanceAction(competance));
   const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
-  const errorValidation = () => dispatch(validacionError());
+  const errorValidacion = () => dispatch(validacionError());
 
   //récupérer les données de l'état
   const error = useSelector((state) => state.error.error);
@@ -35,7 +60,52 @@ function AjouteCompetance() {
   const submitNewCompetance = (e) => {
     e.preventDefault();
 
-    validarForm();
+    let matriculeRessourceEror = "";
+    let nomRessourceEror = "";
+    let nomCompetanceEror = "";
+    let typeCompEror = "";
+    let niveauEror = "";
+    let evaluationManagerEror = "";
+
+
+    if (!matriculeRessource) {
+      matriculeRessourceEror = "le champ de matricule ressource est obligatiore";
+    }
+    if (!nomRessource) {
+      nomRessourceEror = "le champ de nom de ressource  est obligatiore";
+    }
+    if (!nomCompetance) {
+      nomCompetanceEror = "le champ de nom competence est obligatiore";
+    }
+    if (!typeComp) {
+      typeCompEror = "le champ de type competence est obligatiore";
+    }
+    if (!niveau) {
+      niveauEror = "le champ  de nveau est obligatiore";
+    }
+    if (!evaluationManager) {
+      evaluationManagerEror = "le champ de evaluation Manager est obligatiore";
+    }
+
+    if (
+      matriculeRessourceEror ||
+      nomRessourceEror ||
+      nomCompetanceEror ||
+      typeCompEror ||
+      niveauEror ||
+      evaluationManagerEror
+    ) {
+      setMatriculeRessourceEror(matriculeRessourceEror);
+      setNomRessourceEror(nomRessourceEror);
+      setNomCompetanceEror(nomCompetanceEror);
+      setTypeCompEror(typeCompEror);
+      setNiveauEror(niveauEror);
+      setEvaluationManagerEror(evaluationManagerEror);
+
+      errorValidacion();
+      return;
+    }
+
 
     if (
       matriculeRessource.trim() === ""||
@@ -47,7 +117,7 @@ function AjouteCompetance() {
       niveau.trim() === ""
    
     ) {
-      errorValidation();
+      errorValidacion();
       return;
     }
     //si pasa la validacion//si todo sale bien
@@ -97,144 +167,141 @@ function AjouteCompetance() {
   const typesCompetances = [
     {
       label: "Compétences techniques",
-      value: "CompetenceTechn",
+      value: "Compétences techniques",
     },
     {
       label: "Compétences transversales",
-      value: "CompetenceTrans",
+      value: "Compétences transversales",
     },
     {
       label: "Compétences linguistiques",
-      value: "CompetenceLing",
+      value: "Compétences linguistiques",
     },
   
   ];
-  function AnnulerCompetance() {
-    history.push("/app/competances/allCompetances");
-  }
+  const annuler = () => {
+    setNomRessource(initialCompetanceState.nomRessource);
+    setNomCompetance(initialCompetanceState.nomCompetance);
+    setMatriculeRessource(initialCompetanceState.matriculeRessource);
+    setNiveau(initialCompetanceState.niveau);
+    setEvaluationManager(initialCompetanceState.evaluationManager);
+    setTypeComp(initialCompetanceState.typeComp);
+  };
   return (
     <div>
       <div>
         <PageTitle title="Ajouter une nouvelle compétence" path="/app/competances/allCompetances" />
       </div>
-      <form onSubmit={submitNewCompetance}>
-        <Grid container spacing={3}>
-        <Grid item xs={4}  className={classes.label}>
-          <h3>Nom et prénom de ressource </h3>  
-          </Grid>
-      
+      {error ? (
+        <Alert severity="error">La competance n'est pas ajouté!</Alert>
+      ) : null}
+      <form onSubmit={submitNewCompetance} className={classes.Form}>
+        <Grid container spacing={3}className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-nomRessource"
-              // label="Nom et prénom de ressource"
+              label="Nom et prénom de ressource"
               size="small"
               variant="outlined"
               fullWidth
               value={nomRessource}
-              onChange={(e) => setNomRessource(e.target.value)}
+              onChange={(e) =>{ setNomRessource(e.target.value);
+              setNomRessourceEror(initialCompetanceState.nomRessourceEror);}}
             />
-          </Grid>
-        
-
-             <Grid item xs={4}  className={classes.label}>
-          <h3>Matricule de ressource </h3>  
+            <div style={{ color: "red" }}>{nomRessourceEror}</div>
           </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-matriculeRessource"
+              label="Matricule de ressource"
               size="small"
               variant="outlined"
               fullWidth
               value={matriculeRessource}
-              onChange={(e) => setMatriculeRessource(e.target.value)}
-            />
-          </Grid>
-         
-      
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Type de compétence </h3>  
+              onChange={(e) =>{ setMatriculeRessource(e.target.value);
+                setMatriculeRessourceEror(initialCompetanceState.matriculeRessourceEror);}}
+              />
+              <div style={{ color: "red" }}>{matriculeRessourceEror}</div>
+            
           </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-typeComp"
+              label="Type de compétence"
               select
               variant="outlined"
               size="small"
               fullWidth
               value={typeComp}
-              onChange={(e) => {
-                setTypeComp(e.target.value);
-              }}
+              onChange={(e) =>{ setTypeComp(e.target.value);
+                setTypeCompEror(initialCompetanceState.typeCompEror);}}
             >
               {typesCompetances.map((typeCompetance) => (
                 <MenuItem value={typeCompetance.value}>{typeCompetance.label}</MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{typeCompEror}</div>
           </Grid>
           
 
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Intitulé de compétence</h3>  
-          </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-nomCompetance"
+              label="Intitulé de compétence"
               size="small"
               variant="outlined"
               fullWidth
               value={nomCompetance}
-              onChange={(e) => setNomCompetance(e.target.value)}
-            />
+            onChange={(e) =>{ setNomCompetance(e.target.value);
+                setNomCompetanceEror(initialCompetanceState.nomCompetanceEror);}}
+              />
+              <div style={{ color: "red" }}>{nomCompetanceEror}</div>
           </Grid>
-          
 
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Niveau  de maitrise attendu </h3>  
-          </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-niveau"
               select
+              label="Niveau  de maitrise attendu "
               variant="outlined"
               size="small"
               fullWidth
               value={niveau}
-              onChange={(e) => {
-                setNiveau(e.target.value);
-              }}
+           
+               onChange={(e) =>{ setNiveau(e.target.value);
+              setNiveauEror(initialCompetanceState.niveauEror);}}
             >
+           
               {niveaux.map((niveau) => (
                 <MenuItem value={niveau.value}>{niveau.label}</MenuItem>
               ))}
             </TextField>
-          </Grid>
-          
-
-          <Grid item xs={4}  className={classes.label}>
-          <h3>Evaluation de manager</h3>  
+            <div style={{ color: "red" }}>{niveauEror}</div>
           </Grid>
       
           <Grid item xs={6}>
           <TextField
               id="outlined-evaluationManager"
               select
+              label="Evaluation de manager"
               variant="outlined"
               size="small"
               fullWidth
               value={evaluationManager}
-              onChange={(e) => setEvaluationManager(e.target.value)}
-            >
+              onChange={(e) =>{ setEvaluationManager(e.target.value);
+                setEvaluationManagerEror(initialCompetanceState.nevaluationManagerEror);}}
+              >
+             
+          
               {niveaux.map((niveau) => (
                 <MenuItem value={niveau.value}>{niveau.label}</MenuItem>
               ))}
             </TextField>
-         
+            <div style={{ color: "red" }}>{evaluationManagerEror}</div>
           </Grid>
           
         </Grid>
@@ -255,7 +322,9 @@ function AjouteCompetance() {
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
-              onClick={AnnulerCompetance}
+              onClick={() => {
+                annuler();
+              }}
             >
               Annuler
             </Button>

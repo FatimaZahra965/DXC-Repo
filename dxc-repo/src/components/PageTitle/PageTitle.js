@@ -13,18 +13,19 @@ export default function PageTitle(props) {
   return (
     <div className={classes.pageTitleContainer}>
       <Button
+        className={classes.headerIcon}
         onClick={() => {
           history.push(props.path);
         }}
       >
-        <ArrowBackIcon />
+        <i
+          className="pe-7s-angle-left"
+          style={{ color: "#603494", fontSize: "2.4rem" }}
+        />
       </Button>
-
-      <Typography className={classes.typo} variant="h3" size="sm">
-        {props.title}
+      <Typography variant="h3" size="sm">
+        <p>{props.title}</p>
       </Typography>
-
-      {props.button && props.button}
     </div>
   );
 }

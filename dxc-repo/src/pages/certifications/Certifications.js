@@ -1,20 +1,3 @@
-// export default function Certifications() {
-//   var classes = useStyles();
-
-//   useEffect(() => {
-//     //productos cuando el componente este listo
-//     const loedPrestations = () => dispatch(getPrestationsAction());
-//     loedPrestations();
-//   }, []);
-
-//   const loading = useSelector((state) => state.certifications.loading);
-//   const error = useSelector((state) => state.certifications.error);
-//   const certifications = useSelector((state) => state.certifications.certifications);
-
-//   return (
-
-//   );
-// }
 import React, { useEffect } from "react";
 
 //axios
@@ -34,11 +17,19 @@ import TableRow from "@material-ui/core/TableRow";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
+import {
+  getCertificationAction,
+  getCertificationsAction,
+} from "../../services/Actions/certificationsActions";
 
 const columns = [
   { id: "code", label: "Code", minWidth: 100 },
   { id: "titre", label: "Titre", minWidth: 100 },
-  { id: "datecertification", label: "Date Certification", minWidth: 100 },
+  {
+    id: "datecertification",
+    label: "Date Certification",
+    minWidth: 100,
+  },
   { id: "ressourceid", label: "Ressource id", minWidth: 100 },
   { id: "niveau", label: "Niveau", minWidth: 180 },
   { id: "validation", label: "Validation", minWidth: 180 },
@@ -79,7 +70,7 @@ const Certifications = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   useEffect(() => {
-    const loadCertifications = () => dispatch(getPrestationsAction());
+    const loadCertifications = () => dispatch(getCertificationsAction());
     loadCertifications();
   }, []);
 
@@ -98,10 +89,10 @@ const Certifications = () => {
     setPage(0);
   };
 
-  // const EditPrestation = (e) => {
-  //   let path = `/app/certifications/ModiferPrestation/` + 1;
-  //   history.push(path);
-  // };
+  const EditCertif = (e) => {
+    let path = `/app/certifications/ModifierCertification/` + e;
+    history.push(path);
+  };
   // const ViewPrestation = (e) => {
   //   let path = `/app/certifications/AfficherPrestation/` + 1;
   //   history.push(path);
@@ -115,7 +106,7 @@ const Certifications = () => {
       {loading ? <h1>Connecting...</h1> : null}
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <PageTitle title="Certifications"  path="/app/dashboard"/>
+          <PageTitle title="Certifications" path="/app/dashboard" />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -173,7 +164,11 @@ const Certifications = () => {
                           <Button>
                             <VisibilityIcon className={classes.icons} />
                           </Button>
-                          <Button>
+                          <Button
+                            onClick={() => {
+                              EditCertif(row.id);
+                            }}
+                          >
                             <EditIcon className={classes.icons} />
                           </Button>
                         </TableCell>

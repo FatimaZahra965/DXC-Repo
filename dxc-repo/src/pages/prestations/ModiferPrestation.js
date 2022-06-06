@@ -66,7 +66,7 @@ export default function ModiferPrestation({ match }) {
   useEffect(() => {
     console.log("id", id);
     clienteAxios
-      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
+      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         setPrestationdate(resp.data);
@@ -129,21 +129,24 @@ export default function ModiferPrestation({ match }) {
       return;
     }
     SuccessValidation();
-
+    const dates = {
+      dateDebut: moment(prestationdate.dateDebut).format("yyyy-MM-DD"),
+      dateFin: moment(prestationdate.dateFin).format("yyyy-MM-DD"),
+    };
     let prestation = {
       id: id,
       titre: prestationdate.titre,
       etat: prestationdate.etat,
       market: prestationdate.market,
       type: prestationdate.type,
-      dateDebut: prestationdate.dateDebut,
-      dateFin: prestationdate.dateFin,
+      dateDebut: dates.dateDebut,
+      dateFin: dates.dateFin,
     };
     console.log("prestation", prestation);
 
     editPrestation(prestation);
 
-    history.push("/app/prestations/ListePrestations");
+    // history.push("/app/prestations/ListePrestations");
   };
   // const submitEditPrestation = (e) => {
   //   e.preventDefault();
@@ -243,7 +246,10 @@ export default function ModiferPrestation({ match }) {
               fullWidth
               name="titre"
               value={prestationdate.titre}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e);
+                setTitreEror(initialPrestationState.titreEror);
+              }}
             />
             <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
@@ -257,7 +263,10 @@ export default function ModiferPrestation({ match }) {
               fullWidth
               name="etat"
               value={prestationdate.etat}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e);
+                setEtatEror(initialPrestationState.etatEror);
+              }}
             >
               {etats.map((etat) => (
                 <MenuItem key={etat.value} value={etat.value}>

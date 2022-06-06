@@ -15,6 +15,7 @@ import {
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import moment from "moment";
 
 export default function AjouterPrestation() {
   const classes = useStyles();
@@ -117,14 +118,17 @@ export default function AjouterPrestation() {
     }
     SuccessValidation();
 
-    //crear el nuevo producto
+    const dates = {
+      dateDebut: moment(DateDebut).format("yyyy-MM-DD"),
+      dateFin: moment(DateFin).format("yyyy-MM-DD"),
+    };
     let prestation = {
       titre: Titre,
       etat: Etat,
       market: Market,
       type: Type,
-      dateDebut: DateDebut,
-      dateFin: DateFin,
+      dateDebut: dates.dateDebut,
+      dateFin: dates.dateFin,
     };
     addPrestation(prestation);
 
