@@ -21,11 +21,7 @@ function CompetencesLinguistiques(props) {
     console.log("hello hjjjjj");
 
     axios
-<<<<<<< Updated upstream
-      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/allCompetances", {
-=======
       .get("http://localhost:9005/DXC/competances/Competance/type/Compétences linguistiques", {
->>>>>>> Stashed changes
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

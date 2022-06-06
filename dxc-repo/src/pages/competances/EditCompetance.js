@@ -31,20 +31,6 @@ function EditCompetance(props) {
   const getCompetance = () => {
     
     axios
-<<<<<<< Updated upstream
-      .get(
-        `https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/` +
-          props.match.params.id,
-      )
-      .then((resp) => {
-        console.log("hhhhkldmdmmdm", resp.data);
-        setCurrentCompetance(resp.data);
-        console.log("CurrentCompetance", currentCompetance);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-=======
     .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
@@ -54,7 +40,6 @@ function EditCompetance(props) {
       console.log(error);
      
     });
->>>>>>> Stashed changes
   };
 
   const validarForm = () => dispatch(validarFormularioAction());

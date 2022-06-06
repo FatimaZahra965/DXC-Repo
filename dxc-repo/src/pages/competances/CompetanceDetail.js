@@ -10,19 +10,9 @@ function CompetanceDetail(props) {
     console.log("hello hjjjjj");
     
     axios
-<<<<<<< Updated upstream
-      .get(
-        `https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/` +
-          props.match.params.id,
-        {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        },
-      )
-=======
       .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
->>>>>>> Stashed changes
       .then(function (res) {
         // handle success
         console.log("res competance jjsjsksls", res.data);

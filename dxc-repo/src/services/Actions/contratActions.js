@@ -23,7 +23,7 @@ export function createNewContratAction(contrat) {
     dispatch(newContrat());
 
     clienteAxios
-      .post("https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/addContrat", contrat)
+      .post("http://localhost:9003/DXC/contrats/addContrat", contrat)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
@@ -61,7 +61,7 @@ export function getContratsAction() {
 
     // interroger l'API
     clienteAxios
-      .get("https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/allContrats")
+      .get("http://localhost:9003/DXC/contrats/allContrats")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadContratsSuccessful(resp.data));
@@ -93,7 +93,7 @@ export function getContratAction(id) {
 
     //obtenir l'api de  le Contrat
     clienteAxios
-      .get(`https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/Contrat/${id}`)
+      .get(`http://localhost:9003/DXC/contrats/Contrat/${id}`)
       .then((resp) => {
         // console.log("reponse data",resp.data);
         dispatch(getContratEditSuccess(resp.data));
@@ -125,7 +125,7 @@ export function editContratAction(contrat) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/updateContrat`, contrat)
+      .put(`http://localhost:9003/DXC/contrats/updateContrat`, contrat)
       .then((resp) => {
         //console.log(resp);
         dispatch(editContratSuccess(resp.data));

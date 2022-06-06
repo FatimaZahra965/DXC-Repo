@@ -23,7 +23,7 @@ import {
       dispatch(newCompetance());
   
           clienteAxios
-            .post("https://dxcrepo-competance.azurewebsites.net/DXC/competances/addCompetance", competance)
+            .post("http://localhost:9005/DXC/competances/addCompetance", competance)
             .then((res) => {
               console.log(res);
               //si se inserta correctamente
@@ -63,7 +63,7 @@ import {
   
       // interroger l'API
         clienteAxios
-          .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/allCompetances")
+          .get("http://localhost:9005/DXC/competances/allCompetances")
           .then((resp) => {
             //console.log(resp);
             dispatch(downloadCompetancesSuccessful(resp.data));
@@ -95,7 +95,7 @@ import {
   
       //obtenir l'api de  la Competance
       clienteAxios
-        .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/competance/${id}`)
+        .get(`http://localhost:9005/DXC/competances/competance/${id}`)
         .then((resp) => {
           console.log(resp.data);
           dispatch(getCompetanceEditSuccess(resp.data));
@@ -129,7 +129,7 @@ import {
   
       //interrogez l'API et envoyez une méthode put à mettre à jour
       clienteAxios
-        .put(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/updateCompetance`, competance)
+        .put(`http://localhost:9005/DXC/competances/updateCompetance`, competance)
         .then((resp) => {
           //console.log(resp);
           dispatch(editCompetanceSuccess(resp.data));

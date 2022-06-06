@@ -51,7 +51,7 @@ export default function ModiferRessource({ match }) {
 
   useEffect(() => {
     clienteAxios
-      .get(`https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${match.params.id}`)
+      .get(`http://localhost:9000/DXC/ressource/${match.params.id}`)
       .then((resp) => {
         setRessourcedate(resp.data);
       })

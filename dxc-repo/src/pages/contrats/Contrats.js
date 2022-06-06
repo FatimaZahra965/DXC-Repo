@@ -40,28 +40,9 @@ export default function Contrats() {
   const error = useSelector((state) => state.contrats.error);
   const contrats = useSelector((state) => state.contrats.contrats);
   useEffect(() => {
-<<<<<<< Updated upstream
-    console.log("hello hjjjjj");
-
-    axios
-      .get("https://dxcrepo-contrat.azurewebsites.net/contrats/allContrats", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      })
-      .then(function (res) {
-        // handle success
-        console.log("res", res.data);
-        setContrats(res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  });
-=======
     const loadContrats = () => dispatch(getContratsAction());
     loadContrats();
   }, []);
->>>>>>> Stashed changes
   const bull = <span className={classes.bullet}>•</span>;
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

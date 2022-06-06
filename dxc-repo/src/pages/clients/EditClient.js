@@ -25,15 +25,15 @@ function EditClient(props) {
   const dispatch = useDispatch();
   const getClient = () => {
     axios
-      .get(`https://dxcrepo-client.azurewebsites.net/DXC/clients/Client/` + props.match.params.id)
-      .then((resp) => {
-        console.log("hhhhkldmdmmdm", resp.data);
-        setCurrentClient(resp.data);
-        console.log("CurrentClient", currentClient);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .get(`http://localhost:9004/DXC/clients/Client/`+props.match.params.id)
+    .then((resp) => {
+      console.log("hhhhkldmdmmdm",resp.data);
+      setCurrentClient(resp.data);
+      console.log("CurrentClient",currentClient); })
+    .catch((error) => {
+      console.log(error);
+     
+    });
   };
 
   const validarForm = () => dispatch(validarFormularioAction());

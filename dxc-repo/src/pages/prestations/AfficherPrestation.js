@@ -39,7 +39,7 @@ export default function AfficherPrestation({ match }) {
   useEffect(() => {
     console.log("id", id);
     clienteAxios
-      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         setPrestationdate(resp.data);
