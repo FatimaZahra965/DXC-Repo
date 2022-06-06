@@ -23,7 +23,7 @@ export function createNewcertificationAction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(newCERTIFICATION());
     clienteAxios
-      .post("http://localhost:9001/dxc/certifications/addcertif", CERTIFICATION)
+      .post("https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/addcertif", CERTIFICATION)
       .then((res) => {
         console.log(res);
         dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
@@ -67,7 +67,7 @@ export function getCertificationsAction() {
     dispatch(getCertficationStart());
     let id = 1;
     axios
-      .get("http://localhost:9001/dxc/certifications/certificats/" + 1)
+      .get("https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificats/" + 1)
       .then((resp) => {
         resp.data.forEach((element) => {
           element.datecertification = moment(element.datecertification).format(
@@ -103,7 +103,7 @@ export function editcertificationAction(CERTIFICATION) {
 
     clienteAxios
       .put(
-        `http://localhost:9001/dxc/certifications/updatecertif`,
+        `https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/updatecertif`,
         CERTIFICATION,
       )
       .then((resp) => {
@@ -139,7 +139,7 @@ export function getCertificationAction() {
     dispatch(getEditCertificationsAction());
     let id = 1;
     clienteAxios
-      .get(`http://localhost:9001/dxc/certifications/certificats/${id}`)
+      .get(`https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificats/${id}`)
       .then((resp) => {
         console.log("get Certification by id", resp.data);
         dispatch(getCertificationEditExito(resp.data));

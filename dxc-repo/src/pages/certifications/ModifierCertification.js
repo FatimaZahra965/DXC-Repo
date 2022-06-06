@@ -63,7 +63,7 @@ const ModiferCertification = ({ match }) => {
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
       .get(
-        "http://localhost:9001/dxc/certifications/certificat/" + 1 + "/" + id,
+        "https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificat/" + 1 + "/" + id,
       )
       .then(function (response) {
         // handle success
@@ -105,7 +105,7 @@ const ModiferCertification = ({ match }) => {
     data.append("name", file.name);
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
-      .post("http://localhost:9001/files/addFile/1", data)
+      .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
       .then((res) => {
         console.log(res);
       })
