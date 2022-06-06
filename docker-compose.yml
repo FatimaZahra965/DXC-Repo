@@ -6,7 +6,7 @@ services:
     image: dxcrepo.azurecr.io/dxc-repo
     build: ./dxc-repo
     ports:
-      - "3000:3000"
+      - "80:3000"
   certif:
     container_name: microservice-certificat
     image: dxcrepo.azurecr.io/microservice-certificat
