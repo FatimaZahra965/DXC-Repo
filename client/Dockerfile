@@ -7,4 +7,3 @@ FROM openjdk:11
 WORKDIR /app
 COPY --from=builder /tmp/src/target/microservice-client.jar .
 CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "microservice-client.jar"]
-

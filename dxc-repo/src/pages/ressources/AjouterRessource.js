@@ -295,7 +295,6 @@ export default function AjouterRessource() {
   return (
     <>
       <PageTitle title="Ajouter Ressource" path="/app/prestations/ressources" />
-      <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
         {error ? (
           <Alert severity="error">La ressource n'est pas ajouté!</Alert>

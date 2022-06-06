@@ -34,10 +34,6 @@ export default makeStyles((theme) => ({
     margin: "5px",
     width: "500px",
   },
-  hrGlobale: {
-    margin: "5px",
-    backgroundColor: "#603494",
-  },
   hr: {
     margin: "5px",
     width: "500px",

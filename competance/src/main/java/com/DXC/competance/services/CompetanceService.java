@@ -1,4 +1,5 @@
 package com.DXC.competance.services;
+import com.DXC.competance.models.Competance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,9 @@ public class CompetanceService {
     public com.DXC.competance.models.Competance getCompetanceByID(Integer id) {
         return competanceRepository.findById(id).orElse(null);
     }
-    public com.DXC.competance.models.Competance getCompetanceByTypeComp(String typeComp) {
-        return competanceRepository.findByTypeComp(typeComp);
+
+    public List<com.DXC.competance.models.Competance>  getCompetanceByTypeComp(String typeComp) {
+        return competanceRepository.findCompetanceByTypeComp(typeComp);
     }
     public void addCompetance(com.DXC.competance.models.Competance competance) {
         Optional<com.DXC.competance.models.Competance> optionalCompetance = competanceRepository.findCompetanceByNomCompetance(competance.getNomCompetance());

@@ -18,10 +18,7 @@ export default function PageTitle(props) {
           history.push(props.path);
         }}
       >
-        <i
-          className="pe-7s-angle-left"
-          style={{ color: "#603494", fontSize: "2.4rem" }}
-        />
+        <i className="pe-7s-left-arrow" style={{ color: "black" }} />
       </Button>
       <Typography variant="h3" size="sm">
         <p>{props.title}</p>

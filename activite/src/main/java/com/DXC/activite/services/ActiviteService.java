@@ -18,6 +18,7 @@ public class ActiviteService {
         return this.activiteRepository.findAll();
     }
 
+
     public com.DXC.activite.models.Activite getActiviteByID(Integer id) {
         return activiteRepository.findById(id).orElse(null);
     }
@@ -38,6 +39,9 @@ public class ActiviteService {
         existingActivite.setDateDebut(activite.getDateDebut());
         existingActivite.setDateFin(activite.getDateFin());
         existingActivite.setIdPrestation(activite.getIdPrestation());
+        existingActivite.setStatus(activite.getStatus());
+        existingActivite.setDateDebut(activite.getDateDebut());
+        existingActivite.setDateFin(activite.getDateFin());
         return activiteRepository.save(existingActivite);
     }
 }

@@ -27,12 +27,15 @@ public class Activite{
     private Date dateFin;
     private String idPrestation;
 
+    private Date dateDebut;
+    private Date dateFin;
 
 
     public Activite() {
     }
 
     public Activite(int id, String nomActivite,String typeActivite,String description,String categorie,String idPrestation,String status,Date dateDebut,Date dateFin) {
+    public Activite(int id, String nomActivite,String typeActivite,String status,Date dateDebut,Date dateFin) {
         this.id = id;
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
@@ -46,6 +49,11 @@ public class Activite{
     }
 
     public Activite(String nomActivite,String typeActivite,String description,String categorie,String idPrestation,String status,Date dateDebut,Date dateFin) {
+
+       
+    }
+
+    public Activite(String nomActivite,String typeActivite,String status,Date dateDebut,Date dateFin) {
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
         this.status = status;
@@ -127,6 +135,8 @@ public class Activite{
 
 
 
+
+   
 }
 
 

@@ -43,8 +43,6 @@ import Certifications from "../../pages/certifications/Certifications";
 import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
-import AjouterActivite from "../../pages/activites/AjouterActivite";
-import ModifierActivite from "../../pages/activites/ModifierActivité";
 
 function Layout(props) {
   var classes = useStyles();
@@ -178,7 +176,6 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
-            {/* routes activiteés */}
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
               path="/app/activites/AjouteAactivite"

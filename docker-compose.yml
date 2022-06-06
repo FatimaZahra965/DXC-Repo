@@ -3,13 +3,13 @@ services:
   # Frontend Service
   dxc-repo-frontend:
     container_name: dxc-repo
-    image: dxcrepo.azurecr.io/dxc-repo
+    image: dxcrepo.azurecr.io/dxc-repo:latest
     build: ./dxc-repo
     ports:
       - "80:3000"
   certif:
     container_name: microservice-certificat
-    image: dxcrepo.azurecr.io/microservice-certificat
+    image: dxcrepo.azurecr.io/microservice-certificat:latest
     build: ./certificat
     ports:
       - "9001:9001"
@@ -17,7 +17,7 @@ services:
       - db
   ressource:
     container_name: microservice-ressource
-    image: dxcrepo.azurecr.io/microservice-ressource
+    image: dxcrepo.azurecr.io/microservice-ressource:latest
     build: ./ressource
     ports:
       - "9000:9000"
@@ -25,7 +25,7 @@ services:
       - db
   prestation:
     container_name: microservice-prestation
-    image: dxcrepo.azurecr.io/microservice-prestation
+    image: dxcrepo.azurecr.io/microservice-prestation:latest
     build: ./prestation
     ports:
       - "9002:9002"
@@ -33,7 +33,7 @@ services:
       - db
   contrat:
     container_name: microservice-contrat
-    image: dxcrepo.azurecr.io/microservice-contrat
+    image: dxcrepo.azurecr.io/microservice-contrat:latest
     build: ./contrat
     ports:
       - "9003:9003"
@@ -41,7 +41,7 @@ services:
       - db
   client:
     container_name: microservice-client
-    image: dxcrepo.azurecr.io/microservice-client
+    image: dxcrepo.azurecr.io/microservice-client:latest
     build: ./client
     ports:
       - "9004:9004"
@@ -49,7 +49,7 @@ services:
       - db
   competance:
     container_name: microservice-competance
-    image: dxcrepo.azurecr.io/microservice-competance
+    image: dxcrepo.azurecr.io/microservice-competance:latest
     build: ./competance
     ports:
       - "9005:9005"

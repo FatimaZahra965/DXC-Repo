@@ -45,7 +45,11 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+<<<<<<< HEAD
 		 <finalName>microservice-activite</finalName>
+=======
+		<finalName>microservice-activite</finalName>
+>>>>>>> 531bbebbb0f556cd870a99ed71de64af3654b964
 	</build>
 
 </project>

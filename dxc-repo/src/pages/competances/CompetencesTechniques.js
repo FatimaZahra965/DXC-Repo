@@ -21,7 +21,7 @@ function CompetencesTechniques(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Competences techniques", {
+      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Competences/techniques", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

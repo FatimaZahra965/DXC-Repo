@@ -36,6 +36,9 @@ public class ContratService {
         existingContrat.setNomContrat(contrat.getNomContrat());
         existingContrat.setNomClient(contrat.getNomClient());
         existingContrat.setDescription(contrat.getDescription());
+        existingContrat.setType(contrat.getType());
+        existingContrat.setDateDebut(contrat.getDateDebut());
+        existingContrat.setDateFin(contrat.getDateFin());
 
         return contratRepository.save(existingContrat);
     }
