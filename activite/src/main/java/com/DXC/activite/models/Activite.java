@@ -26,11 +26,6 @@ public class Activite{
     private Date dateDebut;
     private Date dateFin;
     private String idPrestation;
-
-    private Date dateDebut;
-    private Date dateFin;
-
-
     public Activite() {
     }
 
