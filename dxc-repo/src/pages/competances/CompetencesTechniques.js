@@ -18,8 +18,6 @@ function CompetencesTechniques(props) {
     let history = useHistory();
     const [competences, setCompetences] = useState([]);
   useEffect(() => {
-    console.log("hello hjjjjj");
-
     axios
       .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Competences/techniques", {
         headers: { "Access-Control-Allow-Origin": "*" },
