@@ -21,7 +21,7 @@ function CompetencesLinguistiques(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9005/DXC/competances/Competance/type/Compétences linguistiques", {
+      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Competences/linguistiques", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {
@@ -47,24 +47,16 @@ function CompetencesLinguistiques(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-            
-            <TableCell>ID de Ressource</TableCell>
-            <TableCell>Nom et prénom </TableCell>
               <TableCell>Compétence</TableCell>
               <TableCell>Niveau de maitrise attendu</TableCell>
               <TableCell>Evaluation de manager</TableCell>
-              <TableCell></TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
           {competences.map((competence) => (
               <TableRow key={competence.nomCompetance}>
-               <TableCell component="th" scope="row">
-                  {competence.matriculeRessource}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {competence.nomRessource}
-                </TableCell>
+               
                 <TableCell component="th" scope="row">
                   {competence.nomCompetance}
                 </TableCell>

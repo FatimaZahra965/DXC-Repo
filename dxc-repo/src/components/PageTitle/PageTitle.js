@@ -20,9 +20,8 @@ export default function PageTitle(props) {
       >
         <i className="pe-7s-left-arrow" style={{ color: "black" }} />
       </Button>
-
-      <Typography className={classes.typo} variant="h3" size="sm">
-        {props.title}
+      <Typography variant="h3" size="sm">
+        <p>{props.title}</p>
       </Typography>
     </div>
   );

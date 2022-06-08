@@ -58,8 +58,6 @@ export default makeStyles(theme => ({
       Button: {
         background: "#741F82",
         color: "#FFFFFF",
-        padding: "6px",
-        marginTop: -"6px",
       },
       ButtonAction: {
         background: "#741F82",
@@ -116,18 +114,5 @@ export default makeStyles(theme => ({
         background: "black",
         color: "white",
       }, 
-      addBtn: {
-        marginLeft: "8px",
-      },
-      Search: {
-        textAlign: "initial",
-        display: "flex",
-        padding: 1,
-        position: "absolute",
-        marginLeft: "8px",
-      },
-      searchTextField: {
-        marginLeft: "8px",
-      },
 
 }));

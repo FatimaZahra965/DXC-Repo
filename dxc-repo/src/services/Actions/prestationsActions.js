@@ -24,7 +24,7 @@ export function createNewPrestationAction(prestation) {
   return (dispatch) => {
     dispatch(newPrestation());
     clienteAxios
-      .post("http://localhost:9002/DXC/prestations/addPrestation", prestation)
+      .post("https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/addPrestation", prestation)
       .then((res) => {
         console.log(res);
         Swal.fire({
@@ -62,7 +62,7 @@ export function getPrestationsAction() {
     dispatch(getPrestationsStart());
 
     axios
-      .get("http://localhost:9002/DXC/prestations/allPrestations")
+      .get("https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/allPrestations")
       .then((resp) => {
         console.log("all prestations ----->", resp.data);
         resp.data.forEach((element) => {
@@ -98,7 +98,7 @@ export function editPrestationAction(prestation) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`http://localhost:9002/DXC/prestations/updatePrestation`, prestation)
+      .put(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/updatePrestation`, prestation)
       .then((resp) => {
         //console.log(resp);
         dispatch(editPrestationSuccess(resp.data));
@@ -135,7 +135,7 @@ export function getPrestationAction(id) {
 
     //obtenir le produit de l'api
     clienteAxios
-      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
+      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getPrestationEditSuccess(resp.data));

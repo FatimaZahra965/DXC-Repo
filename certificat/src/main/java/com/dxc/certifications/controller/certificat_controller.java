@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dxc/certifications")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 
 
 public class certificat_controller {

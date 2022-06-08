@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/DXC")
 @CrossOrigin(origins = "*")
-
 public class ressource_controller {
     @Autowired
     private ressource_service service;

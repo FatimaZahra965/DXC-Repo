@@ -31,7 +31,7 @@ function EditCompetance(props) {
   const getCompetance = () => {
     
     axios
-    .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id)
+    .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
       setCurrentCompetance(resp.data);

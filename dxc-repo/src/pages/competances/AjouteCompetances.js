@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useState }  from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -10,17 +10,9 @@ import { Alert } from "@material-ui/lab";
 import { createNewCompetanceAction } from "../../services/Actions/competanceActions";
 import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
-import { getRessourceAction, getRessourcesAction } from "../../services/Actions/ressourcesActions";
-import axios from "axios";
 function AjouteCompetance() {
   const classes = useStyles();
   const history = useHistory();
-  const loading = useSelector((state) => state.ressources.loading);
-  const ressources = useSelector((state) => state.ressources.ressources);
-  useEffect(() => {
-    const loadRessources = () => dispatch(getRessourcesAction());
-    loadRessources();
-  }, []);
   const initialCompetanceState = {
     id: null,
     matriculeRessource: "",
@@ -187,30 +179,6 @@ function AjouteCompetance() {
     },
   
   ];
-  const GetMatricul = (e) => {
-    console.log("fonction -----GetMatricul")
-    axios
-      .get(
-        `http://localhost:9000/DXC/ressource/${e}`,
-      )
-      .then((resp) => {
-        console.log("matricule", resp.data.matricule);
-        setMatriculeRessource(resp.data.matricule);
-        console.log("MatriculeRessource", matriculeRessource);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  // const GetMatricul= (e)=>{
-  //   // e.preventDefault();
-  //   console.log("get matricul ", e);
-  //   getRessourceAction()
-  // //   .then((resp) => {
-  // //   setMatriculeRessource(resp.data.matricule);
-  // //   console.log("matriculeRessource------->", matriculeRessource);
-  // // })
-  // }
   const annuler = () => {
     setNomRessource(initialCompetanceState.nomRessource);
     setNomCompetance(initialCompetanceState.nomCompetance);
@@ -230,22 +198,16 @@ function AjouteCompetance() {
       <form onSubmit={submitNewCompetance} className={classes.Form}>
         <Grid container spacing={3}className={classes.GridForm}>
           <Grid item xs={6}>
-          <TextField
-           id="outlined-nomRessource"
-           label="Nom et prénom de ressource"
-           select
-           size="small"
-           variant="outlined"
-           fullWidth
-           value={nomRessource}
-           onChange={(e) =>{ setNomRessource(e.target.value);
-            GetMatricul(e.target.value);
-            setNomRessourceEror(initialCompetanceState.nomRessourceEror);}}
-          >
-          {ressources.map((ressource) => (
-            <MenuItem value={ressource.matricule}>{ressource.firstName}{ressource.lastName}</MenuItem>
-          ))}
-          </TextField>
+            <TextField
+              id="outlined-nomRessource"
+              label="Nom et prénom de ressource"
+              size="small"
+              variant="outlined"
+              fullWidth
+              value={nomRessource}
+              onChange={(e) =>{ setNomRessource(e.target.value);
+              setNomRessourceEror(initialCompetanceState.nomRessourceEror);}}
+            />
             <div style={{ color: "red" }}>{nomRessourceEror}</div>
           </Grid>
       

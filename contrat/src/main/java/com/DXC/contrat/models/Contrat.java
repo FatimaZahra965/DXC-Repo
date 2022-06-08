@@ -20,10 +20,10 @@ public class Contrat {
     private String type;
     @Column(name = "dateDebut")
     private Date dateDebut;
+
     @Column(name = "dateFin")
     private Date dateFin;
-    @ManyToOne
-    private Client client;
+
     public Contrat() {
     }
 

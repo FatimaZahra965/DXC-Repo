@@ -17,7 +17,7 @@ export const Tab = ({ title, onClick, active = false }) => {
         li.tab-item {
           list-style-type: none;
           padding: 1rem 2rem;
-          width: 400px;
+         width: 400px;
           background-color: #D2D2D2;
           font-weight: bold;
           text-transform: uppercase;
@@ -72,8 +72,6 @@ export default function Tabs({ children }) {
         .tab-list {
           padding: 2;
           display: flex;
-          margin-left: -23px;
-          margin-right: 20px;
         }
 
         .tab-content {

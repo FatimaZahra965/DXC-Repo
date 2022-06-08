@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "DXC/activites")
 public class ActiviteController {
         private final com.DXC.activite.services.ActiviteService activiteService;
@@ -18,7 +18,6 @@ public class ActiviteController {
         public List<com.DXC.activite.models.Activite> getAllActivites() {
             return this.activiteService.getActivite();
         }
-
 
         @PostMapping(path = "addActivite")
         public void addActivite(@RequestBody com.DXC.activite.models.Activite activite) {

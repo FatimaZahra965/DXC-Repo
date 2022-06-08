@@ -21,30 +21,37 @@ public class Activite{
     private String nomActivite;
     private String typeActivite;
     private String status;
+    private String description;
+    private String categorie;
     private Date dateDebut;
     private Date dateFin;
-
-
+    private String idPrestation;
     public Activite() {
     }
 
-    public Activite(int id, String nomActivite,String typeActivite,String status,Date dateDebut,Date dateFin) {
+    public Activite(int id, String nomActivite,String typeActivite,String description,String categorie,String idPrestation,String status,Date dateDebut,Date dateFin) {
         this.id = id;
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
         this.status = status;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-
+        this.categorie = categorie;
+        this.description = description;
+        this.idPrestation= idPrestation;
        
     }
 
-    public Activite(String nomActivite,String typeActivite,String status,Date dateDebut,Date dateFin) {
+    public Activite(String nomActivite,String typeActivite,String description,String categorie,String idPrestation,String status,Date dateDebut,Date dateFin) {
+
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
         this.status = status;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.categorie = categorie;
+        this.description = description;
+        this.idPrestation= idPrestation;
     }
 
     public int getId() {
@@ -93,6 +100,31 @@ public class Activite{
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+    public String getIdPrestation() {
+        return idPrestation;
+    }
+
+    public void setIdPrestation(String idPrestation) {
+        this.idPrestation = idPrestation;
+    }
+
+
+
 
    
 }

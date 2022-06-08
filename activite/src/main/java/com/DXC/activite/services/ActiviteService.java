@@ -33,6 +33,12 @@ public class ActiviteService {
         com.DXC.activite.models.Activite existingActivite = activiteRepository.findById(activite.getId()).orElse(null);
         existingActivite.setNomActivite(activite.getNomActivite());
         existingActivite.setTypeActivite(activite.getTypeActivite());
+        existingActivite.setDescription(activite.getDescription());
+        existingActivite.setCategorie(activite.getCategorie());
+        existingActivite.setStatus(activite.getStatus());
+        existingActivite.setDateDebut(activite.getDateDebut());
+        existingActivite.setDateFin(activite.getDateFin());
+        existingActivite.setIdPrestation(activite.getIdPrestation());
         existingActivite.setStatus(activite.getStatus());
         existingActivite.setDateDebut(activite.getDateDebut());
         existingActivite.setDateFin(activite.getDateFin());

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 const drawerWidth = 240;
 
 export default makeStyles((theme) => ({
+  btnIcon: {},
   menuButton: {
     marginLeft: 12,
     marginRight: 36,
@@ -23,7 +24,7 @@ export default makeStyles((theme) => ({
     }),
   },
   drawerClose: {
-    transition: theme.transitions.create("#03a9f4", {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),

@@ -1,6 +1,5 @@
 package com.DXC.client.models;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -8,17 +7,20 @@ public class Client {
     // generate the id
     // this is use in when adding a new client
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "client_index",
+            sequenceName = "contrat_index",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "client_index"
+    )
     private int id;
-    @Column(name = "nomClient")
     private String nomClient;
-    @Column(name = "market")
     private String market;
-    @Column(name = "label")
     private String label;
-
-    @OneToMany(mappedBy = "client")
-    private List <Contrat> contrat ;
+    
 
     public Client() {
     }
