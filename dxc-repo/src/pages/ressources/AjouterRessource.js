@@ -310,7 +310,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Prenom}
+              value={Prenom}
               onChange={(e) => {
                 setPrenom(e.target.value);
                 setPrenomEror("");
@@ -325,7 +325,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Nom}
+              value={Nom}
               onChange={(e) => {
                 setNom(e.target.value);
                 setNomEror("");
@@ -340,7 +340,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Matricule}
+              value={Matricule}
               onChange={(e) => {
                 setMatricule(e.target.value);
                 setMatriculeEror("");
@@ -356,7 +356,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Status}
+              value={Status}
               onChange={(e) => {
                 setStatus(e.target.value);
                 setStatusEror("");
@@ -378,7 +378,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Genre}
+              value={Genre}
               onChange={(e) => {
                 setGenre(e.target.value);
                 setGenreEror("");
@@ -398,7 +398,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Profil}
+              value={Profil}
               onChange={(e) => {
                 setProfil(e.target.value);
                 setProfilEror("");
@@ -420,7 +420,7 @@ export default function AjouterRessource() {
               variant="outlined"
               fullWidth
               type="date"
-              valur={DateAmbauche}
+              value={DateAmbauche}
               onChange={(e) => {
                 setDateAmbauche(e.target.value);
                 setDateAmbaucheEror("");
@@ -436,7 +436,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={DateNaissance}
+              value={DateNaissance}
               onChange={(e) => {
                 setDateNaissance(e.target.value);
                 setDateAmbaucheEror("");

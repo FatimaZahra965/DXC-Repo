@@ -47,16 +47,24 @@ function CompetencesLinguistiques(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
+            
+            <TableCell>ID de Ressource</TableCell>
+            <TableCell>Nom et prénom </TableCell>
               <TableCell>Compétence</TableCell>
               <TableCell>Niveau de maitrise attendu</TableCell>
               <TableCell>Evaluation de manager</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
           {competences.map((competence) => (
               <TableRow key={competence.nomCompetance}>
-               
+               <TableCell component="th" scope="row">
+                  {competence.matriculeRessource}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {competence.nomRessource}
+                </TableCell>
                 <TableCell component="th" scope="row">
                   {competence.nomCompetance}
                 </TableCell>

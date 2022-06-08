@@ -4,7 +4,7 @@ import useStyles from "./styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Tabs from "./Tabs";
-import './Competances.css';
+// import './Competances.css';
 
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -15,9 +15,9 @@ import CompetencesLinguistiques from "./CompetencesLinguistiques.js";
 export default function Competances() {
   const classes = useStyles();
   let history = useHistory();
+
   function AjouteCompetance() {
-    let path = `/app/competances/ajouteCompetance`;
-    history.push(path);
+    history.push("/app/competances/ajouteCompetance");
   }
   return (
     <>
@@ -32,8 +32,8 @@ export default function Competances() {
             <AddIcon /> Ajouter Competance
           </Button>
         </div>
-
-        <Tabs >
+        
+        <Tabs>
         <div title="Competences Techniques ">
        <CompetencesTechniques/>
         </div>

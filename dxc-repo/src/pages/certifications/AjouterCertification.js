@@ -120,12 +120,9 @@ export default function AjouterCertification() {
 
   return (
     <>
-      <PageTitle
-        title="Ajouter une certification"
-        path="/app/certifications/ListeCertifications"
-      />
-      <form onSubmit={submitNewCertification}>
-        <Grid container spacing={3}>
+      <PageTitle title="Ajouter une certification" path="/app/certifications/ListeCertifications"/>
+      <form onSubmit={submitNewCertification} className={classes.Form} >
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
   },
   typo: {
     color: "solid #s757575",
-    //borderBottom: "2px solid #757575",
+    borderBottom: "2px solid #757575",
     minWidth: 1300,
     fontSize: "8px",
     margin: "auto",

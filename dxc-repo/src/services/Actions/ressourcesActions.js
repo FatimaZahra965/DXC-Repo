@@ -129,10 +129,9 @@ export const deleteRessourceError = () => ({
 export function getRessourceAction(id) {
   return (dispatch) => {
     dispatch(getEditRessourcesAction());
-
     //obtenir le produit de l'api
     clienteAxios
-      .get(`/route/api/${id}`)
+      .get(`http://localhost:9000/DXC/ressource/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getRessourceEditSuccess(resp.data));

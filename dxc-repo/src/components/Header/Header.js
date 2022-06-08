@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Menu, MenuItem } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import {
   Menu as MenuIcon,
   NotificationsNone as NotificationsIcon,
@@ -22,7 +23,7 @@ import { useUserDispatch, signOut } from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();
-
+  let history = useHistory();
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
@@ -31,7 +32,9 @@ export default function Header(props) {
   // local
   var [mailMenu, setMailMenu] = useState(null);
   var [profileMenu, setProfileMenu] = useState(null);
-
+  function Profil() {
+    history.push("/app/prestations/profil");
+  }
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -160,15 +163,16 @@ export default function Header(props) {
               Post Occupé
             </Typography>
           </div>
+          <Button onClick={Profil}>
           <MenuItem
             className={classNames(
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
+                      <AccountIcon className={classes.profileMenuIcon}  /> Profile
           </MenuItem>
-
+ </Button> 
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

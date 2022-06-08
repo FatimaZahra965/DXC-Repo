@@ -49,6 +49,7 @@ export default makeStyles(theme => ({
         maxWidth: 700,
         border: "3px solid #FFFFFF",
       },
+     
       label: {
         color: "#741F82",
         Stroke: "Solid",
@@ -58,6 +59,8 @@ export default makeStyles(theme => ({
       Button: {
         background: "#741F82",
         color: "#FFFFFF",
+        padding: "6px",
+        marginTop: -"6px",
       },
       ButtonAction: {
         background: "#741F82",
@@ -65,13 +68,18 @@ export default makeStyles(theme => ({
         Height: 5,
       },
      
-     
+      addBtn: {
+        marginLeft: "8px",
+      },
       Search: {
         textAlign: "initial",
         display: "flex",
-        padding: 10,
+        padding: 1,
         position: "absolute",
-        marginLeft: "75px",
+        marginLeft: "8px",
+      },
+      searchTextField: {
+        marginLeft: "8px",
       },
       Visibility: {
         textAlign: "end",
@@ -86,6 +94,7 @@ export default makeStyles(theme => ({
       title: {
         fontSize: "9",
       },
+      
       btnAjouter: {
         margin: "5px",
         float: "right",

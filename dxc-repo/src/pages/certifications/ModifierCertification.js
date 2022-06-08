@@ -184,9 +184,8 @@ const ModiferCertification = ({ match }) => {
         title="Modifer une certification"
         path="/app/certifications/ListeCertifications"
       />
-
-      <form onSubmit={submitEditcertification}>
-        <Grid container spacing={3}>
+       <form onSubmit={submitEditcertification} className={classes.Form} >
+        <Grid container spacing={3} className={classes.GridForm}></Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

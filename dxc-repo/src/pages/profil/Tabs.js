@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Button } from "@material-ui/core";
 
 export const Tab = ({ title, onClick, active = false }) => {
   const onClickTab = e => {
@@ -8,31 +9,33 @@ export const Tab = ({ title, onClick, active = false }) => {
   };
 
   return (
-    <>
-      <li className={`${active ? "active" : ""} tab-item`} onClick={onClickTab}>
-        {title}
-      </li>
+    <div className="tab">
+      <Button className={`${active ? "active" : ""} tab-item`} variant="contained" onClick={onClickTab} > {title} </Button>
+
 
       <style jsx="true">{`
-        li.tab-item {
-          list-style-type: none;
-          padding: 1rem 2rem;
-          width: 400px;
-          background-color: #D2D2D2;
-          font-weight: bold;
+        Button.tab-item {
+          width: 150px;
+          height: 30;
+          float: "right";
+          background-color: #b100ff;
           text-transform: uppercase;
-          letter-spacing: 0.1rem;
           cursor: pointer;
+          padding: 1;
+          margin-right: 20px;
           transition: all 0.5s ease;
         }
+        tab {
+            text-align:"end";
+          }
 
-        li.tab-item:hover,
-        li.tab-item.active {
+        Button.tab-item:hover,
+        Button.tab-item.active {
             
-          background-color: #FFFDFD;
+          background-color: #FFFFFF;
         }
       `}</style>
-    </>
+    </div>
   );
 };
 
@@ -70,10 +73,9 @@ export default function Tabs({ children }) {
 
       <style jsx="true">{`
         .tab-list {
-          padding: 2;
+          padding: 1;
           display: flex;
-          margin-left: -23px;
-          margin-right: 20px;
+          margin-left: 600px;
         }
 
         .tab-content {

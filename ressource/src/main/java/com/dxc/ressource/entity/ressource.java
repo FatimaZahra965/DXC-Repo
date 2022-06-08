@@ -19,19 +19,7 @@ import java.util.*;
 
 public class ressource {
     @Id
-<<<<<<< HEAD
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @SequenceGenerator(
-            name = "ressource_index",
-            sequenceName = "ressource_index",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ressource_index"
-    )
-=======
->>>>>>> 9d2538c26c0e5f3795fb174503ae5cf25eaa0f63
+
     private String matricule;
     private String status;
     private String firstname;
