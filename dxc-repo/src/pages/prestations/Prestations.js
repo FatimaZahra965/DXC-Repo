@@ -73,10 +73,15 @@ const Prestations = () => {
     let path = `/app/prestations/ModiferPrestation/` + e;
     history.push(path);
   };
-  const ViewPrestation = (e) => {
-    let path = `/app/prestations/AficherPrestation/` + e;
+  
+  const ViewPrestation = () => {
+    let path = `/app/prestations/PrestationGlobal`;
     history.push(path);
   };
+  // const ViewPrestation = (e) => {
+  //   let path = `/app/prestations/AficherPrestation/` + e;
+  //   history.push(path);
+  // };
 
   const Recherche = (e) => {
     var lowerCase = e.target.value.toLowerCase();

@@ -18,6 +18,7 @@ function ContratDetail(props) {
       .then(function (res) {
         // handle success
         console.log("res", res.data);
+     
         setContrat(res.data);
       })
       .catch(function (error) {

@@ -282,8 +282,8 @@ export default function ModiferRessource({ match }) {
   return (
     <>
       <PageTitle title="Modifer Ressource" path="/app/prestations/ressources" />
-      <form onSubmit={submitEditRessource}>
-        <Grid container spacing={3}>
+      <form onSubmit={submitEditRessource} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

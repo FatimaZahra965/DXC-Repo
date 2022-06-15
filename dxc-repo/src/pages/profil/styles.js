@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
   
     
   },
+  PhotoProfil: {
+    maxHeight: "200px",
+  },
  
 
  

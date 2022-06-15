@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { Button, MenuItem } from "@material-ui/core";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { createNewContratAction } from "../../services/Actions/contratActions";
 import { getClientsAction } from "../../services/Actions/clientActions";
@@ -34,12 +35,13 @@ function AjouteContrat() {
     dateDebutEror:"",
     dateFinEror:"",
    };
+   
   const [nomContrat, setNomContrat] = useState(initialContratState.nomContrat);
   const [nomClient, setNomClient] = useState(initialContratState.nomClient);
   const [type, setType] = useState(initialContratState.type);
   const [description, setDescription] = useState(initialContratState.description);
   const [dateDebut, setDateDebut] =useState(initialContratState.dateDebut);
-  const [dateFin, setDateFin] = useState(initialContratState.dateFin);
+  const [dateFin, setDateFin] = useState(initialContratState);
 
   // Eror states
   const [nomContratEror, setNomContratEror] = useState(initialContratState.nomContratEror);
@@ -62,7 +64,6 @@ function AjouteContrat() {
   // addnew contrat
   const submitNewContrat = (e) => {
     e.preventDefault();
-
     validarForm();
     let nomContratEror = "";
     let nomClientEror = "";
@@ -135,6 +136,7 @@ function AjouteContrat() {
       dateFin :dateFin,
       
     };
+    
     addContrat(contrat);
     history.push("/app/prestations/Contrats");
   };
@@ -214,7 +216,7 @@ function AjouteContrat() {
             setNomClientEror(initialContratState.nomClientEror);}}
           >
           {clients.map((client) => (
-            <MenuItem value={client.nomClient}>{client.nomClient}</MenuItem>
+            <MenuItem value={client.id}>{client.nomClient}</MenuItem>
           ))}
           </TextField>
           <div style={{ color: "red" }}>{nomClientEror}</div>

@@ -234,8 +234,8 @@ export default function AjouterActivite() {
           <Alert severity="error">L'activité n'est pas ajouté!</Alert>
         ) : null}
       </Grid>
-      <form onSubmit={submitNewActivite}>
-        <Grid container spacing={3}>
+      <form onSubmit={submitNewActivite} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

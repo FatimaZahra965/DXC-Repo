@@ -9,6 +9,18 @@ export default makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
     marginTop: theme.spacing(1),
   },
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+    
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
   text: {
     marginBottom: theme.spacing(2),
   },

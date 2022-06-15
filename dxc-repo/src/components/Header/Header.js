@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Menu, MenuItem } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import {
   Menu as MenuIcon,
   NotificationsNone as NotificationsIcon,
@@ -22,7 +23,7 @@ import { useUserDispatch, signOut } from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();
-
+  let history = useHistory();
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
@@ -31,7 +32,9 @@ export default function Header(props) {
   // local
   var [mailMenu, setMailMenu] = useState(null);
   var [profileMenu, setProfileMenu] = useState(null);
-
+  function Profil() {
+    history.push("/app/prestations/profil");
+  }
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -45,13 +48,18 @@ export default function Header(props) {
         >
           {layoutState.isSidebarOpened ? (
             <i
-              className="pe-7s-angle-left"
-              style={{ color: "#603494", fontSize: "2.8rem" }}
-            />
+              className="pe-7s-left-arrow"
+              classes={{ root: classes.headerIcon }}
+              style={{ color: "black" }}
+            ></i>
           ) : (
-            <i
-              className="pe-7s-menu"
-              style={{ color: "#603494", fontSize: "2.0rem" }}
+            <MenuIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse,
+                ),
+              }}
             />
           )}
         </IconButton>
@@ -80,6 +88,10 @@ export default function Header(props) {
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
           ></i>
+          {/* <NotificationsIcon
+            classes={{ root: classes.headerIcon }}
+            style={{ color: "black" }}
+          /> */}
         </IconButton>
         <IconButton
           aria-haspopup="true"
@@ -146,20 +158,20 @@ export default function Header(props) {
               className={classes.profileMenuLink}
               component="a"
               color="primary"
-              href="https://flatlogic.com"
             >
               Post Occupé
             </Typography>
           </div>
+          <Button onClick={Profil}>
           <MenuItem
             className={classNames(
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
+                      <AccountIcon className={classes.profileMenuIcon}  /> Profile
           </MenuItem>
-
+ </Button> 
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

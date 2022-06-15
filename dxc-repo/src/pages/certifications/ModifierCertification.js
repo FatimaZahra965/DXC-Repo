@@ -63,7 +63,7 @@ const ModiferCertification = ({ match }) => {
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
       .get(
-        "https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificat/" + 1 + "/" + id,
+        "http://localhost:9001/DXC/certifications/certificat/" + 1 + "/" + id,
       )
       .then(function (response) {
         // handle success
@@ -105,7 +105,7 @@ const ModiferCertification = ({ match }) => {
     data.append("name", file.name);
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
-      .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
+      .post("http://localhost:9001/DXC/files/addFile/1", data)
       .then((res) => {
         console.log(res);
       })
@@ -184,9 +184,8 @@ const ModiferCertification = ({ match }) => {
         title="Modifer une certification"
         path="/app/certifications/ListeCertifications"
       />
-
-      <form onSubmit={submitEditcertification}>
-        <Grid container spacing={3}>
+      <form onSubmit={submitEditcertification} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

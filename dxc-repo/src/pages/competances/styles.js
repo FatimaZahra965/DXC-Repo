@@ -19,6 +19,24 @@ export default makeStyles(theme => ({
    
 
   },
+  addBtn: {
+    marginLeft: "8px",
+  },
+  Search: {
+    textAlign: "initial",
+    display: "flex",
+    padding: 1,
+    position: "absolute",
+    marginLeft: "8px",
+  },
+  searchTextField: {
+    marginLeft: "8px",
+  },
+  // Tabs: {
+  //   marginLeft: "-50px",
+  //   margiRright: "18px",
+  // },
+ 
   GridForm: {
     marginLeft: "70px",
     margin: "20px 0px 20px 0px",
@@ -45,6 +63,8 @@ export default makeStyles(theme => ({
   Button: {
     background: "#741F82",
     color: "#FFFFFF",
+    padding: "6px",
+    marginTop: -"6px",
   },
   
   text: {
@@ -114,6 +134,9 @@ export default makeStyles(theme => ({
   },
   title: {
     fontSize: "9",
+  },
+  table: {
+    textAlign: "centre",
   },
   Bajoute: {
     textAlign: "end",

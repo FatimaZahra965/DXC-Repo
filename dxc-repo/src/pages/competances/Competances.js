@@ -22,6 +22,7 @@ export default function Competances() {
   return (
     <>
       <PageTitle title="Competances"  path="/app/dashboard"/>
+      <br/>
       <div className={classes.Bajoute}>
           <Button
             variant="contained"

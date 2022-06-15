@@ -19,7 +19,7 @@ function CompetencesTechniques(props) {
     const [competences, setCompetences] = useState([]);
   useEffect(() => {
     axios
-      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Competences/techniques", {
+      .get("http://localhost:9005/DXC/competances/Competance/type/techniques", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

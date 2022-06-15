@@ -27,7 +27,7 @@ export function createNewRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("https://dxcrepo-ressource.azurewebsites.net/DXC/addRessource", ressource)
+      .post("http://localhost:9000/DXC/addRessource", ressource)
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
@@ -63,7 +63,7 @@ export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
     axios
-      .get("https://dxcrepo-ressource.azurewebsites.net/DXC/ressource")
+      .get("http://localhost:9000/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
         resp.data.forEach((element) => {
@@ -175,7 +175,7 @@ export function editRessourceAction(ressource) {
       outils: ressource.formsOutils,
     };
     clienteAxios
-      .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)
+      .put(`http://localhost:9000/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));

@@ -29,7 +29,7 @@ import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
 import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
 import Prestations from "../../pages/prestations/Prestations";
 import AjouteContrat from "../../pages/contrats/AjouteContrat";
-import AjouteCompetance from "../../pages/competances/AjouteCompetances";
+import AjouteCompetance from "../../pages/competances/AjouteCompetances"
 import Contrats from "../../pages/contrats/Contrats";
 import EditContrat from "../../pages/contrats/EditContrat";
 import ContratDetail from "../../pages/contrats/ContratDetail";
@@ -43,8 +43,8 @@ import Certifications from "../../pages/certifications/Certifications";
 import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
-import AjouterActivite from "../../pages/activites/AjouterActivite";
-import ModifierActivite from "../../pages/activites/ModifierActivité";
+import Profil from "../../pages/profil/Profil";
+import PrestationGlobal from "../../pages/details/PrestationGlobal";
 
 function Layout(props) {
   var classes = useStyles();
@@ -66,11 +66,10 @@ function Layout(props) {
           <Switch>
             {/*  route dashboard  */}
             <Route path="/app/dashboard" component={Dashboard} />
+            <Route path="/app/prestations/PrestationGlobal" component={PrestationGlobal} />
+            <Route path="/app/prestations/profil" component={Profil} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route
-              path="/app/competances/allCompetances"
-              component={Competances}
-            />
+            <Route path="/app/competances/allCompetances" component={Competances} />
             <Route
               path="/app/competances/ajouteCompetance"
               component={AjouteCompetance}
@@ -178,15 +177,8 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
+
             <Route path="/app/prestations/activites" component={Activites} />
-            <Route
-              path="/app/activites/AjouteAactivite"
-              component={AjouterActivite}
-            />
-            <Route
-              path="/app/activites/ModifierAactivite/:id"
-              component={ModifierActivite}
-            />
             <Route
               path="/app/prestations/technologies"
               component={Technologies}
@@ -229,6 +221,19 @@ function Layout(props) {
             <Route path="/app/notifications" component={Notifications} />
             <Route path="/app/capabilites" component={Capabilites} />
           </Switch>
+          <Box
+            mt={5}
+            width={"100%"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent="space-between"
+          >
+            <div>
+              <p>
+                {/* © Copyright 2022 DXC Technology Company. All rights reserved */}
+              </p>
+            </div>
+          </Box>
         </div>
       </>
     </div>

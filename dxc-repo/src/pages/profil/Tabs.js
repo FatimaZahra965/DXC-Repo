@@ -11,8 +11,6 @@ export const Tab = ({ title, onClick, active = false }) => {
   return (
     <div className="tab">
       <Button className={`${active ? "active" : ""} tab-item`} variant="contained" onClick={onClickTab} > {title} </Button>
-
-
       <style jsx="true">{`
         Button.tab-item {
           width: 150px;
@@ -21,8 +19,6 @@ export const Tab = ({ title, onClick, active = false }) => {
           background-color: #b100ff;
           text-transform: uppercase;
           cursor: pointer;
-          padding: 1;
-          margin-right: 20px;
           transition: all 0.5s ease;
         }
         tab {
@@ -73,7 +69,6 @@ export default function Tabs({ children }) {
 
       <style jsx="true">{`
         .tab-list {
-          padding: 1;
           display: flex;
           margin-left: 600px;
         }

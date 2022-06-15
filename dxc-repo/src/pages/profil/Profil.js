@@ -3,19 +3,16 @@ import React from 'react';
 import Tabs from './Tabs';
 import useStyles from "./styles";
 import CertificationProfil from './CertificationProfil';
-import CompetencesProfil from './CompetencesProfil';
+import CompetencesProfil from './Competanceprofil/CompetencesProfil';
 import InformationsProfil from './InformationsProfil';
-import PageTitle from '../../components/PageTitle/PageTitle';
+import TechnoMethodes from './TchnoMethodesProfil/TechnoMethodes';
+import { CardTitle } from 'reactstrap';
 function Profil(props) {
     const classes = useStyles();
     return (
-        <div>
-             <PageTitle title="Informations sur le profil"  path="/app/dashboard"/>
-        <div >
         <Grid container spacing={3}>
-            test
-        </Grid>
         <Grid className={classes.Tabs}>
+       
              <Tabs >
         <div title="Profil" className={classes.title}>
        <InformationsProfil/>
@@ -26,10 +23,12 @@ function Profil(props) {
         <div title="Certification" className={classes.title}>
         <CertificationProfil/>
         </div>
+        <div title="Autres" className={classes.title}>
+        <TechnoMethodes/>
+        </div>
       </Tabs>
         </Grid>
-        </div> 
-        </div> 
+        </Grid>
     );
 }
 

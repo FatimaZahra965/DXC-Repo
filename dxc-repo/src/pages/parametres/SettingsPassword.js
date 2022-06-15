@@ -30,6 +30,7 @@ function SettingsPassword(props) {
             fullWidth
             label="Password"
             margin="normal"
+            size="small"
             name="password"
             onChange={handleChange}
             type="password"
@@ -40,6 +41,7 @@ function SettingsPassword(props) {
             fullWidth
             label="New Password"
             margin="normal"
+            size="small"
             name="newPassword"
             onChange={handleChange}
             type="password"
@@ -50,6 +52,7 @@ function SettingsPassword(props) {
             fullWidth
             label="Confirm password"
             margin="normal"
+            size="small"
             name="confirm"
             onChange={handleChange}
             type="password"
