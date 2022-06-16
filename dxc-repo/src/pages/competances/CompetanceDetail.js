@@ -10,7 +10,7 @@ function CompetanceDetail(props) {
     console.log("hello hjjjjj");
     
     axios
-      .get(`http://localhost:9005/DXC/competances/Competance/`+props.match.params.id, {
+      .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

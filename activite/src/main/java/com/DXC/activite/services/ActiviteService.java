@@ -34,6 +34,13 @@ public class ActiviteService {
         existingActivite.setTypeActivite(activite.getTypeActivite());
         existingActivite.setDescription(activite.getDescription());
         existingActivite.setCategorie(activite.getCategorie());
+<<<<<<< HEAD
+=======
+        existingActivite.setStatus(activite.getStatus());
+        existingActivite.setDateDebut(activite.getDateDebut());
+        existingActivite.setDateFin(activite.getDateFin());
+        existingActivite.setIdPrestation(activite.getIdPrestation());
+>>>>>>> e270f320e3b3e24ee000c8ae2c148372b9ee49d1
         existingActivite.setStatus(activite.getStatus());
         existingActivite.setDateDebut(activite.getDateDebut());
         existingActivite.setDateFin(activite.getDateFin());

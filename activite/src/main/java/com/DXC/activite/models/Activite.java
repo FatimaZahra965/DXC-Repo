@@ -26,9 +26,12 @@ public class Activite{
     private Date dateDebut;
     private Date dateFin;
     private String idPrestation;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> e270f320e3b3e24ee000c8ae2c148372b9ee49d1
     public Activite() {
     }
 
@@ -46,6 +49,10 @@ public class Activite{
     }
 
     public Activite(String nomActivite,String typeActivite,String description,String categorie,String idPrestation,String status,Date dateDebut,Date dateFin) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> e270f320e3b3e24ee000c8ae2c148372b9ee49d1
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
         this.status = status;
@@ -126,6 +133,10 @@ public class Activite{
     }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e270f320e3b3e24ee000c8ae2c148372b9ee49d1
 
 }
 

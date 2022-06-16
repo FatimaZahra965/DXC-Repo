@@ -10,7 +10,7 @@ function ContratDetail(props) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:9003/DXC/contrats/Contrat/` + props.match.params.id,
+        `https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/Contrat/` + props.match.params.id,
         {
           headers: { "Access-Control-Allow-Origin": "*" },
         },

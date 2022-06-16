@@ -178,7 +178,6 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
-            {/* routes activiteés */}
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
               path="/app/activites/AjouteAactivite"

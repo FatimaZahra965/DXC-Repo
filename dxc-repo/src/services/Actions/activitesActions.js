@@ -24,7 +24,7 @@ export function createNewActiviteAction(activite) {
   return (dispatch) => {
     dispatch(newActivite());
     clienteAxios
-      .post("http://localhost:9006/DXC/activites/addActivite", activite)
+      .post("https://dxcrepo-activite.azurewebsites.net/DXC/activites/addActivite", activite)
       .then((res) => {
         console.log(res);
         Swal.fire({
@@ -61,7 +61,7 @@ export function getActivitesAction() {
   return (dispatch) => {
     dispatch(getActivitesStart());
     axios
-      .get("http://localhost:9006/DXC/activites/allActivites")
+      .get("https://dxcrepo-activite.azurewebsites.net/DXC/activites/allActivites")
       .then((resp) => {
         console.log("activites ----->", resp.data);
         resp.data.forEach((element) => {
@@ -72,7 +72,7 @@ export function getActivitesAction() {
           let id = resp.data[i].idPrestation;
           console.log("id/*//*/***************>>>>>>>", id);
           axios
-            .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
+            .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
             .then((res) => {
               resp.data.forEach((element) => {
                 element.idPrestation = res.data.titre;
@@ -109,7 +109,7 @@ export function editActiviteAction(activite) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`http://localhost:9006/DXC/activites/updateActivite`, activite)
+      .put(`https://dxcrepo-activite.azurewebsites.net/DXC/activites/updateActivite`, activite)
       .then((resp) => {
         //console.log(resp);
         dispatch(editActiviteSuccess(resp.data));
@@ -146,7 +146,7 @@ export function getActiviteAction(id) {
 
     //obtenir le produit de l'api
     clienteAxios
-      .get(`http://localhost:9006/DXC/activites/Prestation/${id}`)
+      .get(`https://dxcrepo-activite.azurewebsites.net/DXC/activites/Prestation/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getActiviteEditSuccess(resp.data));
