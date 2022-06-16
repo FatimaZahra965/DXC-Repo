@@ -41,7 +41,6 @@ release_client:
     - docker push $DOCKER_REPOSITORY/microservice-client:latest
   only:
     - main
-  
 release_contrat:
   stage: build contrat
   script:

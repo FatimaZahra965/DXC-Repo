@@ -105,9 +105,37 @@ import {
         });
     };
   }
+  export function getCompetanceRessourceAction(matriculeRessource) {
+    return (dispatch) => {
+      dispatch(getEditCompetanceRessourceAction());
+  
+      //obtenir l'api de  la Competance
+      clienteAxios
+        .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/CompetanceRessource/${matriculeRessource}`)
+        .then((resp) => {
+          console.log(resp.data);
+          dispatch(getCompetanceRessourceEditSuccess(resp.data));
+        })
+        .catch((error) => {
+          console.log(error);
+          dispatch(getCompetanceRessourceEditError());
+        });
+    };
+  }
 
   
+  export const getEditCompetanceRessourceAction = (matriculeRessource) => ({
+    type: GET_COMPETANCE_EDIT,
+  });
   
+  export const getCompetanceRessourceEditSuccess = (competance) => ({
+    type: COMPETANCE_EDIT_SUCCESS,
+    payload: competance,
+  });
+  
+  export const getCompetanceRessourceEditError = () => ({
+    type: COMPETANCE_EDIT_ERROR,
+  });
   export const getEditCompetanceAction = (id) => ({
     type: GET_COMPETANCE_EDIT,
   });

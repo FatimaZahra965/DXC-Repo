@@ -4,19 +4,20 @@ import { Row, Col, Card} from "reactstrap";
 import CompetenceLing from "./CompetenceLing";
 import CompetenceTrans from "./CompetenceTrans";
 import { useDispatch } from "react-redux";
+import { getCompetanceRessourceAction } from '../../../services/Actions/competanceActions';
 import clienteAxios from "../../../config/axios";
 function CompetencesProfil(match) {
   const { matriculeRessource } = match.params;
   const dispatch=useDispatch();
-  const getCompetanceAction = (value) => dispatch(getCompetanceAction(value));
+  const getCompetanceRessourceAction = (value) => dispatch(getCompetanceRessourceAction(value));
 
 
   useEffect(() => {
     clienteAxios
-      .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/${matriculeRessource}`)
+      .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/CompetanceRessource/${matriculeRessource}`)
       .then((resp) => {
         console.log("Competence by matriculeRessource",resp.data);
-        getCompetanceAction(resp.data)
+        getCompetanceRessourceAction(resp.data)
       })
       .catch((error) => {
         console.log(error);
@@ -27,13 +28,13 @@ function CompetencesProfil(match) {
       <Card>
       <Row>
       <Col lg="4">
-        <CompetenceTech   props={getCompetanceAction}/>
+        <CompetenceTech   props={getCompetanceRessourceAction}/>
       </Col>
       <Col lg="4">
-        <CompetenceLing  props={getCompetanceAction}/>
+        <CompetenceLing  props={getCompetanceRessourceAction}/>
       </Col>
       <Col lg="4">
-        <CompetenceTrans props={getCompetanceAction}/>
+        <CompetenceTrans props={getCompetanceRessourceAction}/>
       </Col>
       </Row>
       
