@@ -14,6 +14,7 @@ import {
   BEGIN_RESSOURCE_EDIT,
   EDITION_RESSOURCE_SUCCESS,
   EDIT_RESSOURCE_ERROR,
+  SHOW_ID_RESSOURCE
 } from "../types";
 
 //chaque réducteur a son propre état
@@ -22,10 +23,16 @@ const initialState = {
   error: null,
   loading: false,
   ressource: {},
+
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case SHOW_ID_RESSOURCE:
+      return {
+        ...state,
+        ressource: action.payload,
+      };
     case ADD_RESSOURCE:
       return {
         ...state,

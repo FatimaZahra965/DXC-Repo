@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, CardTitle, Card} from "reactstrap";
+import React from "react";
+import { Row, Col, Card} from "reactstrap";
 import Technologies from "./Technologies";
 import Outils from "./Outils";
 import Methodes from "./Methodes";
@@ -8,7 +8,6 @@ function TechnoMethodes(props) {
     return (
         <div>
       <Card>
-     
       <Row>
       <Col lg="4">
         <Technologies/>
@@ -19,8 +18,7 @@ function TechnoMethodes(props) {
       <Col lg="4">
         <Methodes/>
       </Col>
-      </Row>
-      
+      </Row>    
       </Card>
       </div>
     );

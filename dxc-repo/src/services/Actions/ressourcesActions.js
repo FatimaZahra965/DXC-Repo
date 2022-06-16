@@ -14,6 +14,7 @@ import {
   BEGIN_RESSOURCE_EDIT,
   EDITION_RESSOURCE_SUCCESS,
   EDIT_RESSOURCE_ERROR,
+  SHOW_ID_RESSOURCE
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -27,11 +28,7 @@ export function createNewRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(newRessource());
     axios
-<<<<<<< HEAD
       .post("https://dxcrepo-ressource.azurewebsites.net/DXC/addRessource", ressource)
-=======
-      .post("http://localhost:9000/DXC/addRessource", ressource)
->>>>>>> abdelhadi
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
@@ -115,6 +112,16 @@ export function deleteRessourceAction(id) {
     //   });
   };
 }
+export function showIdRessources(value) {
+  return (dispatch) => {
+    console.log("show ressource action ffffffffffffffffffffffff ", value);
+    dispatch(showIdRessource(value));
+  };
+}
+export const showIdRessource = (value) => ({
+  type: SHOW_ID_RESSOURCE,
+  payload: value,
+});
 
 export const getRessourceDelete = () => ({
   type: GET_RESSOURCE_REMOVE,
@@ -179,11 +186,7 @@ export function editRessourceAction(ressource) {
       outils: ressource.formsOutils,
     };
     clienteAxios
-<<<<<<< HEAD
       .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)
-=======
-      .put(`http://localhost:9000/DXC/update`, ressource_date)
->>>>>>> abdelhadi
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));

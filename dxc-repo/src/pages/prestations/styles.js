@@ -41,6 +41,7 @@ export default makeStyles((theme) => ({
   },
   icons: {
     margin: "00px",
+    color: "#603494",
   },
   addBtn: {
     display: "flex",
@@ -69,5 +70,33 @@ export default makeStyles((theme) => ({
   },
   bText: {
     padding: "10px",
+  },
+  // style modal
+  paper: {
+    position: "absolute",
+    width: 600,
+    height: 200,
+    backgroundColor: theme.palette.background.paper,
+    border: "1px solid purple",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  bntAffecteActv1: {
+    float: "right",
+  },
+  bntAffecteActv: {
+    marginTop: "13px",
+  },
+  textAfct: {
+    color: "#603494",
+    margin: "4px",
+  },
+  iconUser: {
+    float: "left",
+    width: "1.5em",
+  },
+  cardRessource: {
+    margin: "5px",
+    backgroundColor: "#603494",
   },
 }));

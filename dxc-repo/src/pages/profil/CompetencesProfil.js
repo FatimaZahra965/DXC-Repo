@@ -16,11 +16,15 @@ function CompetencesProfil(props) {
     var classes = useStyles();
     let history = useHistory();
     const [competences, setCompetences] = useState([]);
+    const RessourcesToShow = useSelector(
+      (state) => state.ressources.ressource,
+    );
+
   useEffect(() => {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9005/DXC/competances/Competance/type/Compétences techniques", {
+      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Compétences techniques", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

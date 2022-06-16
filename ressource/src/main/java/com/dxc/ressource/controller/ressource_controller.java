@@ -13,11 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/DXC")
-<<<<<<< HEAD
 @CrossOrigin(origins = "*")
-=======
-@CrossOrigin(origins = "http://localhost:3000")
->>>>>>> abdelhadi
 public class ressource_controller {
     @Autowired
     private ressource_service service;
@@ -35,16 +31,12 @@ public class ressource_controller {
         return  service.afficher_ressource();
     }
 
-<<<<<<< HEAD
-    @GetMapping("/ressource/{matricule}")
-    public ressource afficherbyid(@PathVariable String matricule){
-        return service.afficherbyid(matricule);
+
+    @GetMapping("/ressource/act/{id}")
+    public List<ressource> afficher_ressource_acct(@PathVariable Integer id){
+        return  service.afficher_ressource_acct(id);
     }
 
-    @DeleteMapping("/delete/{matricule}")
-    public boolean suppression(@PathVariable String matricule){
-       return service.suppression(matricule);
-=======
     @GetMapping("/ressource/{id}")
     public ressource afficherbyid(@PathVariable Integer id){
         return service.afficherbyid(id);
@@ -53,7 +45,6 @@ public class ressource_controller {
     @DeleteMapping("/delete/{id}")
     public boolean suppression(@PathVariable Integer id){
        return service.suppression(id);
->>>>>>> abdelhadi
 
     }
     @PutMapping("/update")

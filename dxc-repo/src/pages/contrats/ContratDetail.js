@@ -18,10 +18,6 @@ function ContratDetail(props) {
       .then(function (res) {
         // handle success
         console.log("res", res.data);
-<<<<<<< HEAD
-=======
-     
->>>>>>> abdelhadi
         setContrat(res.data);
       })
       .catch(function (error) {

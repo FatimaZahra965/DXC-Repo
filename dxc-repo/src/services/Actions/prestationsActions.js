@@ -11,6 +11,7 @@ import {
   GET_PRESTATION_EDIT,
   PRESTATION_EDIT_SUCCESS,
   PRESTATION_EDIT_ERROR,
+  SHOWRESSOURCES,
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -26,14 +27,21 @@ export function createNewPrestationAction(prestation) {
     clienteAxios
       .post("https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/addPrestation", prestation)
       .then((res) => {
-        console.log(res);
-        Swal.fire({
-          timer: 3000,
-          text: "La prestation est ajouter avec succés",
-          timeerProgressBar: true,
-          icon: "success",
-        });
-        dispatch(addNewPrestationSuccess(prestation));
+        clienteAxios
+          .put(
+            `https://dxcrepo-activite.azurewebsites.net/dxc/activites/affectActivite/${prestation.idActivite}/${res.data.id}`,
+          )
+          .then((result) => {
+            console.log(res);
+            Swal.fire({
+              timer: 3000,
+              text: "La prestation est ajouter avec succés",
+              timeerProgressBar: true,
+              icon: "success",
+            });
+
+            dispatch(addNewPrestationSuccess(prestation));
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -42,6 +50,16 @@ export function createNewPrestationAction(prestation) {
       });
   };
 }
+export function showRessources(value) {
+  return (dispatch) => {
+    console.log("show ressource action ", value);
+    dispatch(showRessource(value));
+  };
+}
+export const showRessource = (value) => ({
+  type: SHOWRESSOURCES,
+  payload: value,
+});
 
 export const newPrestation = () => ({
   type: ADD_PRESTATION,
@@ -136,6 +154,23 @@ export function getPrestationAction(id) {
     //obtenir le produit de l'api
     clienteAxios
       .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
+      .then((resp) => {
+        console.log(resp.data);
+        dispatch(getPrestationEditSuccess(resp.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(getPrestationEditError());
+      });
+  };
+}
+
+export function getPrestationActivites() {
+  return (dispatch) => {
+    // dispatch();
+
+    clienteAxios
+      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/allPrestationActivites")
       .then((resp) => {
         console.log(resp.data);
         dispatch(getPrestationEditSuccess(resp.data));

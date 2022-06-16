@@ -64,4 +64,7 @@ export default makeStyles((theme) => ({
   bText: {
     padding: "10px",
   },
+  inputSelect: {
+    height: "40px",
+  },
 }));

@@ -4,10 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { Button, MenuItem } from "@material-ui/core";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
-<<<<<<< HEAD
-=======
 import moment from 'moment';
->>>>>>> abdelhadi
 import { useDispatch, useSelector } from "react-redux";
 import { createNewContratAction } from "../../services/Actions/contratActions";
 import { getClientsAction } from "../../services/Actions/clientActions";

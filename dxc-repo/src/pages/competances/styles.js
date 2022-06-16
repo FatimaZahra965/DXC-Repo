@@ -19,8 +19,6 @@ export default makeStyles(theme => ({
    
 
   },
-<<<<<<< HEAD
-=======
   addBtn: {
     marginLeft: "8px",
   },
@@ -39,7 +37,6 @@ export default makeStyles(theme => ({
   //   margiRright: "18px",
   // },
  
->>>>>>> abdelhadi
   GridForm: {
     marginLeft: "70px",
     margin: "20px 0px 20px 0px",

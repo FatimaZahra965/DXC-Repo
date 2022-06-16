@@ -23,11 +23,7 @@ export function createNewcertificationAction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(newCERTIFICATION());
     clienteAxios
-<<<<<<< HEAD
-      .post("https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/addcertif", CERTIFICATION)
-=======
-      .post("http://localhost:9001/DXC/certifications/addcertif", CERTIFICATION)
->>>>>>> abdelhadi
+         .post("https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/addcertif", CERTIFICATION)
       .then((res) => {
         console.log(res);
         dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
@@ -44,7 +40,7 @@ export function createNewcertificationAction(CERTIFICATION) {
         dispatch(addNewCERTIFICATIONError());
         Swal.fire({
           timer: 3000,
-          text: "La ressource n'est pas ajouté",
+          text: "La certif  n'est pas ajouté",
           timeerProgressBar: true,
           icon: "error",
         });
@@ -71,11 +67,7 @@ export function getCertificationsAction() {
     dispatch(getCertficationStart());
     let id = 1;
     axios
-<<<<<<< HEAD
-      .get("https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificats/" + 1)
-=======
-      .get("http://localhost:9001/DXC/certifications/certificats/" + 1)
->>>>>>> abdelhadi
+      .get("https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/certificats/" + 1)
       .then((resp) => {
         resp.data.forEach((element) => {
           element.datecertification = moment(element.datecertification).format(
@@ -111,11 +103,8 @@ export function editcertificationAction(CERTIFICATION) {
 
     clienteAxios
       .put(
-<<<<<<< HEAD
-        `https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/updatecertif`,
-=======
-        `http://localhost:9001/DXC/certifications/updatecertif`,
->>>>>>> abdelhadi
+        `https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/updatecertif`,
+
         CERTIFICATION,
       )
       .then((resp) => {
@@ -151,11 +140,7 @@ export function getCertificationAction() {
     dispatch(getEditCertificationsAction());
     let id = 1;
     clienteAxios
-<<<<<<< HEAD
-      .get(`https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificats/${id}`)
-=======
-      .get(`http://localhost:9001/DXC/certifications/certificats/${id}`)
->>>>>>> abdelhadi
+      .get(`https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/certificats/${id}`)
       .then((resp) => {
         console.log("get Certification by id", resp.data);
         dispatch(getCertificationEditExito(resp.data));

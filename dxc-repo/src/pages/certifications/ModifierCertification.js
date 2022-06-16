@@ -58,20 +58,15 @@ const ModiferCertification = ({ match }) => {
   const [certificationdata, setcertificationdata] = useState(initialState);
 
   useEffect(() => {
-    console.log("------------------->", id);
+    // console.log("------------------->", id);
     // dispatch(getcertificationAction(id));
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
-      .get(
-<<<<<<< HEAD
-        "https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificat/" + 1 + "/" + id,
-=======
-        "http://localhost:9001/DXC/certifications/certificat/" + 1 + "/" + id,
->>>>>>> abdelhadi
-      )
+      .get("https://dxcrepo-ressource.azurewebsites.net/dxc/certifications/certificat/" + 1 + "/" + id,)
+
       .then(function (response) {
         // handle success
-        console.log("response---------------->", response.data);
+        // console.log("response---------------->", response.data);
         setcertificationdata(response.data);
       })
       .catch(function (error) {
@@ -86,6 +81,7 @@ const ModiferCertification = ({ match }) => {
   const certification = useSelector(
     (state) => state.certifications.certification,
   );
+  const [doErr, setDoErr] = useState(false);
 
   const dates = {
     dateCetification: moment(certificationdata.dateCetification).format(
@@ -99,7 +95,6 @@ const ModiferCertification = ({ match }) => {
       setFileEror("Please upload a file.");
       return;
     }
-
     if (file.size >= 2000000) {
       setFileEror("File size exceeds limit of 2MB.");
       return;
@@ -109,11 +104,8 @@ const ModiferCertification = ({ match }) => {
     data.append("name", file.name);
     //1 a remplacer avec l'id de la ressource qui va venir apartir de reoute
     clienteAxios
-<<<<<<< HEAD
       .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
-=======
-      .post("http://localhost:9001/DXC/files/addFile/1", data)
->>>>>>> abdelhadi
+
       .then((res) => {
         console.log(res);
       })
@@ -130,7 +122,7 @@ const ModiferCertification = ({ match }) => {
     const form = new FormData();
     if (imageCertificat) {
       form.append("image", imageCertificat, imageCertificat.name);
-      console.log("------------>", imageCertificat);
+      // console.log("------------>", imageCertificat);
     }
 
     validarForm();
@@ -139,7 +131,10 @@ const ModiferCertification = ({ match }) => {
     let datecertificationEror = "";
     let titreEror = "";
 
-    if (!certificationdata.code) {
+    if (
+      !certificationdata.code ||
+      !new RegExp(/^\w+$/).test(certificationdata.code)
+    ) {
       codeEror = "le champ code de la certification est obligatiore";
     }
     if (!certificationdata.niveau) {
@@ -148,7 +143,10 @@ const ModiferCertification = ({ match }) => {
     if (!certificationdata.datecertification) {
       datecertificationEror = "le champ date de certification est obligatiore";
     }
-    if (!certificationdata.titre) {
+    if (
+      !certificationdata.titre ||
+      !new RegExp(/^\w+$/).test(certificationdata.titre)
+    ) {
       titreEror = "le champ titre de la certification est obligatiore";
     }
     if (codeEror || niveauEror || datecertificationEror || titreEror) {
@@ -157,6 +155,7 @@ const ModiferCertification = ({ match }) => {
       setNiveauEror(niveauEror);
       setDateCertificationEror(datecertificationEror);
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -206,6 +205,7 @@ const ModiferCertification = ({ match }) => {
               onChange={(e) => {
                 handlchange(e);
                 setTitreEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{TitreEror}</div>
@@ -319,7 +319,7 @@ const ModiferCertification = ({ match }) => {
           </Grid>
         </Grid>
       </form>
-      {error ? (
+      {error && doErr ? (
         <Alert severity="error">Tous les champs sont obligatiore!</Alert>
       ) : null}
     </>

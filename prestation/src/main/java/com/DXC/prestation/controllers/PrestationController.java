@@ -1,5 +1,7 @@
 package com.DXC.prestation.controllers;
+
 import com.DXC.prestation.models.Prestation;
+import com.DXC.prestation.models.PrestationActivites;
 import com.DXC.prestation.services.PrestationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,27 +13,38 @@ import java.util.Optional;
 @RequestMapping(path = "DXC/prestations")
 @CrossOrigin(origins = "*")
 public class PrestationController {
-        private final PrestationService prestationService;
+    private final PrestationService prestationService;
 
-        @Autowired
-        public PrestationController(PrestationService prestationService) {
-            this.prestationService = prestationService;
-        }
+    @Autowired
+    public PrestationController(PrestationService prestationService) {
+        this.prestationService = prestationService;
+    }
 
-        @GetMapping(path = "allPrestations")
-        public List<Prestation> getAllPrestations() {
-            return this.prestationService.getPrestation();
-        }
+    @GetMapping(path = "allPrestations")
+    public List<Prestation> getAllPrestations() {
+        return this.prestationService.getPrestation();
+    }
 
-        @PostMapping(path = "addPrestation")
-        public void addPrestation(@RequestBody Prestation prestation) {
-            this.prestationService.addPrestation(prestation);
-        }
+    @PostMapping(path = "addPrestation")
+    public Prestation addPrestation(@RequestBody Prestation prestation) {
+        return this.prestationService.addPrestation(prestation);
+    }
 
-        @GetMapping(path = "Prestation/{id}")
-        public Prestation showPrestation(@PathVariable Integer id) {
-           return this.prestationService.getPrestationByID(id);
-        }
+    @PostMapping(path = "affecterActiviteToPrestation")
+
+    public void AffecterActivite(@RequestBody PrestationActivites presAct) {
+        this.prestationService.affecterActivite(presAct);
+    }
+
+    @GetMapping(path = "PrestationActivite")
+    public List<PrestationActivites> showPrestationActivite() {
+        return this.prestationService.getPrestationActiviteByID();
+    }
+
+    @GetMapping(path = "Prestation/{id}")
+    public Prestation showPrestation(@PathVariable Integer id) {
+        return this.prestationService.getPrestationByID(id);
+    }
 
     @PutMapping("updatePrestation")
     public Prestation updateProduct(@RequestBody Prestation prestation) {

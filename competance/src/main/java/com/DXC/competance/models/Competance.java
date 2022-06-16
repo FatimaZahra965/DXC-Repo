@@ -18,7 +18,7 @@ public class Competance {
     )
     private int id;
     private String nomCompetance;
-    private String matriculeRessource;
+    private int matriculeRessource;
     private String nomRessource;
     private String typeComp;
     private String evaluationManager;
@@ -27,7 +27,7 @@ public class Competance {
     public Competance() {
     }
 
-    public Competance(int id, String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(int id, String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
@@ -37,7 +37,7 @@ public class Competance {
         this.niveau = niveau;
     }
 
-    public Competance(String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
         this.nomRessource = nomRessource;
@@ -64,11 +64,11 @@ public class Competance {
         this.nomCompetance = nomCompetance;
     }
 
-    public String getMatriculeRessource() {
+    public int getMatriculeRessource() {
         return matriculeRessource;
     }
 
-    public void setMatriculeRessource(String matriculeRessource) {
+    public void setMatriculeRessource(int matriculeRessource) {
         this.matriculeRessource = matriculeRessource;
     }
 

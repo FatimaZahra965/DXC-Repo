@@ -28,21 +28,15 @@ public class ressource_service {
         return  repo.findAll();
     }
 
-<<<<<<< HEAD
-    public ressource afficherbyid( String matricule){
-        return repo.findById(matricule).orElse(null);
+    public List<ressource> afficher_ressource_acct(Integer idAcct){
+        return  repo.getRessurceOfActivité(idAcct);
     }
-/*delate route */
-    @DeleteMapping("/delete/{matricule}")
-    public boolean suppression( String matricule){
-        repo.deleteById(matricule);
-=======
+
     public ressource afficherbyid( Integer id){
         return repo.findById(id).orElse(null);
     }
     public boolean suppression( Integer id){
         repo.deleteById(id);
->>>>>>> abdelhadi
         return true;
 
     }
@@ -52,7 +46,6 @@ public class ressource_service {
         ressourceexist.setFirstName(ressource.getFirstName());
         ressourceexist.setLastName(ressource.getLastName());
         ressourceexist.setStatus(ressource.getStatus());
-        ressourceexist.setGenre(ressource.getGenre());
         ressourceexist.setDateNaissance(ressource.getDateNaissance());
         ressourceexist.setDateAmbauche(ressource.getDateAmbauche());
         return repo.save(ressourceexist);

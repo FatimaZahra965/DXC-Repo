@@ -1,62 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React from "react";
 import { Card } from "@material-ui/core";
 import { CardBody, CardTitle, Table } from "reactstrap";
+import { useSelector } from "react-redux";
 function Methodes(props) {
-    let history = useHistory();
-    const [competences, setCompetences] = useState([]);
-  useEffect(() => {
-    console.log("hello hjjjjj");
-
-    axios
-      .get("http://localhost:9005/DXC/competances/Competance/type/techniques", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      })
-      .then(function (res) {
-        // handle success
-        console.log("res", res.data);
-        setCompetences(res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  });
-    function EditCompetence(id) {
-      history.push("/app/competances/EditCompetance/"+id);
-    }
-    const AfficheCompetence = (e) => {
-      let path = `/app/competances/CompetanceDetail/` + e;
-      history.push(path);
-    };
+  const RessourcesToShow = useSelector(
+    (state) => state.ressources.ressource,
+  );
     return (
-        <div>
-        <Card>
-            <CardBody>
-              <CardTitle tag="h5">Compétences Transversales</CardTitle>
-              <div className="d-flex align-items-center p-2">
-              <Table className="no-wrap mt-3 align-middle" responsive borderless>
-                <thead>
-                  <tr>
-                    <th>Competance</th>
-                    <th>Niveau</th>
+      <div>
+      <Card>
+          <CardBody>
+            <CardTitle tag="h6" className="border-bottom p-3 mb-0">Méthodes</CardTitle>
+            <div className="d-flex align-items-center p-2">
+            <Table className="no-wrap mt-3 align-middle" responsive borderless>
+              <thead>
+                <tr>
+                  <th>Nom de Méthode</th>
+                  <th>Niveau</th>
+                </tr>
+              </thead>
+              <tbody>
+                {RessourcesToShow.methodes.map((methode) => (
+                  <tr key={methode.id} className="border-top">
+                    
+                    <td>{methode.titre}</td>
+                    <td>{methode.niveau}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {competences.map((competence) => (
-                    <tr key={competence.nomCompetance} className="border-top">
-                      
-                      <td>{competence.nomCompetance}</td>
-                      <td>{competence.niveau}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-              </div>
-            </CardBody>
-          </Card>
-          </div>
+                ))}
+              </tbody>
+            </Table>
+            </div>
+          </CardBody>
+        </Card>
+        </div>
     );
 }
 

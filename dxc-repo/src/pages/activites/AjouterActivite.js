@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Button } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Chip,
+  InputLabel,
+  OutlinedInput,
+  Select,
+} from "@material-ui/core";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +23,19 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import moment from "moment";
 import { createNewActiviteAction } from "../../services/Actions/activitesActions";
 import { getPrestationsAction } from "../../services/Actions/prestationsActions";
+import { useTheme } from "@material-ui/styles";
+import { getRessourcesAction } from "../../services/Actions/ressourcesActions";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function AjouterActivite() {
   const classes = useStyles();
@@ -30,7 +50,6 @@ export default function AjouterActivite() {
     status: "",
     categorie: "",
     description: "",
-    nomPrestation: "",
 
     typeEror: "",
     dateDebutEror: "",
@@ -39,7 +58,6 @@ export default function AjouterActivite() {
     statusEror: "",
     categorieEror: "",
     descriptionEror: "",
-    nomPrestationEror: "",
   };
   const [Nom, setNom] = useState(initialActiviteState.nom);
   const [Type, setType] = useState(initialActiviteState.type);
@@ -49,9 +67,6 @@ export default function AjouterActivite() {
   const [Categorie, setCategorie] = useState(initialActiviteState.categorie);
   const [Description, setDescription] = useState(
     initialActiviteState.description,
-  );
-  const [NomPrestation, setNomPrestation] = useState(
-    initialActiviteState.nomPrestation,
   );
 
   // Eror states
@@ -70,9 +85,6 @@ export default function AjouterActivite() {
   const [DescriptionEror, setDescriptionEror] = useState(
     initialActiviteState.description,
   );
-  const [NomPrestationEror, setNomPrestationEror] = useState(
-    initialActiviteState.description,
-  );
 
   //crar nuevo producto
   const dispatch = useDispatch();
@@ -84,10 +96,15 @@ export default function AjouterActivite() {
   //obtener los datos del state
   const error = useSelector((state) => state.error.error);
   useEffect(() => {
-    const loadProducts = () => dispatch(getPrestationsAction());
-    loadProducts();
+    const loadPrestations = () => dispatch(getPrestationsAction());
+    loadPrestations();
+    const loadRessources = () => dispatch(getRessourcesAction());
+    loadRessources();
   }, []);
-  const prestations = useSelector((state) => state.prestations.prestations);
+  // const prestations = useSelector((state) => state.prestations.prestations);
+  const ressources = useSelector((state) => state.ressources.ressources);
+  const [doErr, setDoErr] = useState(false);
+
   const submitNewActivite = (e) => {
     e.preventDefault();
 
@@ -98,12 +115,11 @@ export default function AjouterActivite() {
     let statusEror = "";
     let categorieEror = "";
     let descriptionEror = "";
-    let nomPrestationEror = "";
 
     if (!Type) {
       typeEror = "Le champ Type de l'activite est obligatiore";
     }
-    if (!Nom) {
+    if (!Nom || !new RegExp(/^\w+$/).test(Nom)) {
       nomEror = "Le champ l'intitulé de l'activité est obligatiore";
     }
     if (!Status) {
@@ -118,11 +134,8 @@ export default function AjouterActivite() {
     if (!DateFin) {
       dateFinEror = "Le champ Date de fin de l'activite est obligatiore";
     }
-    if (!Description) {
+    if (!Description || !new RegExp(/^\w+$/).test(Description)) {
       descriptionEror = "Le champ Description de l'activite est obligatiore";
-    }
-    if (!NomPrestation) {
-      nomPrestationEror = "Le champ Prestation est obligatiore";
     }
 
     if (
@@ -132,8 +145,7 @@ export default function AjouterActivite() {
       dateDebutEror ||
       dateFinEror ||
       categorieEror ||
-      descriptionEror ||
-      nomPrestationEror
+      descriptionEror
     ) {
       setNomEror(nomEror);
       setTypeEror(typeEror);
@@ -142,9 +154,9 @@ export default function AjouterActivite() {
       setStatusEror(statusEror);
       setCategorieEror(categorieEror);
       setDescriptionEror(descriptionEror);
-      setNomPrestationEror(nomPrestationEror);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -153,6 +165,17 @@ export default function AjouterActivite() {
       dateDebut: moment(DateDebut).format("yyyy-MM-DD"),
       dateFin: moment(DateFin).format("yyyy-MM-DD"),
     };
+    const ressources = [
+      {
+        matricule: "Matricule",
+        status: "Status",
+        genre: "Genre",
+        dateNaissance: "DateNaissance",
+        lastName: "Nom",
+        firstName: "Prenom",
+        dateAmbauche: "DateAmbauche",
+      },
+    ];
     let activite = {
       nomActivite: Nom,
       status: Status,
@@ -161,7 +184,7 @@ export default function AjouterActivite() {
       dateDebut: dates.dateDebut,
       dateFin: dates.dateFin,
       description: Description,
-      idPrestation: NomPrestation,
+      idRessources: personName,
     };
     console.log("------------>", activite);
     addActivite(activite);
@@ -222,15 +245,37 @@ export default function AjouterActivite() {
     setType(initialActiviteState.type);
     setCategorie(initialActiviteState.categorie);
     setDescription(initialActiviteState.description);
-    setNomPrestation(initialActiviteState.nomPrestation);
   };
+
+  // multiple select
+  const theme = useTheme();
+  const [personName, setPersonName] = useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value,
+    );
+  };
+
+  function getStyles(name, personName, theme) {
+    return {
+      fontWeight:
+        personName.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   return (
     <>
       <PageTitle title="Crée une Activité" path="/app/prestations/activites" />
       <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
-        {error ? (
+        {error && doErr ? (
           <Alert severity="error">L'activité n'est pas ajouté!</Alert>
         ) : null}
       </Grid>
@@ -247,30 +292,12 @@ export default function AjouterActivite() {
               onChange={(e) => {
                 setNom(e.target.value);
                 setNomEror(initialActiviteState.nomEror);
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{NomEror}</div>
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-nomClient"
-              label="Prestation"
-              select
-              variant="outlined"
-              size="small"
-              fullWidth
-              value={NomPrestation}
-              onChange={(e) => {
-                setNomPrestation(e.target.value);
-                setNomPrestationEror(initialActiviteState.nomPrestationEror);
-              }}
-            >
-              {prestations.map((prestation) => (
-                <MenuItem value={prestation.id}>{prestation.titre}</MenuItem>
-              ))}
-            </TextField>
-            <div style={{ color: "red" }}>{NomPrestationEror}</div>
-          </Grid>
+
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
@@ -315,39 +342,6 @@ export default function AjouterActivite() {
             </TextField>
             <div style={{ color: "red" }}>{CategrorieEror}</div>
           </Grid>
-
-          <Grid item xs={6}>
-            <label>Date de début</label>
-            <TextField
-              id="outlined-basic"
-              size="small"
-              variant="outlined"
-              fullWidth
-              type="date"
-              value={DateDebut}
-              onChange={(e) => {
-                setDateDebut(e.target.value);
-                setDateDebutEror(initialActiviteState.dateDebutEror);
-              }}
-            />
-            <div style={{ color: "red" }}>{DateDebutEror}</div>
-          </Grid>
-          <Grid item xs={6}>
-            <label>Date de Fin</label>
-            <TextField
-              id="outlined-basic"
-              type="date"
-              size="small"
-              variant="outlined"
-              fullWidth
-              value={DateFin}
-              onChange={(e) => {
-                setDateFin(e.target.value);
-                setDateFinEror(initialActiviteState.dateFinEror);
-              }}
-            />
-            <div style={{ color: "red" }}>{DateFinEror}</div>
-          </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
@@ -371,6 +365,40 @@ export default function AjouterActivite() {
             <div style={{ color: "red" }}>{StatusEror}</div>
           </Grid>
           <Grid item xs={6}>
+            <label>Date de début</label>
+            <TextField
+              id="outlined-basic"
+              size="small"
+              variant="outlined"
+              fullWidth
+              type="date"
+              value={DateDebut}
+              onChange={(e) => {
+                setDateDebut(e.target.value);
+                setDateDebutEror(initialActiviteState.dateDebutEror);
+              }}
+            />
+            <div style={{ color: "red" }}>{DateDebutEror}</div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <label>Date de Fin</label>
+            <TextField
+              id="outlined-basic"
+              type="date"
+              size="small"
+              variant="outlined"
+              fullWidth
+              value={DateFin}
+              onChange={(e) => {
+                setDateFin(e.target.value);
+                setDateFinEror(initialActiviteState.dateFinEror);
+              }}
+            />
+            <div style={{ color: "red" }}>{DateFinEror}</div>
+          </Grid>
+
+          <Grid item xs={6}>
             <TextField
               id="outlined-multiline-static"
               label="Description"
@@ -387,6 +415,36 @@ export default function AjouterActivite() {
               }}
             />
             <div style={{ color: "red" }}>{DescriptionEror}</div>
+          </Grid>
+          <Grid item xs={6} className={classes.inputSelect}>
+            <InputLabel id="demo-multiple-chip-label">Ressources</InputLabel>
+            <Select
+              labelId="demo-multiple-chip-label"
+              id="demo-multiple-chip"
+              multiple
+              value={personName}
+              fullWidth
+              onChange={handleChange}
+              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+              MenuProps={MenuProps}
+            >
+              {ressources.map((name) => (
+                <MenuItem
+                  key={name.matricule}
+                  value={name.matricule}
+                  style={getStyles(name.firstName, personName, theme)}
+                >
+                  {`${name.firstName} ${name.lastName}`}
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
           <Grid item xs={12}>
             <Button

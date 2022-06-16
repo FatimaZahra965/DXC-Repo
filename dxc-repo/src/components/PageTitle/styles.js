@@ -21,9 +21,12 @@ export default makeStyles((theme) => ({
       boxShadow: theme.customShadows.widgetWide,
     },
   },
+  hrGlobale: {
+    margin: "5px",
+    backgroundColor: "#603494",
+  },
 
   headerIcon: {
     fontSize: 28,
   },
- 
 }));

@@ -33,7 +33,7 @@ export default function Header(props) {
   var [mailMenu, setMailMenu] = useState(null);
   var [profileMenu, setProfileMenu] = useState(null);
   function Profil() {
-    history.push("/app/prestations/profil");
+    history.push("/app/prestations/profil/:id");
   }
   return (
     <AppBar position="fixed" className={classes.appBar}>

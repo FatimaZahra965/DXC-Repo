@@ -1,54 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React from "react";
 import { Card } from "@material-ui/core";
 import { CardBody, CardTitle, Table } from "reactstrap";
+import { useSelector } from "react-redux";
 function Technologies(props) {
-    let history = useHistory();
-    const [competences, setCompetences] = useState([]);
-  useEffect(() => {
-    console.log("hello hjjjjj");
-
-    axios
-      .get("http://localhost:9005/DXC/competances/Competance/type/techniques", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      })
-      .then(function (res) {
-        // handle success
-        console.log("res", res.data);
-        setCompetences(res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  });
-    function EditCompetence(id) {
-      history.push("/app/competances/EditCompetance/"+id);
-    }
-    const AfficheCompetence = (e) => {
-      let path = `/app/competances/CompetanceDetail/` + e;
-      history.push(path);
-    };
+    const RessourcesToShow = useSelector(
+      (state) => state.ressources.ressource,
+    );
+ 
     return (
         <div>
         <Card>
             <CardBody>
-              <CardTitle tag="h5">Compétences Transversales</CardTitle>
+              <CardTitle tag="h6" className="border-bottom p-3 mb-0">Technologies</CardTitle>
               <div className="d-flex align-items-center p-2">
               <Table className="no-wrap mt-3 align-middle" responsive borderless>
                 <thead>
                   <tr>
-                    <th>Competance</th>
+                    <th>Nom de technologie</th>
                     <th>Niveau</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {competences.map((competence) => (
-                    <tr key={competence.nomCompetance} className="border-top">
+                  {RessourcesToShow.technologies.map((techno) => (
+                    <tr key={techno.id} className="border-top">
                       
-                      <td>{competence.nomCompetance}</td>
-                      <td>{competence.niveau}</td>
+                      <td>{techno.titre}</td>
+                      <td>{techno.niveau}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState }  from "react";
-=======
 import React, { useEffect, useState }  from "react";
->>>>>>> abdelhadi
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -14,6 +10,11 @@ import { Alert } from "@material-ui/lab";
 import { createNewCompetanceAction } from "../../services/Actions/competanceActions";
 import { validacionError, validationSuccess,validarFormularioAction} from "../../services/Actions/validacionActions";
 import useStyles from "./styles";
+import { getRessourceAction, getRessourcesAction } from "../../services/Actions/ressourcesActions";
+import axios from "axios";
+function AjouteCompetance() {
+  const classes = useStyles();
+  const history = useHistory();
   const loading = useSelector((state) => state.ressources.loading);
   const ressources = useSelector((state) => state.ressources.ressources);
   useEffect(() => {
@@ -25,6 +26,7 @@ import useStyles from "./styles";
     matriculeRessource: "",
     nomRessource: "",
     nomCompetance: "",
+    typeComp: "",
     niveau: "",
     evaluationManager: "",
 
@@ -189,7 +191,7 @@ import useStyles from "./styles";
     console.log("fonction -----GetMatricul")
     axios
       .get(
-        `http://localhost:9000/DXC/ressource/${e}`,
+        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${e}`,
       )
       .then((resp) => {
         console.log("matricule", resp.data.matricule);

@@ -34,6 +34,10 @@ export default makeStyles((theme) => ({
     margin: "5px",
     width: "500px",
   },
+  hrGlobale: {
+    margin: "5px",
+    backgroundColor: "#603494",
+  },
   hr: {
     margin: "5px",
     width: "500px",
@@ -46,8 +50,6 @@ export default makeStyles((theme) => ({
   Btext: {
     color: "#603494",
   },
-<<<<<<< HEAD
-=======
   GridForm: {
     marginLeft: "70px",
     margin: "20px 0px 20px 0px",
@@ -60,5 +62,4 @@ export default makeStyles((theme) => ({
     backgroundColor: "transparent",
     maxWidth: 1100,
   },
->>>>>>> abdelhadi
 }));

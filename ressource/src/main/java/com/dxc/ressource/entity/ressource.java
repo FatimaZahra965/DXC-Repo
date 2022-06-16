@@ -22,23 +22,8 @@ import java.util.*;
 public class ressource {
 
     @Id
-<<<<<<< HEAD
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @SequenceGenerator(
-            name = "ressource_index",
-            sequenceName = "ressource_index",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ressource_index"
-    )
-
-    private String matricule;
-=======
     @GeneratedValue
     private int matricule;
->>>>>>> abdelhadi
     private String status;
     private String firstname;
     private String lastname;
@@ -46,11 +31,6 @@ public class ressource {
     private Date dateambauche;
     private Date datenaissance;
 
-<<<<<<< HEAD
-*/
-
-    public String getMatricule() {
-=======
     @OneToMany(targetEntity = methode.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
     private List<methode> methodes;
@@ -63,7 +43,6 @@ public class ressource {
 
 
     public int getMatricule() {
->>>>>>> abdelhadi
         return matricule;
     }
 
