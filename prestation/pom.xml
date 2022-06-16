@@ -79,7 +79,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>dxc-repo-prestation</finalName>
+		<finalName>microservice-prestation</finalName>
 	</build>
 
 </project>

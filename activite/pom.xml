@@ -61,6 +61,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<finalName>microservice-activite</finalName>
 		</plugins>
 	</build>
 
