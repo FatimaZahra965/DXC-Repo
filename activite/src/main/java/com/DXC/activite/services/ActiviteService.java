@@ -47,8 +47,8 @@ public class ActiviteService {
         Activite savedActivite = activiteRepository.save(activite);
         idRessources.forEach(element -> {
             RessourceActivities newOne = new RessourceActivities();
-            newOne.setIdActivite(savedActivite.getId());
-            newOne.setIdRessource(element);
+            newOne.setId_activite(savedActivite.getId());
+            newOne.setId_ressource(element);
             ressourceActivitiesRepository.save(newOne);
         });
 
