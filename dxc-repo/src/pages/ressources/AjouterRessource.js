@@ -55,6 +55,8 @@ export default function AjouterRessource() {
   const errorValidacion = () => dispatch(validacionError());
 
   const error = useSelector((state) => state.error.error);
+  const [doErr, setDoErr] = useState(false);
+
   const submitNewRessource = (e) => {
     e.preventDefault();
     let matriculeEror = "";
@@ -69,13 +71,13 @@ export default function AjouterRessource() {
     let formsMethodesEror = "";
     let formsOutilsEror = "";
 
-    if (!Matricule) {
+    if (!Matricule || !new RegExp(/^\w+$/).test(Matricule)) {
       matriculeEror = "le champ Matricule de la ressource est obligatiore";
     }
-    if (!Status) {
+    if (!Status || !new RegExp(/^\w+$/).test(Status)) {
       statusEror = "le champ Status de la ressource est obligatiore";
     }
-    if (!Genre) {
+    if (!Genre || !new RegExp(/^\w+$/).test(Genre)) {
       genreEror = "le champ Genre de la ressource est obligatiore";
     }
     if (!DateAmbauche) {
@@ -89,10 +91,10 @@ export default function AjouterRessource() {
     if (!Profil) {
       profilEror = "le champ Profil de la ressource est obligatiore";
     }
-    if (!Nom) {
+    if (!Nom || !new RegExp(/^\w+$/).test(Nom)) {
       nomEror = "le champ Nom de la ressource est obligatiore";
     }
-    if (!Prenom) {
+    if (!Prenom || !new RegExp(/^\w+$/).test(Prenom)) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
     }
     if (!forms) {
@@ -131,6 +133,7 @@ export default function AjouterRessource() {
       setFormsOutilsEror(formsOutilsEror);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -165,19 +168,19 @@ export default function AjouterRessource() {
 
   const status = [
     {
-      label: "recrutement",
+      label: "Recrutement",
       value: "recrutement",
     },
     {
       label: "Salarié",
-      value: "Salarié",
+      value: "salarie",
     },
     {
       label: "Contractant",
-      value: "Contractant",
+      value: "contractant",
     },
     {
-      label: "inactif",
+      label: "Inactif",
       value: "inactif",
     },
   ];
@@ -185,27 +188,27 @@ export default function AjouterRessource() {
   const profiles = [
     {
       label: "Entry",
-      value: "Entry",
+      value: "entry",
     },
     {
       label: "Intermediate",
-      value: "Intermediate",
+      value: "intermediate",
     },
     {
       label: "Specialist",
-      value: "Specialist",
+      value: "specialist",
     },
     {
       label: "Referent",
-      value: "Referent",
+      value: "referent",
     },
     {
       label: "Expert",
-      value: "Expert",
+      value: "expert",
     },
     {
       label: "Master",
-      value: "Master",
+      value: "master",
     },
   ];
 
@@ -295,8 +298,9 @@ export default function AjouterRessource() {
   return (
     <>
       <PageTitle title="Ajouter Ressource" path="/app/prestations/ressources" />
+      <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
-        {error ? (
+        {error && doErr ? (
           <Alert severity="error">La ressource n'est pas ajouté!</Alert>
         ) : null}
       </Grid>
@@ -314,6 +318,7 @@ export default function AjouterRessource() {
               onChange={(e) => {
                 setPrenom(e.target.value);
                 setPrenomEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{PrenomEror}</div>
@@ -329,6 +334,7 @@ export default function AjouterRessource() {
               onChange={(e) => {
                 setNom(e.target.value);
                 setNomEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{NomEror}</div>
@@ -471,6 +477,7 @@ export default function AjouterRessource() {
                   onChange={(e) => {
                     handleInputChange(e, i);
                     setFormsEror("");
+                    setDoErr(false);
                   }}
                 />
                 <br />
@@ -541,6 +548,7 @@ export default function AjouterRessource() {
                     onChange={(e) => {
                       handleInputChangeMethodes(e, i);
                       setFormsMethodesEror("");
+                      setDoErr(false);
                     }}
                   />
                   <br />

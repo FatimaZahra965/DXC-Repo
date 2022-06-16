@@ -5,6 +5,7 @@ import {
   DOWNLOAD_PRESTATION__ERROR,
   START_DOWNLOAD_PRESTATIONS,
   PRESTATION_DOWNLOAD_SUCCESSFUL,
+  SHOWRESSOURCES,
 } from "../types";
 
 //chaque réducteur a son propre état
@@ -13,11 +14,17 @@ const initialState = {
   error: null,
   loading: false,
   prestation: {},
+  showRessources: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   switch (action.type) {
+    case SHOWRESSOURCES:
+      return {
+        ...state,
+        showRessources: action.payload,
+      };
     case ADD_PRESTATION:
       return {
         ...state,

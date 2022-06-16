@@ -1,8 +1,18 @@
 package com.DXC.prestation.models;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
+@Getter
+@Setter
 @Table(name = "Prestation")
 public class Prestation {
     // generate the id
@@ -20,68 +30,16 @@ public class Prestation {
     private int id;
     private String type;
     private String etat;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "dateDebut")
     private Date dateDebut;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "dateFin")
     private Date dateFin;
     private String titre;
     private String market;
+    private int idActivite;
 
-    public Prestation() {
-    }
-    public Prestation(int id, String titre, String market, String type, String etat) {
-        this.id = id;
-        this.titre = titre;
-        this.market = market;
-        this.type = type;
-        this.etat= etat;
-    }
 
-    public Prestation(String titre, String market, String type, String etat) {
-        this.titre = titre;
-        this.market = market;
-        this.type = type;
-        this.etat= etat;
-    }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getTitre() {
-        return titre;
-    }
-    public String getMarket() {
-        return market;
-    }
-    public String getType() {
-        return type;
-    }
-    public String getEtat() {
-        return etat;
-    }
-    public Date getDateDebut() {
-        return dateDebut;
-    }
-    public Date getDateFin() {
-        return dateFin;
-    }
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-    public void setMarket(String market) {
-        this.market = market;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
-    }
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
-    }
 
 }

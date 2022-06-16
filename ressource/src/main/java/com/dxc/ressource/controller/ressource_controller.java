@@ -17,14 +17,10 @@ import java.util.List;
 public class ressource_controller {
     @Autowired
     private ressource_service service;
-
-
     @PostMapping("/addRessource")
     public ressource ajouter_ressource(@RequestBody ressource ressource){
         return service.ajout_ressource(ressource);
     }
-
-
 
     @PostMapping("/addRessources")
     public List<ressource> ajouter_ressources(@RequestBody List<ressource>  ressources){
@@ -35,14 +31,20 @@ public class ressource_controller {
         return  service.afficher_ressource();
     }
 
-    @GetMapping("/ressource/{matricule}")
-    public ressource afficherbyid(@PathVariable String matricule){
-        return service.afficherbyid(matricule);
+
+    @GetMapping("/ressource/act/{id}")
+    public List<ressource> afficher_ressource_acct(@PathVariable Integer id){
+        return  service.afficher_ressource_acct(id);
     }
 
-    @DeleteMapping("/delete/{matricule}")
-    public boolean suppression(@PathVariable String matricule){
-       return service.suppression(matricule);
+    @GetMapping("/ressource/{id}")
+    public ressource afficherbyid(@PathVariable Integer id){
+        return service.afficherbyid(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean suppression(@PathVariable Integer id){
+       return service.suppression(id);
 
     }
     @PutMapping("/update")
