@@ -106,8 +106,8 @@ function EditContrat(props) {
           path="/app/prestations/Contrats"
         />
       </div>
-      <form onSubmit={updateContent}>
-        <Grid container spacing={3}>
+      <form onSubmit={updateContent} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-nomContrat"

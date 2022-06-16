@@ -4,6 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import { Button, MenuItem } from "@material-ui/core";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useHistory } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import moment from 'moment';
+>>>>>>> abdelhadi
 import { useDispatch, useSelector } from "react-redux";
 import { createNewContratAction } from "../../services/Actions/contratActions";
 import { getClientsAction } from "../../services/Actions/clientActions";
@@ -62,7 +66,6 @@ function AjouteContrat() {
   // addnew contrat
   const submitNewContrat = (e) => {
     e.preventDefault();
-
     validarForm();
     let nomContratEror = "";
     let nomClientEror = "";
@@ -214,7 +217,7 @@ function AjouteContrat() {
             setNomClientEror(initialContratState.nomClientEror);}}
           >
           {clients.map((client) => (
-            <MenuItem value={client.nomClient}>{client.nomClient}</MenuItem>
+            <MenuItem value={client.id}>{client.nomClient}</MenuItem>
           ))}
           </TextField>
           <div style={{ color: "red" }}>{nomClientEror}</div>

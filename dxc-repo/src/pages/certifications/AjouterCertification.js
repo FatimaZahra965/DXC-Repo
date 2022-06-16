@@ -61,7 +61,11 @@ export default function AjouterCertification() {
     data.append("file", file);
     data.append("name", file.name);
     clienteAxios
+<<<<<<< HEAD
       .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
+=======
+      .post("http://localhost:9001/DXC/files/addFile/1", data)
+>>>>>>> abdelhadi
       .then((res) => {
         console.log(res);
         return true;
@@ -124,8 +128,8 @@ export default function AjouterCertification() {
         title="Ajouter une certification"
         path="/app/certifications/ListeCertifications"
       />
-      <form onSubmit={submitNewCertification}>
-        <Grid container spacing={3}>
+        <form onSubmit={submitNewCertification} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

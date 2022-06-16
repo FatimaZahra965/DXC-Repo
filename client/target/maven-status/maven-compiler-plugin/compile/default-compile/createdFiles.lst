@@ -1,0 +1,5 @@
+com\DXC\client\models\Client.class
+com\DXC\client\services\ClientService.class
+com\DXC\client\ClientApplication.class
+com\DXC\client\controllers\ClientController.class
+com\DXC\client\repository\ClientRepository.class

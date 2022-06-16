@@ -46,4 +46,19 @@ export default makeStyles((theme) => ({
   Btext: {
     color: "#603494",
   },
+<<<<<<< HEAD
+=======
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+    
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
+>>>>>>> abdelhadi
 }));

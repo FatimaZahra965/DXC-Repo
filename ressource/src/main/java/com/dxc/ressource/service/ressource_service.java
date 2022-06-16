@@ -28,6 +28,7 @@ public class ressource_service {
         return  repo.findAll();
     }
 
+<<<<<<< HEAD
     public ressource afficherbyid( String matricule){
         return repo.findById(matricule).orElse(null);
     }
@@ -35,6 +36,13 @@ public class ressource_service {
     @DeleteMapping("/delete/{matricule}")
     public boolean suppression( String matricule){
         repo.deleteById(matricule);
+=======
+    public ressource afficherbyid( Integer id){
+        return repo.findById(id).orElse(null);
+    }
+    public boolean suppression( Integer id){
+        repo.deleteById(id);
+>>>>>>> abdelhadi
         return true;
 
     }

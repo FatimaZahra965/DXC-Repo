@@ -29,11 +29,7 @@ import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
 import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
 import Prestations from "../../pages/prestations/Prestations";
 import AjouteContrat from "../../pages/contrats/AjouteContrat";
-import AjouteCompetance from "../../pages/competances/AjouteCompetances";
 import Contrats from "../../pages/contrats/Contrats";
-import EditContrat from "../../pages/contrats/EditContrat";
-import ContratDetail from "../../pages/contrats/ContratDetail";
-import AjouteClient from "../../pages/clients/AjouteClient";
 import EditClient from "../../pages/clients/EditClient";
 import AffichageClient from "../../pages/clients/AffichageClient";
 import AjouterRessource from "../../pages/ressources/AjouterRessource";
@@ -43,6 +39,8 @@ import Certifications from "../../pages/certifications/Certifications";
 import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
+import Profil from "../../pages/profil/Profil";
+import PrestationGlobal from "../../pages/details/PrestationGlobal";
 
 function Layout(props) {
   var classes = useStyles();
@@ -64,11 +62,10 @@ function Layout(props) {
           <Switch>
             {/*  route dashboard  */}
             <Route path="/app/dashboard" component={Dashboard} />
+            <Route path="/app/prestations/PrestationGlobal" component={PrestationGlobal} />
+            <Route path="/app/prestations/profil" component={Profil} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route
-              path="/app/competances/allCompetances"
-              component={Competances}
-            />
+            <Route path="/app/competances/allCompetances" component={Competances} />
             <Route
               path="/app/competances/ajouteCompetance"
               component={AjouteCompetance}

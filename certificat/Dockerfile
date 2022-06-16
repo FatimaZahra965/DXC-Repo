@@ -5,5 +5,16 @@ RUN mvn -B -DskipTests clean package
 
 FROM openjdk:11
 WORKDIR /app
+<<<<<<< HEAD
 COPY --from=builder /tmp/src/target/microservice-certificat.jar .
 CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "microservice-certificat.jar"]
+=======
+<<<<<<< Updated upstream
+COPY --from=builder /tmp/src/target/microservice-certificat.jar .
+CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "microservice-certificat.jar"]
+=======
+EXPOSE 8080
+COPY --from=builder /tmp/src/target/certificat-service.jar .
+CMD  ["java", "-jar", "-Dspring.profiles.active=dev", "certificat-service.jar"]
+>>>>>>> Stashed changes
+>>>>>>> abdelhadi

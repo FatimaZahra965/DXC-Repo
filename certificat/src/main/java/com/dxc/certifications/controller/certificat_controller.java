@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+<<<<<<< HEAD
 @RequestMapping("/dxc/certifications")
+=======
+@RequestMapping("/DXC/certifications")
+>>>>>>> abdelhadi
 @CrossOrigin(origins = "*")
 
 

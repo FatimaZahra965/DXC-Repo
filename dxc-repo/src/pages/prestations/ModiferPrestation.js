@@ -235,8 +235,8 @@ export default function ModiferPrestation({ match }) {
         title="Modifer une prestation"
         path="/app/prestations/ListePrestations"
       />
-      <form onSubmit={submitEditPrestation}>
-        <Grid container spacing={3}>
+         <form onSubmit={submitEditPrestation} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

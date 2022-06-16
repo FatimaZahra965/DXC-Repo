@@ -1,6 +1,7 @@
 package com.dxc.ressource.entity;
 
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,10 +16,13 @@ import java.util.*;
 @NoArgsConstructor
 @ToString
 @Entity
+
 @Table(name = "ressource", schema = "public")
 
 public class ressource {
+
     @Id
+<<<<<<< HEAD
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @SequenceGenerator(
             name = "ressource_index",
@@ -31,26 +35,41 @@ public class ressource {
     )
 
     private String matricule;
+=======
+    @GeneratedValue
+    private int matricule;
+>>>>>>> abdelhadi
     private String status;
     private String firstname;
     private String lastname;
     private String genre;
     private Date dateambauche;
     private Date datenaissance;
-  /*  @OneToMany(targetEntity = certificat.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
-    private List<certificat> certif;
 
+<<<<<<< HEAD
 */
 
     public String getMatricule() {
+=======
+    @OneToMany(targetEntity = methode.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
+    private List<methode> methodes;
+    @OneToMany(targetEntity = outil.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
+    private List<outil> outils;
+    @OneToMany(targetEntity = technologie.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
+    private List<technologie> technologies;
+
+
+    public int getMatricule() {
+>>>>>>> abdelhadi
         return matricule;
     }
 
-    public void setMatricule(String matriculee) {
-        matricule = matriculee;
+    public void setMatricule(int matricule) {
+        this.matricule = matricule;
     }
-
     public String getStatus() {
         return status;
     }

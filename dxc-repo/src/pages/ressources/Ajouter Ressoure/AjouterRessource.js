@@ -89,8 +89,14 @@ export default function AjouterRessource() {
   return (
     <>
       <PageTitle title="Ajouter Ressource" />
+<<<<<<< HEAD
       <form onSubmit={submitNewRessource}>
         <Grid container spacing={3}>
+=======
+      <form onSubmit={submitNewRessource} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
+    
+>>>>>>> abdelhadi
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"

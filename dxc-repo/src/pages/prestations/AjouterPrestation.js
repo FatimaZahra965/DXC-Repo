@@ -184,9 +184,10 @@ export default function AjouterPrestation() {
         title="Ajouter une prestation"
         path="/app/prestations/ListePrestations"
       />
-      <form onSubmit={submitNewPrestation}>
-        <Grid container spacing={3}>
+       <form onSubmit={submitNewPrestation} className={classes.Form}>
+       <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
+        
             <TextField
               id="outlined-basic"
               label="Titre"
