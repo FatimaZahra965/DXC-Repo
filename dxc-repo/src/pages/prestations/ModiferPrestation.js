@@ -68,7 +68,7 @@ export default function ModiferPrestation({ match }) {
     clienteAxios
       .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
-        console.log(resp.data);
+        console.log("--------------------*>", resp.data);
         setPrestationdate(resp.data);
       })
       .catch((error) => {
@@ -91,13 +91,22 @@ export default function ModiferPrestation({ match }) {
     let titreEror = "";
     let marketEror = "";
 
-    if (!prestationdate.type) {
+    if (
+      !prestationdate.type ||
+      !new RegExp(/^\w+$/).test(prestationdate.type)
+    ) {
       typeEror = "le champ Type de la prestation est obligatiore";
     }
-    if (!prestationdate.titre) {
+    if (
+      !prestationdate.titre ||
+      !new RegExp(/^\w+$/).test(prestationdate.titre)
+    ) {
       titreEror = "le champ Titre de la prestation est obligatiore";
     }
-    if (!prestationdate.market) {
+    if (
+      !prestationdate.market ||
+      !new RegExp(/^\w+$/).test(prestationdate.market)
+    ) {
       marketEror = "le champ Market de la prestation est obligatiore";
     }
     if (!prestationdate.dateDebut) {
@@ -106,7 +115,10 @@ export default function ModiferPrestation({ match }) {
     if (!prestationdate.dateFin) {
       dateFinEror = "le champ Date de fin de la prestation est obligatiore";
     }
-    if (!prestationdate.etat) {
+    if (
+      !prestationdate.etat ||
+      !new RegExp(/^\w+$/).test(prestationdate.etat)
+    ) {
       etatEror = "le champ Etat de la prestation est obligatiore";
     }
 

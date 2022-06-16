@@ -1,16 +1,16 @@
 image: docker:latest
 services:
-- docker:dind
+  - docker:dind
 
 stages:
-- build competance
-- build certificat
-- build client
-- build contrat
-- build ressource
-- build prestation
-- build activite
-- build dxcrepo
+  - build competance
+  - build certificat
+  - build client
+  - build contrat
+  - build ressource
+  - build prestation
+  - build activite
+  - build dxcrepo
 
 variables:
   DOCKER_DRIVER: overlay
@@ -41,7 +41,6 @@ release_client:
     - docker push $DOCKER_REPOSITORY/microservice-client:latest
   only:
     - main
-  
 release_contrat:
   stage: build contrat
   script:
@@ -86,4 +85,3 @@ release_dxcrepo_front:
     - docker push $DOCKER_REPOSITORY/dxc-repo:latest
   only:
     - main
-

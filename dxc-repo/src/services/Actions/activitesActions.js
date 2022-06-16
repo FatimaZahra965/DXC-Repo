@@ -24,7 +24,7 @@ export function createNewActiviteAction(activite) {
   return (dispatch) => {
     dispatch(newActivite());
     clienteAxios
-      .post("https://dxcrepo-activite.azurewebsites.net/DXC/activites/addActivite", activite)
+      .post("https://dxcrepo-activite.azurewebsites.net/dxc/activites/addActivite", activite)
       .then((res) => {
         console.log(res);
         Swal.fire({
@@ -61,27 +61,28 @@ export function getActivitesAction() {
   return (dispatch) => {
     dispatch(getActivitesStart());
     axios
-      .get("https://dxcrepo-activite.azurewebsites.net/DXC/activites/allActivites")
+      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/allActivites")
       .then((resp) => {
         console.log("activites ----->", resp.data);
         resp.data.forEach((element) => {
           element.dateDebut = moment(element.dateDebut).format("L");
           element.dateFin = moment(element.dateFin).format("L");
         });
-        for (let i = 0; i < resp.data.length; i++) {
-          let id = resp.data[i].idPrestation;
-          console.log("id/*//*/***************>>>>>>>", id);
-          axios
-            .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
-            .then((res) => {
-              resp.data.forEach((element) => {
-                element.idPrestation = res.data.titre;
-                console.log("------>res.data.titre", res.data.titre);
-              });
-              dispatch(downloadActivitesSuccessful(resp.data));
-              console.log("****-****", resp.data);
-            });
-        }
+        dispatch(downloadActivitesSuccessful(resp.data));
+        // for (let i = 0; i < resp.data.length; i++) {
+        //   let id = resp.data[i].idPrestation;
+        //   console.log("id/*//*/***************>>>>>>>", id);
+        //   axios
+        //     .get(`https://dxcrepo-prestation.azurewebsites.net/dxc/prestations/Prestation/${id}`)
+        //     .then((res) => {
+        //       resp.data.forEach((element) => {
+        //         element.idPrestation = res.data.titre;
+        //         console.log("------>res.data.titre", res.data.titre);
+        //       });
+        //       dispatch(downloadActivitesSuccessful(resp.data));
+        //       console.log("****-****", resp.data);
+        //     });
+        // }
       })
       .catch((error) => {
         //console.log(error);
@@ -109,7 +110,7 @@ export function editActiviteAction(activite) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`https://dxcrepo-activite.azurewebsites.net/DXC/activites/updateActivite`, activite)
+      .put(`https://dxcrepo-activite.azurewebsites.net/dxc/activites/updateActivite`, activite)
       .then((resp) => {
         //console.log(resp);
         dispatch(editActiviteSuccess(resp.data));
@@ -143,12 +144,11 @@ export const editActiviteError = () => ({
 export function getActiviteAction(id) {
   return (dispatch) => {
     dispatch(getEditActivitesAction());
-
-    //obtenir le produit de l'api
+    console.log("-------->id", id);
     clienteAxios
-      .get(`https://dxcrepo-activite.azurewebsites.net/DXC/activites/Prestation/${id}`)
+      .get(`https://dxcrepo-activite.azurewebsites.net/dxc/activites/Activite/${id}`)
       .then((resp) => {
-        console.log(resp.data);
+        console.log("here we are -----------//----->", resp.data);
         dispatch(getActiviteEditSuccess(resp.data));
       })
       .catch((error) => {

@@ -44,7 +44,8 @@ import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
 import AjouterActivite from "../../pages/activites/AjouterActivite";
-import ModifierActivite from "../../pages/activites/ModifierActivité";
+import ModifierActivite from "../../pages/activites/ModifierActivite";
+import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
 
 function Layout(props) {
   var classes = useStyles();
@@ -137,8 +138,11 @@ function Layout(props) {
               path="/app/prestations/AjouterPrestation"
               component={AjouterPrestation}
             />
-            {/* <Route path="/app/prestations/ModiferPrestation/:id"  component={ModiferPrestation} />
-                <Route path="/app/prestations/AficherPrestation/:id" component={AfficherPrestation}/> */}
+            {/* <Route path="/app/prestations/ModiferPrestation/:id"  component={ModiferPrestation} />*/}
+            <Route
+              path="/app/prestations/AficherPrestation/:id"
+              component={AfficherPrestation}
+            />
 
             {/*  routes clients  */}
             <Route path="/app/prestations/clients" component={Clients} />
@@ -178,6 +182,7 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
+            {/* routes activiteés */}
             <Route path="/app/prestations/activites" component={Activites} />
             <Route
               path="/app/activites/AjouteAactivite"

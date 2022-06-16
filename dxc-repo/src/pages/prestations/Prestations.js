@@ -2,15 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPrestationsAction } from "../../services/Actions/prestationsActions";
-import {
-  Button,
-  Grid,
-  IconButton,
-  InputAdornment,
-  makeStyles,
-  Paper,
-  TextField,
-} from "@material-ui/core";
+import { Button, Grid, Paper, TextField, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -25,7 +17,8 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
 import useStyles from "./styles";
-import SearchIcon from "@material-ui/icons/Search";
+
+import QueueIcon from "@material-ui/icons/Queue";
 
 const columns = [
   { id: "titre", label: "Titre", minWidth: 100 },
@@ -102,9 +95,17 @@ const Prestations = () => {
         <Grid item xs={6} className={classes.grid}>
           <PageTitle title="Prestations" path="/app/dashboard" />
         </Grid>
-
         <Grid item xs={6} className={classes.grid}></Grid>
-        <Grid xs={6} className={classes.grid}>
+        <Grid item xs={1}>
+          <Typography
+            variant="subtitle2"
+            fontWeight="medium"
+            style={{ marginTop: "23px" }}
+          >
+            Recherche:
+          </Typography>
+        </Grid>
+        <Grid xs={5} className={classes.grid}>
           <TextField
             id="outlined-basic"
             onChange={Recherche}
@@ -150,6 +151,9 @@ const Prestations = () => {
                       {column.label}
                     </TableCell>
                   ))}
+                  {/* <TableCell key="activite" style={{ minWidth: "100" }}>
+                    Activité
+                  </TableCell> */}
                   <TableCell key="actions" style={{ minWidth: "170" }}>
                     Actions
                   </TableCell>
@@ -176,6 +180,15 @@ const Prestations = () => {
                             </TableCell>
                           );
                         })}
+                        {/*<TableCell
+                        // key={row.activites[0].nomActivite}
+                        // align={row.activites[0].id}
+                        >
+                           {row.activites[0].nomActivite} */}
+                        {/* {row.format && typeof value === "number"
+                                ? row.format(value)
+                                : value} */}
+                        {/* </TableCell> */}
                         <TableCell>
                           <Button
                             onClick={() => {
