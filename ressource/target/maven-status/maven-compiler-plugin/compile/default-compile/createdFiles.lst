@@ -1,0 +1,8 @@
+com\dxc\ressource\entity\methode.class
+com\dxc\ressource\controller\ressource_controller.class
+com\dxc\ressource\entity\outil.class
+com\dxc\ressource\RessourceApplication.class
+com\dxc\ressource\repository\ressource_repo.class
+com\dxc\ressource\entity\ressource.class
+com\dxc\ressource\service\ressource_service.class
+com\dxc\ressource\entity\technologie.class

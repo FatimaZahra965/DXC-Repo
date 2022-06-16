@@ -10,9 +10,6 @@ COPY yarn.lock .
 RUN npm install
 # Copy app files
 COPY . .
-# Arguments
-ARG REACT_APP_API_BASE_URL
-ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
 # Expose port
 EXPOSE 3000
 # Start the app

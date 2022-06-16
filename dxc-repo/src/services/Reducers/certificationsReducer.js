@@ -1,10 +1,10 @@
 import {
-  ADD_CERTIFICATE,
-  ADD_CERTIFICATE_SUCCESS,
-  ADD_CERTIFICATE_ERROR,
-  DOWNLOAD_CERTIFICATE__ERROR,
+  ADD_CERTIFICATION,
+  ADD_CERTIFICATION_SUCCESS,
+  ADD_CERTIFICATION_ERROR,
+  DOWNLOAD_CERTIFICATION__ERROR,
   START_DOWNLOAD_CERTIFICATIONS,
-  CERTIFICATE_DOWNLOAD_SUCCESSFUL,
+  CERTIFICATION_DOWNLOAD_SUCCESSFUL,
 } from "../types";
 
 const initialState = {
@@ -17,18 +17,18 @@ const initialState = {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_CERTIFICATE:
+    case ADD_CERTIFICATION:
       return {
         ...state,
         error: null,
       };
-    case ADD_CERTIFICATE_SUCCESS:
+    case ADD_CERTIFICATION_SUCCESS:
       return {
         ...state,
         error: null,
         certifications: [...state.certifications, action.payload],
       };
-    case ADD_CERTIFICATE_ERROR:
+    case ADD_CERTIFICATION_ERROR:
       return {
         ...state,
         error: true,
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
         //limpiar y reacrgar el productopara editar
         certification: {},
       };
-    case CERTIFICATE_DOWNLOAD_SUCCESSFUL:
+    case CERTIFICATION_DOWNLOAD_SUCCESSFUL:
       return {
         ...state,
         certifications: action.payload,
@@ -48,7 +48,7 @@ export default function (state = initialState, action) {
         error: false,
         certification: {},
       };
-    case DOWNLOAD_CERTIFICATE__ERROR:
+    case DOWNLOAD_CERTIFICATION__ERROR:
       return {
         ...state,
         certifications: [],

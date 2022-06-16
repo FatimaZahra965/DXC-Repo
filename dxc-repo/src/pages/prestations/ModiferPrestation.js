@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -6,71 +6,193 @@ import { Button } from "@material-ui/core";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
 import { Alert } from "@material-ui/lab";
-import { createNewPrestationAction } from "../../services/Actions/prestationsActions";
+import { editPrestationAction } from "../../services/Actions/prestationsActions";
 import {
   validacionError,
   validarFormularioAction,
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import clienteAxios from "../../config/axios";
 
-export default function ModiferPrestation() {
+export default function ModiferPrestation({ match }) {
   const classes = useStyles();
   const history = useHistory();
-  //state
-  const [Titre, getTitre] = useState("");
-  const [Etat, getEtat] = useState("");
-  const [Type, getType] = useState("");
-  const [Market, getMarket] = useState("");
-  const [DateDebut, getDateDebut] = useState("");
-  const [DateFin, getDateFin] = useState("");
 
-  //crar nuevo producto
+  //state
+  const initialPrestationState = {
+    id: null,
+    type: "",
+    etat: "",
+    dateDebut: "",
+    dateFin: "",
+    titre: "",
+    market: "",
+
+    typeEror: "",
+    etatEror: "",
+    dateDebutEror: "",
+    dateFinEror: "",
+    titreEror: "",
+    marketEror: "",
+  };
+  // prestation
   const dispatch = useDispatch();
   const editPrestation = (prestation) =>
-    dispatch(createNewPrestationAction(prestation));
+    dispatch(editPrestationAction(prestation));
   const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
-  //obtener los datos del state
+  // Eror states
+  const [TitreEror, setTitreEror] = useState(initialPrestationState.titreEror);
+  const [EtatEror, setEtatEror] = useState(initialPrestationState.etatEror);
+  const [TypeEror, setTypeEror] = useState(initialPrestationState.typeEror);
+  const [MarketEror, setMarketEror] = useState(
+    initialPrestationState.marketEror,
+  );
+  const [DateDebutEror, setDateDebutEror] = useState(
+    initialPrestationState.dateDebutEror,
+  );
+  const [DateFinEror, setDateFinEror] = useState(
+    initialPrestationState.dateFinEror,
+  );
+
+  const { id } = match.params;
+
+  useEffect(() => {
+    console.log("id", id);
+    clienteAxios
+      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
+      .then((resp) => {
+        console.log("--------------------*>", resp.data);
+        setPrestationdate(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // dispatch(getPrestationAction(id));
+  }, [id]);
+
+  const prestation = useSelector((state) => state.prestations.prestation);
+  const [prestationdate, setPrestationdate] = useState(initialPrestationState);
   const error = useSelector((state) => state.error.error);
 
-  // addnew prestation
   const submitEditPrestation = (e) => {
     e.preventDefault();
 
-    validarForm();
+    let typeEror = "";
+    let etatEror = "";
+    let dateDebutEror = "";
+    let dateFinEror = "";
+    let titreEror = "";
+    let marketEror = "";
 
     if (
-      Titre.trim() === "" ||
-      Etat.trim() === "" ||
-      Market.trim() === "" ||
-      Type.trim() === "" ||
-      DateDebut.trim() === "" ||
-      DateFin.trim() === ""
+      !prestationdate.type ||
+      !new RegExp(/^\w+$/).test(prestationdate.type)
     ) {
+      typeEror = "le champ Type de la prestation est obligatiore";
+    }
+    if (
+      !prestationdate.titre ||
+      !new RegExp(/^\w+$/).test(prestationdate.titre)
+    ) {
+      titreEror = "le champ Titre de la prestation est obligatiore";
+    }
+    if (
+      !prestationdate.market ||
+      !new RegExp(/^\w+$/).test(prestationdate.market)
+    ) {
+      marketEror = "le champ Market de la prestation est obligatiore";
+    }
+    if (!prestationdate.dateDebut) {
+      dateDebutEror = "le champ Date de début de la prestation est obligatiore";
+    }
+    if (!prestationdate.dateFin) {
+      dateFinEror = "le champ Date de fin de la prestation est obligatiore";
+    }
+    if (
+      !prestationdate.etat ||
+      !new RegExp(/^\w+$/).test(prestationdate.etat)
+    ) {
+      etatEror = "le champ Etat de la prestation est obligatiore";
+    }
+
+    if (
+      typeEror ||
+      titreEror ||
+      marketEror ||
+      dateDebutEror ||
+      dateFinEror ||
+      etatEror
+    ) {
+      setTitreEror(titreEror);
+      setTypeEror(typeEror);
+      setEtatEror(etatEror);
+      setDateDebutEror(dateDebutEror);
+      setDateFinEror(dateFinEror);
+      setMarketEror(marketEror);
+
       errorValidacion();
       return;
     }
-    //si pasa la validacion//si todo sale bien
     SuccessValidation();
-
-    //crear el nuevo producto
-    let prestation = {
-      Titre,
-      Etat,
-      Market,
-      Type,
-      DateDebut,
-      DateFin,
+    const dates = {
+      dateDebut: moment(prestationdate.dateDebut).format("yyyy-MM-DD"),
+      dateFin: moment(prestationdate.dateFin).format("yyyy-MM-DD"),
     };
+    let prestation = {
+      id: id,
+      titre: prestationdate.titre,
+      etat: prestationdate.etat,
+      market: prestationdate.market,
+      type: prestationdate.type,
+      dateDebut: dates.dateDebut,
+      dateFin: dates.dateFin,
+    };
+    console.log("prestation", prestation);
+
     editPrestation(prestation);
 
-    // history.push("/app/prestations");
+    // history.push("/app/prestations/ListePrestations");
   };
+  // const submitEditPrestation = (e) => {
+  //   e.preventDefault();
+
+  //   validarForm();
+
+  //   if (
+  //     prestationdate.titre.trim() === "" ||
+  //     prestationdate.etat.trim() === "" ||
+  //     prestationdate.market.trim() === "" ||
+  //     prestationdate.type.trim() === "" ||
+  //     prestationdate.dateDebut.trim() === "" ||
+  //     prestationdate.dateFin.trim() === ""
+  //   ) {
+  //     errorValidacion();
+  //     return;
+  //   }
+  //   SuccessValidation();
+
+  //   let prestation = {
+  //     id: id,
+  //     titre: prestationdate.titre,
+  //     etat: prestationdate.etat,
+  //     market: prestationdate.market,
+  //     type: prestationdate.type,
+  //     dateDebut: prestationdate.dateDebut,
+  //     dateFin: prestationdate.dateFin,
+  //   };
+  //   console.log("prestation", prestation);
+
+  //   editPrestation(prestation);
+
+  //   history.push("/app/prestations/ListePrestations");
+  // };
 
   const etats = [
     {
@@ -96,12 +218,37 @@ export default function ModiferPrestation() {
       value: "local",
     },
   ];
+  const types = [
+    {
+      label: "Interne",
+      value: "Interne",
+    },
+    {
+      label: "Externe",
+      value: "Externe",
+    },
+  ];
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setPrestationdate({ ...prestationdate, [name]: value });
+  };
 
+  const dates = {
+    dateFin: moment(prestationdate.dateFin).format("L"),
+    dateDebut: moment(prestationdate.dateDebut).format("L"),
+  };
+
+  const annuler = () => {
+    setPrestationdate(initialPrestationState);
+  };
   return (
     <>
-      <PageTitle title="Modifer une prestation" />
-      <form onSubmit={submitEditPrestation}>
-        <Grid container spacing={3}>
+      <PageTitle
+        title="Modifer une prestation"
+        path="/app/prestations/ListePrestations"
+      />
+         <form onSubmit={submitEditPrestation} className={classes.Form}>
+        <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"
@@ -109,26 +256,37 @@ export default function ModiferPrestation() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Titre}
-              onChange={(e) => getTitre(e.target.value)}
+              name="titre"
+              value={prestationdate.titre}
+              onChange={(e) => {
+                handleInputChange(e);
+                setTitreEror(initialPrestationState.titreEror);
+              }}
             />
+            <div style={{ color: "red" }}>{TitreEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Etat"
               size="small"
               fullWidth
-              valur={Etat}
+              name="etat"
+              value={prestationdate.etat}
               onChange={(e) => {
-                getEtat(e.target.value);
+                handleInputChange(e);
+                setEtatEror(initialPrestationState.etatEror);
               }}
             >
               {etats.map((etat) => (
-                <MenuItem value={etat.value}>{etat.label}</MenuItem>
+                <MenuItem key={etat.value} value={etat.value}>
+                  {etat.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{EtatEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -137,32 +295,38 @@ export default function ModiferPrestation() {
               label="Type"
               size="small"
               fullWidth
-              valur={Type}
-              onChange={(e) => {
-                getType(e.target.value);
-              }}
+              name="type"
+              variant="outlined"
+              value={prestationdate.type}
+              onChange={handleInputChange}
             >
-              {etats.map((etat) => (
-                <MenuItem value={etat.value}>{etat.label}</MenuItem>
+              {types.map((type) => (
+                <MenuItem key={type.value} value={type.value}>
+                  {type.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{TypeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
               select
+              variant="outlined"
               label="Market"
               size="small"
               fullWidth
-              valur={Market}
-              onChange={(e) => {
-                getMarket(e.target.value);
-              }}
+              name="market"
+              value={prestationdate.market}
+              onChange={handleInputChange}
             >
               {markets.map((market) => (
-                <MenuItem value={market.value}>{market.label}</MenuItem>
+                <MenuItem key={market.value} value={market.value}>
+                  {market.label}
+                </MenuItem>
               ))}
             </TextField>
+            <div style={{ color: "red" }}>{MarketEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de début</label>
@@ -172,9 +336,11 @@ export default function ModiferPrestation() {
               variant="outlined"
               fullWidth
               type="date"
-              valur={DateDebut}
-              onChange={(e) => getDateDebut(e.target.value)}
+              name="dateDebut"
+              value={prestationdate.dateDebut}
+              onChange={handleInputChange}
             />
+            <div style={{ color: "red" }}>{DateDebutEror}</div>
           </Grid>
           <Grid item xs={6}>
             <label>Date de Fin</label>
@@ -184,9 +350,11 @@ export default function ModiferPrestation() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={DateFin}
-              onChange={(e) => getDateFin(e.target.value)}
+              name="dateFin"
+              value={prestationdate.dateFin}
+              onChange={handleInputChange}
             />
+            <div style={{ color: "red" }}>{DateFinEror}</div>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -196,13 +364,16 @@ export default function ModiferPrestation() {
               className={classes.btnAjouter}
               color="primary"
             >
-              Ajouter
+              Modifer
             </Button>
             <Button
               size="small"
               variant="contained"
               className={classes.btnAnnuler}
               color="secondary"
+              onClick={() => {
+                annuler();
+              }}
             >
               Annuler
             </Button>
@@ -210,7 +381,7 @@ export default function ModiferPrestation() {
         </Grid>
       </form>
       {error ? (
-        <Alert severity="error">Tous les champs sont requis!</Alert>
+        <Alert severity="error">La prestation n'est pas modifié!</Alert>
       ) : null}
     </>
   );

@@ -12,6 +12,7 @@ import {
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
+import CardMembershipIcon from "@material-ui/icons/CardMembership";
 
 // styles
 import useStyles from "./styles";
@@ -27,50 +28,139 @@ import {
 } from "../../context/LayoutContext";
 
 const structure = [
-  { id: 0, label: "Accueil", link: "/app/dashboard", icon: <HomeIcon /> },
+  {
+    id: 0,
+    label: "Accueil",
+    link: "/app/dashboard",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-home" />
+      </IconButton>
+    ),
+  },
   {
     id: 1,
     label: "Capabilités",
     link: "/app/capabilites",
-    icon: <TableIcon />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-photo-gallery" />
+      </IconButton>
+    ),
   },
   {
     id: 2,
     label: "Compétances",
-    link: "/app/competances",
-    icon: <Subject />,
+    link: "/app/competances/allCompetances",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-medal" />
+      </IconButton>
+    ),
   },
   {
     id: 3,
     label: "Notifications",
     link: "/app/notifications",
-    icon: <NotificationsIcon />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-bell" />
+      </IconButton>
+    ),
   },
   {
     id: 4,
     label: "Prestations",
-    icon: <Work />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-folder" />
+      </IconButton>
+    ),
     children: [
-      { label: "Liste des Prestations", link: "/app/prestations/ListePrestations" },
-      { label: "Contrats", link: "/app/prestations/Contrats" },
-      { label: "Clients", link: "/app/prestations/clients" },
-      { label: "Ressources", link: "/app/ressources" },
-      { label: "Activités", link: "/app/prestations/activites" },
-      { label: "Téchnologies", link: "/app/prestations/technologies" },
-      { label: "Projets", link: "/app/prestations/projets" },
+      {
+        label: "Liste des Prestations",
+        link: "/app/prestations/ListePrestations",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-network" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Contrats",
+        link: "/app/prestations/Contrats",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-id" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Clients",
+        link: "/app/prestations/clients",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-way" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Ressources",
+        link: "/app/prestations/ressources",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-users" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Activités",
+        link: "/app/prestations/activites",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-albums" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Téchnologies",
+        link: "/app/prestations/technologies",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-star" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Projets",
+        link: "/app/prestations/projets",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-news-paper" />
+          </IconButton>
+        ),
+      },
     ],
   },
   {
     id: 5,
     label: "Parametres",
     link: "/app/parametres",
-    icon: <Settings />,
+    icon: (
+      <IconButton>
+        <i className="pe-7s-tools" />
+      </IconButton>
+    ),
   },
   {
     id: 6,
     label: "Certifications",
-    link: "/app/certifications",
-    icon: <Settings />,
+    link: "/app/certifications/ListeCertifications",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-ribbon" />
+      </IconButton>
+    ),
   },
 ];
 

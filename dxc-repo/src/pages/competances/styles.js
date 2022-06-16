@@ -19,6 +19,36 @@ export default makeStyles(theme => ({
    
 
   },
+  addBtn: {
+    marginLeft: "8px",
+  },
+  Search: {
+    textAlign: "initial",
+    display: "flex",
+    padding: 1,
+    position: "absolute",
+    marginLeft: "8px",
+  },
+  searchTextField: {
+    marginLeft: "8px",
+  },
+  // Tabs: {
+  //   marginLeft: "-50px",
+  //   margiRright: "18px",
+  // },
+ 
+  GridForm: {
+    marginLeft: "70px",
+    margin: "20px 0px 20px 0px",
+    backgroundColor: "transparent",
+    maxWidth: 1000,
+    
+  },
+  Form: {
+    marginLeft: "60px",
+    backgroundColor: "transparent",
+    maxWidth: 1100,
+  },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
@@ -33,6 +63,8 @@ export default makeStyles(theme => ({
   Button: {
     background: "#741F82",
     color: "#FFFFFF",
+    padding: "6px",
+    marginTop: -"6px",
   },
   
   text: {
@@ -73,6 +105,28 @@ export default makeStyles(theme => ({
     color: "#FFFFFF",
     fontSize: "medium",
   },
+  labelDonnes: {
+    color: "#000000",
+    Stroke: "Solid",
+    marginTop: "inherit",
+  },
+
+  
+  labelinformation: {
+    color: "#7978BB",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  label: {
+    color: "#741F82",
+    Stroke: "Solid",
+    textAlign:"center",
+    marginTop: "inherit",
+  },
+  buttons: {
+    textAlign:"center",
+  },
   Visib: {
     background: "#741F82",
     minWidth: 30,
@@ -80,6 +134,13 @@ export default makeStyles(theme => ({
   },
   title: {
     fontSize: "9",
+  },
+  table: {
+    textAlign: "centre",
+  },
+  Bajoute: {
+    textAlign: "end",
+    marginLeft: "800px",
   },
   btnAjouter: {
     margin: "5px",

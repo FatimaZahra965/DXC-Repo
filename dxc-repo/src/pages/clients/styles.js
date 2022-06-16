@@ -7,6 +7,18 @@ export default makeStyles(theme => ({
         maxHeight: 350,
         border: "2px solid #741F82",
       },
+      GridForm: {
+        marginLeft: "70px",
+        margin: "20px 0px 20px 0px",
+        backgroundColor: "transparent",
+        maxWidth: 1000,
+        
+      },
+      Form: {
+        marginLeft: "60px",
+        backgroundColor: "transparent",
+        maxWidth: 1100,
+      },
       bullet: {
         display: "inline-block",
         margin: "0 2px",
@@ -17,6 +29,31 @@ export default makeStyles(theme => ({
       },
       Bajoute: {
         textAlign: "end",
+        marginLeft: "800px",
+      },
+      labelDonnes: {
+        color: "#000000",
+        Stroke: "Solid",
+        marginTop: "inherit",
+      },
+      
+      labelinformation: {
+        color: "#7978BB",
+        Stroke: "Solid",
+        textAlign:"center",
+        marginTop: "inherit",
+      },
+      
+      forminformation: {
+        backgroundColor: "transparent",
+        maxWidth: 700,
+        border: "3px solid #FFFFFF",
+      },
+      label: {
+        color: "#741F82",
+        Stroke: "Solid",
+        textAlign:"center",
+        marginTop: "inherit",
       },
       Button: {
         background: "#741F82",
@@ -27,29 +64,14 @@ export default makeStyles(theme => ({
         Width: 10,
         Height: 5,
       },
-      InputSearch: {
-        background: "#FFFFFF",
-        minWidth: 260,
-        Height: 26,
-        display: "flex",
-        marginRight: 1,
-        border: "2px solid #741F82",
-        borderRadius: "10px",
-      },
-      ButtonSearch: {
-        background: "#741F82",
-        Stroke: "Solid",
-        Align: "Inside",
-        minWidth: 22,
-        height: 35,
-        color: "#FFFFFF",
-        borderRadius: "10px",
-      },
+     
+     
       Search: {
         textAlign: "initial",
         display: "flex",
-        padding: 8,
+        padding: 10,
         position: "absolute",
+        marginLeft: "75px",
       },
       Visibility: {
         textAlign: "end",
@@ -69,6 +91,7 @@ export default makeStyles(theme => ({
         float: "right",
         background: "#741F82",
         color: "#FFFFFF",
+        textAlign: "end",
       },
       btnAnnuler: {
         margin: "5px",

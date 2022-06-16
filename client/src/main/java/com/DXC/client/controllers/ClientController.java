@@ -4,7 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:3000")
+=======
+@CrossOrigin(origins = "*")
+>>>>>>> khalid
 @RequestMapping(path = "DXC/clients")
 public class ClientController {
         private final com.DXC.client.services.ClientService clientService;

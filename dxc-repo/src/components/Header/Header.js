@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Menu, MenuItem } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import {
   Menu as MenuIcon,
   NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   ArrowBack as ArrowBackIcon,
-  Language,
-  Brightness6,
 } from "@material-ui/icons";
 import classNames from "classnames";
-
 // styles
 import useStyles from "./styles";
-
 // components
 import { Typography } from "../Wrappers";
 
@@ -26,7 +23,7 @@ import { useUserDispatch, signOut } from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();
-
+  let history = useHistory();
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
@@ -35,7 +32,9 @@ export default function Header(props) {
   // local
   var [mailMenu, setMailMenu] = useState(null);
   var [profileMenu, setProfileMenu] = useState(null);
-
+  function Profil() {
+    history.push("/app/prestations/profil/:id");
+  }
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -48,23 +47,14 @@ export default function Header(props) {
           )}
         >
           {layoutState.isSidebarOpened ? (
-            <ArrowBackIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
-              style={{ color: "black" }}
+            <i
+              className="pe-7s-angle-left"
+              style={{ color: "#603494", fontSize: "2.8rem" }}
             />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
+            <i
+              className="pe-7s-menu"
+              style={{ color: "#603494", fontSize: "2.0rem" }}
             />
           )}
         </IconButton>
@@ -88,10 +78,11 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <NotificationsIcon
+          <i
+            className="pe-7s-bell"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
         <IconButton
           aria-haspopup="true"
@@ -99,12 +90,13 @@ export default function Header(props) {
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
         >
-          <Language
+          <i
+            className="pe-7s-global"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
-        <IconButton
+        {/* <IconButton
           aria-haspopup="true"
           color="inherit"
           className={classes.headerMenuButton}
@@ -114,7 +106,8 @@ export default function Header(props) {
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
           />
-        </IconButton>
+        </IconButton> */}
+
         <IconButton
           aria-haspopup="true"
           color="inherit"
@@ -122,10 +115,11 @@ export default function Header(props) {
           aria-controls="profile-menu"
           onClick={(e) => setProfileMenu(e.currentTarget)}
         >
-          <AccountIcon
+          <i
+            className="pe-7s-user"
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
-          />
+          ></i>
         </IconButton>
 
         <Menu
@@ -155,20 +149,20 @@ export default function Header(props) {
               className={classes.profileMenuLink}
               component="a"
               color="primary"
-              href="https://flatlogic.com"
             >
               Post Occupé
             </Typography>
           </div>
+          <Button onClick={Profil}>
           <MenuItem
             className={classNames(
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
+                      <AccountIcon className={classes.profileMenuIcon}  /> Profile
           </MenuItem>
-
+ </Button> 
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

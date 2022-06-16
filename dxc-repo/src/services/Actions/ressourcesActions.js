@@ -14,32 +14,30 @@ import {
   BEGIN_RESSOURCE_EDIT,
   EDITION_RESSOURCE_SUCCESS,
   EDIT_RESSOURCE_ERROR,
+  SHOW_ID_RESSOURCE
 } from "../types";
 import Swal from "sweetalert2";
 
 import clienteAxios from "../../config/axios";
 import axios from "axios";
+import moment from "moment";
 
 //créer un nouveau produit - fonction principale
 export function createNewRessourceAction(ressource) {
   console.log("ressource", ressource);
-  const ressource_date = {
-    matricule: ressource.Matricule,
-    status: ressource.Status,
-    genre: ressource.Genre,
-    dateAmbauche: ressource.DateAmbauche,
-    firstName: ressource.Nom,
-    dateNaissance: ressource.DateNaissance,
-    lastName: ressource.Prenom,
-  };
-  console.log("ressource", ressource_date);
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("http://localhost:9000/DXC/addRessource", ressource_date)
+      .post("https://dxcrepo-ressource.azurewebsites.net/DXC/addRessource", ressource)
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -66,9 +64,13 @@ export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
     axios
-      .get("http://localhost:9000/DXC/ressource")
+      .get("https://dxcrepo-ressource.azurewebsites.net/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
+        resp.data.forEach((element) => {
+          element.dateAmbauche = moment(element.dateAmbauche).format("L");
+          element.dateNaissance = moment(element.dateNaissance).format("L");
+        });
         dispatch(downloadRessourcesSuccessful(resp.data));
       })
       .catch((error) => {
@@ -110,6 +112,16 @@ export function deleteRessourceAction(id) {
     //   });
   };
 }
+export function showIdRessources(value) {
+  return (dispatch) => {
+    console.log("show ressource action ffffffffffffffffffffffff ", value);
+    dispatch(showIdRessource(value));
+  };
+}
+export const showIdRessource = (value) => ({
+  type: SHOW_ID_RESSOURCE,
+  payload: value,
+});
 
 export const getRessourceDelete = () => ({
   type: GET_RESSOURCE_REMOVE,
@@ -125,7 +137,7 @@ export const deleteRessourceError = () => ({
 });
 
 //fonction pour obtenir le produit à modifier
-export function getRessourceAcoution(id) {
+export function getRessourceAction(id) {
   return (dispatch) => {
     dispatch(getEditRessourcesAction());
 
@@ -156,22 +168,44 @@ export const getRessourceEditError = () => ({
   type: RESSOURCE_EDIT_ERROR,
 });
 
-//MODIFIER UN PRODUIT DANS L'API ET L'ETAT
 export function editRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(startEditRessource());
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
+    const ressource_date = {
+      matricule: ressource.Matricule,
+      status: ressource.Status,
+      genre: ressource.Genre,
+      dateAmbauche: ressource.DateAmbauche,
+      firstName: ressource.Nom,
+      dateNaissance: ressource.DateNaissance,
+      lastName: ressource.Prenom,
+      technologies: ressource.forms,
+      methodes: ressource.formsMethodes,
+      outils: ressource.formsOutils,
+    };
     clienteAxios
-      .put(`route/api/${ressource.id}`, ressource)
+      .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
-        Swal.fire("Stored", "The Product was successfully updated", "success");
+        Swal.fire({
+          timer: 3000,
+          text: "La ressource est modifier avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
       })
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
+        // Swal.fire({
+        //   timer: 3000,
+        //   text: "La ressource n'est pas modifier !",
+        //   timeerProgressBar: true,
+        //   icon: "error",
+        // });
       });
   };
 }

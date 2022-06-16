@@ -28,12 +28,14 @@ public class ressource_service {
         return  repo.findAll();
     }
 
-    public ressource afficherbyid( String id){
+    public List<ressource> afficher_ressource_acct(Integer idAcct){
+        return  repo.getRessurceOfActivité(idAcct);
+    }
+
+    public ressource afficherbyid( Integer id){
         return repo.findById(id).orElse(null);
     }
-/*delate route */
-    @DeleteMapping("/delete/{id}")
-    public boolean suppression( String id){
+    public boolean suppression( Integer id){
         repo.deleteById(id);
         return true;
 

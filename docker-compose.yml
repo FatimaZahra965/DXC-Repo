@@ -2,65 +2,62 @@ version: '3.1'
 services:
   # Frontend Service
   dxc-repo-frontend:
-    build:
-      context: dxc-repo # Use an image built from the specified dockerfile in the `polling-app-client` directory.
-      dockerfile: Dockerfile
-      args:
-         REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api
+    container_name: dxc-repo
+    image: dxcrepo.azurecr.io/dxc-repo:latest
+    build: ./dxc-repo
     ports:
-      - "3000:3000" # Map the exposed port 80 on the container to port 9090 on the host machine
-
-  # certif:
-  #   container_name: microservice-certificat
-  #   image: microservice-certificat
-  #   build: ./certificat
-  #   ports:
-  #     - "9001:9001"
-  #   depends_on:
-  #     - db
-  # ressource:
-  #   container_name: microservice-ressource
-  #   image: microservice-ressource
-  #   build: ./ressource
-  #   ports:
-  #     - "9000:9000"
-  #   depends_on:
-  #     - db
-  # prestation:
-  #   container_name: microservice-prestation
-  #   image: microservice-prestation
-  #   build: ./prestation
-  #   ports:
-  #     - "9002:9002"
-  #   depends_on:
-  #     - db
-  # contrat:
-  #   container_name: microservice-contrat
-  #   image: microservice-contrat
-  #   build: ./contrat
-  #   ports:
-  #     - "9003:9003"
-  #   depends_on:
-  #     - db
+      - "80:3000"
+  certif:
+    container_name: microservice-certificat
+    image: dxcrepo.azurecr.io/microservice-certificat:latest
+    build: ./certificat
+    ports:
+      - "9001:9001"
+    depends_on:
+      - db
+  ressource:
+    container_name: microservice-ressource
+    image: dxcrepo.azurecr.io/microservice-ressource:latest
+    build: ./ressource
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+  prestation:
+    container_name: microservice-prestation
+    image: dxcrepo.azurecr.io/microservice-prestation:latest
+    build: ./prestation
+    ports:
+      - "9002:9002"
+    depends_on:
+      - db
+  contrat:
+    container_name: microservice-contrat
+    image: dxcrepo.azurecr.io/microservice-contrat:latest
+    build: ./contrat
+    ports:
+      - "9003:9003"
+    depends_on:
+      - db
   client:
     container_name: microservice-client
-    image: microservice-client
+    image: dxcrepo.azurecr.io/microservice-client:latest
     build: ./client
     ports:
       - "9004:9004"
     depends_on:
       - db
-  # competance:
-  #   container_name: microservice-competance
-  #   image: microservice-competance
-  #   build: ./competance
-  #   ports:
-  #     - "9005:9005"
-  #   depends_on:
-  #     - db
+  competance:
+    container_name: microservice-competance
+    image: dxcrepo.azurecr.io/microservice-competance:latest
+    build: ./competance
+    ports:
+      - "9005:9005"
+    depends_on:
+      - db
   db:
-    build: ./database
-    image: postgres:latest
+    build: database
+    image: dxcrepo.azurecr.io/postgres:latest
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
