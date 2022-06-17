@@ -85,3 +85,4 @@ release_dxcrepo_front:
     - docker push $DOCKER_REPOSITORY/dxc-repo:latest
   only:
     - main
+  
