@@ -18,30 +18,15 @@ public class Competance {
     )
     private int id;
     private String nomCompetance;
-<<<<<<< HEAD
-    private String market;
-=======
     private int matriculeRessource;
     private String nomRessource;
     private String typeComp;
     private String evaluationManager;
     private String niveau;
->>>>>>> khalid
 
     public Competance() {
     }
 
-<<<<<<< HEAD
-    public Competance(int id, String nomCompetance, String market) {
-        this.id = id;
-        this.nomCompetance = nomCompetance;
-        this.market = market;
-    }
-
-    public Competance(String nomCompetance, String market) {
-        this.nomCompetance = nomCompetance;
-        this.market = market;
-=======
     public Competance(int id, String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
@@ -61,7 +46,6 @@ public class Competance {
         this.niveau = niveau;
 
 
->>>>>>> khalid
     }
 
     public int getId() {
@@ -79,16 +63,6 @@ public class Competance {
     public void setNomCompetance(String nomCompetance) {
         this.nomCompetance = nomCompetance;
     }
-<<<<<<< HEAD
-    public String getMarket() {
-        return market;
-    }
-
-    public void setMarket(String market) {
-        this.market = market;
-    }
-}
-=======
 
     public int getMatriculeRessource() {
         return matriculeRessource;
@@ -130,6 +104,3 @@ public class Competance {
         this.evaluationManager = evaluationManager;
     }
 }
-
-
->>>>>>> khalid
