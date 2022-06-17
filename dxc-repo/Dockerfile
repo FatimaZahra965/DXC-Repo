@@ -7,7 +7,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY yarn.lock .
-RUN npm install
+RUN npm install -g npm@8.12.2
 # Copy app files
 COPY . .
 # Expose port
