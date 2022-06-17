@@ -78,6 +78,7 @@ release_activite:
     - docker push $DOCKER_REPOSITORY/microservice-activite:latest
   only:
     - main
+    
 release_dxcrepo_front:
   stage: build dxcrepo
   script:
