@@ -7,7 +7,6 @@ function Technologies() {
   const competances = useSelector(
     (state) => state.competances.competancesRess,
   );
-  console.log("competancescompetancescompetancescompetances zzzzzzzzzzzzzzzzzzz",competances);
     return (
         <div>
         <Card>

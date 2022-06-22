@@ -110,5 +110,3 @@ public class Competance {
         this.evaluationManager = evaluationManager;
     }
 }
-
-
