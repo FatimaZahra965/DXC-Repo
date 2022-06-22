@@ -1,4 +1,6 @@
 package com.DXC.contrat.models;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,10 +20,13 @@ public class Contrat {
     private String description;
     @Column(name = "type")
     private String type;
+    
     @Column(name = "dateDebut")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebut;
 
     @Column(name = "dateFin")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFin;
 
     public Contrat() {

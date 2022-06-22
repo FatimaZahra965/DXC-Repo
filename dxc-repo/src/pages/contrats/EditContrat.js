@@ -67,17 +67,7 @@ function EditContrat(props) {
 
     validarForm();
 
-    if (
-      currentContrat.nomClient.trim() === "" ||
-      currentContrat.nomContrat.trim() === "" ||
-      currentContrat.description.trim() === "" ||
-      currentContrat.type.trim() === "" ||
-      currentContrat.dateDebut.trim() === "" ||
-      currentContrat.dateFin.trim() === ""
-    ) {
-      errorValidacion();
-      return;
-    }
+
     //si pasa la validacion//si todo sale bien
     SuccessValidacion();
 
@@ -127,6 +117,7 @@ function EditContrat(props) {
               label="Type"
               size="small"
               fullWidth
+              name="type"
               variant="outlined"
               value={currentContrat.type}
               onChange={handleInputChange}
@@ -170,6 +161,7 @@ function EditContrat(props) {
               format="MM/dd/yyyy"
               variant="outlined"
               fullWidth
+              name="dateDebut"
               type="date"
               value={currentContrat.dateDebut}
               onChange={handleInputChange}
@@ -183,6 +175,7 @@ function EditContrat(props) {
               format="MM/dd/yyyy"
               size="small"
               variant="outlined"
+              name="dateFin"
               fullWidth
               value={currentContrat.dateFin}
               onChange={handleInputChange}

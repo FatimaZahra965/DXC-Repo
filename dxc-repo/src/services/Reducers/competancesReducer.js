@@ -5,6 +5,7 @@ import {
     DOWNLOAD_COMPETANCE__ERROR,
     START_DOWNLOAD_COMPETANCES,
     COMPETANCE_DOWNLOAD_SUCCESSFUL,
+    SHOW_COMPETANCE_ID_RESSOURCE,
   } from "../types";
   
   const initialState = {
@@ -12,6 +13,7 @@ import {
     error: null,
     loading: false,
     competance: {},
+    competancesRess: []
   };
   
   // eslint-disable-next-line import/no-anonymous-default-export
@@ -22,6 +24,11 @@ import {
           ...state,
           error: null,
         };
+        case SHOW_COMPETANCE_ID_RESSOURCE:
+      return {
+        ...state,
+        competancesRess:  action.payload,
+      };
       case ADD_COMPETANCE_SUCCESS:
         return {
           ...state,

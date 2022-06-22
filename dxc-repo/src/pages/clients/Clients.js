@@ -11,20 +11,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios";
 import SearchIcon from "@material-ui/icons/Search";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import {
-  IconButton,
-  InputAdornment,
-  TablePagination,
-  TextField,
-} from "@material-ui/core";
+import { IconButton,InputAdornment,TablePagination, TextField,} from "@material-ui/core";
 // styles
 import useStyles from "./styles";
-import "./style.css";
 import { Grid } from "@material-ui/core";
 import { getClientsAction } from "../../services/Actions/clientActions";
 export default function Clients() {

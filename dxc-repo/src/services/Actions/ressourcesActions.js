@@ -33,7 +33,7 @@ export function createNewRessourceAction(ressource) {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est ajouter avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -114,7 +114,6 @@ export function deleteRessourceAction(id) {
 }
 export function showIdRessources(value) {
   return (dispatch) => {
-    console.log("show ressource action ffffffffffffffffffffffff ", value);
     dispatch(showIdRessource(value));
   };
 }
@@ -191,7 +190,7 @@ export function editRessourceAction(ressource) {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est modifier avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -200,12 +199,6 @@ export function editRessourceAction(ressource) {
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
-        // Swal.fire({
-        //   timer: 3000,
-        //   text: "La ressource n'est pas modifier !",
-        //   timeerProgressBar: true,
-        //   icon: "error",
-        // });
       });
   };
 }

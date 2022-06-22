@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,14 +17,17 @@ public class certificat {
     @Id
     @GeneratedValue
     private int id;
+    @Column(name = "code")
     private String code;
+    @Column(name = "titre")
     private String titre;
-
+    @Column(name = "datecertification")
     private  Date datecertification;
-
+    @Column(name = "ressourceid")
     private String ressourceid;
+    @Column(name = "niveau")
     private String niveau;
-
+    @Column(name = "validation")
     private String validation;
 
     public String getValidation() {

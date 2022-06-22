@@ -17,31 +17,22 @@ public class Competance {
             generator = "competance_index"
     )
     private int id;
+    @Column(name = "nomCompetance")
     private String nomCompetance;
-<<<<<<< HEAD
-    private String market;
-=======
+    @Column(name = "matriculeRessource")
     private int matriculeRessource;
+    @Column(name = "nomRessource")
     private String nomRessource;
+    @Column(name = "typeComp")
     private String typeComp;
+    @Column(name = "evaluationManager")
     private String evaluationManager;
+    @Column(name = "niveau")
     private String niveau;
->>>>>>> khalid
 
     public Competance() {
     }
 
-<<<<<<< HEAD
-    public Competance(int id, String nomCompetance, String market) {
-        this.id = id;
-        this.nomCompetance = nomCompetance;
-        this.market = market;
-    }
-
-    public Competance(String nomCompetance, String market) {
-        this.nomCompetance = nomCompetance;
-        this.market = market;
-=======
     public Competance(int id, String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
@@ -61,7 +52,6 @@ public class Competance {
         this.niveau = niveau;
 
 
->>>>>>> khalid
     }
 
     public int getId() {
@@ -79,16 +69,6 @@ public class Competance {
     public void setNomCompetance(String nomCompetance) {
         this.nomCompetance = nomCompetance;
     }
-<<<<<<< HEAD
-    public String getMarket() {
-        return market;
-    }
-
-    public void setMarket(String market) {
-        this.market = market;
-    }
-}
-=======
 
     public int getMatriculeRessource() {
         return matriculeRessource;
@@ -132,4 +112,3 @@ public class Competance {
 }
 
 
->>>>>>> khalid

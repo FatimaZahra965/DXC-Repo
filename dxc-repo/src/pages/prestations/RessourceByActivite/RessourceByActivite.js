@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid, Typography } from "@material-ui/core";
+import { Box, Button, Card, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
@@ -29,7 +29,7 @@ export default function RessourceByActivite() {
         console.log(error);
         //si hay un error
       });
-  }, []);
+  },);
 const viewProfil=(e)=>{
   history.push("/app/prestations/profil/"+e)
 }

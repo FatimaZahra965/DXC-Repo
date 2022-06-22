@@ -32,11 +32,8 @@ public class ClientService {
         com.DXC.client.models.Client existingClient = clientRepository.findById(client.getId()).orElse(null);
         existingClient.setNomClient(client.getNomClient());
         existingClient.setMarket(client.getMarket());
-<<<<<<< HEAD
-=======
          existingClient.setLabel(client.getLabel());
         
->>>>>>> khalid
 
         return clientRepository.save(existingClient);
     }

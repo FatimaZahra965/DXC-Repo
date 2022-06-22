@@ -7,6 +7,10 @@ export default makeStyles(theme => ({
         maxHeight: 350,
         border: "2px solid #741F82",
       },
+      hrGlobale: {
+        margin: "5px",
+        backgroundColor: "#603494",
+      },
       GridForm: {
         marginLeft: "70px",
         margin: "20px 0px 20px 0px",

@@ -46,6 +46,7 @@ public class ressource_service {
         ressourceexist.setFirstName(ressource.getFirstName());
         ressourceexist.setLastName(ressource.getLastName());
         ressourceexist.setStatus(ressource.getStatus());
+        ressourceexist.setProfil(ressource.getProfil());
         ressourceexist.setDateNaissance(ressource.getDateNaissance());
         ressourceexist.setDateAmbauche(ressource.getDateAmbauche());
         return repo.save(ressourceexist);

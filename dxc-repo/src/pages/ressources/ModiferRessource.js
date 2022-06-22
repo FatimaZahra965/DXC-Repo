@@ -68,7 +68,7 @@ export default function ModiferRessource({ match }) {
 
   const submitEditRessource = (e) => {
     e.preventDefault();
-
+    validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -385,7 +385,7 @@ export default function ModiferRessource({ match }) {
               size="small"
               fullWidth
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.profil}
               onChange={(e) => {
                 handleInputChange(e);
                 setStatusEror("");
@@ -408,7 +408,7 @@ export default function ModiferRessource({ match }) {
               fullWidth
               name="profil"
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.profil}
               onChange={(e) => {
                 handleInputChange(e);
                 setProfilEror("");

@@ -1,8 +1,5 @@
 package com.DXC.competance.services;
-<<<<<<< HEAD
-=======
 import com.DXC.competance.models.Competance;
->>>>>>> khalid
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +19,6 @@ public class CompetanceService {
         return this.competanceRepository.findAll();
     }
 
-<<<<<<< HEAD
-    public com.DXC.competance.models.Competance getCompetanceByID(Integer id) {
-        return competanceRepository.findById(id).orElse(null);
-    }
-=======
 
     public com.DXC.competance.models.Competance getCompetanceByID(Integer id) {
         return competanceRepository.findById(id).orElse(null);
@@ -38,7 +30,6 @@ public class CompetanceService {
     public List<com.DXC.competance.models.Competance>  getCompetanceByTypeComp(String typeComp) {
         return competanceRepository.findCompetanceByTypeComp(typeComp);
     }
->>>>>>> khalid
     public void addCompetance(com.DXC.competance.models.Competance competance) {
         Optional<com.DXC.competance.models.Competance> optionalCompetance = competanceRepository.findCompetanceByNomCompetance(competance.getNomCompetance());
         if (optionalCompetance.isPresent()) {
@@ -49,15 +40,11 @@ public class CompetanceService {
     public com.DXC.competance.models.Competance updateCompetance(com.DXC.competance.models.Competance competance) {
         com.DXC.competance.models.Competance existingCompetance = competanceRepository.findById(competance.getId()).orElse(null);
         existingCompetance.setNomCompetance(competance.getNomCompetance());
-<<<<<<< HEAD
-        existingCompetance.setMarket(competance.getMarket());
-=======
         existingCompetance.setMatriculeRessource(competance.getMatriculeRessource());
         existingCompetance.setEvaluationManager(competance.getEvaluationManager());
         existingCompetance.setTypeComp(competance.getTypeComp());
         existingCompetance.setNomRessource(competance.getNomRessource());
         existingCompetance.setNiveau(competance.getNiveau());
->>>>>>> khalid
 
         return competanceRepository.save(existingCompetance);
     }
