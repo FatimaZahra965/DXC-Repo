@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { Box, Button, IconButton } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import moment from "moment";
 
 export default function AjouterRessource() {
   const classes = useStyles();
@@ -55,8 +56,11 @@ export default function AjouterRessource() {
   const errorValidacion = () => dispatch(validacionError());
 
   const error = useSelector((state) => state.error.error);
+  const [doErr, setDoErr] = useState(false);
+
   const submitNewRessource = (e) => {
     e.preventDefault();
+    validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -69,13 +73,13 @@ export default function AjouterRessource() {
     let formsMethodesEror = "";
     let formsOutilsEror = "";
 
-    if (!Matricule) {
+    if (!Matricule || !new RegExp(/^\w+$/).test(Matricule)) {
       matriculeEror = "le champ Matricule de la ressource est obligatiore";
     }
-    if (!Status) {
+    if (!Status || !new RegExp(/^\w+$/).test(Status)) {
       statusEror = "le champ Status de la ressource est obligatiore";
     }
-    if (!Genre) {
+    if (!Genre || !new RegExp(/^\w+$/).test(Genre)) {
       genreEror = "le champ Genre de la ressource est obligatiore";
     }
     if (!DateAmbauche) {
@@ -89,10 +93,10 @@ export default function AjouterRessource() {
     if (!Profil) {
       profilEror = "le champ Profil de la ressource est obligatiore";
     }
-    if (!Nom) {
+    if (!Nom || !new RegExp(/^\w+$/).test(Nom)) {
       nomEror = "le champ Nom de la ressource est obligatiore";
     }
-    if (!Prenom) {
+    if (!Prenom || !new RegExp(/^\w+$/).test(Prenom)) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
     }
     if (!forms) {
@@ -131,17 +135,23 @@ export default function AjouterRessource() {
       setFormsOutilsEror(formsOutilsEror);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
+    const dates = {
+      DateNaissance: moment(DateNaissance).format("yyyy-MM-DD"),
+      DateAmbauche: moment(DateAmbauche).format("yyyy-MM-DD"),
+    };
     let ressource = {
       matricule: Matricule,
       status: Status,
       genre: Genre,
-      dateNaissance: DateNaissance,
+      dateNaissance: dates.DateNaissance,
       lastName: Nom,
+      profil: Profil,
       firstName: Prenom,
-      dateAmbauche: DateAmbauche,
+      dateAmbauche: dates.DateAmbauche,
       technologies: forms,
       methodes: formsMethodes,
       outils: formsOutils,
@@ -165,19 +175,19 @@ export default function AjouterRessource() {
 
   const status = [
     {
-      label: "recrutement",
+      label: "Recrutement",
       value: "recrutement",
     },
     {
       label: "Salarié",
-      value: "Salarié",
+      value: "salarie",
     },
     {
       label: "Contractant",
-      value: "Contractant",
+      value: "contractant",
     },
     {
-      label: "inactif",
+      label: "Inactif",
       value: "inactif",
     },
   ];
@@ -185,27 +195,27 @@ export default function AjouterRessource() {
   const profiles = [
     {
       label: "Entry",
-      value: "Entry",
+      value: "entry",
     },
     {
       label: "Intermediate",
-      value: "Intermediate",
+      value: "intermediate",
     },
     {
       label: "Specialist",
-      value: "Specialist",
+      value: "specialist",
     },
     {
       label: "Referent",
-      value: "Referent",
+      value: "referent",
     },
     {
       label: "Expert",
-      value: "Expert",
+      value: "expert",
     },
     {
       label: "Master",
-      value: "Master",
+      value: "master",
     },
   ];
 
@@ -295,8 +305,9 @@ export default function AjouterRessource() {
   return (
     <>
       <PageTitle title="Ajouter Ressource" path="/app/prestations/ressources" />
+      <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
-        {error ? (
+        {error && doErr ? (
           <Alert severity="error">La ressource n'est pas ajouté!</Alert>
         ) : null}
       </Grid>
@@ -310,10 +321,11 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Prenom}
+              value={Prenom}
               onChange={(e) => {
                 setPrenom(e.target.value);
                 setPrenomEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{PrenomEror}</div>
@@ -325,10 +337,11 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Nom}
+              value={Nom}
               onChange={(e) => {
                 setNom(e.target.value);
                 setNomEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{NomEror}</div>
@@ -340,7 +353,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={Matricule}
+              value={Matricule}
               onChange={(e) => {
                 setMatricule(e.target.value);
                 setMatriculeEror("");
@@ -356,7 +369,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Status}
+              value={Status}
               onChange={(e) => {
                 setStatus(e.target.value);
                 setStatusEror("");
@@ -378,7 +391,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Genre}
+              value={Genre}
               onChange={(e) => {
                 setGenre(e.target.value);
                 setGenreEror("");
@@ -398,7 +411,7 @@ export default function AjouterRessource() {
               size="small"
               fullWidth
               variant="outlined"
-              valur={Profil}
+              value={Profil}
               onChange={(e) => {
                 setProfil(e.target.value);
                 setProfilEror("");
@@ -412,6 +425,7 @@ export default function AjouterRessource() {
             </TextField>
             <div style={{ color: "red" }}>{ProfilEror}</div>
           </Grid>
+          
           <Grid item xs={6}>
             <label>Date d'ambauche</label>
             <TextField
@@ -420,7 +434,7 @@ export default function AjouterRessource() {
               variant="outlined"
               fullWidth
               type="date"
-              valur={DateAmbauche}
+              value={DateAmbauche}
               onChange={(e) => {
                 setDateAmbauche(e.target.value);
                 setDateAmbaucheEror("");
@@ -436,7 +450,7 @@ export default function AjouterRessource() {
               size="small"
               variant="outlined"
               fullWidth
-              valur={DateNaissance}
+              value={DateNaissance}
               onChange={(e) => {
                 setDateNaissance(e.target.value);
                 setDateAmbaucheEror("");
@@ -464,13 +478,14 @@ export default function AjouterRessource() {
                   id="outlined-basic"
                   label="Technologies"
                   size="small"
-                  name="name"
+                  name="titre"
                   variant="outlined"
                   fullWidth
                   value={form.name}
                   onChange={(e) => {
                     handleInputChange(e, i);
                     setFormsEror("");
+                    setDoErr(false);
                   }}
                 />
                 <br />
@@ -534,13 +549,14 @@ export default function AjouterRessource() {
                     id="outlined-basic"
                     label="Méthode"
                     size="small"
-                    name="name"
+                    name="titre"
                     variant="outlined"
                     fullWidth
                     value={form.name}
                     onChange={(e) => {
                       handleInputChangeMethodes(e, i);
                       setFormsMethodesEror("");
+                      setDoErr(false);
                     }}
                   />
                   <br />
@@ -607,7 +623,7 @@ export default function AjouterRessource() {
                   id="outlined-basic"
                   label="Outil"
                   size="small"
-                  name="name"
+                  name="titre"
                   variant="outlined"
                   fullWidth
                   value={form.name}

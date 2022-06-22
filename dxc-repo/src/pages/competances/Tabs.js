@@ -14,6 +14,17 @@ export const Tab = ({ title, onClick, active = false }) => {
       </li>
 
       <style jsx="true">{`
+       li.tab-item {
+          list-style-type: none;
+          padding: 1rem 2rem;
+         width: 400px;
+          background-color: #D2D2D2;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
+          cursor: pointer;
+          transition: all 0.5s ease;
+        }
         li.tab-item {
           list-style-type: none;
           padding: 1rem 2rem;
@@ -70,8 +81,11 @@ export default function Tabs({ children }) {
 
       <style jsx="true">{`
         .tab-list {
-          padding: 2;
+          padding: 5;
           display: flex;
+          margin-left: -28px;
+          margin-right: 17px;
+          margin-top: 17px;
         }
 
         .tab-content {

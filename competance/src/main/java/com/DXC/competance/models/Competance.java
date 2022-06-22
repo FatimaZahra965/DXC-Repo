@@ -17,17 +17,23 @@ public class Competance {
             generator = "competance_index"
     )
     private int id;
+    @Column(name = "nomCompetance")
     private String nomCompetance;
-    private String matriculeRessource;
+    @Column(name = "matriculeRessource")
+    private int matriculeRessource;
+    @Column(name = "nomRessource")
     private String nomRessource;
+    @Column(name = "typeComp")
     private String typeComp;
+    @Column(name = "evaluationManager")
     private String evaluationManager;
+    @Column(name = "niveau")
     private String niveau;
 
     public Competance() {
     }
 
-    public Competance(int id, String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(int id, String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
@@ -37,7 +43,7 @@ public class Competance {
         this.niveau = niveau;
     }
 
-    public Competance(String nomCompetance, String matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
         this.nomRessource = nomRessource;
@@ -64,11 +70,11 @@ public class Competance {
         this.nomCompetance = nomCompetance;
     }
 
-    public String getMatriculeRessource() {
+    public int getMatriculeRessource() {
         return matriculeRessource;
     }
 
-    public void setMatriculeRessource(String matriculeRessource) {
+    public void setMatriculeRessource(int matriculeRessource) {
         this.matriculeRessource = matriculeRessource;
     }
 
@@ -104,5 +110,3 @@ public class Competance {
         this.evaluationManager = evaluationManager;
     }
 }
-
-

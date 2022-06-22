@@ -14,6 +14,7 @@ import {
   BEGIN_RESSOURCE_EDIT,
   EDITION_RESSOURCE_SUCCESS,
   EDIT_RESSOURCE_ERROR,
+  SHOW_ID_RESSOURCE
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -27,12 +28,12 @@ export function createNewRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("http://localhost:9000/DXC/addRessource", ressource)
+      .post("https://dxcrepo-ressource.azurewebsites.net/DXC/addRessource", ressource)
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est ajouter avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -63,7 +64,7 @@ export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
     axios
-      .get("http://localhost:9000/DXC/ressource")
+      .get("https://dxcrepo-ressource.azurewebsites.net/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
         resp.data.forEach((element) => {
@@ -111,6 +112,15 @@ export function deleteRessourceAction(id) {
     //   });
   };
 }
+export function showIdRessources(value) {
+  return (dispatch) => {
+    dispatch(showIdRessource(value));
+  };
+}
+export const showIdRessource = (value) => ({
+  type: SHOW_ID_RESSOURCE,
+  payload: value,
+});
 
 export const getRessourceDelete = () => ({
   type: GET_RESSOURCE_REMOVE,
@@ -175,12 +185,12 @@ export function editRessourceAction(ressource) {
       outils: ressource.formsOutils,
     };
     clienteAxios
-      .put(`http://localhost:9000/DXC/update`, ressource_date)
+      .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est modifier avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -189,12 +199,6 @@ export function editRessourceAction(ressource) {
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
-        // Swal.fire({
-        //   timer: 3000,
-        //   text: "La ressource n'est pas modifier !",
-        //   timeerProgressBar: true,
-        //   icon: "error",
-        // });
       });
   };
 }

@@ -56,7 +56,6 @@ function EditCompetance(props) {
 
 
   const updateContent = () => {
-    console.log("currentCompetance",currentCompetance);
 
     validarForm();
 

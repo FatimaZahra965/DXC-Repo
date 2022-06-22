@@ -33,7 +33,7 @@ export default function Header(props) {
   var [mailMenu, setMailMenu] = useState(null);
   var [profileMenu, setProfileMenu] = useState(null);
   function Profil() {
-    history.push("/app/prestations/profil");
+    history.push("/app/prestations/profil/:id");
   }
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -48,18 +48,13 @@ export default function Header(props) {
         >
           {layoutState.isSidebarOpened ? (
             <i
-              className="pe-7s-left-arrow"
-              classes={{ root: classes.headerIcon }}
-              style={{ color: "black" }}
-            ></i>
+              className="pe-7s-angle-left"
+              style={{ color: "#603494", fontSize: "2.8rem" }}
+            />
           ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }}
+            <i
+              className="pe-7s-menu"
+              style={{ color: "#603494", fontSize: "2.0rem" }}
             />
           )}
         </IconButton>
@@ -88,10 +83,6 @@ export default function Header(props) {
             classes={{ root: classes.headerIcon }}
             style={{ color: "black" }}
           ></i>
-          {/* <NotificationsIcon
-            classes={{ root: classes.headerIcon }}
-            style={{ color: "black" }}
-          /> */}
         </IconButton>
         <IconButton
           aria-haspopup="true"

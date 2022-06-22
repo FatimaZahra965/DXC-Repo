@@ -10,4 +10,6 @@ public interface CompetanceRepository extends JpaRepository<com.DXC.competance.m
     @Query("SELECT c FROM Competance c WHERE c.nomCompetance = ?1")
     Optional<com.DXC.competance.models.Competance> findCompetanceByNomCompetance(String nomCompetance);
     List<Competance> findCompetanceByTypeComp(String typeComp);
+    @Query("SELECT c FROM Competance c WHERE c.matriculeRessource = ?1")
+    List<Competance> findCompetanceByIdRessource(int matriculeRessource);
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.*;
@@ -24,11 +25,22 @@ public class ressource {
     @Id
     @GeneratedValue
     private int matricule;
+    @Column(name = "status")
     private String status;
+    @Column(name = "firstname")
     private String firstname;
+    @Column(name = "lastname")
     private String lastname;
+    @Column(name = "profil")
+    private String profil;
+
+    @Column(name = "genre")
     private String genre;
+    @Column(name = "dateambauche")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateambauche;
+    @Column(name = "datenaissance")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datenaissance;
 
     @OneToMany(targetEntity = methode.class,cascade = CascadeType.ALL)
@@ -75,6 +87,14 @@ public class ressource {
 
     public String getGenre() {
         return genre;
+    }
+
+    public String getProfil() {
+        return profil;
+    }
+
+    public void setProfil(String profil) {
+        this.profil = profil;
     }
 
     public void setGenre(String genree) {

@@ -35,13 +35,12 @@ function AjouteContrat() {
     dateDebutEror:"",
     dateFinEror:"",
    };
-   
   const [nomContrat, setNomContrat] = useState(initialContratState.nomContrat);
   const [nomClient, setNomClient] = useState(initialContratState.nomClient);
   const [type, setType] = useState(initialContratState.type);
   const [description, setDescription] = useState(initialContratState.description);
   const [dateDebut, setDateDebut] =useState(initialContratState.dateDebut);
-  const [dateFin, setDateFin] = useState(initialContratState);
+  const [dateFin, setDateFin] = useState(initialContratState.dateFin);
 
   // Eror states
   const [nomContratEror, setNomContratEror] = useState(initialContratState.nomContratEror);
@@ -111,32 +110,22 @@ function AjouteContrat() {
       setDateDebutEror(dateDebutEror);
       setDateFinEror(dateFinEror);
     }
-    if (
-      nomContrat.trim() === "" ||
-      nomClient.trim() === "" ||
-      type.trim() === "" ||
-      description.trim() === "" ||
-      dateDebut.trim() === "" ||
-      dateFin.trim() === "" 
-   
-    ) {
-      errorValidation();
-      return;
-    }
     //si pasa la validacion//si todo sale bien
     SuccessValidation();
-
+    const dates = {
+      dateDebut: moment(dateDebut).format("yyyy-MM-DD"),
+      dateFin: moment(dateFin).format("yyyy-MM-DD"),
+    };
     //créer un nouveau contrat
     let contrat = {
       nomContrat : nomContrat,
       nomClient : nomClient,
       type : type,
       description :description,
-      dateDebut :dateDebut,
-      dateFin :dateFin,
+      dateDebut :dates.dateDebut,
+      dateFin :dates.dateFin,
       
     };
-    
     addContrat(contrat);
     history.push("/app/prestations/Contrats");
   };
@@ -227,6 +216,9 @@ function AjouteContrat() {
               label="Description"
               size="small"
               fullWidth
+              multiline
+              maxRows={3}
+              minRows={3}
               variant="outlined"
               value={description}
               onChange={(e) =>{ setDescription(e.target.value);
@@ -234,10 +226,11 @@ function AjouteContrat() {
               />
               <div style={{ color: "red" }}>{descriptionEror}</div>
           </Grid>
-          
+        
           <Grid item xs={6}>
+            
             <label>Date de début</label>
-            <TextField
+            <TextField 
               id="outlined-basic"
               size="small"
               format="MM/dd/yyyy"

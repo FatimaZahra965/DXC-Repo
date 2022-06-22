@@ -7,12 +7,9 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY yarn.lock .
-RUN npm install
+RUN npm install --force
 # Copy app files
 COPY . .
-# Arguments
-# ARG REACT_APP_API_BASE_URL
-# ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
 # Expose port
 EXPOSE 3000
 # Start the app

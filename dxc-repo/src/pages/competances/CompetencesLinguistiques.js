@@ -21,7 +21,7 @@ function CompetencesLinguistiques(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get("http://localhost:9005/DXC/competances/Competance/type/Competences/linguistiques", {
+      .get("http://localhost:9005/DXC/competances/Competance/type/Compétences linguistiques", {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

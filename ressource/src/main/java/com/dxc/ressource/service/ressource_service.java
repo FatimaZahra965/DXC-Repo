@@ -28,6 +28,10 @@ public class ressource_service {
         return  repo.findAll();
     }
 
+    public List<ressource> afficher_ressource_acct(Integer idAcct){
+        return  repo.getRessurceOfActivité(idAcct);
+    }
+
     public ressource afficherbyid( Integer id){
         return repo.findById(id).orElse(null);
     }
@@ -42,6 +46,7 @@ public class ressource_service {
         ressourceexist.setFirstName(ressource.getFirstName());
         ressourceexist.setLastName(ressource.getLastName());
         ressourceexist.setStatus(ressource.getStatus());
+        ressourceexist.setProfil(ressource.getProfil());
         ressourceexist.setDateNaissance(ressource.getDateNaissance());
         ressourceexist.setDateAmbauche(ressource.getDateAmbauche());
         return repo.save(ressourceexist);

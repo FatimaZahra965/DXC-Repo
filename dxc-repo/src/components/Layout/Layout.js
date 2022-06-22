@@ -29,11 +29,7 @@ import AjouterPrestation from "../../pages/prestations/AjouterPrestation";
 import ModiferPrestation from "../../pages/prestations/ModiferPrestation";
 import Prestations from "../../pages/prestations/Prestations";
 import AjouteContrat from "../../pages/contrats/AjouteContrat";
-import AjouteCompetance from "../../pages/competances/AjouteCompetances"
 import Contrats from "../../pages/contrats/Contrats";
-import EditContrat from "../../pages/contrats/EditContrat";
-import ContratDetail from "../../pages/contrats/ContratDetail";
-import AjouteClient from "../../pages/clients/AjouteClient";
 import EditClient from "../../pages/clients/EditClient";
 import AffichageClient from "../../pages/clients/AffichageClient";
 import AjouterRessource from "../../pages/ressources/AjouterRessource";
@@ -44,7 +40,13 @@ import EditCompetance from "../../pages/competances/EditCompetance";
 import CompetanceDetail from "../../pages/competances/CompetanceDetail";
 import AjouterCertification from "../../pages/certifications/AjouterCertification";
 import Profil from "../../pages/profil/Profil";
-import PrestationGlobal from "../../pages/details/PrestationGlobal";
+import AjouterActivite from "../../pages/activites/AjouterActivite";
+import ModifierActivite from "../../pages/activites/ModifierActivite";
+import AfficherPrestation from "../../pages/prestations/AfficherPrestation";
+import AjouteCompetance from "../../pages/competances/AjouteCompetances";
+import AjouteClient from "../../pages/clients/AjouteClient";
+import ContratDetail from "../../pages/contrats/ContratDetail";
+import EditContrat from "../../pages/contrats/EditContrat";
 
 function Layout(props) {
   var classes = useStyles();
@@ -66,8 +68,7 @@ function Layout(props) {
           <Switch>
             {/*  route dashboard  */}
             <Route path="/app/dashboard" component={Dashboard} />
-            <Route path="/app/prestations/PrestationGlobal" component={PrestationGlobal} />
-            <Route path="/app/prestations/profil" component={Profil} />
+            <Route path="/app/prestations/profil/:id" component={Profil} />
             <Route path="/app/capabilites" component={Capabilites} />
             <Route path="/app/competances/allCompetances" component={Competances} />
             <Route
@@ -136,8 +137,11 @@ function Layout(props) {
               path="/app/prestations/AjouterPrestation"
               component={AjouterPrestation}
             />
-            {/* <Route path="/app/prestations/ModiferPrestation/:id"  component={ModiferPrestation} />
-                <Route path="/app/prestations/AficherPrestation/:id" component={AfficherPrestation}/> */}
+            {/* <Route path="/app/prestations/ModiferPrestation/:id"  component={ModiferPrestation} />*/}
+            <Route
+              path="/app/prestations/AficherPrestation/:id"
+              component={AfficherPrestation}
+            />
 
             {/*  routes clients  */}
             <Route path="/app/prestations/clients" component={Clients} />
@@ -177,8 +181,16 @@ function Layout(props) {
               path="/app/ressources/AfficherRessource/:id"
               component={AfficherRessource}
             />
-
+            {/* routes activiteés */}
             <Route path="/app/prestations/activites" component={Activites} />
+            <Route
+              path="/app/activites/AjouteAactivite"
+              component={AjouterActivite}
+            />
+            <Route
+              path="/app/activites/ModifierAactivite/:id"
+              component={ModifierActivite}
+            />
             <Route
               path="/app/prestations/technologies"
               component={Technologies}
@@ -221,19 +233,6 @@ function Layout(props) {
             <Route path="/app/notifications" component={Notifications} />
             <Route path="/app/capabilites" component={Capabilites} />
           </Switch>
-          <Box
-            mt={5}
-            width={"100%"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent="space-between"
-          >
-            <div>
-              <p>
-                {/* © Copyright 2022 DXC Technology Company. All rights reserved */}
-              </p>
-            </div>
-          </Box>
         </div>
       </>
     </div>

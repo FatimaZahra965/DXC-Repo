@@ -18,23 +18,23 @@ function AjouteClient() {
   const initialClientState = {
     id: null,
     nomClient: "",
-    label: "",
+    fileClient: "",
     market: "",
 
     nomClientEror: "",
-    labelEror: "",
+    fileClientEror: "",
     marketEror: "",
   };
   const [nomClient, setNomClient] = useState(initialClientState.nomClient);
   const [market, setMarket] = useState(initialClientState.market);
-  const [label, setLabel] = useState(initialClientState.label);
+  const [fileClient, setFileClient] = useState(initialClientState.fileClient);
 
   // Eror states
   const [nomClientEror, setNomClientEror] = useState(
     initialClientState.nomClientEror,
   );
   const [marketEror, setMarketEror] = useState(initialClientState.marketEror);
-  const [labelEror, setLabelEror] = useState(initialClientState.labelEror);
+  const [fileClientEror, setFileClientEror] = useState(initialClientState.fileClientEror);
   // créer un nouveau Client
   const dispatch = useDispatch();
   const addClient = (client) => dispatch(createNewClientAction(client));
@@ -51,47 +51,35 @@ function AjouteClient() {
 
     validarForm();
     let nomClientEror = "";
-    let labelEror = "";
+    let fileClientEror = "";
     let marketEror = "";
 
     if (!nomClient) {
       nomClientEror = "le champ de nom de client  est obligatiore";
     }
-    if (!label) {
-      labelEror = "le champ de label  est obligatiore";
-    }
     if (!market) {
       marketEror = "le champ de market est obligatiore";
     }
 
-    if (nomClientEror || labelEror || marketEror) {
+    if (nomClientEror || fileClientEror || marketEror) {
       setNomClientEror(nomClientEror);
-      setLabelEror(labelEror);
+      setFileClientEror(fileClientEror);
       setMarketEror(marketEror);
     }
-    if (
-      nomClient.trim() === "" ||
-      market.trim() === "" ||
-      label.trim() === ""
-    ) {
-      errorValidation();
-      return;
-    }
-    //si pasa la validacion//si todo sale bien
     SuccessValidation();
 
     //créer un nouveau Client
     let client = {
       nomClient: nomClient,
       market: market,
-      label: label,
+      fileClient: fileClient,
     };
     addClient(client);
     history.push("/app/prestations/clients");
   };
   const AnnulerClient = () => {
     setNomClient(initialClientState.nomClient);
-    setLabel(initialClientState.label);
+    setFileClient(initialClientState.fileClient);
     setMarket(initialClientState.market);
   };
 
@@ -148,19 +136,19 @@ function AjouteClient() {
             <div style={{ color: "red" }}>{marketEror}</div>
           </Grid>
           <Grid item xs={6}>
+          <label>Logo de client</label>
             <TextField
-              id="outlined-label"
-              label="Label"
+              type="file"
+              id="logo-client"
               size="small"
               variant="outlined"
               fullWidth
-              value={label}
-              onChange={(e) => {
-                setLabel(e.target.value);
-                setLabelEror(initialClientState.labelEror);
+              value={fileClient}
+              onChange={(info) => {
+                setFileClient(info.target.files[0]);
               }}
             />
-            <div style={{ color: "red" }}>{labelEror}</div>
+            <div style={{ color: "red" }}>{fileClientEror}</div>
           </Grid>
         </Grid>
       </form>

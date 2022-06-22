@@ -18,7 +18,6 @@ function ContratDetail(props) {
       .then(function (res) {
         // handle success
         console.log("res", res.data);
-     
         setContrat(res.data);
       })
       .catch(function (error) {
@@ -33,6 +32,7 @@ function ContratDetail(props) {
           title="Afficher d'un Contrat"
           path="/app/prestations/contrats"
         />
+
       </div>
 
       <div>

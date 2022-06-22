@@ -145,9 +145,9 @@ const Activites = () => {
                       {column.label}
                     </TableCell>
                   ))}
-                  <TableCell key="prestation" style={{ minWidth: "170" }}>
+                  {/* <TableCell key="prestation" style={{ minWidth: "170" }}>
                     Prestation
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell key="actions" style={{ minWidth: "170" }}>
                     Actions
                   </TableCell>
@@ -172,12 +172,11 @@ const Activites = () => {
                           </TableCell>
                         );
                       })}
-                      <TableCell key="1" align="1">
+                      {/* <TableCell key="1" align="1">
                         {row.idPrestation}
-                        {/* {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value} */}
-                      </TableCell>
+                       
+                      </TableCell> */}
+
                       <TableCell>
                         <Button
                           onClick={() => {

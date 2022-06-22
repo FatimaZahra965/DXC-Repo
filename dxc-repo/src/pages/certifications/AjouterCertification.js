@@ -44,6 +44,7 @@ export default function AjouterCertification() {
   const errorValidacion = () => dispatch(validacionError());
 
   const error = useSelector((state) => state.error.error);
+  const [doErr, setDoErr] = useState(false);
 
   //upload file
   const uploadFile = (event) => {
@@ -61,7 +62,10 @@ export default function AjouterCertification() {
     data.append("file", file);
     data.append("name", file.name);
     clienteAxios
-      .post("http://localhost:9001/DXC/files/addFile/1", data)
+ 
+      .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
+
+   
       .then((res) => {
         console.log(res);
         return true;
@@ -81,7 +85,7 @@ export default function AjouterCertification() {
     let datecertificationEror = "";
     let titreEror = "";
 
-    if (!code) {
+    if (!code || !new RegExp(/^\w+$/).test(code)) {
       codeEror = "le champ code de la certification est obligatiore";
     }
     if (!niveau) {
@@ -90,7 +94,7 @@ export default function AjouterCertification() {
     if (!datecertification) {
       datecertificationEror = "le champ date de certification est obligatiore";
     }
-    if (!titre) {
+    if (!titre || !new RegExp(/^\w+$/).test(titre)) {
       titreEror = "le champ titre de la certification est obligatiore";
     }
     if (codeEror || niveauEror || datecertificationEror || titreEror) {
@@ -99,10 +103,11 @@ export default function AjouterCertification() {
       setNiveauEror(niveauEror);
       setDateCertificationEror(datecertificationEror);
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
-    console.log("date", datecertification.slice(0, 10));
+    // console.log("date", datecertification.slice(0, 10));
     const dates = {
       dateCetification: moment(datecertification).format("yyyy-MM-DD"),
     };
@@ -111,11 +116,11 @@ export default function AjouterCertification() {
       titre: titre,
       niveau: niveau,
       datecertification: dates.dateCetification,
-      ressourceid: 1,
+      ressourceid: 1, //todo change 1 with id of ressource
     };
     uploadFile(e);
     addcertification(certification);
-    // history.push("/app/certifications/ListeCertifications");
+    history.push("/app/certifications/ListeCertifications");
   };
 
   return (
@@ -137,6 +142,7 @@ export default function AjouterCertification() {
               onChange={(e) => {
                 setCode(e.target.value);
                 setCodeEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{CodeEror}</div>
@@ -204,7 +210,7 @@ export default function AjouterCertification() {
               type="file"
               id="upload-photo"
               selected={Img}
-              valur={imageCertificat}
+              value={imageCertificat}
               onChange={(info) => {
                 setFile(info.target.files[0]);
               }}
@@ -249,7 +255,7 @@ export default function AjouterCertification() {
           </Grid>
         </Grid>
       </form>
-      {error ? (
+      {error && doErr ? (
         <Alert severity="error">La certif n'est pas ajouté!</Alert>
       ) : null}
     </>

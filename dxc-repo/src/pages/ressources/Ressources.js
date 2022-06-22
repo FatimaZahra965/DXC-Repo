@@ -84,10 +84,9 @@ const Ressources = () => {
     let path = `/app/ressources/ModiferRessource/` + e;
     history.push(path);
   };
-  // const ViewRessource = (e) => {
-  //   let path = `/app/ressources/AfficherRessurce/` + 1;
-  //   history.push(path);
-  // };
+  const viewProfil=(e)=>{
+    history.push("/app/prestations/profil/"+e)
+  }
   return (
     <>
       {error ? (
@@ -153,7 +152,7 @@ const Ressources = () => {
                         })}
                         <TableCell>
                           <Button>
-                            <VisibilityIcon className={classes.icons} />
+                            <VisibilityIcon className={classes.icons}  onClick={(e)=> {viewProfil(row.matricule)}}/>
                           </Button>
                           <Button
                             onClick={() => {

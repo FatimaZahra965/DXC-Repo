@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/DXC")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class ressource_controller {
     @Autowired
     private ressource_service service;
@@ -29,6 +29,12 @@ public class ressource_controller {
     @GetMapping("/ressource")
     public List<ressource> afficher_ressource(){
         return  service.afficher_ressource();
+    }
+
+
+    @GetMapping("/ressource/act/{id}")
+    public List<ressource> afficher_ressource_acct(@PathVariable Integer id){
+        return  service.afficher_ressource_acct(id);
     }
 
     @GetMapping("/ressource/{id}")

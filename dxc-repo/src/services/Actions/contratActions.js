@@ -30,7 +30,7 @@ export function createNewContratAction(contrat) {
         dispatch(addNewContratSuccess(contrat));
         Swal.fire({
           text: "le Contrat été ajouter avec succés",
-          timer: 1500,
+          timer: 2000,
         });
       })
       .catch((error) => {
@@ -131,8 +131,7 @@ export function editContratAction(contrat) {
         dispatch(editContratSuccess(resp.data));
         Swal.fire({
           text: "le Contrat été modifier avec succés",
-          timer: 1500,
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
         });
       })

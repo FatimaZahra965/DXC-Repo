@@ -5,9 +5,6 @@ import {
   START_DOWNLOAD_CLIENTS,
   CLIENT_DOWNLOAD_SUCCESSFUL,
   DOWNLOAD_CLIENT__ERROR,
-  GET_CLIENT_REMOVE,
-  DELETE_CLIENT_SUCCESS,
-  DELETE_CLIENT_ERROR,
   GET_CLIENT_EDIT,
   CLIENT_EDIT_SUCCESS,
   CLIENT_EDIT_ERROR,
@@ -33,8 +30,7 @@ export function createNewClientAction(client) {
         dispatch(addNewClientSuccess(client));
         Swal.fire({
           text: "le Client été ajouter avec succés",
-          timer: 1500,
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
         });
       })
@@ -137,8 +133,7 @@ export function editClientAction(client) {
         dispatch(editClientSuccess(resp.data));
         Swal.fire({
           text: "le client été modifier avec succés",
-          timer: 1500,
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
         });
       })

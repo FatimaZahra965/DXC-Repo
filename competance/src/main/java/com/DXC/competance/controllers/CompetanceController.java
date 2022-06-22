@@ -20,25 +20,20 @@ public class CompetanceController {
             return this.competanceService.getCompetance();
         }
 
-    /*@GetMapping(path = "CompetancesLing")
-    public List<com.DXC.competance.models.Competance> afficheCompetancesLing(@PathVariable String typeComp) {
-        return this.competanceService.getCompetanceByTypeComp("Compétences linguistiques");
-    }
-    @GetMapping(path = "CompetancesTran")
-    public List<com.DXC.competance.models.Competance> afficheCompetancesTran(@PathVariable String typeComp) {
-        return this.competanceService.getCompetanceByTypeComp("Compétences transversales");
-    }*/
-
-
         @PostMapping(path = "addCompetance")
         public void addCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
             this.competanceService.addCompetance(competance);
         }
+    @GetMapping(path = "CompetanceRessource/{matriculeRessource}")
+    public List<com.DXC.competance.models.Competance> CompetanceByIdRessoure(@PathVariable int matriculeRessource) {
+        return this.competanceService.getCompetanceByIdRessource(matriculeRessource);
+    }
     @GetMapping(path = "Competance/{id}")
     public com.DXC.competance.models.Competance showCompetance(@PathVariable Integer id) {
         return this.competanceService.getCompetanceByID(id);
     }
-    @GetMapping(path = "Competance/type/{typeComp}")
+
+        @GetMapping(path = "Competance/type/{typeComp}")
     public List<com.DXC.competance.models.Competance> afficheCompetancesTechn(@PathVariable String typeComp) {
         return this.competanceService.getCompetanceByTypeComp(typeComp);
     }

@@ -1,6 +1,9 @@
 package com.DXC.prestation.services;
 import com.DXC.prestation.models.Prestation;
+import com.DXC.prestation.models.PrestationActivites;
+import com.DXC.prestation.repository.PrestationActivitesRepository;
 import com.DXC.prestation.repository.PrestationRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,13 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class PrestationService {
     private final PrestationRepository prestationRepository;
-
-    @Autowired
-    public PrestationService(PrestationRepository prestationRepository) {
-        this.prestationRepository = prestationRepository;
-    }
+    private final PrestationActivitesRepository prestationActivitesRepository;
 
     public List<Prestation> getPrestation() {
         return this.prestationRepository.findAll();
@@ -24,12 +24,18 @@ public class PrestationService {
         return prestationRepository.findById(id).orElse(null);
     }
 
-    public void addPrestation(Prestation prestation) {
+    public Prestation addPrestation(Prestation prestation) {
         Optional<Prestation> optionalPrestation = prestationRepository.findPrestationByTitre(prestation.getTitre());
         if (optionalPrestation.isPresent()) {
             throw new IllegalStateException("already exist");
         }
-        prestationRepository.save(prestation);
+        return prestationRepository.save(prestation);
+    }
+    public void affecterActivite(PrestationActivites presAct){
+        prestationActivitesRepository.save(presAct);
+    }
+    public List<PrestationActivites> getPrestationActiviteByID() {
+        return prestationActivitesRepository.findAll();
     }
 
     public Prestation updatePrestation(Prestation prestation) {
@@ -40,6 +46,7 @@ public class PrestationService {
         existingPrestation.setEtat(prestation.getEtat());
         existingPrestation.setMarket(prestation.getMarket());
         existingPrestation.setType(prestation.getType());
+        existingPrestation.setIdActivite(prestation.getIdActivite());
         return prestationRepository.save(existingPrestation);
     }
 }

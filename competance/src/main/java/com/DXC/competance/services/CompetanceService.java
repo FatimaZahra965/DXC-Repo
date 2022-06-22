@@ -23,6 +23,9 @@ public class CompetanceService {
     public com.DXC.competance.models.Competance getCompetanceByID(Integer id) {
         return competanceRepository.findById(id).orElse(null);
     }
+    public List<com.DXC.competance.models.Competance> getCompetanceByIdRessource(int matriculeRessource) {
+        return competanceRepository.findCompetanceByIdRessource(matriculeRessource);
+    }
 
     public List<com.DXC.competance.models.Competance>  getCompetanceByTypeComp(String typeComp) {
         return competanceRepository.findCompetanceByTypeComp(typeComp);

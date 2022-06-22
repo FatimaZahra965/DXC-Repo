@@ -11,6 +11,7 @@ import {
     BEGIN_COMPETANCE_EDIT,
     EDITION_COMPETANCE_SUCCESS,
     EDIT_COMPETANCE_ERROR,
+    SHOW_COMPETANCE_ID_RESSOURCE,
   } from "../types";
   import Swal from "sweetalert2";
   
@@ -23,15 +24,14 @@ import {
       dispatch(newCompetance());
   
           clienteAxios
-            .post("http://localhost:9005/DXC/competances/addCompetance", competance)
+            .post("https://dxcrepo-competance.azurewebsites.net/DXC/competances/addCompetance", competance)
             .then((res) => {
               console.log(res);
               //si se inserta correctamente
               dispatch(addNewCompetanceSuccess(competance));
               Swal.fire({
                 text: 'la Competance été ajouter avec succés',
-                 timer: 1500 ,
-                  timer: 3000,
+                 timer: 2000 ,
                   timerProgressBar: true,
                 })
             })
@@ -42,7 +42,6 @@ import {
             });
     };
   }
-  
   export const newCompetance = () => ({
     type: ADD_COMPETANCE,
   });
@@ -63,7 +62,7 @@ import {
   
       // interroger l'API
         clienteAxios
-          .get("http://localhost:9005/DXC/competances/allCompetances")
+          .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/allCompetances")
           .then((resp) => {
             //console.log(resp);
             dispatch(downloadCompetancesSuccessful(resp.data));
@@ -95,7 +94,7 @@ import {
   
       //obtenir l'api de  la Competance
       clienteAxios
-        .get(`http://localhost:9005/DXC/competances/competance/${id}`)
+        .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/competance/${id}`)
         .then((resp) => {
           console.log(resp.data);
           dispatch(getCompetanceEditSuccess(resp.data));
@@ -106,9 +105,36 @@ import {
         });
     };
   }
+  export function getCompetanceRessourceAction(matriculeRessource) {
+    return (dispatch) => {
+      dispatch(getEditCompetanceRessourceAction());
+      //obtenir l'api de  la Competance
+      clienteAxios
+        .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/CompetanceRessource/${matriculeRessource}`)
+        .then((resp) => {
+          console.log("resp.data CompetanceRessource ----->",resp.data);
+          dispatch(showIdCompetance(resp.data));
+        })
+        .catch((error) => {
+          console.log(error);
+          // dispatch(getCompetanceRessourceEditError());
+        });
+    };
+  }
 
   
+  export const getEditCompetanceRessourceAction = (matriculeRessource) => ({
+    type: GET_COMPETANCE_EDIT,
+  });
   
+  export const getCompetanceRessourceEditSuccess = (competance) => ({
+    type: COMPETANCE_EDIT_SUCCESS,
+    payload: competance,
+  });
+  
+  export const getCompetanceRessourceEditError = () => ({
+    type: COMPETANCE_EDIT_ERROR,
+  });
   export const getEditCompetanceAction = (id) => ({
     type: GET_COMPETANCE_EDIT,
   });
@@ -129,13 +155,13 @@ import {
   
       //interrogez l'API et envoyez une méthode put à mettre à jour
       clienteAxios
-        .put(`http://localhost:9005/DXC/competances/updateCompetance`, competance)
+        .put(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/updateCompetance`, competance)
         .then((resp) => {
           //console.log(resp);
           dispatch(editCompetanceSuccess(resp.data));
           Swal.fire({
             text: 'la Competance été modifier avec succés',
-              timer: 3000,
+              timer: 2000,
               timerProgressBar: true,
             })
           
@@ -144,7 +170,7 @@ import {
           //console.log(error);
           dispatch(editCompetanceError());
           Swal.fire({
-            timer: 3000,
+            timer: 2000,
             text: "La competence n'est pas modifié",
             timeerProgressBar: true,
             icon: "error",
@@ -164,5 +190,15 @@ import {
   
   export const editCompetanceError = () => ({
     type: EDIT_COMPETANCE_ERROR,
+  });
+
+  export function showIdCompetances(value) {
+    return (dispatch) => {
+      dispatch(showIdCompetance(value));
+    };
+  }
+  export const showIdCompetance = (value) => ({
+    type: SHOW_COMPETANCE_ID_RESSOURCE,
+    payload: value,
   });
   

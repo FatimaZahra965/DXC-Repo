@@ -16,6 +16,7 @@ import {
 import { useHistory } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import Alert from "@material-ui/lab/Alert";
 
 export default function ModiferRessource({ match }) {
   const classes = useStyles();
@@ -63,10 +64,11 @@ export default function ModiferRessource({ match }) {
 
   // const ressource = useSelector((state) => state.Ressources.Ressource);
   const error = useSelector((state) => state.error.error);
+  const [doErr, setDoErr] = useState(false);
 
   const submitEditRessource = (e) => {
     e.preventDefault();
-
+    validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -76,7 +78,10 @@ export default function ModiferRessource({ match }) {
     let dateNaissanceEror = "";
     let dateAmbaucheEror = "";
 
-    if (!ressourcedate.matricule) {
+    if (
+      !ressourcedate.matricule ||
+      !new RegExp(/^\w+$/).test(ressourcedate.matricule)
+    ) {
       matriculeEror = "le champ Matricule de la ressource est obligatiore";
     }
     if (!ressourcedate.status) {
@@ -96,10 +101,16 @@ export default function ModiferRessource({ match }) {
     if (!ressourcedate.profil) {
       profilEror = "le champ Profil de la ressource est obligatiore";
     }
-    if (!ressourcedate.firstName) {
+    if (
+      !ressourcedate.firstName ||
+      !new RegExp(/^\w+$/).test(ressourcedate.firstName)
+    ) {
       nomEror = "le champ Nom de la ressource est obligatiore";
     }
-    if (!ressourcedate.lastName) {
+    if (
+      !ressourcedate.lastName ||
+      !new RegExp(/^\w+$/).test(ressourcedate.lastName)
+    ) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
     }
 
@@ -123,6 +134,7 @@ export default function ModiferRessource({ match }) {
       setProfilEror(profilEror);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -282,6 +294,13 @@ export default function ModiferRessource({ match }) {
   return (
     <>
       <PageTitle title="Modifer Ressource" path="/app/prestations/ressources" />
+
+      <hr className={classes.hrGlobale}></hr>
+      <Grid item xs={12} className={classes.Alert}>
+        {error && doErr ? (
+          <Alert severity="error">La ressource n'est pas modifié!</Alert>
+        ) : null}
+      </Grid>
       <form onSubmit={submitEditRessource} className={classes.Form}>
         <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
@@ -296,6 +315,7 @@ export default function ModiferRessource({ match }) {
               onChange={(e) => {
                 handleInputChange(e);
                 setMatriculeEror("");
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{MatriculeEror}</div>
@@ -365,7 +385,7 @@ export default function ModiferRessource({ match }) {
               size="small"
               fullWidth
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.profil}
               onChange={(e) => {
                 handleInputChange(e);
                 setStatusEror("");
@@ -388,7 +408,7 @@ export default function ModiferRessource({ match }) {
               fullWidth
               name="profil"
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.profil}
               onChange={(e) => {
                 handleInputChange(e);
                 setProfilEror("");

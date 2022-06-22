@@ -94,12 +94,6 @@ export default makeStyles(theme => ({
     color: "#FFFFFF",
     borderRadius: "10px",
   },
-  Search: {
-    textAlign: "initial",
-    display: "flex",
-    padding: 8,
-    position: "absolute",
-  },
   Visibility: {
     textAlign: "end",
     color: "#FFFFFF",
@@ -140,7 +134,7 @@ export default makeStyles(theme => ({
   },
   Bajoute: {
     textAlign: "end",
-    marginLeft: "800px",
+    marginLeft: "400px",
   },
   btnAjouter: {
     margin: "5px",

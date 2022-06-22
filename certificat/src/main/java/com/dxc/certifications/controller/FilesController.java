@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/DXC/files")
+@RequestMapping("files")
 @CrossOrigin(origins = "*")
 public class FilesController {
     private final FileService fileService;

@@ -115,19 +115,6 @@ function AjouteCompetance() {
     }
 
 
-    if (
-      matriculeRessource.trim() === ""||
-      nomRessource.trim() === ""||
-      nomCompetance.trim() === ""||
-      typeComp.trim() === ""||
-      nomCompetance.trim() === ""||
-      evaluationManager.trim() === ""||
-      niveau.trim() === ""
-   
-    ) {
-      errorValidacion();
-      return;
-    }
     //si pasa la validacion//si todo sale bien
     SuccessValidation();
 
@@ -141,6 +128,9 @@ function AjouteCompetance() {
       niveau : niveau
       
     };
+    console.log("competance data ,",competance)
+
+
     addCompetance(competance);
     history.push("/app/competances/allCompetances");
   };
@@ -191,12 +181,12 @@ function AjouteCompetance() {
     console.log("fonction -----GetMatricul")
     axios
       .get(
-        `http://localhost:9000/DXC/ressource/${e}`,
+        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${e}`,
       )
       .then((resp) => {
         console.log("matricule", resp.data.matricule);
         setMatriculeRessource(resp.data.matricule);
-        console.log("MatriculeRessource", matriculeRessource);
+        console.log("MatriculeRessource", resp.data.matricule);
       })
       .catch((error) => {
         console.log(error);
