@@ -3,7 +3,7 @@ services:
 - docker:dind
 
 stages:
-
+- build dxcrepo
 - build competance
 - build certificat
 - build client
@@ -11,12 +11,20 @@ stages:
 - build ressource
 - build prestation
 - build activite
-- build dxcrepo
+
 
 
 variables:
   DOCKER_DRIVER: overlay
 
+release_dxcrepo_front:
+  stage: build dxcrepo
+  script:
+    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
+  only:
+    - main
 release_competence:
   stage: build competance
   script:
@@ -79,12 +87,4 @@ release_activite:
   only:
     - main
     
-release_dxcrepo_front:
-  stage: build dxcrepo
-  script:
-    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
-  only:
-    - main
   
