@@ -7,7 +7,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY yarn.lock .
-RUN npm install -g npm@8.12.2
+RUN npm install --save react react-dom react-scripts
 # Copy app files
 COPY . .
 # Expose port
