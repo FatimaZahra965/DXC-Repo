@@ -19,10 +19,10 @@ function InformationsProfil(props) {
             
             <Row className="mt-3">
               <Col>
-                <div className="bg-light p-2 border">NOM : {RessourcesToShow.firstName}</div>
+                <div className="bg-light p-2 border">NOM : {RessourcesToShow.firstname}</div>
               </Col>
               <Col>
-                <div className="bg-light p-2 border">Prénom : {RessourcesToShow.lastName}</div>
+                <div className="bg-light p-2 border">Prénom : {RessourcesToShow.lastname}</div>
               </Col>
               
             </Row>
@@ -37,16 +37,16 @@ function InformationsProfil(props) {
             </Row>
             <Row className="mt-3">
               <Col>
-                <div className="bg-light p-2 border">Profil de facturation : {RessourcesToShow.status}</div>
+                <div className="bg-light p-2 border">Profil de facturation : {RessourcesToShow.profilfacturation}</div>
               </Col>
               <Col>
-                <div className="bg-light p-2 border">Date de naissance : {RessourcesToShow.dateNaissance}</div>
+                <div className="bg-light p-2 border">Date de naissance : {RessourcesToShow.datenaissance}</div>
               </Col>
               
             </Row>
             <Row className="mt-3">
               <Col>
-                <div className="bg-light p-2 border"> Date d'ambauche : {RessourcesToShow.dateAmbauche}</div>
+                <div className="bg-light p-2 border"> Date d'ambauche : {RessourcesToShow.dateambauche}</div>
               </Col>
               
             </Row>

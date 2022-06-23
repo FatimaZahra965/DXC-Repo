@@ -77,6 +77,18 @@ const Ressources = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const Recherche = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = ressources.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.firstname.toLowerCase().includes(val);
+    }
+  });
 
   const EditRessource = (e) => {
     console.log("------>", e);
@@ -96,6 +108,27 @@ const Ressources = () => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <PageTitle title="Ressources" path="/app/dashboard" />
+        </Grid>
+        <Grid item xs={6} className={classes.grid}></Grid>
+        <Grid xs={6} className={classes.grid}>
+          <TextField
+            id="outlined-basic"
+            onChange={Recherche}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Rechercher"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button
