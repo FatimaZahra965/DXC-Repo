@@ -10,25 +10,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "DXC/competances")
 public class CompetanceController {
-<<<<<<< HEAD
-    private final com.DXC.competance.services.CompetanceService competanceService;
-
-    @Autowired
-    public CompetanceController(com.DXC.competance.services.CompetanceService competanceService) {
-        this.competanceService = competanceService;
-    }
-
-    @GetMapping(path = "allCompetances")
-    public List<com.DXC.competance.models.Competance> getAllCompetances() {
-        return this.competanceService.getCompetance();
-    }
-
-    @PostMapping(path = "addCompetance")
-    public void addCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
-        this.competanceService.addCompetance(competance);
-    }
-
-=======
         private final com.DXC.competance.services.CompetanceService competanceService;
 
         @Autowired
@@ -45,7 +26,6 @@ public class CompetanceController {
         public void addCompetance(@RequestBody com.DXC.competance.models.Competance competance) {
             this.competanceService.addCompetance(competance);
         }
->>>>>>> 44d931e088c1b326e649988da8420734578a09bf
     @GetMapping(path = "CompetanceRessource/{matriculeRessource}")
     public List<com.DXC.competance.models.Competance> CompetanceByIdRessoure(@PathVariable int matriculeRessource) {
         return this.competanceService.getCompetanceByIdRessource(matriculeRessource);
