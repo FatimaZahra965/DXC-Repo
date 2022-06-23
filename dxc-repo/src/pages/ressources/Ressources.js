@@ -1,8 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //axios
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+  makeStyles,
+  Paper,
+  TextField,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -57,6 +67,7 @@ const Ressources = () => {
     history.push(path);
   };
   const dispatch = useDispatch();
+  const [val, setVal] = useState("");
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -83,9 +94,22 @@ const Ressources = () => {
     let path = `/app/ressources/ModiferRessource/` + e;
     history.push(path);
   };
-  const viewProfil=(e)=>{
-    history.push("/app/prestations/profil/"+e)
-  }
+  const viewProfil = (e) => {
+    history.push("/app/prestations/profil/" + e);
+  };
+
+  const Recherche = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = ressources.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.nomActivite.toLowerCase().includes(val);
+    }
+  });
   return (
     <>
       {error ? (
@@ -96,6 +120,27 @@ const Ressources = () => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <PageTitle title="Ressources" path="/app/dashboard" />
+        </Grid>
+        <Grid item xs={6} className={classes.grid}></Grid>
+        <Grid xs={6} className={classes.grid}>
+          <TextField
+            id="outlined-basic"
+            onChange={Recherche}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Rechercher"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -151,7 +196,12 @@ const Ressources = () => {
                         })}
                         <TableCell>
                           <Button>
-                            <VisibilityIcon className={classes.icons}  onClick={(e)=> {viewProfil(row.matricule)}}/>
+                            <VisibilityIcon
+                              className={classes.icons}
+                              onClick={(e) => {
+                                viewProfil(row.matricule);
+                              }}
+                            />
                           </Button>
                           <Button
                             onClick={() => {

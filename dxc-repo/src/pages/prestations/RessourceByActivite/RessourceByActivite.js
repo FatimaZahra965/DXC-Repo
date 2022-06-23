@@ -29,10 +29,10 @@ export default function RessourceByActivite() {
         console.log(error);
         //si hay un error
       });
-  },);
-const viewProfil=(e)=>{
-  history.push("/app/prestations/profil/"+e)
-}
+  });
+  const viewProfil = (e) => {
+    history.push("/app/prestations/profil/" + e);
+  };
   return (
     <>
       {acts.map((ressource) => (
@@ -74,7 +74,7 @@ const viewProfil=(e)=>{
                       textTransform="capitalize"
                     >
                       <AccountCircleIcon className={classes.iconUser} />
-                      {ressource.lastName + " " + ressource.firstName}
+                      {ressource.lastname + " " + ressource.firstname}
                     </Typography>
                     <Box
                       display="flex"
@@ -87,9 +87,14 @@ const viewProfil=(e)=>{
                           <EditIcon className={classes.icons} />
                         </Button>
                       </Box>
-                      <Button variant="text" color="dark" onClick={(e)=> {viewProfil(ressource.matricule)}}>
+                      <Button
+                        variant="text"
+                        color="dark"
+                        onClick={(e) => {
+                          viewProfil(ressource.matricule);
+                        }}
+                      >
                         <VisibilityIcon className={classes.icons} />
-                        
                       </Button>
                     </Box>
                   </Box>

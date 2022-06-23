@@ -233,9 +233,9 @@ function AjouteCapabilite() {
                 <MenuItem
                   key={name.matricule}
                   value={name.matricule}
-                  style={getStyles(name.firstName, personName, theme)}
+                  style={getStyles(name.firstname, personName, theme)}
                 >
-                  {`${name.firstName} ${name.lastName}`}
+                  {`${name.firstname} ${name.lastname}`}
                 </MenuItem>
               ))}
             </Select>

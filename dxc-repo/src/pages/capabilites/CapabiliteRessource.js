@@ -112,9 +112,9 @@ export default function CapabiliteRessource() {
                 {row.matricule}
               </TableCell>
               <TableCell align="left" scope="row">
-                {row.firstName}
+                {row.firstname}
               </TableCell>
-              <TableCell align="left">{row.lastName}</TableCell>
+              <TableCell align="left">{row.lastname}</TableCell>
               <TableCell align="left">{row.status}</TableCell>
               <TableCell align="left">{row.genre}</TableCell>
               <TableCell align="left">

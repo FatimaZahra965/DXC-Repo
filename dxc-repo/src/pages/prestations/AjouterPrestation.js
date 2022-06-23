@@ -118,7 +118,9 @@ export default function AjouterPrestation() {
     // loadActivites();
 
     clienteAxios
-      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites")
+      .get(
+        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+      )
       .then((resp) => {
         //console.log("rerpprpprppr", resp.data);
         setPresActivites(resp.data);
@@ -315,7 +317,7 @@ export default function AjouterPrestation() {
             <div style={{ color: "red" }}>{NomActviteEror}</div>
             <div style={{ color: "red" }}>{NomActviteEror1}</div>
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <TextField
               id="outlined-nomClient"
               label="Activité"
@@ -354,7 +356,7 @@ export default function AjouterPrestation() {
               ))}
             </TextField>
             <div style={{ color: "red" }}>{NomActviteEror}</div>
-          </Grid>
+          </Grid> */}
           <Grid item xs={6}>
             <TextField
               id="outlined-select-currency"
