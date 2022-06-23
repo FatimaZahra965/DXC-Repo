@@ -37,14 +37,11 @@ public class ressource_controller {
         return  service.afficher_ressource_acct(id);
     }
 
-<<<<<<< Updated upstream
-=======
     @GetMapping("/ressource/capabilite/{id_capabilie}")
     public List<ressource> afficher_ressource_capabilite(@PathVariable Integer id_capabilie){
         return  service.afficher_ressource_capabilite(id_capabilie);
     }
 
->>>>>>> Stashed changes
     @GetMapping("/ressource/{id}")
     public ressource afficherbyid(@PathVariable Integer id){
         return service.afficherbyid(id);
