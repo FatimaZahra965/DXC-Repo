@@ -3,43 +3,18 @@ services:
   - docker:dind
 
 stages:
-  - build competance
-  - build dxcrepo
-  - build certificat
   - build client
   - build contrat
   - build ressource
   - build prestation
   - build activite
   - build capabilite
+  - build competance
+  - build dxcrepo
+  - build certificat
 
 variables:
   DOCKER_DRIVER: overlay
-release_competence:
-  stage: build competance
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-competance:latest ./competance
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-competance:latest
-  only:
-    - main
-release_dxcrepo_front:
-  stage: build dxcrepo
-  script:
-    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
-  only:
-    - main
-
-release_certificat:
-  stage: build certificat
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-certificat:latest ./certificat
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-certificat:latest
-  only:
-    - main
 
 release_client:
   stage: build client
@@ -90,5 +65,30 @@ release_capabilite:
     - docker build -t $DOCKER_REPOSITORY/microservice-capabilite:latest ./capabilite
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/microservice-capabilite:latest
+  only:
+    - main
+release_competence:
+  stage: build competance
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-competance:latest ./competance
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-competance:latest
+  only:
+    - main
+release_dxcrepo_front:
+  stage: build dxcrepo
+  script:
+    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
+  only:
+    - main
+
+release_certificat:
+  stage: build certificat
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-certificat:latest ./certificat
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-certificat:latest
   only:
     - main
