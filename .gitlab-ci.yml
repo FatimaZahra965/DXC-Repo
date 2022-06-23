@@ -3,7 +3,7 @@ services:
   - docker:dind
 
 stages:
-  - build client
+ 
   - build contrat
   - build ressource
   - build prestation
@@ -12,18 +12,12 @@ stages:
   - build competance
   - build dxcrepo
   - build certificat
+  - build client
 
 variables:
   DOCKER_DRIVER: overlay
 
-release_client:
-  stage: build client
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-client:latest ./client
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-client:latest
-  only:
-    - main
+
 release_contrat:
   stage: build contrat
   script:
@@ -90,5 +84,13 @@ release_certificat:
     - docker build -t $DOCKER_REPOSITORY/microservice-certificat:latest ./certificat
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/microservice-certificat:latest
+  only:
+    - main
+release_client:
+  stage: build client
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-client:latest ./client
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-client:latest
   only:
     - main
