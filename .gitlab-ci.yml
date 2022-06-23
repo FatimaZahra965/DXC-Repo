@@ -4,46 +4,22 @@ services:
 
 stages:
  
-  - build contrat
-  - build ressource
-  - build prestation
+
   - build activite
   - build capabilite
   - build competance
   - build dxcrepo
   - build certificat
   - build client
+  - build contrat
+  - build ressource
+  - build prestation
 
 variables:
   DOCKER_DRIVER: overlay
 
 
-release_contrat:
-  stage: build contrat
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-contrat:latest ./contrat
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-contrat:latest
-  only:
-    - main
 
-release_ressource:
-  stage: build ressource
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-ressource:latest ./ressource
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-ressource:latest
-  only:
-    - main
-
-release_prestation:
-  stage: build prestation
-  script:
-    - docker build -t $DOCKER_REPOSITORY/microservice-prestation:latest ./prestation
-    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/microservice-prestation:latest
-  only:
-    - main
 
 release_activite:
   stage: build activite
@@ -92,5 +68,32 @@ release_client:
     - docker build -t $DOCKER_REPOSITORY/microservice-client:latest ./client
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
     - docker push $DOCKER_REPOSITORY/microservice-client:latest
+  only:
+    - main
+
+release_contrat:
+  stage: build contrat
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-contrat:latest ./contrat
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-contrat:latest
+  only:
+    - main
+
+release_ressource:
+  stage: build ressource
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-ressource:latest ./ressource
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-ressource:latest
+  only:
+    - main
+
+release_prestation:
+  stage: build prestation
+  script:
+    - docker build -t $DOCKER_REPOSITORY/microservice-prestation:latest ./prestation
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/microservice-prestation:latest
   only:
     - main
