@@ -51,7 +51,7 @@ export default function AjouterRessource() {
   const dispatch = useDispatch();
   const addRessource = (ressource) =>
     dispatch(createNewRessourceAction(ressource));
-  const validarForm = () => dispatch(validarFormularioAction());
+  // const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
@@ -60,7 +60,7 @@ export default function AjouterRessource() {
 
   const submitNewRessource = (e) => {
     e.preventDefault();
-    validarForm();
+    // validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -144,14 +144,14 @@ export default function AjouterRessource() {
       DateAmbauche: moment(DateAmbauche).format("yyyy-MM-DD"),
     };
     let ressource = {
-      matricule: Matricule,
+      // matricule: Matricule,
       status: Status,
       genre: Genre,
-      dateNaissance: dates.DateNaissance,
-      lastName: Nom,
-      profil: Profil,
-      firstName: Prenom,
-      dateAmbauche: dates.DateAmbauche,
+      dateNaissance: DateNaissance,
+      lastname: Nom,
+      firstname: Prenom,
+      dateAmbauche: DateAmbauche,
+      profilefacturation: Profil,
       technologies: forms,
       methodes: formsMethodes,
       outils: formsOutils,
@@ -425,7 +425,7 @@ export default function AjouterRessource() {
             </TextField>
             <div style={{ color: "red" }}>{ProfilEror}</div>
           </Grid>
-          
+
           <Grid item xs={6}>
             <label>Date d'ambauche</label>
             <TextField

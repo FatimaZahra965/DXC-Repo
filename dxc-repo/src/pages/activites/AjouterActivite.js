@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import {
   validacionError,
-  validarFormularioAction,
+  // validarFormularioAction,
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -55,6 +55,7 @@ export default function AjouterActivite() {
     dateDebutEror: "",
     dateFinEror: "",
     nomEror: "",
+    setNomEror1: "",
     statusEror: "",
     categorieEror: "",
     descriptionEror: "",
@@ -71,6 +72,7 @@ export default function AjouterActivite() {
 
   // Eror states
   const [NomEror, setNomEror] = useState(initialActiviteState.nomEror);
+  const [NomEror1, setNomEror1] = useState(initialActiviteState.nomEror1);
   const [TypeEror, setTypeEror] = useState(initialActiviteState.typeEror);
   const [StatusEror, setStatusEror] = useState(initialActiviteState.statusEror);
   const [DateDebutEror, setDateDebutEror] = useState(
@@ -89,7 +91,7 @@ export default function AjouterActivite() {
   //crar nuevo producto
   const dispatch = useDispatch();
   const addActivite = (activite) => dispatch(createNewActiviteAction(activite));
-  const validarForm = () => dispatch(validarFormularioAction());
+  // const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
@@ -115,12 +117,17 @@ export default function AjouterActivite() {
     let statusEror = "";
     let categorieEror = "";
     let descriptionEror = "";
+    let nomEror1 = "";
 
     if (!Type) {
       typeEror = "Le champ Type de l'activite est obligatiore";
     }
-    if (!Nom || !new RegExp(/^\w+$/).test(Nom)) {
+    if (!Nom) {
       nomEror = "Le champ l'intitulé de l'activité est obligatiore";
+    }
+    if (!new RegExp(/^\w+$/).test(Nom)) {
+      nomEror1 =
+        "Merci de saisir un texte valide, les caractères spéciaux ne sont pas acceptés";
     }
     if (!Status) {
       statusEror = "Le champ status de l'activite est obligatiore";
@@ -145,7 +152,8 @@ export default function AjouterActivite() {
       dateDebutEror ||
       dateFinEror ||
       categorieEror ||
-      descriptionEror
+      descriptionEror ||
+      nomEror1
     ) {
       setNomEror(nomEror);
       setTypeEror(typeEror);
@@ -154,6 +162,7 @@ export default function AjouterActivite() {
       setStatusEror(statusEror);
       setCategorieEror(categorieEror);
       setDescriptionEror(descriptionEror);
+      setNomEror1(nomEror1);
 
       errorValidacion();
       setDoErr(true);
@@ -296,6 +305,7 @@ export default function AjouterActivite() {
               }}
             />
             <div style={{ color: "red" }}>{NomEror}</div>
+            <div style={{ color: "red" }}>{NomEror1}</div>
           </Grid>
 
           <Grid item xs={6}>

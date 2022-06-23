@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 
-import SuiButton from "../SuiButton";
+// import SuiButton from "../SuiButton";
 import { Box, Button, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { showRessources } from "../../../services/Actions/prestationsActions";

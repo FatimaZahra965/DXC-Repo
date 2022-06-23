@@ -21,8 +21,8 @@ import useStyles from "./styles";
 const columns = [
   // { id: "matricule", label: "Matricule", minWidth: 100 },
   { id: "status", label: "Status", minWidth: 80 },
-  { id: "firstName", label: "Nom", minWidth: 80 },
-  { id: "lastName", label: "Prénom", minWidth: 80 },
+  { id: "firstname", label: "Nom", minWidth: 80 },
+  { id: "lastname", label: "Prénom", minWidth: 80 },
   { id: "genre", label: "Genre", minWidth: 80 },
   { id: "dateAmbauche", label: "Date d'ambauche", minWidth: 180 },
   { id: "dateNaissance", label: "Date de naissance", minWidth: 180 },
@@ -40,7 +40,6 @@ const Ressources = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [val, setVal] = useState("");
   useEffect(() => {
-    //productos cuando el componente este listo
     const loadRessours = () => dispatch(getRessourcesAction());
     loadRessours();
   }, []);

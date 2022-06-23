@@ -39,23 +39,17 @@ export default function ModifierActivite({ match }) {
     dateDebutEror: "",
     dateFinEror: "",
     nomEror: "",
+    nomEror1: "",
     statusEror: "",
     categorieEror: "",
     descriptionEror: "",
   };
-  // const [Nom, setNom] = useState(initialActiviteState.nom);
-  // const [Type, setType] = useState(initialActiviteState.type);
-  // const [Status, setStatus] = useState(initialActiviteState.status);
-  // const [DateDebut, setDateDebut] = useState(initialActiviteState.dateDebut);
-  // const [DateFin, setDateFin] = useState(initialActiviteState.dateFin);
-  // const [Categorie, setCategorie] = useState(initialActiviteState.categorie);
-  // const [Description, setDescription] = useState(
-  //   initialActiviteState.description,
-  // );
+
   const { id } = match.params;
   const [Activitiedata, setActivitiedata] = useState(initialActiviteState);
   // Eror states
   const [NomEror, setNomEror] = useState(initialActiviteState.nomEror);
+  const [NomEror1, setNomEror1] = useState(initialActiviteState.nomEror1);
   const [TypeEror, setTypeEror] = useState(initialActiviteState.typeEror);
   const [StatusEror, setStatusEror] = useState(initialActiviteState.statusEror);
   const [DateDebutEror, setDateDebutEror] = useState(
@@ -84,7 +78,10 @@ export default function ModifierActivite({ match }) {
 
   useEffect(() => {
     clienteAxios
-      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/Activite/" + id)
+      .get(
+        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/Activite/" +
+          id,
+      )
       .then(function (response) {
         console.log("response---------------->", response.data);
         setActivitiedata(response.data);
@@ -102,6 +99,7 @@ export default function ModifierActivite({ match }) {
     let dateDebutEror = "";
     let dateFinEror = "";
     let nomEror = "";
+    let nomEror1 = "";
     let statusEror = "";
     let categorieEror = "";
     let descriptionEror = "";
@@ -109,11 +107,12 @@ export default function ModifierActivite({ match }) {
     if (!Activitiedata.type) {
       typeEror = "Le champ Type de l'activite est obligatiore";
     }
-    if (
-      !Activitiedata.nomActivite ||
-      !new RegExp(/^\w+$/).test(Activitiedata.nomActivite)
-    ) {
+    if (!Activitiedata.nomActivite) {
       nomEror = "Le champ l'intitulé de l'activité est obligatiore";
+    }
+    if (!new RegExp(/^\w+$/).test(Activitiedata.nomActivite)) {
+      nomEror1 =
+        "Merci de saisir un texte valide, les caractères spéciaux ne sont pas acceptés";
     }
     if (!Activitiedata.status) {
       statusEror = "Le champ status de l'activite est obligatiore";
@@ -141,7 +140,8 @@ export default function ModifierActivite({ match }) {
       dateDebutEror ||
       dateFinEror ||
       categorieEror ||
-      descriptionEror
+      descriptionEror ||
+      nomEror1
     ) {
       setNomEror(nomEror);
       setTypeEror(typeEror);
@@ -150,6 +150,7 @@ export default function ModifierActivite({ match }) {
       setStatusEror(statusEror);
       setCategorieEror(categorieEror);
       setDescriptionEror(descriptionEror);
+      setNomEror1(nomEror1);
 
       errorValidacion();
       setDoErr(true);
@@ -177,51 +178,51 @@ export default function ModifierActivite({ match }) {
   const category = [
     {
       label: "Facturable",
-      value: "facturable",
+      value: "Facturable",
     },
     {
       label: "Non facturable",
-      value: "non_facturable",
+      value: "Non_facturable",
     },
     {
       label: "Inactivité",
-      value: "inactivite",
+      value: "Inactivite",
     },
     {
       label: "Congé",
-      value: "conge",
+      value: "Conge",
     },
   ];
   const status = [
     {
       label: "Demarrage",
-      value: "demarrage",
+      value: "Demarrage",
     },
     {
       label: "Suivi",
-      value: "suivi",
+      value: "Suivi",
     },
     {
       label: "Clôture",
-      value: "cloture",
+      value: "Cloture",
     },
   ];
   const types = [
     {
       label: "Projet",
-      value: "projet",
+      value: "Projet",
     },
     {
       label: "Run",
-      value: "run",
+      value: "Run",
     },
     {
       label: "Build",
-      value: "build",
+      value: "Build",
     },
   ];
   const annuler = () => {
-    setActivitiedata(initialActiviteState);
+    history.push("/app/prestations/activites");
   };
   const handlchange = (event) => {
     const { name, value } = event.target;
@@ -233,6 +234,7 @@ export default function ModifierActivite({ match }) {
         title="Modifié une Activité"
         path="/app/prestations/activites"
       />
+
       <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
         {error && doErr ? (
@@ -253,10 +255,12 @@ export default function ModifierActivite({ match }) {
               onChange={(e) => {
                 handlchange(e);
                 setNomEror(initialActiviteState.nomEror);
+                setNomEror1(initialActiviteState.nomEror1);
                 setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{NomEror}</div>
+            <div style={{ color: "red" }}>{NomEror1}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -267,7 +271,7 @@ export default function ModifierActivite({ match }) {
               fullWidth
               name="type"
               variant="outlined"
-              value={Activitiedata.type}
+              value={Activitiedata.typeActivite}
               onChange={(e) => {
                 handlchange(e);
                 setTypeEror(initialActiviteState.typeEror);
@@ -389,7 +393,7 @@ export default function ModifierActivite({ match }) {
               className={classes.btnAjouter}
               color="primary"
             >
-              Ajouter
+              Modifier
             </Button>
             <Button
               size="small"

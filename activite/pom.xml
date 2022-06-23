@@ -60,7 +60,7 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>	
+			</plugin>
 		</plugins>
 		<finalName>microservice-activite</finalName>
 	</build>

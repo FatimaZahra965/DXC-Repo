@@ -36,10 +36,6 @@ export default function AfficherPrestation({ match }) {
   const RessourcesToShow = useSelector(
     (state) => state.prestations.showRessources,
   );
-  console.log(
-    "*********************************************",
-    RessourcesToShow,
-  );
   useEffect(() => {
     // console.log("id", id);
     getPrestationActivites(id);
@@ -120,7 +116,7 @@ export default function AfficherPrestation({ match }) {
                       <Typography variant="subtitle2" color="text">
                         Marcket:&nbsp;&nbsp;&nbsp;
                         <Typography variant="caption" fontWeight="medium">
-                          {prestationdata.marcket}
+                          {prestationdata.market}
                         </Typography>
                       </Typography>
                     </Grid>

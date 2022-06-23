@@ -6,6 +6,7 @@ import {
   START_DOWNLOAD_PRESTATIONS,
   PRESTATION_DOWNLOAD_SUCCESSFUL,
   SHOWRESSOURCES,
+  SHOWACTIVITIES,
 } from "../types";
 
 //chaque réducteur a son propre état
@@ -15,6 +16,9 @@ const initialState = {
   loading: false,
   prestation: {},
   showRessources: {},
+  showActivities: {
+    showAct: false,
+  },
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -24,6 +28,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         showRessources: action.payload,
+      };
+    case SHOWACTIVITIES:
+      return {
+        ...state,
+        showActivities: action.payload,
       };
     case ADD_PRESTATION:
       return {

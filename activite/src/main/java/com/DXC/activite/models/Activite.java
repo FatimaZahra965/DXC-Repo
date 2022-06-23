@@ -1,5 +1,4 @@
 package com.DXC.activite.models;
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,6 +37,10 @@ public class Activite {
     public void setIdRessources(List<Integer> idRessources) {
         this.idRessources = idRessources;
     }
+
+    public int getFkPrestation() {
+        return fkPrestation;
+    }
     /*
      * @ManyToMany
      * 
@@ -48,5 +51,20 @@ public class Activite {
      * )
      * private List<Ressources> ressources= new ArrayList<>();
      */
+
+    public void setFkPrestation(int fkPrestation) {
+        this.fkPrestation = fkPrestation;
+    }
+/*   @ManyToMany
+    @JoinTable(
+            name = "ressource_activites",
+            joinColumns = @JoinColumn(name = "id_activite"),
+            inverseJoinColumns = @JoinColumn(name = "id_ressource")
+    )
+    private List<Ressources> ressources= new ArrayList<>();*/
+
+
+
+
 
 }

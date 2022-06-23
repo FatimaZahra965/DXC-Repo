@@ -59,7 +59,6 @@ export const addNewRessourceError = (error) => ({
   type: ADD_RESSOURCE_ERROR,
 });
 
-//obtenir la liste des produits de productsReducer (voir API)
 export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
@@ -141,16 +140,6 @@ export function getRessourceAction(id) {
     dispatch(getEditRessourcesAction());
 
     //obtenir le produit de l'api
-    clienteAxios
-      .get(`/route/api/${id}`)
-      .then((resp) => {
-        console.log(resp.data);
-        dispatch(getRessourceEditSuccess(resp.data));
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(getRessourceEditError());
-      });
   };
 }
 

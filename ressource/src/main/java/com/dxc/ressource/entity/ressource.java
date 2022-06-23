@@ -1,11 +1,6 @@
 package com.dxc.ressource.entity;
 
-
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +11,8 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Entity
 
 @Table(name = "ressource", schema = "public")
@@ -42,78 +39,16 @@ public class ressource {
     @Column(name = "datenaissance")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datenaissance;
+    private String profilefacturation;
 
-    @OneToMany(targetEntity = methode.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = methode.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
     private List<methode> methodes;
-    @OneToMany(targetEntity = outil.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = outil.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
     private List<outil> outils;
-    @OneToMany(targetEntity = technologie.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = technologie.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
     private List<technologie> technologies;
 
-
-    public int getMatricule() {
-        return matricule;
-    }
-
-    public void setMatricule(int matricule) {
-        this.matricule = matricule;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String statuss) {
-        status = statuss;
-    }
-
-    public String getFirstName() {
-        return firstname;
-    }
-
-    public void setFirstName(String firstName) {
-        firstname = firstName;
-    }
-
-    public String getLastName() {
-        return lastname;
-    }
-
-    public void setLastName(String lastName) {
-        lastname = lastName;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getProfil() {
-        return profil;
-    }
-
-    public void setProfil(String profil) {
-        this.profil = profil;
-    }
-
-    public void setGenre(String genree) {
-        genre = genree;
-    }
-
-    public Date getDateAmbauche() {
-        return dateambauche;
-    }
-
-    public void setDateAmbauche(Date dateAmbauche) {
-        dateambauche = dateAmbauche;
-    }
-
-    public Date getDateNaissance() {
-        return datenaissance;
-    }
-
-    public void setDateNaissance(Date dateNaissance) {
-        datenaissance = dateNaissance;
-    }
 }

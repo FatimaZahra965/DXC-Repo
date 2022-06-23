@@ -58,9 +58,7 @@ export default makeStyles((theme) => ({
   container: {
     maxHeight: 440,
   },
-  grid: {
-    height: "50px",
-  },
+
   searchTextField: {
     display: "flex",
     justifyContent: "space-between",
@@ -96,6 +94,13 @@ export default makeStyles((theme) => ({
     width: "1.5em",
   },
   cardRessource: {
+    margin: "5px",
+    backgroundColor: "#603494",
+  },
+  Alert: {
+    paddingBottom: "inherit",
+  },
+  hrGlobale: {
     margin: "5px",
     backgroundColor: "#603494",
   },
