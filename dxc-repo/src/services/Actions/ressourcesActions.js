@@ -33,7 +33,7 @@ export function createNewRessourceAction(ressource) {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est ajouter avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -59,7 +59,6 @@ export const addNewRessourceError = (error) => ({
   type: ADD_RESSOURCE_ERROR,
 });
 
-//obtenir la liste des produits de productsReducer (voir API)
 export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
@@ -114,7 +113,6 @@ export function deleteRessourceAction(id) {
 }
 export function showIdRessources(value) {
   return (dispatch) => {
-    console.log("show ressource action ffffffffffffffffffffffff ", value);
     dispatch(showIdRessource(value));
   };
 }
@@ -142,16 +140,6 @@ export function getRessourceAction(id) {
     dispatch(getEditRessourcesAction());
 
     //obtenir le produit de l'api
-    clienteAxios
-      .get(`/route/api/${id}`)
-      .then((resp) => {
-        console.log(resp.data);
-        dispatch(getRessourceEditSuccess(resp.data));
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(getRessourceEditError());
-      });
   };
 }
 
@@ -191,7 +179,7 @@ export function editRessourceAction(ressource) {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));
         Swal.fire({
-          timer: 3000,
+          timer: 2000,
           text: "La ressource est modifier avec succés",
           timeerProgressBar: true,
           icon: "success",
@@ -200,12 +188,6 @@ export function editRessourceAction(ressource) {
       .catch((error) => {
         //console.log(error);
         dispatch(editRessourceError());
-        // Swal.fire({
-        //   timer: 3000,
-        //   text: "La ressource n'est pas modifier !",
-        //   timeerProgressBar: true,
-        //   icon: "error",
-        // });
       });
   };
 }

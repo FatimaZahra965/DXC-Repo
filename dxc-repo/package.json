@@ -32,8 +32,10 @@
     "react-redux": "^8.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
+    "react-vertical-tree": "^1.1.7",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.8",
     "tinycolor2": "^1.4.2",
     "reactstrap": "^9.0.0"

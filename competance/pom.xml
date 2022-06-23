@@ -5,16 +5,21 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
+		<version>2.4.0</version>
+=======
 		<version>2.6.6</version>
+>>>>>>> 104cf149bb86bffdaf7838e3f9629ac81a2299d3
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.DXC</groupId>
-	<artifactId>competance</artifactId>
+	<artifactId>ressource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>competance</name>
-	<description>Demo project for competance</description>
+	<description>competance</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -32,6 +37,11 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -43,6 +53,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 		<finalName>microservice-competance</finalName>

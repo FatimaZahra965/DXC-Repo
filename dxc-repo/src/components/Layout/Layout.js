@@ -47,6 +47,9 @@ import AjouteCompetance from "../../pages/competances/AjouteCompetances";
 import AjouteClient from "../../pages/clients/AjouteClient";
 import ContratDetail from "../../pages/contrats/ContratDetail";
 import EditContrat from "../../pages/contrats/EditContrat";
+import CapabiliteDetail from "../../pages/capabilites/CapabiliteDetail";
+import AjouteCapabilite from "../../pages/capabilites/AjouteCapabilite";
+import EditCapabilite from "../../pages/capabilites/EditCapabilite";
 
 function Layout(props) {
   var classes = useStyles();
@@ -70,12 +73,16 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/prestations/profil/:id" component={Profil} />
             <Route path="/app/capabilites" component={Capabilites} />
-            <Route path="/app/competances/allCompetances" component={Competances} />
+            <Route
+              path="/app/competances/allCompetances"
+              component={Competances}
+            />
             <Route
               path="/app/competances/ajouteCompetance"
               component={AjouteCompetance}
             />
             <Route
+              key="1"
               path="/app/certifications/ListeCertifications"
               component={Certifications}
             />
@@ -232,6 +239,13 @@ function Layout(props) {
             />
             <Route path="/app/notifications" component={Notifications} />
             <Route path="/app/capabilites" component={Capabilites} />
+
+            <Route
+              path="/app/CapabiliteDetail/:id"
+              component={CapabiliteDetail}
+            />
+            <Route path="/app/AjouteCapabilite" component={AjouteCapabilite} />
+            <Route path="/app/EditCapabilite/:id" component={EditCapabilite} />
           </Switch>
         </div>
       </>

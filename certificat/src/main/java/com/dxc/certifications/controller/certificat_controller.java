@@ -23,7 +23,7 @@ public class certificat_controller {
         return service.ajout_certif(certif);
     }
 
-    @PostMapping("/valider/{id}")
+    @PostMapping("/valider/x")
     public boolean valider_certif(@PathVariable int id){
         return service.valider(id);
     }
@@ -50,7 +50,6 @@ public class certificat_controller {
         return service.suppression(id);
 
     }
-
     @PutMapping("/updatecertif")
     public certificat mise_a_jour(@RequestBody certificat certif){
 

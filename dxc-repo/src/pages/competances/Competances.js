@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Tabs from "./Tabs";
-import './Competances.css';
 
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -29,18 +28,18 @@ export default function Competances() {
             onClick={AjouteCompetance}
           >
           
-            <AddIcon /> Ajouter Competance
+            <AddIcon /> Ajouter Competénce
           </Button>
         </div>
 
         <Tabs >
-        <div title="Competences Techniques ">
+        <div title="Competénces Techniques ">
        <CompetencesTechniques/>
         </div>
-        <div title="Competences Transversales">
+        <div title="Competénces Transversales">
         <CompetencesTransversales/>
         </div>
-        <div title="Competences Linguistiques">
+        <div title="Competénces Linguistiques">
         <CompetencesLinguistiques/>
         </div>
       </Tabs>

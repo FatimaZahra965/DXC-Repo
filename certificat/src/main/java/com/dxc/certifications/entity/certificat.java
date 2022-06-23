@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,14 +18,19 @@ public class certificat {
     @Id
     @GeneratedValue
     private int id;
+    @Column(name = "code")
     private String code;
+    @Column(name = "titre")
     private String titre;
 
-    private  Date datecertification;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "datecertification")
+    private Date datecertification;
+    @Column(name = "ressourceid")
     private String ressourceid;
+    @Column(name = "niveau")
     private String niveau;
-
+    @Column(name = "validation")
     private String validation;
 
     public String getValidation() {
@@ -70,7 +73,8 @@ public class certificat {
         this.niveau = niveau;
     }
 
-    public certificat(int id, String code, String titre, Date datecertification, String ressourceid, String niveau, String validation) {
+    public certificat(int id, String code, String titre, Date datecertification, String ressourceid, String niveau,
+            String validation) {
         this.id = id;
         this.code = code;
         this.titre = titre;

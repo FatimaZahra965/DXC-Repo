@@ -11,6 +11,7 @@ import {
     BEGIN_COMPETANCE_EDIT,
     EDITION_COMPETANCE_SUCCESS,
     EDIT_COMPETANCE_ERROR,
+    SHOW_COMPETANCE_ID_RESSOURCE,
   } from "../types";
   import Swal from "sweetalert2";
   
@@ -30,8 +31,7 @@ import {
               dispatch(addNewCompetanceSuccess(competance));
               Swal.fire({
                 text: 'la Competance été ajouter avec succés',
-                 timer: 1500 ,
-                  timer: 3000,
+                 timer: 2000 ,
                   timerProgressBar: true,
                 })
             })
@@ -108,17 +108,16 @@ import {
   export function getCompetanceRessourceAction(matriculeRessource) {
     return (dispatch) => {
       dispatch(getEditCompetanceRessourceAction());
-  
       //obtenir l'api de  la Competance
       clienteAxios
         .get(`https://dxcrepo-competance.azurewebsites.net/DXC/competances/CompetanceRessource/${matriculeRessource}`)
         .then((resp) => {
-          console.log(resp.data);
-          dispatch(getCompetanceRessourceEditSuccess(resp.data));
+          console.log("resp.data CompetanceRessource ----->",resp.data);
+          dispatch(showIdCompetance(resp.data));
         })
         .catch((error) => {
           console.log(error);
-          dispatch(getCompetanceRessourceEditError());
+          // dispatch(getCompetanceRessourceEditError());
         });
     };
   }
@@ -162,7 +161,7 @@ import {
           dispatch(editCompetanceSuccess(resp.data));
           Swal.fire({
             text: 'la Competance été modifier avec succés',
-              timer: 3000,
+              timer: 2000,
               timerProgressBar: true,
             })
           
@@ -171,7 +170,7 @@ import {
           //console.log(error);
           dispatch(editCompetanceError());
           Swal.fire({
-            timer: 3000,
+            timer: 2000,
             text: "La competence n'est pas modifié",
             timeerProgressBar: true,
             icon: "error",
@@ -191,5 +190,15 @@ import {
   
   export const editCompetanceError = () => ({
     type: EDIT_COMPETANCE_ERROR,
+  });
+
+  export function showIdCompetances(value) {
+    return (dispatch) => {
+      dispatch(showIdCompetance(value));
+    };
+  }
+  export const showIdCompetance = (value) => ({
+    type: SHOW_COMPETANCE_ID_RESSOURCE,
+    payload: value,
   });
   

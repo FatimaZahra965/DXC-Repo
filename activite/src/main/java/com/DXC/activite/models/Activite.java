@@ -38,6 +38,14 @@ public class Activite {
     public void setIdRessources(List<Integer> idRessources) {
         this.idRessources = idRessources;
     }
+
+    public int getFkPrestation() {
+        return fkPrestation;
+    }
+
+    public void setFkPrestation(int fkPrestation) {
+        this.fkPrestation = fkPrestation;
+    }
     /*
      * @ManyToMany
      * 

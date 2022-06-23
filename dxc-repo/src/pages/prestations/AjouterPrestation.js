@@ -16,7 +16,7 @@ import {
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import moment from "moment";
-import { getActivitesAction } from "../../services/Actions/activitesActions";
+// import { getActivitesAction } from "../../services/Actions/activitesActions";
 import clienteAxios from "../../config/axios";
 
 export default function AjouterPrestation() {
@@ -53,6 +53,10 @@ export default function AjouterPrestation() {
 
   // Eror states
   const [TitreEror, setTitreEror] = useState(initialPrestationState.titreEror);
+  const [TitreEror1, setTitreEror1] = useState(
+    initialPrestationState.titreEror,
+  );
+
   const [EtatEror, setEtatEror] = useState(initialPrestationState.etatEror);
   const [TypeEror, setTypeEror] = useState(initialPrestationState.typeEror);
   const [MarketEror, setMarketEror] = useState(
@@ -67,6 +71,9 @@ export default function AjouterPrestation() {
   const [NomActviteEror, setNomActviteEror] = useState(
     initialPrestationState.nomActvite,
   );
+  const [NomActviteEror1, setNomActviteEror1] = useState(
+    initialPrestationState.nomActvite,
+  );
 
   const dispatch = useDispatch();
   const addPrestation = (prestation) =>
@@ -76,8 +83,36 @@ export default function AjouterPrestation() {
   const errorValidacion = () => dispatch(validacionError());
 
   const error = useSelector((state) => state.error.error);
+  const [doErr, setDoErr] = useState(false);
 
   const [presActivites, setPresActivites] = useState([]);
+  useEffect(() => {
+    clienteAxios
+      .get(
+        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+      )
+      .then((resp) => {
+        //console.log("rerpprpprppr", resp.data);
+        setPresActivites(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    clienteAxios
+      .get(
+        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+      )
+      .then((resp) => {
+        //console.log("rerpprpprppr", resp.data);
+        setPresActivites(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   useEffect(() => {
     // const loadActivites = () => dispatch(getActivitesAction());
     // loadActivites();
@@ -102,13 +137,19 @@ export default function AjouterPrestation() {
     let dateDebutEror = "";
     let dateFinEror = "";
     let titreEror = "";
+    let titreEror1 = "";
     let marketEror = "";
     let nomactvite = "";
+    let nomactvite1 = "";
 
     if (!Type || !new RegExp(/^\w+$/).test(Type)) {
       typeEror = "le champ Type de la prestation est obligatiore";
     }
-    if (!Titre || !new RegExp(/^\w+$/).test(Titre)) {
+    if (!new RegExp(/^\w+$/).test(Titre)) {
+      titreEror1 =
+        "Merci de saisir un texte valide, les caractères spéciaux ne sont pas acceptés";
+    }
+    if (!Titre) {
       titreEror = "le champ Titre de la prestation est obligatiore";
     }
     if (!Market || !new RegExp(/^\w+$/).test(Market)) {
@@ -125,6 +166,10 @@ export default function AjouterPrestation() {
     }
     if (!NomActvite || !new RegExp(/^\w+$/).test(NomActvite)) {
       nomactvite = "le champ Activité de la prestation est obligatiore";
+    }
+    if (!new RegExp(/^\w+$/).test(NomActvite)) {
+      nomactvite1 =
+        "Merci de saisir un texte valide, les caractères spéciaux ne sont pas acceptés";
     }
 
     if (
@@ -143,8 +188,11 @@ export default function AjouterPrestation() {
       setDateFinEror(dateFinEror);
       setMarketEror(marketEror);
       setNomActviteEror(nomactvite);
+      setNomActviteEror1(nomactvite1);
+      setTitreEror1(titreEror1);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -218,10 +266,15 @@ export default function AjouterPrestation() {
         title="Ajouter une prestation"
         path="/app/prestations/ListePrestations"
       />
-       <form onSubmit={submitNewPrestation} className={classes.Form}>
-       <Grid container spacing={3} className={classes.GridForm}>
+      <hr className={classes.hrGlobale}></hr>
+      <Grid item xs={12} className={classes.Alert}>
+        {error && doErr ? (
+          <Alert severity="error">La prestation n'est pas ajouté!</Alert>
+        ) : null}
+      </Grid>
+      <form onSubmit={submitNewPrestation}>
+        <Grid container spacing={3}>
           <Grid item xs={6}>
-        
             <TextField
               id="outlined-basic"
               label="Titre"
@@ -232,9 +285,55 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setTitre(e.target.value);
                 setTitreEror(initialPrestationState.titreEror);
+                setTitreEror1(initialPrestationState.titreEror);
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{TitreEror}</div>
+            <div style={{ color: "red" }}>{TitreEror1}</div>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-nomClient"
+              label="Activité"
+              select
+              variant="outlined"
+              size="small"
+              fullWidth
+              value={NomActvite}
+              onChange={(e) => {
+                setNomActvite(e.target.value);
+                setNomActviteEror(initialPrestationState.nomActviteEror);
+                setNomActviteEror1(initialPrestationState.nomActviteEror);
+                setDoErr(false);
+              }}
+            >
+              {presActivites.map((activite) => (
+                <MenuItem value={activite.id}>{activite.nomActivite}</MenuItem>
+              ))}
+            </TextField>
+            <div style={{ color: "red" }}>{NomActviteEror}</div>
+            <div style={{ color: "red" }}>{NomActviteEror1}</div>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-nomClient"
+              label="Activité"
+              select
+              variant="outlined"
+              size="small"
+              fullWidth
+              value={NomActvite}
+              onChange={(e) => {
+                setNomActvite(e.target.value);
+                setNomActviteEror(initialPrestationState.nomActviteEror);
+              }}
+            >
+              {presActivites.map((activite) => (
+                <MenuItem value={activite.id}>{activite.nomActivite}</MenuItem>
+              ))}
+            </TextField>
+            <div style={{ color: "red" }}>{NomActviteEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -268,6 +367,7 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setEtat(e.target.value);
                 setEtatEror(initialPrestationState.etatEror);
+                setDoErr(false);
               }}
             >
               {etats.map((etat) => (
@@ -290,6 +390,7 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setType(e.target.value);
                 setTypeEror(initialPrestationState.typeEror);
+                setDoErr(false);
               }}
             >
               {types.map((type) => (
@@ -313,6 +414,7 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setDateDebut(e.target.value);
                 setDateDebutEror(initialPrestationState.dateDebutEror);
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{DateDebutEror}</div>
@@ -329,6 +431,7 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setDateFin(e.target.value);
                 setDateFinEror(initialPrestationState.dateFinEror);
+                setDoErr(false);
               }}
             />
             <div style={{ color: "red" }}>{DateFinEror}</div>
@@ -345,6 +448,7 @@ export default function AjouterPrestation() {
               onChange={(e) => {
                 setMarket(e.target.value);
                 setMarketEror(initialPrestationState.marketEror);
+                setDoErr(false);
               }}
             >
               {markets.map((market) => (
@@ -379,9 +483,6 @@ export default function AjouterPrestation() {
           </Grid>
         </Grid>
       </form>
-      {error ? (
-        <Alert severity="error">La prestation n'est pas ajouté!</Alert>
-      ) : null}
     </>
   );
 }

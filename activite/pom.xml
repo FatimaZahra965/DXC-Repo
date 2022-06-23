@@ -60,7 +60,15 @@
 						</exclude>
 					</excludes>
 				</configuration>
+<<<<<<< HEAD
 			</plugin>	
+=======
+<<<<<<< Updated upstream
+			</plugin>	
+=======
+			</plugin>
+>>>>>>> Stashed changes
+>>>>>>> abdelhadi
 		</plugins>
 		<finalName>microservice-activite</finalName>
 	</build>

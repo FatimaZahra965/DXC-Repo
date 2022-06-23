@@ -210,7 +210,7 @@ export default function AjouterCertification() {
               type="file"
               id="upload-photo"
               selected={Img}
-              valur={imageCertificat}
+              value={imageCertificat}
               onChange={(info) => {
                 setFile(info.target.files[0]);
               }}

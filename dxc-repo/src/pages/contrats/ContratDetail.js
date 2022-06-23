@@ -32,6 +32,7 @@ function ContratDetail(props) {
           title="Afficher d'un Contrat"
           path="/app/prestations/contrats"
         />
+
       </div>
 
       <div>

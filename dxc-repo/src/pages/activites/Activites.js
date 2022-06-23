@@ -24,7 +24,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
 import useStyles from "./styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { Axios } from "axios";
+// import { Axios } from "axios";
 
 const columns = [
   { id: "nomActivite", label: "Intitulé de l'activité", minWidth: 100 },
@@ -49,7 +49,7 @@ const Activites = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [val, setVal] = useState("");
-  const [listFilter, setListFilter] = useState([]);
+  // const [listFilter, setListFilter] = useState([]);
   // const [activites, setActivites] = useState([]);
   useEffect(() => {
     const loadActivites = () => dispatch(getActivitesAction());

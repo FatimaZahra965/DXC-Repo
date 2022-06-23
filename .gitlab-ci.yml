@@ -1,22 +1,29 @@
 image: docker:latest
 services:
-- docker:dind
+  - docker:dind
 
 stages:
-
-- build competance
-- build certificat
-- build client
-- build contrat
-- build ressource
-- build prestation
-- build activite
-- build dxcrepo
-
+  - build dxcrepo
+  - build competance
+  - build certificat
+  - build client
+  - build contrat
+  - build ressource
+  - build prestation
+  - build activite
+  - build capabilite
 
 variables:
   DOCKER_DRIVER: overlay
 
+release_dxcrepo_front:
+  stage: build dxcrepo
+  script:
+    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
+  only:
+    - main
 release_competence:
   stage: build competance
   script:
@@ -78,13 +85,11 @@ release_activite:
     - docker push $DOCKER_REPOSITORY/microservice-activite:latest
   only:
     - main
-    
-release_dxcrepo_front:
-  stage: build dxcrepo
+release_capabilite:
+  stage: build capabilite
   script:
-    - docker build -t $DOCKER_REPOSITORY/dxc-repo:latest ./dxc-repo
+    - docker build -t $DOCKER_REPOSITORY/microservice-capabilite:latest ./capabilite
     - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REPOSITORY --username $DOCKER_USERNAME --password-stdin
-    - docker push $DOCKER_REPOSITORY/dxc-repo:latest
+    - docker push $DOCKER_REPOSITORY/microservice-capabilite:latest
   only:
     - main
-  

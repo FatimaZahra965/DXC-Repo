@@ -1,4 +1,5 @@
 package com.DXC.competance.models;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,27 +8,27 @@ public class Competance {
     // generate the id
     // this is use in when adding a new competance
     @Id
-    @SequenceGenerator(
-            name = "competance_index",
-            sequenceName = "competance_index",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "competance_index"
-    )
+    @SequenceGenerator(name = "competance_index", sequenceName = "competance_index", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "competance_index")
     private int id;
+    @Column(name = "nomCompetance")
     private String nomCompetance;
+    @Column(name = "matriculeRessource")
     private int matriculeRessource;
+    @Column(name = "nomRessource")
     private String nomRessource;
+    @Column(name = "typeComp")
     private String typeComp;
+    @Column(name = "evaluationManager")
     private String evaluationManager;
+    @Column(name = "niveau")
     private String niveau;
 
     public Competance() {
     }
 
-    public Competance(int id, String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(int id, String nomCompetance, int matriculeRessource, String nomRessource, String typeComp,
+            String evaluationManager, String niveau) {
         this.id = id;
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
@@ -37,14 +38,14 @@ public class Competance {
         this.niveau = niveau;
     }
 
-    public Competance(String nomCompetance, int matriculeRessource,String nomRessource,String typeComp,String evaluationManager,String niveau) {
+    public Competance(String nomCompetance, int matriculeRessource, String nomRessource, String typeComp,
+            String evaluationManager, String niveau) {
         this.nomCompetance = nomCompetance;
         this.matriculeRessource = matriculeRessource;
         this.nomRessource = nomRessource;
         this.typeComp = typeComp;
         this.evaluationManager = evaluationManager;
         this.niveau = niveau;
-
 
     }
 

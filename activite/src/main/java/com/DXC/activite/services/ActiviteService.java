@@ -2,9 +2,7 @@ package com.DXC.activite.services;
 
 import com.DXC.activite.models.Activite;
 import com.DXC.activite.models.RessourceActivities;
-import com.DXC.activite.models.Ressources;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +30,10 @@ public class ActiviteService {
         return activiteRepository.findById(id).orElse(null);
     }
 
+    public List<com.DXC.activite.models.Activite> getActiviteOfRessurce(Integer id) {
+        return activiteRepository.getActiviteOfRessurce(id);
+    }
+
     public void affectPrestation(Integer id, Integer prestation) {
         com.DXC.activite.models.Activite existingActivite = activiteRepository.findById(id).orElse(null);
         existingActivite.setFkPrestation(prestation);
@@ -51,7 +53,6 @@ public class ActiviteService {
             newOne.setId_ressource(element);
             ressourceActivitiesRepository.save(newOne);
         });
-
     }
 
     public com.DXC.activite.models.Activite updateActivite(com.DXC.activite.models.Activite activite) {

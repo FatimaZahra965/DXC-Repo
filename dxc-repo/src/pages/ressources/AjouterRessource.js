@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { Box, Button, IconButton } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import moment from "moment";
 
 export default function AjouterRessource() {
   const classes = useStyles();
@@ -50,7 +51,7 @@ export default function AjouterRessource() {
   const dispatch = useDispatch();
   const addRessource = (ressource) =>
     dispatch(createNewRessourceAction(ressource));
-  const validarForm = () => dispatch(validarFormularioAction());
+  // const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
@@ -59,6 +60,7 @@ export default function AjouterRessource() {
 
   const submitNewRessource = (e) => {
     e.preventDefault();
+    // validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -137,14 +139,19 @@ export default function AjouterRessource() {
       return;
     }
     SuccessValidation();
+    const dates = {
+      DateNaissance: moment(DateNaissance).format("yyyy-MM-DD"),
+      DateAmbauche: moment(DateAmbauche).format("yyyy-MM-DD"),
+    };
     let ressource = {
-      matricule: Matricule,
+      // matricule: Matricule,
       status: Status,
       genre: Genre,
       dateNaissance: DateNaissance,
-      lastName: Nom,
-      firstName: Prenom,
+      lastname: Nom,
+      firstname: Prenom,
       dateAmbauche: DateAmbauche,
+      profilefacturation: Profil,
       technologies: forms,
       methodes: formsMethodes,
       outils: formsOutils,
@@ -418,6 +425,7 @@ export default function AjouterRessource() {
             </TextField>
             <div style={{ color: "red" }}>{ProfilEror}</div>
           </Grid>
+
           <Grid item xs={6}>
             <label>Date d'ambauche</label>
             <TextField

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -12,7 +12,7 @@ import { Alert } from "@material-ui/lab";
 import { editPrestationAction } from "../../services/Actions/prestationsActions";
 import {
   validacionError,
-  validarFormularioAction,
+  // validarFormularioAction,
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -38,17 +38,22 @@ export default function ModiferPrestation({ match }) {
     dateFinEror: "",
     titreEror: "",
     marketEror: "",
+    titreEror1: "",
   };
   // prestation
   const dispatch = useDispatch();
   const editPrestation = (prestation) =>
     dispatch(editPrestationAction(prestation));
-  const validarForm = () => dispatch(validarFormularioAction());
+  // const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
 
   // Eror states
   const [TitreEror, setTitreEror] = useState(initialPrestationState.titreEror);
+  const [TitreEror1, setTitreEror1] = useState(
+    initialPrestationState.titreEror1,
+  );
+
   const [EtatEror, setEtatEror] = useState(initialPrestationState.etatEror);
   const [TypeEror, setTypeEror] = useState(initialPrestationState.typeEror);
   const [MarketEror, setMarketEror] = useState(
@@ -60,13 +65,22 @@ export default function ModiferPrestation({ match }) {
   const [DateFinEror, setDateFinEror] = useState(
     initialPrestationState.dateFinEror,
   );
+  const [NomActviteEror, setNomActviteEror] = useState(
+    initialPrestationState.nomActvite,
+  );
+  const [NomActvite, setNomActvite] = useState(
+    initialPrestationState.nomPrestation,
+  );
 
   const { id } = match.params;
+  const [doErr, setDoErr] = useState(false);
 
   useEffect(() => {
     console.log("id", id);
     clienteAxios
-      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
+      .get(
+        `https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`,
+      )
       .then((resp) => {
         console.log("--------------------*>", resp.data);
         setPrestationdate(resp.data);
@@ -90,6 +104,7 @@ export default function ModiferPrestation({ match }) {
     let dateFinEror = "";
     let titreEror = "";
     let marketEror = "";
+    let titreEror1: "";
 
     if (
       !prestationdate.type ||
@@ -108,6 +123,10 @@ export default function ModiferPrestation({ match }) {
       !new RegExp(/^\w+$/).test(prestationdate.market)
     ) {
       marketEror = "le champ Market de la prestation est obligatiore";
+    }
+    if (!new RegExp(/^\w+$/).test(prestationdate.titre)) {
+      titreEror1 =
+        "Merci de saisir un texte valide, les caractères spéciaux ne sont pas acceptés";
     }
     if (!prestationdate.dateDebut) {
       dateDebutEror = "le champ Date de début de la prestation est obligatiore";
@@ -128,7 +147,8 @@ export default function ModiferPrestation({ match }) {
       marketEror ||
       dateDebutEror ||
       dateFinEror ||
-      etatEror
+      etatEror ||
+      titreEror1
     ) {
       setTitreEror(titreEror);
       setTypeEror(typeEror);
@@ -136,8 +156,10 @@ export default function ModiferPrestation({ match }) {
       setDateDebutEror(dateDebutEror);
       setDateFinEror(dateFinEror);
       setMarketEror(marketEror);
+      setTitreEror1(titreEror1);
 
       errorValidacion();
+      setDoErr(true);
       return;
     }
     SuccessValidation();
@@ -158,7 +180,7 @@ export default function ModiferPrestation({ match }) {
 
     editPrestation(prestation);
 
-    // history.push("/app/prestations/ListePrestations");
+    history.push("/app/prestations/ListePrestations");
   };
   // const submitEditPrestation = (e) => {
   //   e.preventDefault();
@@ -228,9 +250,24 @@ export default function ModiferPrestation({ match }) {
       value: "Externe",
     },
   ];
+  const [presActivites, setPresActivites] = useState([]);
+  useEffect(() => {
+    clienteAxios
+      .get(
+        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+      )
+      .then((resp) => {
+        //console.log("rerpprpprppr", resp.data);
+        setPresActivites(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPrestationdate({ ...prestationdate, [name]: value });
+    setDoErr(false);
   };
 
   const dates = {
@@ -239,7 +276,7 @@ export default function ModiferPrestation({ match }) {
   };
 
   const annuler = () => {
-    setPrestationdate(initialPrestationState);
+    history.push("/app/prestations/ListePrestations");
   };
   return (
     <>
@@ -247,7 +284,13 @@ export default function ModiferPrestation({ match }) {
         title="Modifer une prestation"
         path="/app/prestations/ListePrestations"
       />
-         <form onSubmit={submitEditPrestation} className={classes.Form}>
+      <hr className={classes.hrGlobale}></hr>
+      <Grid item xs={12} className={classes.Alert}>
+        {error && doErr ? (
+          <Alert severity="error">La prestation n'est pas modifié!</Alert>
+        ) : null}
+      </Grid>
+      <form onSubmit={submitEditPrestation} className={classes.Form}>
         <Grid container spacing={3} className={classes.GridForm}>
           <Grid item xs={6}>
             <TextField
@@ -261,9 +304,32 @@ export default function ModiferPrestation({ match }) {
               onChange={(e) => {
                 handleInputChange(e);
                 setTitreEror(initialPrestationState.titreEror);
+                setTitreEror1(initialPrestationState.titreEror1);
               }}
             />
             <div style={{ color: "red" }}>{TitreEror}</div>
+            <div style={{ color: "red" }}>{TitreEror1}</div>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-nomClient"
+              label="Activité"
+              select
+              variant="outlined"
+              size="small"
+              fullWidth
+              value={NomActvite}
+              onChange={(e) => {
+                setNomActvite(e.target.value);
+                setNomActviteEror(initialPrestationState.nomActviteEror);
+                setDoErr(false);
+              }}
+            >
+              {presActivites.map((activite) => (
+                <MenuItem value={activite.id}>{activite.nomActivite}</MenuItem>
+              ))}
+            </TextField>
+            <div style={{ color: "red" }}>{NomActviteEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -380,9 +446,6 @@ export default function ModiferPrestation({ match }) {
           </Grid>
         </Grid>
       </form>
-      {error ? (
-        <Alert severity="error">La prestation n'est pas modifié!</Alert>
-      ) : null}
     </>
   );
 }

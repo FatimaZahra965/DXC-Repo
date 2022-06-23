@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editRessourceAction } from "../../services/Actions/ressourcesActions";
 import {
   validacionError,
-  validarFormularioAction,
+  // validarFormularioAction,
   validationSuccess,
 } from "../../services/Actions/validacionActions";
 import { useHistory } from "react-router-dom";
@@ -25,16 +25,16 @@ export default function ModiferRessource({ match }) {
     matricule: "",
     prenom: "",
     nom: "",
-    dateAmbauche: "",
-    dateNaissance: "",
+    dateambauche: "",
+    datenaissance: "",
     status: "",
     genre: "",
-    profil: "",
+    profilefacturation: "",
   };
   // Ressource
   const dispatch = useDispatch();
   const editRessource = (ressource) => dispatch(editRessourceAction(ressource));
-  const validarForm = () => dispatch(validarFormularioAction());
+  // const validarForm = () => dispatch(validarFormularioAction());
   const SuccessValidation = () => dispatch(validationSuccess());
   const errorValidacion = () => dispatch(validacionError());
   const [ressourcedate, setRessourcedate] = useState(initialRessourceState);
@@ -52,15 +52,18 @@ export default function ModiferRessource({ match }) {
 
   useEffect(() => {
     clienteAxios
-      .get(`https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${match.params.id}`)
+      .get(
+        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${match.params.id}`,
+      )
       .then((resp) => {
         setRessourcedate(resp.data);
+        // console.log(resp.data);
       })
       .catch((error) => {
         console.log(error);
       });
     // dispatch(getRessourceAction(matricule));
-  }, [matricule]);
+  }, []);
 
   // const ressource = useSelector((state) => state.Ressources.Ressource);
   const error = useSelector((state) => state.error.error);
@@ -68,7 +71,7 @@ export default function ModiferRessource({ match }) {
 
   const submitEditRessource = (e) => {
     e.preventDefault();
-
+    // validarForm();
     let matriculeEror = "";
     let statusEror = "";
     let genreEror = "";
@@ -90,26 +93,26 @@ export default function ModiferRessource({ match }) {
     if (!ressourcedate.genre) {
       genreEror = "le champ Genre de la ressource est obligatiore";
     }
-    if (!ressourcedate.dateAmbauche) {
+    if (!ressourcedate.dateambauche) {
       dateAmbaucheEror =
         "le champ Date d'ambauche de la ressource est obligatiore";
     }
-    if (!ressourcedate.dateNaissance) {
+    if (!ressourcedate.datenaissance) {
       dateNaissanceEror =
         "le champ Date de naissance de la ressource est obligatiore";
     }
-    if (!ressourcedate.profil) {
+    if (!ressourcedate.profilefacturation) {
       profilEror = "le champ Profil de la ressource est obligatiore";
     }
     if (
-      !ressourcedate.firstName ||
-      !new RegExp(/^\w+$/).test(ressourcedate.firstName)
+      !ressourcedate.firstname ||
+      !new RegExp(/^\w+$/).test(ressourcedate.firstname)
     ) {
       nomEror = "le champ Nom de la ressource est obligatiore";
     }
     if (
-      !ressourcedate.lastName ||
-      !new RegExp(/^\w+$/).test(ressourcedate.lastName)
+      !ressourcedate.lastname ||
+      !new RegExp(/^\w+$/).test(ressourcedate.lastname)
     ) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
     }
@@ -142,10 +145,11 @@ export default function ModiferRessource({ match }) {
       matricule: ressourcedate.matricule,
       status: ressourcedate.status,
       genre: ressourcedate.genre,
-      dateNaissance: ressourcedate.dateNaissance,
-      lastName: ressourcedate.nom,
-      firstName: ressourcedate.prenom,
-      dateAmbauche: ressourcedate.dateAmbauche,
+      datenaissance: ressourcedate.datenaissance,
+      lastname: ressourcedate.nom,
+      firstname: ressourcedate.prenom,
+      dateambauche: ressourcedate.dateambauche,
+      profilefacturation: ressourcedate.profilefacturation,
       techno: forms,
       methodes: formsMethodes,
       outils: formsOutils,
@@ -166,16 +170,16 @@ export default function ModiferRessource({ match }) {
 
   const status = [
     {
-      label: "recrutement",
+      label: "Recrutement",
       value: "recrutement",
     },
     {
       label: "Salarié",
-      value: "Salarié",
+      value: "salarie",
     },
     {
       label: "Contractant",
-      value: "Contractant",
+      value: "contractant",
     },
     {
       label: "inactif",
@@ -186,27 +190,27 @@ export default function ModiferRessource({ match }) {
   const profiles = [
     {
       label: "Entry",
-      value: "Entry",
+      value: "entry",
     },
     {
       label: "Intermediate",
-      value: "Intermediate",
+      value: "intermediate",
     },
     {
       label: "Specialist",
-      value: "Specialist",
+      value: "specialist",
     },
     {
       label: "Referent",
-      value: "Referent",
+      value: "referent",
     },
     {
       label: "Expert",
-      value: "Expert",
+      value: "expert",
     },
     {
       label: "Master",
-      value: "Master",
+      value: "master",
     },
   ];
   const technosForm = {
@@ -294,7 +298,6 @@ export default function ModiferRessource({ match }) {
   return (
     <>
       <PageTitle title="Modifer Ressource" path="/app/prestations/ressources" />
-
       <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
         {error && doErr ? (
@@ -328,8 +331,8 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="firstName"
-              value={ressourcedate.firstName}
+              name="firstname"
+              value={ressourcedate.firstname}
               onChange={(e) => {
                 handleInputChange(e);
                 setNomEror("");
@@ -344,8 +347,8 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="lastName"
-              value={ressourcedate.lastName}
+              name="lastname"
+              value={ressourcedate.lastname}
               onChange={(e) => {
                 handleInputChange(e);
                 setPrenomEror("");
@@ -385,7 +388,7 @@ export default function ModiferRessource({ match }) {
               size="small"
               fullWidth
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.status}
               onChange={(e) => {
                 handleInputChange(e);
                 setStatusEror("");
@@ -406,9 +409,9 @@ export default function ModiferRessource({ match }) {
               label="Profil de facturation"
               size="small"
               fullWidth
-              name="profil"
+              name="profilefacturation"
               variant="outlined"
-              valur={ressourcedate.profil}
+              value={ressourcedate.profilefacturation}
               onChange={(e) => {
                 handleInputChange(e);
                 setProfilEror("");
@@ -431,8 +434,8 @@ export default function ModiferRessource({ match }) {
               format="MM/DD/YYYY"
               fullWidth
               type="date"
-              name="dateAmbauche"
-              value={ressourcedate.dateAmbauche}
+              name="dateambauche"
+              value={ressourcedate.dateambauche}
               onChange={(e) => {
                 handleInputChange(e);
                 setDateAmbaucheEror("");
@@ -448,8 +451,8 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="dateNaissance"
-              value={ressourcedate.dateNaissance}
+              name="datenaissance"
+              value={ressourcedate.datenaissance}
               onChange={(e) => {
                 handleInputChange(e);
                 setDateNaissanceEror("");

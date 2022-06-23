@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,16 +14,19 @@ import useStyles from "./styles";
 import axios from "axios";
 
 function CompetencesLinguistiques(props) {
-    var classes = useStyles();
-    let history = useHistory();
-    const [competences, setCompetences] = useState([]);
+  var classes = useStyles();
+  let history = useHistory();
+  const [competences, setCompetences] = useState([]);
   useEffect(() => {
     console.log("hello hjjjjj");
 
     axios
-      .get("https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Compétences linguistiques", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      })
+      .get(
+        "https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Compétences linguistiques",
+        {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        },
+      )
       .then(function (res) {
         // handle success
         console.log("res", res.data);
@@ -35,15 +38,15 @@ function CompetencesLinguistiques(props) {
       });
   });
   function EditCompetence(id) {
-    history.push("/app/competances/EditCompetance/"+id);
+    history.push("/app/competances/EditCompetance/" + id);
   }
   const AfficheCompetence = (e) => {
     let path = `/app/competances/CompetanceDetail/` + e;
     history.push(path);
   };
-    return (
-        <div>
-          <TableContainer component={Paper}>
+  return (
+    <div>
+      <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -54,9 +57,8 @@ function CompetencesLinguistiques(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-          {competences.map((competence) => (
+            {competences.map((competence) => (
               <TableRow key={competence.nomCompetance}>
-               
                 <TableCell component="th" scope="row">
                   {competence.nomCompetance}
                 </TableCell>
@@ -66,11 +68,10 @@ function CompetencesLinguistiques(props) {
                 <TableCell component="th" scope="row">
                   {competence.evaluationManager}
                 </TableCell>
-                <TableRow component="th" scope="row" >
-                <Button 
-                onClick={() => AfficheCompetence(competence.id)}>
-                 <VisibilityIcon className={classes.icons} />
-                      </Button>
+                <TableRow component="th" scope="row">
+                  <Button onClick={() => AfficheCompetence(competence.id)}>
+                    <VisibilityIcon className={classes.icons} />
+                  </Button>
                   <Button onClick={() => EditCompetence(competence.id)}>
                     <EditIcon className={classes.icons} />
                   </Button>
@@ -79,9 +80,9 @@ function CompetencesLinguistiques(props) {
             ))}
           </TableBody>
         </Table>
-      </TableContainer> 
-        </div>
-    );
+      </TableContainer>
+    </div>
+  );
 }
 
 export default CompetencesLinguistiques;

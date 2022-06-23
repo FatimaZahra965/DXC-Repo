@@ -2,15 +2,16 @@ import React from "react";
 import { Card } from "@material-ui/core";
 import { CardBody, CardTitle, Table } from "reactstrap";
 import { useSelector } from "react-redux";
-function CompetenceTrans(props) {
-  const competences = useSelector(
-    (state) => state.competences.competence,
+function Technologies() {
+
+  const competances = useSelector(
+    (state) => state.competances.competancesRess,
   );
     return (
         <div>
         <Card>
             <CardBody>
-              <CardTitle tag="h6" className="border-bottom p-3 mb-0">Compétences Techniques</CardTitle>
+              <CardTitle tag="h6" className="border-bottom p-3 mb-0">les Compétences </CardTitle>
               <div className="d-flex align-items-center p-2">
               <Table className="no-wrap mt-3 align-middle" responsive borderless>
                 <thead>
@@ -20,7 +21,7 @@ function CompetenceTrans(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {competences.map((competence) => (
+                  {competances.map((competence) => (
                     <tr key={competence.nomCompetance} className="border-top">
                       
                       <td>{competence.nomCompetance}</td>
@@ -36,5 +37,5 @@ function CompetenceTrans(props) {
     );
 }
 
-export default CompetenceTrans
+export default Technologies
 ;
