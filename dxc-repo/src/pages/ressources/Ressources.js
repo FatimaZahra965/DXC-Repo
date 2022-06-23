@@ -88,6 +88,18 @@ const Ressources = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const Recherche = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = ressources.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.firstname.toLowerCase().includes(val);
+    }
+  });
 
   const EditRessource = (e) => {
     console.log("------>", e);
@@ -98,18 +110,6 @@ const Ressources = () => {
     history.push("/app/prestations/profil/" + e);
   };
 
-  const Recherche = (e) => {
-    var lowerCase = e.target.value.toLowerCase();
-    setVal(lowerCase);
-  };
-
-  const filteredData = ressources.filter((el) => {
-    if (val === "") {
-      return el;
-    } else {
-      return el.nomActivite.toLowerCase().includes(val);
-    }
-  });
   return (
     <>
       {error ? (

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 //axios
 import { useDispatch, useSelector } from "react-redux";
 // import { getPrestationsAction } from "../../services/Actions/prestationsActions";
-import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
+import { Button, Grid, makeStyles, Paper,TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -97,6 +97,19 @@ const Certifications = () => {
   //   let path = `/app/certifications/AfficherPrestation/` + 1;
   //   history.push(path);
   // };
+
+  const Recherche = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = certifications.filter((el) => {
+    if (val === "") {
+      return el;
+    } else {
+      return el.titre.toLowerCase().includes(val);
+    }
+  });
   return (
     <>
       {error ? (
@@ -107,6 +120,27 @@ const Certifications = () => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <PageTitle title="Certifications" path="/app/dashboard" />
+        </Grid>
+        <Grid item xs={6} className={classes.grid}></Grid>
+        <Grid xs={6} className={classes.grid}>
+          <TextField
+            id="outlined-basic"
+            onChange={Recherche}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Rechercher"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button

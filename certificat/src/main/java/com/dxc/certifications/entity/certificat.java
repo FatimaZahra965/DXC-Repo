@@ -22,15 +22,10 @@ public class certificat {
     private String code;
     @Column(name = "titre")
     private String titre;
-<<<<<<< HEAD
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "datecertification")
     private Date datecertification;
-=======
-    @Column(name = "datecertification")
-    private  Date datecertification;
->>>>>>> 44d931e088c1b326e649988da8420734578a09bf
     @Column(name = "ressourceid")
     private String ressourceid;
     @Column(name = "niveau")
