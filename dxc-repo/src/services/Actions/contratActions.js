@@ -13,7 +13,7 @@ import {
   EDIT_CONTRAT_ERROR,
 } from "../types";
 import Swal from "sweetalert2";
-
+import moment from "moment";
 import clienteAxios from "../../config/axios";
 
 //créer un nouveau contrat - fonction principale
@@ -95,6 +95,10 @@ export function getContratAction(id) {
     clienteAxios
       .get(`https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/Contrat/${id}`)
       .then((resp) => {
+        resp.data.forEach((element) => {
+          element.dateDebut = moment(element.dateDebut).format("L");
+          element.dateFin = moment(element.dateFin).format("L");
+        });
         // console.log("reponse data",resp.data);
         dispatch(getContratEditSuccess(resp.data));
       })

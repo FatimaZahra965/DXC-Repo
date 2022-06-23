@@ -19,6 +19,7 @@ import { IconButton,InputAdornment,TablePagination, TextField,} from "@material-
 import useStyles from "./styles";
 import { Grid } from "@material-ui/core";
 import { getClientsAction } from "../../services/Actions/clientActions";
+import { Alert } from "@material-ui/lab";
 export default function Clients() {
   const classes = useStyles();
   let history = useHistory();
@@ -67,6 +68,11 @@ export default function Clients() {
   });
   return (
     <>
+     {error ? (
+        <Alert severity="error">Problème de chargement ...!</Alert>
+      ) : null}
+
+      {loading ? <h3 style={{ color: "black" }}>Connecting...</h3> : null}
       <div>
         <PageTitle title="  Liste des clients" path="/app/dashboard" />
       </div>

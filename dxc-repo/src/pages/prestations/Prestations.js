@@ -18,8 +18,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
 import useStyles from "./styles";
 
-import QueueIcon from "@material-ui/icons/Queue";
-
 const columns = [
   { id: "titre", label: "Titre", minWidth: 100 },
   { id: "etat", label: "Etat", minWidth: 100 },
@@ -83,6 +81,7 @@ const Prestations = () => {
       return el.titre.toLowerCase().includes(val);
     }
   });
+  
 
   return (
     <>
@@ -114,15 +113,6 @@ const Prestations = () => {
             size="small"
             label="Recherche"
             className={classes.searchTextField}
-            // InputProps={{
-            //   endAdornment: (
-            //     <InputAdornment>
-            //       <IconButton>
-            //         <SearchIcon />
-            //       </IconButton>
-            //     </InputAdornment>
-            //   ),
-            // }}
           />
         </Grid>
         <Grid item xs={6}>
@@ -151,9 +141,7 @@ const Prestations = () => {
                       {column.label}
                     </TableCell>
                   ))}
-                  {/* <TableCell key="activite" style={{ minWidth: "100" }}>
-                    Activité
-                  </TableCell> */}
+                
                   <TableCell key="actions" style={{ minWidth: "170" }}>
                     Actions
                   </TableCell>

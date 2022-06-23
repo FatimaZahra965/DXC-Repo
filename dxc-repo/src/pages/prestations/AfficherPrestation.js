@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import clienteAxios from "../../config/axios";
 import Bill from "./Bill";
-import SuiBox from "./SiutBox";
-import SuiTypography from "./SuiTypography.js";
 import { Box, Button, Grid, Modal, Typography } from "@material-ui/core";
-import RessourceByActivité from "./RessourceByActivite/RessourceByActivite";
 import QueueIcon from "@material-ui/icons/Queue";
 import ModalAddActivite from "./Modal/ModalAddActivite";
 import { useSelector } from "react-redux";

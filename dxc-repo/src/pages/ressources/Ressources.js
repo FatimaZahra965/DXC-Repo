@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 //axios
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
+import { Button, Grid, IconButton, InputAdornment, makeStyles, Paper, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -15,9 +14,10 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
+import SearchIcon from "@material-ui/icons/Search";
 import { getRessourcesAction } from "../../services/Actions/ressourcesActions";
 import { Alert } from "@material-ui/lab";
-
+import useStyles from "./styles";
 const columns = [
   // { id: "matricule", label: "Matricule", minWidth: 100 },
   { id: "status", label: "Status", minWidth: 80 },
@@ -27,28 +27,6 @@ const columns = [
   { id: "dateAmbauche", label: "Date d'ambauche", minWidth: 180 },
   { id: "dateNaissance", label: "Date de naissance", minWidth: 180 },
 ];
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  icons: {
-    margin: "00px",
-  },
-  addBtn: {
-    display: "flex",
-    justifyContent: "space-between",
-    float: "right",
-    background: "#741F82",
-    color: "#FFFFFF",
-  },
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
 const Ressources = () => {
   const history = useHistory();
   var classes = useStyles();
@@ -60,6 +38,7 @@ const Ressources = () => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [val, setVal] = useState("");
   useEffect(() => {
     //productos cuando el componente este listo
     const loadRessours = () => dispatch(getRessourcesAction());
@@ -73,6 +52,7 @@ const Ressources = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -87,6 +67,20 @@ const Ressources = () => {
   const viewProfil=(e)=>{
     history.push("/app/prestations/profil/"+e)
   }
+  const RechercheRessource = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setVal(lowerCase);
+  };
+
+  const filteredData = ressources.filter((el) => {
+  
+    if (val === "") {
+      return el;
+    } else {
+      return el.firstName.toLowerCase().includes(val);
+      
+    }
+  });
   return (
     <>
       {error ? (
@@ -94,22 +88,44 @@ const Ressources = () => {
       ) : null}
 
       {loading ? <h1>Connexion...</h1> : null}
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
+       <Grid item xs={6}>
           <PageTitle title="Ressources" path="/app/dashboard" />
         </Grid>
-        <Grid item xs={6}>
+      <Grid container spacing={3}>
+       
+        <Grid xs={8} className={classes.Search}>
+          <TextField
+            id="outlined-basic"
+            onChange={RechercheRessource}
+            variant="outlined"
+            fullWidth
+            size="small"
+            label="Recherche"
+            className={classes.searchTextField}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton className={classes.addBtn}>
+                    <SearchIcon className={classes.addBtn} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={4} className={classes.Bajoute}>
           <Button
             type="small"
             variant="contained"
             color="primary"
-            className={classes.addBtn}
+            className={classes.Button}
             onClick={addRessource}
           >
             <AddIcon></AddIcon>
             Ajouter Ressource
           </Button>
         </Grid>
+        <br />
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
@@ -130,8 +146,7 @@ const Ressources = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ressources
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <TableRow

@@ -27,6 +27,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import axios from "axios";
 import EditIcon from "@material-ui/icons/Edit";
 import { getContratsAction } from "../../services/Actions/contratActions";
+import { Alert } from "@material-ui/lab";
 // import './contrat.css';
 export default function Contrats() {
   const classes = useStyles();
@@ -76,6 +77,11 @@ export default function Contrats() {
 
   return (
     <div>
+       {error ? (
+        <Alert severity="error">Problème de chargement ...!</Alert>
+      ) : null}
+
+      {loading ? <h3 style={{ color: "black" }}>Connecting...</h3> : null}
       <div>
         <PageTitle title="  Liste des contrats" path="/app/dashboard" />
       </div>

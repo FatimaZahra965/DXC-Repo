@@ -4,6 +4,18 @@ export default makeStyles((theme) => ({
   body: {
     color: "#603494",
   },
+  table: {
+    minWidth: 650,
+  },
+  icons: {
+    margin: "00px",
+  },
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
   dashedBorder: {
     border: "1px dashed",
     borderColor: theme.palette.primary.main,
@@ -15,12 +27,6 @@ export default makeStyles((theme) => ({
   text: {
     marginBottom: theme.spacing(2),
   },
-  btnAjouter: {
-    margin: "5px",
-    float: "right",
-    background: "#741F82",
-    color: "#FFFFFF",
-  },
   btnAnnuler: {
     margin: "5px",
     float: "right",
@@ -29,10 +35,6 @@ export default makeStyles((theme) => ({
   },
   Alert: {
     paddingBottom: "inherit",
-  },
-  textField: {
-    margin: "5px",
-    width: "500px",
   },
   hrGlobale: {
     margin: "5px",
@@ -50,6 +52,7 @@ export default makeStyles((theme) => ({
   Btext: {
     color: "#603494",
   },
+
   GridForm: {
     marginLeft: "70px",
     margin: "20px 0px 20px 0px",
@@ -61,5 +64,20 @@ export default makeStyles((theme) => ({
     marginLeft: "60px",
     backgroundColor: "transparent",
     maxWidth: 1100,
+  },
+  Search: {
+    textAlign: "initial",
+    display: "flex",
+    padding: 10,
+    position: "absolute",
+    marginLeft: "75px",
+  },
+  Button: {
+    background: "#741F82",
+    color: "#FFFFFF",
+  },
+  Bajoute: {
+    textAlign: "end",
+    marginLeft: "800px",
   },
 }));

@@ -135,7 +135,7 @@ function AjouteClient() {
             </TextField>
             <div style={{ color: "red" }}>{marketEror}</div>
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
           <label>Logo de client</label>
             <TextField
               type="file"
@@ -149,7 +149,7 @@ function AjouteClient() {
               }}
             />
             <div style={{ color: "red" }}>{fileClientEror}</div>
-          </Grid>
+          </Grid> */}
         </Grid>
       </form>
       <Grid item xs={12}>
