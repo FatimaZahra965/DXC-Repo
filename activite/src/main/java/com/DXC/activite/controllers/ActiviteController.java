@@ -24,7 +24,11 @@ public class ActiviteController {
         return this.activiteService.getPrestationActivites(prestation);
     }
 
+<<<<<<< Updated upstream
     @GetMapping(path = "allActivites")
+=======
+        @GetMapping(path = "allActivites")
+>>>>>>> Stashed changes
         public List<com.DXC.activite.models.Activite> getAllActivites() {
             return this.activiteService.getActivite();
         }
@@ -42,6 +46,12 @@ public class ActiviteController {
     public com.DXC.activite.models.Activite showActivite(@PathVariable Integer id) {
         return this.activiteService.getActiviteByID(id);
     }
+
+    @GetMapping(path = "activite/ressource/{idRessource}")
+    public List<com.DXC.activite.models.Activite> getActiviteOfRessurce(@PathVariable Integer idRessource) {
+        return this.activiteService.getActiviteOfRessurce(idRessource);
+    }
+
     @PutMapping("updateActivite")
     public com.DXC.activite.models.Activite updateActivite(@RequestBody com.DXC.activite.models.Activite activite) {
         return activiteService.updateActivite(activite);

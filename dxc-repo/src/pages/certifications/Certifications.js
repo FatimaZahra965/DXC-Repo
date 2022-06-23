@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 //axios
 import { useDispatch, useSelector } from "react-redux";
-import { getPrestationsAction } from "../../services/Actions/prestationsActions";
+// import { getPrestationsAction } from "../../services/Actions/prestationsActions";
 import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
@@ -18,7 +18,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import { Alert } from "@material-ui/lab";
 import {
-  getCertificationAction,
+  // getCertificationAction,
   getCertificationsAction,
 } from "../../services/Actions/certificationsActions";
 

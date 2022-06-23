@@ -22,7 +22,10 @@ export function createNewcertificationAction(CERTIFICATION) {
   return (dispatch) => {
     dispatch(newCERTIFICATION());
     clienteAxios
-      .post("http://localhost:9001/dxc/certifications/addcertif", CERTIFICATION)
+      .post(
+        "https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/addcertif",
+        CERTIFICATION,
+      )
       .then((res) => {
         console.log(res);
         dispatch(addNewCERTIFICATIONSuccess(CERTIFICATION));
@@ -66,7 +69,7 @@ export function getCertificationsAction() {
     dispatch(getCertficationStart());
 
     axios
-      .get("http://localhost:9001/dxc/certifications/")
+      .get("https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/")
       .then((resp) => {
         console.log("all certifications ----->", resp.data);
         dispatch(downloadCertificationsSuccessful(resp.data));
@@ -126,7 +129,9 @@ export function getCertificationAction(id) {
     dispatch(getEditCertificationsAction());
 
     clienteAxios
-      .get(`http://localhost:9001/dxc/certifications/Certification/${id}`)
+      .get(
+        `https://dxcrepo-certificat.azurewebsites.net/dxc/certifications/Certification/${id}`,
+      )
       .then((resp) => {
         console.log("get Certification by id", resp.data);
         dispatch(getCertificationEditExito(resp.data));

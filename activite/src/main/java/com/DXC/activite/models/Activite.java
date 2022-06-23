@@ -1,5 +1,8 @@
 package com.DXC.activite.models;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,10 +36,21 @@ public class Activite {
 
     public List<Integer> getIdRessources() {
         return idRessources;
+<<<<<<< Updated upstream
     }
 
     public void setIdRessources(List<Integer> idRessources) {
         this.idRessources = idRessources;
+=======
+    }
+
+    public void setIdRessources(List<Integer> idRessources) {
+        this.idRessources = idRessources;
+    }
+
+    public int getFkPrestation() {
+        return fkPrestation;
+>>>>>>> Stashed changes
     }
     /*
      * @ManyToMany
@@ -49,4 +63,22 @@ public class Activite {
      * private List<Ressources> ressources= new ArrayList<>();
      */
 
+<<<<<<< Updated upstream
+=======
+    public void setFkPrestation(int fkPrestation) {
+        this.fkPrestation = fkPrestation;
+    }
+/*   @ManyToMany
+    @JoinTable(
+            name = "ressource_activites",
+            joinColumns = @JoinColumn(name = "id_activite"),
+            inverseJoinColumns = @JoinColumn(name = "id_ressource")
+    )
+    private List<Ressources> ressources= new ArrayList<>();*/
+
+
+
+
+
+>>>>>>> Stashed changes
 }

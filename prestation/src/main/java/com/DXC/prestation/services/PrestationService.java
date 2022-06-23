@@ -1,4 +1,5 @@
 package com.DXC.prestation.services;
+
 import com.DXC.prestation.models.Prestation;
 import com.DXC.prestation.models.PrestationActivites;
 import com.DXC.prestation.repository.PrestationActivitesRepository;
@@ -31,9 +32,11 @@ public class PrestationService {
         }
         return prestationRepository.save(prestation);
     }
-    public void affecterActivite(PrestationActivites presAct){
+
+    public void affecterActivite(PrestationActivites presAct) {
         prestationActivitesRepository.save(presAct);
     }
+
     public List<PrestationActivites> getPrestationActiviteByID() {
         return prestationActivitesRepository.findAll();
     }

@@ -6,10 +6,7 @@ import Card from "@material-ui/core/Card";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import clienteAxios from "../../config/axios";
 import Bill from "./Bill";
-import SuiBox from "./SiutBox";
-import SuiTypography from "./SuiTypography.js";
 import { Box, Button, Grid, Modal, Typography } from "@material-ui/core";
-import RessourceByActivité from "./RessourceByActivite/RessourceByActivite";
 import QueueIcon from "@material-ui/icons/Queue";
 import ModalAddActivite from "./Modal/ModalAddActivite";
 import { useSelector } from "react-redux";
@@ -39,10 +36,6 @@ export default function AfficherPrestation({ match }) {
   const [act, setAct] = useState();
   const RessourcesToShow = useSelector(
     (state) => state.prestations.showRessources,
-  );
-  console.log(
-    "*********************************************",
-    RessourcesToShow,
   );
   useEffect(() => {
     // console.log("id", id);
@@ -124,7 +117,7 @@ export default function AfficherPrestation({ match }) {
                       <Typography variant="subtitle2" color="text">
                         Marcket:&nbsp;&nbsp;&nbsp;
                         <Typography variant="caption" fontWeight="medium">
-                          {prestationdata.marcket}
+                          {prestationdata.market}
                         </Typography>
                       </Typography>
                     </Grid>

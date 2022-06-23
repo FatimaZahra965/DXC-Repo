@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +22,11 @@ public class certificat {
     private String code;
     @Column(name = "titre")
     private String titre;
+<<<<<<< Updated upstream
+=======
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+>>>>>>> Stashed changes
     @Column(name = "datecertification")
     private  Date datecertification;
     @Column(name = "ressourceid")

@@ -35,9 +35,6 @@ public class certficat_service {
         return true;
     }
 
-
-
-
     public List<certificat> affichermescertif( String id){
         return certif_repo.displayCertificats(id);
     }

@@ -50,30 +50,115 @@ const structure = [
   },
   {
     id: 2,
-    label: "Compétances",
-    link: "/app/competances/allCompetances",
+    label: "Prestations",
     icon: (
       <IconButton>
-        <i className="pe-7s-medal" />
+        <i className="pe-7s-folder" />
       </IconButton>
     ),
+    children: [
+      {
+        label: "Prestations",
+        link: "/app/prestations/ListePrestations",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-network" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Contrats",
+        link: "/app/prestations/Contrats",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-id" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Clients",
+        link: "/app/prestations/clients",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-way" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Activités",
+        link: "/app/prestations/activites",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-albums" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Projets",
+        link: "/app/prestations/projets",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-news-paper" />
+          </IconButton>
+        ),
+      },
+    ],
   },
+
   {
     id: 3,
+    label: "Ressources",
+    icon: (
+      <IconButton>
+        <i className="pe-7s-users" />
+      </IconButton>
+    ),
+    children: [
+      {
+        label: "Ressources",
+        link: "/app/prestations/ressources",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-users" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Certifications",
+        link: "/app/certifications/ListeCertifications",
+        icon: (
+          <IconButton>
+            <i className="pe-7s-ribbon" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Compétences",
+        link: "/app/competances/allCompetances",
+        icon: (
+          <IconButton>
+            <i className="pe-7s-medal" />
+          </IconButton>
+        ),
+      },
+      {
+        label: "Téchnologies",
+        link: "/app/prestations/technologies",
+        icon: (
+          <IconButton style={{ fontSize: "1.1rem" }}>
+            <i className="pe-7s-star" />
+          </IconButton>
+        ),
+      },
+    ],
+  },
+  {
+    id: 4,
     label: "Notifications",
     link: "/app/notifications",
     icon: (
       <IconButton>
         <i className="pe-7s-bell" />
-      </IconButton>
-    ),
-  },
-  {
-    id: 4,
-    label: "Prestations",
-    icon: (
-      <IconButton>
-        <i className="pe-7s-folder" />
       </IconButton>
     ),
     children: [
@@ -149,16 +234,6 @@ const structure = [
     icon: (
       <IconButton>
         <i className="pe-7s-tools" />
-      </IconButton>
-    ),
-  },
-  {
-    id: 6,
-    label: "Certifications",
-    link: "/app/certifications/ListeCertifications",
-    icon: (
-      <IconButton>
-        <i className="pe-7s-ribbon" />
       </IconButton>
     ),
   },

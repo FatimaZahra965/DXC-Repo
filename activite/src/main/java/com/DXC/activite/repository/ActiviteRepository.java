@@ -11,7 +11,10 @@ public interface ActiviteRepository extends JpaRepository<com.DXC.activite.model
     @Query("SELECT c FROM Activite c WHERE c.nomActivite = ?1")
     Optional<com.DXC.activite.models.Activite> findByNomActivite(String nomActivite);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     @Query("SELECT c FROM Activite c WHERE c.fkPrestation = 0")
     List<Activite> findActivitiesEn();
 
@@ -25,5 +28,11 @@ public interface ActiviteRepository extends JpaRepository<com.DXC.activite.model
     @Query("SELECT c FROM Activite c WHERE c.fkPrestation = ?1")
     List<Activite> affectRessource(Integer idActivite,Integer idRessource);
 
+<<<<<<< Updated upstream
+=======
+    @Query("SELECT c FROM Activite c, RessourceActivities rc WHERE c.id = rc.id_activite AND rc.id_ressource=?1")
+    List<Activite> getActiviteOfRessurce(Integer idressources);
+
+>>>>>>> Stashed changes
 
 }
