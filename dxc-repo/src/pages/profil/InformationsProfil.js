@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Col, Row, Card, CardBody, CardTitle } from "reactstrap";
-import clienteAxios from '../../config/axios';
 function InformationsProfil(props) {
   
   const RessourcesToShow = useSelector(

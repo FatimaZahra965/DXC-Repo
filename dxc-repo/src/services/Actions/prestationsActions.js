@@ -38,7 +38,7 @@ export function createNewPrestationAction(prestation) {
           .then((result) => {
             console.log(res);
             Swal.fire({
-              timer: 3000,
+              timer: 2000,
               text: "La prestation est ajouter avec succés",
               timeerProgressBar: true,
               icon: "success",
