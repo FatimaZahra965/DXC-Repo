@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPrestationsAction } from "../../services/Actions/prestationsActions";
-import { Button, Grid, Paper, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -19,6 +27,8 @@ import { Alert } from "@material-ui/lab";
 import useStyles from "./styles";
 
 import QueueIcon from "@material-ui/icons/Queue";
+
+import SearchIcon from "@material-ui/icons/Search";
 
 const columns = [
   { id: "titre", label: "Titre", minWidth: 100 },
@@ -96,16 +106,7 @@ const Prestations = () => {
           <PageTitle title="Prestations" path="/app/dashboard" />
         </Grid>
         <Grid item xs={6} className={classes.grid}></Grid>
-        <Grid item xs={1}>
-          <Typography
-            variant="subtitle2"
-            fontWeight="medium"
-            style={{ marginTop: "23px" }}
-          >
-            Recherche:
-          </Typography>
-        </Grid>
-        <Grid xs={5} className={classes.grid}>
+        <Grid xs={6} className={classes.grid}>
           <TextField
             id="outlined-basic"
             onChange={Recherche}
@@ -114,15 +115,15 @@ const Prestations = () => {
             size="small"
             label="Recherche"
             className={classes.searchTextField}
-            // InputProps={{
-            //   endAdornment: (
-            //     <InputAdornment>
-            //       <IconButton>
-            //         <SearchIcon />
-            //       </IconButton>
-            //     </InputAdornment>
-            //   ),
-            // }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={6}>

@@ -216,7 +216,7 @@ export default function AjouterPrestation() {
     console.log("prestation", prestation);
     addPrestation(prestation);
 
-    // history.push("/app/prestations/ListePrestations");
+    history.push("/app/prestations/ListePrestations");
   };
 
   const etats = [

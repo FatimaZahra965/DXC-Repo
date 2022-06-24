@@ -14,7 +14,6 @@ export default makeStyles((theme) => ({
     margin: "20px 0px 20px 0px",
     backgroundColor: "transparent",
     maxWidth: 1000,
-    
   },
   Form: {
     marginLeft: "60px",
@@ -63,8 +62,6 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     float: "left",
-    marginTop: "27px",
-    width: "auto",
   },
   bText: {
     padding: "10px",

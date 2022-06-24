@@ -8,6 +8,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import {
   Grid,
+  IconButton,
+  InputAdornment,
   // IconButton,
   // InputAdornment,
   TablePagination,
@@ -28,6 +30,10 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import EditIcon from "@material-ui/icons/Edit";
 // import { getCapabilitesAction } from "../../services/Actions/capabiliteActions";
 import clienteAxios from "../../config/axios";
+import SearchIcon from "@material-ui/icons/Search";
+import { Alert } from "reactstrap";
+import { useSelector } from "react-redux";
+
 // import './contrat.css';
 export default function Capabilites() {
   const classes = useStyles();
@@ -37,6 +43,7 @@ export default function Capabilites() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [val, setVal] = useState("");
   const [capabilites, setCapabilites] = useState([]);
+
   //acceder al state
 
   useEffect(() => {
@@ -55,8 +62,8 @@ export default function Capabilites() {
       });
   });
 
-  // const loading = useSelector((state) => state.capabilites.loading);
-  // const error = useSelector((state) => state.capabilites.error);
+  //const loading = useSelector((state) => state.capabilites.loading);
+  //const error = useSelector((state) => state.capabilites.error);
   // const capabilites = useSelector((state) => state.capabilites.capabilites);
   const bull = <span className={classes.bullet}>•</span>;
   const handleChangePage = (event, newPage) => {
@@ -77,109 +84,116 @@ export default function Capabilites() {
     let path = `/app/CapabiliteDetail/` + e;
     history.push(path);
   };
-  const RechercheCapabilite = (e) => {
+  const Recherche = (e) => {
     var lowerCase = e.target.value.toLowerCase();
     setVal(lowerCase);
   };
+
   const filteredData = capabilites.filter((el) => {
     if (val === "") {
       return el;
     } else {
-      return el.matricule.toLowerCase().includes(val);
+      return el.firstname.toLowerCase().includes(val);
     }
   });
 
   return (
-    <div>
-      <div>
-        <PageTitle title="  Liste des Capabilites" path="/app/dashboard" />
-      </div>
+    <>
+      {/* {error ? (
+        <Alert severity="error">Problème de chargement ...!</Alert>
+      ) : null}
 
+      {loading ? <h1>Connexion...</h1> : null} */}
       <Grid container spacing={3}>
-        <Grid item xs={8} className={classes.Search}>
+        <Grid item xs={6}>
+          <PageTitle title="Capabilities" path="/app/dashboard" />
+        </Grid>
+        <Grid item xs={6} className={classes.grid}></Grid>
+        <Grid xs={6} className={classes.grid}>
           <TextField
             id="outlined-basic"
-            onChange={RechercheCapabilite}
+            onChange={Recherche}
             variant="outlined"
             fullWidth
             size="small"
-            label="Recherche"
+            label="Rechercher"
             className={classes.searchTextField}
-            // InputProps={{
-            //   endAdornment: (
-            //     <InputAdornment>
-            //       <IconButton className={classes.addBtn}>
-            //         <SearchIcon className={classes.addBtn} />
-            //       </IconButton>
-            //     </InputAdornment>
-            //   ),
-            // }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
-        <Grid item xs={6} className={classes.grid}></Grid>
-        <Grid item xs={6} className={classes.grid}>
+        <Grid item xs={6}>
           <Button
             type="small"
             variant="contained"
             color="primary"
-            className={classes.ButtonAdd}
+            className={classes.addBtn}
             onClick={AjouteCapabilite}
           >
-            <AddIcon />
-            Ajouter Capabilite
+            <AddIcon></AddIcon>
+            Ajouter Capabilité
           </Button>
         </Grid>
-      </Grid>
-      <br />
-
-      <Paper>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow className={classes.TableRow}>
-                <TableCell>Matricule du Capabilité</TableCell>
-                <TableCell>Intitulé</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredData
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((capabilite) => (
-                  <TableRow key={capabilite.matricule}>
-                    <TableCell component="th" scope="row">
-                      {capabilite.matricule}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {capabilite.intitule}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {capabilite.description}
-                    </TableCell>
-                    <TableRow component="th" scope="row">
-                      <Button onClick={() => AfficheCapabilite(capabilite.id)}>
-                        <VisibilityIcon className={classes.icons} />
-                      </Button>
-                      <Button onClick={() => EditCapabilite(capabilite.id)}>
-                        <EditIcon className={classes.icons} />
-                      </Button>
-                    </TableRow>
+        <Grid item xs={12}>
+          <Paper>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow className={classes.TableRow}>
+                    <TableCell>Matricule du Capabilité</TableCell>
+                    <TableCell>Intitulé</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Actions</TableCell>
                   </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[8, 10, 25, 100]}
-          component="div"
-          count={capabilites.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+                </TableHead>
+                <TableBody>
+                  {filteredData
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((capabilite) => (
+                      <TableRow key={capabilite.matricule}>
+                        <TableCell component="th" scope="row">
+                          {capabilite.matricule}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {capabilite.intitule}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {capabilite.description}
+                        </TableCell>
+                        <TableRow component="th" scope="row">
+                          <Button
+                            onClick={() => AfficheCapabilite(capabilite.id)}
+                          >
+                            <VisibilityIcon className={classes.icons} />
+                          </Button>
+                          <Button onClick={() => EditCapabilite(capabilite.id)}>
+                            <EditIcon className={classes.icons} />
+                          </Button>
+                        </TableRow>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[8, 10, 25, 100]}
+              component="div"
+              count={capabilites.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   );
 }

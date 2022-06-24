@@ -37,7 +37,13 @@ export default makeStyles((theme) => ({
     Stroke: "Solid",
     marginTop: "inherit",
   },
-
+  addBtn: {
+    display: "flex",
+    justifyContent: "space-between",
+    float: "right",
+    background: "#741F82",
+    color: "#FFFFFF",
+  },
   labelinformation: {
     color: "#7978BB",
     Stroke: "Solid",
@@ -135,5 +141,39 @@ export default makeStyles((theme) => ({
 
   h3: {
     color: "#7978BB",
+  },
+  body: {
+    color: "#603494",
+  },
+  dashedBorder: {
+    border: "1px dashed",
+    borderColor: theme.palette.primary.main,
+    padding: theme.spacing(2),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+    marginTop: theme.spacing(1),
+  },
+  text: {
+    marginBottom: theme.spacing(2),
+  },
+  textField: {
+    margin: "5px",
+    width: "500px",
+  },
+  hrGlobale: {
+    margin: "5px",
+    backgroundColor: "#603494",
+  },
+  hr: {
+    margin: "5px",
+    width: "500px",
+    float: "left",
+    backgroundColor: "#603494",
+  },
+  gridBorder: {
+    // border: "thick double #32a1ce",
+  },
+  Btext: {
+    color: "#603494",
   },
 }));

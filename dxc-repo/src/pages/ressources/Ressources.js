@@ -174,7 +174,7 @@ const Ressources = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ressources
+                {filteredData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (

@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 //axios
 import { useDispatch, useSelector } from "react-redux";
 // import { getPrestationsAction } from "../../services/Actions/prestationsActions";
-import { Button, Grid, makeStyles, Paper,TextField } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+  makeStyles,
+  Paper,
+  TextField,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -21,6 +28,7 @@ import {
   // getCertificationAction,
   getCertificationsAction,
 } from "../../services/Actions/certificationsActions";
+import SearchIcon from "@material-ui/icons/Search";
 
 const columns = [
   { id: "code", label: "Code", minWidth: 100 },
@@ -68,6 +76,8 @@ const Certifications = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = React.useState(0);
+  const [val, setVal] = useState("");
+
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   useEffect(() => {
     const loadCertifications = () => dispatch(getCertificationsAction());
@@ -122,7 +132,7 @@ const Certifications = () => {
           <PageTitle title="Certifications" path="/app/dashboard" />
         </Grid>
         <Grid item xs={6} className={classes.grid}></Grid>
-        <Grid xs={6} className={classes.grid}>
+        <Grid item xs={6} className={classes.grid}>
           <TextField
             id="outlined-basic"
             onChange={Recherche}
@@ -174,7 +184,7 @@ const Certifications = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {certifications
+                {filteredData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
