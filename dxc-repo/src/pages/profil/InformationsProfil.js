@@ -39,7 +39,7 @@ function InformationsProfil(props) {
             <Row className="mt-3">
               <Col>
                 <div className="bg-light p-2 border">
-                  Profil de facturation : {RessourcesToShow.profilfacturation}
+                  Profil de facturation : {RessourcesToShow.profilefacturation}
                 </div>
               </Col>
               <Col>
