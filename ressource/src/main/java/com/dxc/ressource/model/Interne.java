@@ -1,12 +1,11 @@
-package com.dxc.ressource.entity;
+package com.dxc.ressource.model;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.*;
-
+import java.util.Date;
+import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,25 +13,13 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
+@DiscriminatorValue("1")
+public class Interne extends Ressource {
 
-@Table(name = "ressource", schema = "public")
-
-public class ressource {
-
-    @Id
-    @GeneratedValue
-    private int matricule;
     @Column(name = "status")
     private String status;
-    @Column(name = "firstname")
-    private String firstname;
-    @Column(name = "lastname")
-    private String lastname;
     @Column(name = "profil")
     private String profil;
-
-    @Column(name = "genre")
-    private String genre;
     @Column(name = "dateambauche")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateambauche;

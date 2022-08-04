@@ -1,4 +1,4 @@
-package com.dxc.ressource.entity;
+package com.dxc.ressource.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,15 +13,14 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "technologie", schema = "public")
-public class technologie {
+@Table(name = "ressource_activities", schema = "public")
+public class ressourceActivities {
     @Id
     @GeneratedValue
     private int id;
-    private String titre;
-    private String niveau;
-
-
+    private int id_activite;
+    private int id_ressource;
 }
+
 
 

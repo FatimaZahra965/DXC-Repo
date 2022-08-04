@@ -1,6 +1,5 @@
-package com.dxc.ressource.entity;
+package com.dxc.ressource.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,21 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "methode", schema = "public")
-public class methode {
+@Table(name = "ressource_capabilities", schema = "public")
+public class ressourceCapabilities {
     @Id
     @GeneratedValue
     private int id;
-    private String titre;
-    private String niveau;
-
-
+    private int id_capabilite;
+    private int id_ressource;
 }
+
 
 
