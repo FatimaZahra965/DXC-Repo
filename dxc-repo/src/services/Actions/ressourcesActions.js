@@ -28,10 +28,10 @@ export function createNewRessourceAction(ressource) {
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("https://dxcrepo-ressource.azurewebsites.net/DXC/addRessource", ressource)
+      .post("http://localhost:9000/DXC/addRessource", ressource)
       .then((res) => {
         console.log(res);
-        dispatch(addNewRessourceSuccess(ressource));
+        dispatch(addNewRessourceSuccess(ressource))
         Swal.fire({
           timer: 2000,
           text: "La ressource est ajouter avec succés",
@@ -62,8 +62,9 @@ export const addNewRessourceError = (error) => ({
 export function getRessourcesAction() {
   return (dispatch) => {
     dispatch(getRessourcesStart());
+    console.log('dispatched1');
     axios
-      .get("https://dxcrepo-ressource.azurewebsites.net/DXC/ressource")
+      .get("https://localhost:9000/DXC/ressource")
       .then((resp) => {
         console.log(resp.data);
         resp.data.forEach((element) => {
@@ -71,10 +72,12 @@ export function getRessourcesAction() {
           element.dateNaissance = moment(element.dateNaissance).format("L");
         });
         dispatch(downloadRessourcesSuccessful(resp.data));
+        console.log('dispatched2');
       })
       .catch((error) => {
         //console.log(error);
         dispatch(descargaRessourcesError());
+        console.log('dispatched3');
       });
   };
 }
@@ -174,7 +177,7 @@ export function editRessourceAction(ressource) {
       outils: ressource.formsOutils,
     };
     clienteAxios
-      .put(`https://dxcrepo-ressource.azurewebsites.net/DXC/update`, ressource_date)
+      .put(`https://localhost:9000/DXC/update`, ressource_date)
       .then((resp) => {
         //console.log(resp);
         dispatch(editRessourceSuccess(resp.data));

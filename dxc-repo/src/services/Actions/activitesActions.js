@@ -24,7 +24,7 @@ export function createNewActiviteAction(activite) {
   return (dispatch) => {
     dispatch(newActivite());
     clienteAxios
-      .post("https://dxcrepo-activite.azurewebsites.net/dxc/activites/addActivite", activite)
+      .post("http://localhost:9006/dxc/activites/addActivite", activite)
       .then((res) => {
         console.log(res);
         Swal.fire({
@@ -61,7 +61,7 @@ export function getActivitesAction() {
   return (dispatch) => {
     dispatch(getActivitesStart());
     axios
-      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/allActivites")
+      .get("http://localhost:9006/dxc/activites/allActivites")
       .then((resp) => {
         console.log("activites ----->", resp.data);
         resp.data.forEach((element) => {
@@ -73,7 +73,7 @@ export function getActivitesAction() {
         //   let id = resp.data[i].idPrestation;
         //   console.log("id/*//*/***************>>>>>>>", id);
         //   axios
-        //     .get(`https://dxcrepo-prestation.azurewebsites.net/dxc/prestations/Prestation/${id}`)
+        //     .get(`http://localhost:9002/dxc/prestations/Prestation/${id}`)
         //     .then((res) => {
         //       resp.data.forEach((element) => {
         //         element.idPrestation = res.data.titre;
@@ -110,7 +110,7 @@ export function editActiviteAction(activite) {
 
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
-      .put(`https://dxcrepo-activite.azurewebsites.net/dxc/activites/updateActivite`, activite)
+      .put(`http://localhost:9006/dxc/activites/updateActivite`, activite)
       .then((resp) => {
         //console.log(resp);
         dispatch(editActiviteSuccess(resp.data));
@@ -146,7 +146,7 @@ export function getActiviteAction(id) {
     dispatch(getEditActivitesAction());
     console.log("-------->id", id);
     clienteAxios
-      .get(`https://dxcrepo-activite.azurewebsites.net/dxc/activites/Activite/${id}`)
+      .get(`http://localhost:9006/dxc/activites/Activite/${id}`)
       .then((resp) => {
         console.log("here we are -----------//----->", resp.data);
         dispatch(getActiviteEditSuccess(resp.data));

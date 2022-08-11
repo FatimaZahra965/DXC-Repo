@@ -13,14 +13,15 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "ressource_activities", schema = "public")
-public class ressourceActivities {
+@Table(name = "outil", schema = "public")
+public class Outil {
     @Id
     @GeneratedValue
     private int id;
-    private int id_activite;
-    private int id_ressource;
-}
+    private String titre;
+    private String niveau;
+    
 
+}
 
 

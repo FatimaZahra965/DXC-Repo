@@ -11,7 +11,7 @@ function AffichageClient(props) {
     console.log("hello hjjjjj");
 
     axios
-      .get(`https://dxcrepo-client.azurewebsites.net/DXC/clients/Client/`+props.match.params.id, {
+      .get(`https://localhost:9004/DXC/clients/Client/`+props.match.params.id, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then(function (res) {

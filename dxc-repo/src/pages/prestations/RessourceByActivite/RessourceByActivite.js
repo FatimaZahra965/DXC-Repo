@@ -19,7 +19,7 @@ export default function RessourceByActivite() {
     console.log("id", RessourcesToShow);
     clienteAxios
       .get(
-        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/act/${RessourcesToShow.idRessource}`,
+        `https://localhost:9000/DXC/ressource/act/${RessourcesToShow.idRessource}`,
       )
       .then((res) => {
         console.log("hak hak hak hak ", res.data);

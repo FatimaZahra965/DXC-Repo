@@ -12,7 +12,7 @@ function Technologies(props) {
 
     axios
       .get(
-        "https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/techniques",
+        "https://localhost:9005/DXC/competances/Competance/type/techniques",
         {
           headers: { "Access-Control-Allow-Origin": "*" },
         },

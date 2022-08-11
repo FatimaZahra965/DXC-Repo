@@ -44,7 +44,7 @@ export default function AfficherPrestation({ match }) {
   }, [id]);
   const getPrestation = (id) => {
     clienteAxios
-      .get(`https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`)
+      .get(`http://localhost:9002/DXC/prestations/Prestation/${id}`)
       .then((resp) => {
         console.log("--------------------*>", resp.data);
         setPrestationdata(resp.data);
@@ -55,7 +55,7 @@ export default function AfficherPrestation({ match }) {
   };
   const getPrestationActivites = (id) => {
     clienteAxios
-      .get(`https://dxcrepo-activite.azurewebsites.net/dxc/activites/allPrestationActivites/${id}`)
+      .get(`http://localhost:9006/dxc/activites/allPrestationActivites/${id}`)
       .then((resp) => {
         console.log("allPrestationActivites", resp.data);
         setPrestationActivites(resp.data);

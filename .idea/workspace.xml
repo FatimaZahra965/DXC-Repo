@@ -2,51 +2,76 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="535e8fd0-d353-4363-acdc-10c337ad9e57" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/DXC/client/models/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/DXC/client/models/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/target/classes/com/DXC/client/models/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/target/classes/com/DXC/client/models/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/competance/src/main/java/com/DXC/competance/models/Competance.java" beforeDir="false" afterPath="$PROJECT_DIR$/competance/src/main/java/com/DXC/competance/models/Competance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrat/src/main/java/com/DXC/contrat/models/Contrat.java" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/src/main/java/com/DXC/contrat/models/Contrat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activite/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/activite/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activite/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/activite/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capabilite/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/capabilite/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/certificat/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/certificat/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/competance/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/competance/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/ContratApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/ContratApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/controllers/ContratController.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/controllers/ContratController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/models/Contrat.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/models/Contrat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/repository/ContratRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/repository/ContratRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/services/ContratService.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/classes/com/DXC/contrat/services/ContratService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrat/target/test-classes/com/DXC/contrat/ContratApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/contrat/target/test-classes/com/DXC/contrat/ContratApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/activites/ModifierActivite.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/activites/ModifierActivite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/CapabiliteDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/CapabiliteDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/CapabiliteRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/CapabiliteRessource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/Capabilites.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/Capabilites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/EditCapabilite.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/capabilites/EditCapabilite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/certifications/AjouterCertification.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/certifications/AjouterCertification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/AjouteClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/clients/AjouteClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/Clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/clients/Clients.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/clients/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/Competances.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/Competances.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/Competances.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/EditCompetance.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/EditCompetance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/Tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/Tabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/AjouteContrat.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/AjouteContrat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/certifications/ModifierCertification.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/certifications/ModifierCertification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/AffichageClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/clients/AffichageClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/clients/EditClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/clients/EditClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/AjouteCompetances.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/AjouteCompetances.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetanceDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetanceDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetencesLinguistiques.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetencesLinguistiques.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetencesTechniques.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/competances/CompetencesTechniques.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/ContratDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/ContratDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/EditContrat.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/contrats/EditContrat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/AfficherPrestation.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/AfficherPrestation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/AjouterPrestation.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/AjouterPrestation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/Modal/ModalAddActivite.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/Modal/ModalAddActivite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/ModiferPrestation.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/ModiferPrestation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/RessourceByActivite/RessourceByActivite.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/prestations/RessourceByActivite/RessourceByActivite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Competanceprofil/CompetenceLing.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Competanceprofil/CompetenceTech.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Competanceprofil/CompetenceTrans.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Competanceprofil/CompetencesProfil.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/CompetencesProfil.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/InformationsProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/profil/InformationsProfil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/CompetencesProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/profil/CompetencesProfil.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Profil.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/profil/Profil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/Methodes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/Outils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/TechnoMethodes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/Technologies.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Afficher Ressource/AfficherRessource.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Ajouter Ressoure/AjouterRessource.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Ajouter Ressoure/style.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/AjouterRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/AjouterRessource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/Technologies.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/profil/TchnoMethodesProfil/Technologies.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/ModiferRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/ModiferRessource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Modifier Ressource/ModiferRessource.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Modifier Ressource/style.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Ressources.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/pages/ressources/Ressources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/activitesActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/activitesActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/capabiliteActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/capabiliteActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/certification.Actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/certification.Actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/certificationsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/certificationsActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/clientActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/clientActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/competanceActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/competanceActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/contratActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/contratActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/prestationsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/prestationsActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dxc-repo/src/services/Actions/ressourcesActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/dxc-repo/src/services/Actions/ressourcesActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/PrestationApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/PrestationApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/controllers/PrestationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/controllers/PrestationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/models/Prestation.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/models/Prestation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/repository/PrestationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/repository/PrestationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/services/PrestationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/classes/com/DXC/prestation/services/PrestationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestation/target/test-classes/com/DXC/prestation/PrestationApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/prestation/target/test-classes/com/DXC/prestation/PrestationApplicationTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressource/src/main/java/com/dxc/ressource/entity/ressource.java" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/src/main/java/com/dxc/ressource/entity/ressource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/RessourceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/RessourceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/controller/ressource_controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/controller/ressource_controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/entity/ressource.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/entity/ressource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/repository/ressource_repo.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/repository/ressource_repo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/service/ressource_service.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/classes/com/dxc/ressource/service/ressource_service.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/target/test-classes/com/dxc/ressource/ressource/RessourceApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/target/test-classes/com/dxc/ressource/ressource/RessourceApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,13 +90,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="jdk.selected.JAVA_MODULE" value="corretto-1.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/activite" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/EL MARBOUH Salma/DXC_Repo/dxc-repo"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -91,5 +116,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -181,7 +181,7 @@ function AjouteCompetance() {
     console.log("fonction -----GetMatricul")
     axios
       .get(
-        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${e}`,
+        `https://localhost:9000/DXC/ressource/${e}`,
       )
       .then((resp) => {
         console.log("matricule", resp.data.matricule);

@@ -38,7 +38,7 @@ function EditCapabilite(props) {
   const getCapabilite = () => {
     axios
       .get(
-        `https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/Capabilite/` +
+        `https://localhost:9008/DXC/capabilites/Capabilite/` +
           props.match.params.id,
       )
       .then((resp) => {

@@ -89,7 +89,7 @@ export default function AjouterPrestation() {
   useEffect(() => {
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+        "http://localhost:9006/dxc/activites/allNotAffectedActivites",
       )
       .then((resp) => {
         //console.log("rerpprpprppr", resp.data);
@@ -102,7 +102,7 @@ export default function AjouterPrestation() {
   useEffect(() => {
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+        "http://localhost:9006/dxc/activites/allNotAffectedActivites",
       )
       .then((resp) => {
         //console.log("rerpprpprppr", resp.data);
@@ -119,7 +119,7 @@ export default function AjouterPrestation() {
 
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+        "http://localhost:9006/dxc/activites/allNotAffectedActivites",
       )
       .then((resp) => {
         //console.log("rerpprpprppr", resp.data);

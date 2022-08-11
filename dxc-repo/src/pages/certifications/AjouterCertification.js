@@ -63,7 +63,7 @@ export default function AjouterCertification() {
     data.append("name", file.name);
     clienteAxios
  
-      .post("https://dxcrepo-ressource.azurewebsites.net/files/addFile/1", data)
+      .post("https://localhost:9000/files/addFile/1", data)
 
    
       .then((res) => {

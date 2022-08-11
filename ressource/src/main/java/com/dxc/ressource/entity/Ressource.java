@@ -1,7 +1,6 @@
 package com.dxc.ressource.entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,39 +15,34 @@ import java.util.*;
 @Entity
 
 @Table(name = "ressource", schema = "public")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class ressource {
+public class Ressource {
 
     @Id
     @GeneratedValue
     private int matricule;
-    @Column(name = "status")
-    private String status;
     @Column(name = "firstname")
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
-    @Column(name = "profil")
-    private String profil;
 
     @Column(name = "genre")
     private String genre;
-    @Column(name = "dateambauche")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateambauche;
+    @Column(name="typeRessource")
+    private String typeRessource;
     @Column(name = "datenaissance")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datenaissance;
-    private String profilefacturation;
 
-    @OneToMany(targetEntity = methode.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Methode.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
-    private List<methode> methodes;
-    @OneToMany(targetEntity = outil.class, cascade = CascadeType.ALL)
+    private List<Methode> methodes;
+    @OneToMany(targetEntity = Outil.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
-    private List<outil> outils;
-    @OneToMany(targetEntity = technologie.class, cascade = CascadeType.ALL)
+    private List<Outil> outils;
+    @OneToMany(targetEntity = Technologie.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ressourceid", referencedColumnName = "matricule")
-    private List<technologie> technologies;
+    private List<Technologie> technologies;
 
 }
