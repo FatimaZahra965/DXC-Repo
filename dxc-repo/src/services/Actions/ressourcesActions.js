@@ -23,12 +23,35 @@ import axios from "axios";
 import moment from "moment";
 
 //créer un nouveau produit - fonction principale
-export function createNewRessourceAction(ressource) {
+export function createNewRessourceExterneAction(ressource) {
   console.log("ressource", ressource);
   return (dispatch) => {
     dispatch(newRessource());
     axios
-      .post("http://localhost:9000/DXC/addRessource", ressource)
+      .post("http://localhost:9000/DXC//addRessourceExterne", ressource)
+      .then((res) => {
+        console.log(res);
+        dispatch(addNewRessourceSuccess(ressource))
+        Swal.fire({
+          timer: 2000,
+          text: "La ressource est ajouter avec succés",
+          timeerProgressBar: true,
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(addNewRessourceError());
+      });
+  };
+}
+
+export function createNewRessourceInterneAction(ressource) {
+  console.log("ressource", ressource);
+  return (dispatch) => {
+    dispatch(newRessource());
+    axios
+      .post("http://localhost:9000/DXC//addRessourceInterne", ressource)
       .then((res) => {
         console.log(res);
         dispatch(addNewRessourceSuccess(ressource))

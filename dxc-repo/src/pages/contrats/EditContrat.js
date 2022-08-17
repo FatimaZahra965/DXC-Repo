@@ -38,7 +38,7 @@ function EditContrat(props) {
   const getContrat = () => {
     axios
       .get(
-        `https://dxcrepo-contrat.azurewebsites.net/DXC/contrats/Contrat/` + props.match.params.id,
+        `https://localhost:9003/DXC/contrats/Contrat/` + props.match.params.id,
       )
       .then((resp) => {
         console.log("hhhhkldmdmmdm", resp.data);

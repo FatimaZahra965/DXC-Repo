@@ -1,43 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import { Button, IconButton } from "@material-ui/core";
 import useStyles from "./styles";
-import PageTitle from "../../components/PageTitle/PageTitle";
-import clienteAxios from "../../config/axios";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editRessourceAction } from "../../services/Actions/ressourcesActions";
+import { createNewRessourceAction } from "../../services/Actions/ressourcesActions";
 import {
   validacionError,
-  // validarFormularioAction,
   validationSuccess,
+  validarFormularioAction,
 } from "../../services/Actions/validacionActions";
-import { useHistory } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import Alert from "@material-ui/lab/Alert";
+import moment from "moment";
 
-export default function ModiferRessource({ match }) {
+export default function AjouterRessource() {
   const classes = useStyles();
   const history = useHistory();
-  const initialRessourceState = {
-    matricule: "",
-    prenom: "",
-    nom: "",
-    dateambauche: "",
-    datenaissance: "",
-    status: "",
-    genre: "",
-    profilefacturation: "",
-  };
-  // Ressource
-  const dispatch = useDispatch();
-  const editRessource = (ressource) => dispatch(editRessourceAction(ressource));
-  // const validarForm = () => dispatch(validarFormularioAction());
-  const SuccessValidation = () => dispatch(validationSuccess());
-  const errorValidacion = () => dispatch(validacionError());
-  const [ressourcedate, setRessourcedate] = useState(initialRessourceState);
+  //state
+  const [Matricule, setMatricule] = useState("");
+  const [Status, setStatus] = useState("");
+  const [Prenom, setPrenom] = useState("");
+  const [Nom, setNom] = useState("");
+  const [Genre, setGenre] = useState("");
+  const [DateAmbauche, setDateAmbauche] = useState("");
+  const [DateNaissance, setDateNaissance] = useState("");
+  const [Profil, setProfil] = useState("");
 
   const [MatriculeEror, setMatriculeEror] = useState("");
   const [StatusEror, setStatusEror] = useState("");
@@ -48,28 +40,25 @@ export default function ModiferRessource({ match }) {
   const [DateNaissanceEror, setDateNaissanceEror] = useState("");
   const [ProfilEror, setProfilEror] = useState("");
 
-  const { matricule } = match.params.id;
+  const [FormsEror, setFormsEror] = useState("");
+  const [FormsMethodesEror, setFormsMethodesEror] = useState("");
+  const [FormsOutilsEror, setFormsOutilsEror] = useState("");
 
-  useEffect(() => {
-    clienteAxios
-      .get(
-        `https://localhost:9000/DXC/ressource/${match.params.id}`,
-      )
-      .then((resp) => {
-        setRessourcedate(resp.data);
-        // console.log(resp.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // dispatch(getRessourceAction(matricule));
-  }, []);
+  const [forms, setForms] = useState([]);
+  const [formsMethodes, setFormsMethodes] = useState([]);
+  const [formsOutils, setFormsOutils] = useState([]);
 
-  // const ressource = useSelector((state) => state.Ressources.Ressource);
+  const dispatch = useDispatch();
+  const addRessource = (ressource) =>
+    dispatch(createNewRessourceAction(ressource));
+  // const validarForm = () => dispatch(validarFormularioAction());
+  const SuccessValidation = () => dispatch(validationSuccess());
+  const errorValidacion = () => dispatch(validacionError());
+
   const error = useSelector((state) => state.error.error);
   const [doErr, setDoErr] = useState(false);
 
-  const submitEditRessource = (e) => {
+  const submitNewRessource = (e) => {
     e.preventDefault();
     // validarForm();
     let matriculeEror = "";
@@ -80,41 +69,44 @@ export default function ModiferRessource({ match }) {
     let profilEror = "";
     let dateNaissanceEror = "";
     let dateAmbaucheEror = "";
+    let formsEror = "";
+    let formsMethodesEror = "";
+    let formsOutilsEror = "";
 
-    if (
-      !ressourcedate.matricule ||
-      !new RegExp(/^\w+$/).test(ressourcedate.matricule)
-    ) {
+    if (!Matricule || !new RegExp(/^\w+$/).test(Matricule)) {
       matriculeEror = "le champ Matricule de la ressource est obligatiore";
     }
-    if (!ressourcedate.status) {
+    if (!Status || !new RegExp(/^\w+$/).test(Status)) {
       statusEror = "le champ Status de la ressource est obligatiore";
     }
-    if (!ressourcedate.genre) {
+    if (!Genre || !new RegExp(/^\w+$/).test(Genre)) {
       genreEror = "le champ Genre de la ressource est obligatiore";
     }
-    if (!ressourcedate.dateambauche) {
+    if (!DateAmbauche) {
       dateAmbaucheEror =
         "le champ Date d'ambauche de la ressource est obligatiore";
     }
-    if (!ressourcedate.datenaissance) {
+    if (!DateNaissance) {
       dateNaissanceEror =
         "le champ Date de naissance de la ressource est obligatiore";
     }
-    if (!ressourcedate.profilefacturation) {
+    if (!Profil) {
       profilEror = "le champ Profil de la ressource est obligatiore";
     }
-    if (
-      !ressourcedate.firstname ||
-      !new RegExp(/^\w+$/).test(ressourcedate.firstname)
-    ) {
+    if (!Nom || !new RegExp(/^\w+$/).test(Nom)) {
       nomEror = "le champ Nom de la ressource est obligatiore";
     }
-    if (
-      !ressourcedate.lastname ||
-      !new RegExp(/^\w+$/).test(ressourcedate.lastname)
-    ) {
+    if (!Prenom || !new RegExp(/^\w+$/).test(Prenom)) {
       prenomEror = "le champ Prénom de la ressource est obligatiore";
+    }
+    if (!forms) {
+      formsEror = "le champ Technologie de la ressource est obligatiore";
+    }
+    if (!formsMethodes) {
+      formsMethodesEror = "le champ Méthode de la ressource est obligatiore";
+    }
+    if (!formsOutils) {
+      formsOutilsEror = "le champ Outils de la ressource est obligatiore";
     }
 
     if (
@@ -125,7 +117,10 @@ export default function ModiferRessource({ match }) {
       dateNaissanceEror ||
       genreEror ||
       profilEror ||
-      prenomEror
+      prenomEror ||
+      formsEror ||
+      formsMethodesEror ||
+      formsOutilsEror
     ) {
       setMatriculeEror(matriculeEror);
       setNomEror(nomEror);
@@ -135,38 +130,48 @@ export default function ModiferRessource({ match }) {
       setStatusEror(statusEror);
       setGenreEror(genreEror);
       setProfilEror(profilEror);
+      setFormsEror(formsEror);
+      setFormsMethodesEror(formsMethodesEror);
+      setFormsOutilsEror(formsOutilsEror);
 
       errorValidacion();
       setDoErr(true);
       return;
     }
     SuccessValidation();
+    const dates = {
+      DateNaissance: moment(DateNaissance).format("yyyy-MM-DD"),
+      DateAmbauche: moment(DateAmbauche).format("yyyy-MM-DD"),
+    };
     let ressource = {
-      matricule: ressourcedate.matricule,
-      status: ressourcedate.status,
-      genre: ressourcedate.genre,
-      datenaissance: ressourcedate.datenaissance,
-      lastname: ressourcedate.nom,
-      firstname: ressourcedate.prenom,
-      dateambauche: ressourcedate.dateambauche,
-      profilefacturation: ressourcedate.profilefacturation,
-      techno: forms,
+      // matricule: Matricule,
+      status: Status,
+      genre: Genre,
+      dateNaissance: DateNaissance,
+      lastname: Nom,
+      firstname: Prenom,
+      dateAmbauche: DateAmbauche,
+      profilefacturation: Profil,
+      technologies: forms,
       methodes: formsMethodes,
       outils: formsOutils,
     };
     console.log("ressource", ressource);
-    editRessource(ressource);
+    addRessource(ressource);
 
     history.push("/app/prestations/ressources");
   };
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setRessourcedate({ ...ressourcedate, [name]: value });
-  };
-  const annuler = () => {
-    let path = `/app/prestations/ressources`;
-    history.push(path);
-  };
+
+  const options = [
+    {
+      label: "Homme",
+      value: "homme",
+    },
+    {
+      label: "Femme",
+      value: "femme",
+    },
+  ];
 
   const status = [
     {
@@ -182,7 +187,7 @@ export default function ModiferRessource({ match }) {
       value: "contractant",
     },
     {
-      label: "inactif",
+      label: "Inactif",
       value: "inactif",
     },
   ];
@@ -213,6 +218,11 @@ export default function ModiferRessource({ match }) {
       value: "master",
     },
   ];
+
+  const annuler = () => {
+    let path = `/app/prestations/ressources`;
+    history.push(path);
+  };
   const technosForm = {
     titre: "",
     niveau: "",
@@ -226,11 +236,7 @@ export default function ModiferRessource({ match }) {
     niveau: "",
   };
 
-  const [forms, setForms] = useState([]);
-  const [formsMethodes, setFormsMethodes] = useState([]);
-  const [formsOutils, setFormsOutils] = useState([]);
-
-  const handleInputChangeForms = (e, idform) => {
+  const handleInputChange = (e, idform) => {
     const { name, value } = e.target;
     setForms(
       forms.map((form, i) => {
@@ -295,35 +301,19 @@ export default function ModiferRessource({ match }) {
   const removeMethode = (i) => {
     setFormsMethodes(formsMethodes.filter((el, id) => id !== i));
   };
+
   return (
     <>
-      <PageTitle title="Modifer Ressource" path="/app/prestations/ressources" />
+      <PageTitle title="Ajouter Ressource" path="/app/prestations/ressources" />
       <hr className={classes.hrGlobale}></hr>
       <Grid item xs={12} className={classes.Alert}>
         {error && doErr ? (
-          <Alert severity="error">La ressource n'est pas modifié!</Alert>
+          <Alert severity="error">La ressource n'est pas ajouté!</Alert>
         ) : null}
       </Grid>
-      <form onSubmit={submitEditRessource} className={classes.Form}>
-        <Grid container spacing={3} className={classes.GridForm}>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-basic"
-              label="Matricule"
-              size="small"
-              variant="outlined"
-              fullWidth
-              name="matricule"
-              value={ressourcedate.matricule}
-              onChange={(e) => {
-                handleInputChange(e);
-                setMatriculeEror("");
-                setDoErr(false);
-              }}
-            />
-            <div style={{ color: "red" }}>{MatriculeEror}</div>
-          </Grid>
 
+      <form onSubmit={submitNewRessource}>
+        <Grid container spacing={3}>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"
@@ -331,14 +321,14 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="firstname"
-              value={ressourcedate.firstname}
+              value={Prenom}
               onChange={(e) => {
-                handleInputChange(e);
-                setNomEror("");
+                setPrenom(e.target.value);
+                setPrenomEror("");
+                setDoErr(false);
               }}
             />
-            <div style={{ color: "red" }}>{NomEror}</div>
+            <div style={{ color: "red" }}>{PrenomEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -347,38 +337,29 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="lastname"
-              value={ressourcedate.lastname}
+              value={Nom}
               onChange={(e) => {
-                handleInputChange(e);
-                setPrenomEror("");
+                setNom(e.target.value);
+                setNomEror("");
+                setDoErr(false);
               }}
             />
-            <div style={{ color: "red" }}>{PrenomEror}</div>
+            <div style={{ color: "red" }}>{NomEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="outlined-basic"
-              select
-              label="Genre"
+              label="Matricule"
               size="small"
-              fullWidth
-              name="genre"
               variant="outlined"
-              value={ressourcedate.genre}
+              fullWidth
+              value={Matricule}
               onChange={(e) => {
-                handleInputChange(e);
-                setGenreEror("");
+                setMatricule(e.target.value);
+                setMatriculeEror("");
               }}
-            >
-              <MenuItem key="1" value="homme">
-                Homme
-              </MenuItem>
-              <MenuItem key="2" value="femme">
-                Femme
-              </MenuItem>
-            </TextField>
-            <div style={{ color: "red" }}>{GenreEror}</div>
+            />
+            <div style={{ color: "red" }}>{MatriculeEror}</div>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -388,9 +369,9 @@ export default function ModiferRessource({ match }) {
               size="small"
               fullWidth
               variant="outlined"
-              value={ressourcedate.status}
+              value={Status}
               onChange={(e) => {
-                handleInputChange(e);
+                setStatus(e.target.value);
                 setStatusEror("");
               }}
             >
@@ -404,16 +385,35 @@ export default function ModiferRessource({ match }) {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              id="outlined-select-currency"
+              select
+              label="Genre"
+              size="small"
+              fullWidth
+              variant="outlined"
+              value={Genre}
+              onChange={(e) => {
+                setGenre(e.target.value);
+                setGenreEror("");
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem value={option.value}>{option.label}</MenuItem>
+              ))}
+            </TextField>
+            <div style={{ color: "red" }}>{GenreEror}</div>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
               id="outlined-basic"
               select
               label="Profil de facturation"
               size="small"
               fullWidth
-              name="profilefacturation"
               variant="outlined"
-              value={ressourcedate.profilefacturation}
+              value={Profil}
               onChange={(e) => {
-                handleInputChange(e);
+                setProfil(e.target.value);
                 setProfilEror("");
               }}
             >
@@ -431,13 +431,11 @@ export default function ModiferRessource({ match }) {
               id="outlined-basic"
               size="small"
               variant="outlined"
-              format="MM/DD/YYYY"
               fullWidth
               type="date"
-              name="dateambauche"
-              value={ressourcedate.dateambauche}
+              value={DateAmbauche}
               onChange={(e) => {
-                handleInputChange(e);
+                setDateAmbauche(e.target.value);
                 setDateAmbaucheEror("");
               }}
             />
@@ -451,11 +449,10 @@ export default function ModiferRessource({ match }) {
               size="small"
               variant="outlined"
               fullWidth
-              name="datenaissance"
-              value={ressourcedate.datenaissance}
+              value={DateNaissance}
               onChange={(e) => {
-                handleInputChange(e);
-                setDateNaissanceEror("");
+                setDateNaissance(e.target.value);
+                setDateAmbaucheEror("");
               }}
             />
             <div style={{ color: "red" }}>{DateNaissanceEror}</div>
@@ -465,6 +462,7 @@ export default function ModiferRessource({ match }) {
               <AddIcon />
             </IconButton>
             Ajouter une Technologie
+            <div style={{ color: "red" }}>{FormsEror}</div>
           </Grid>
 
           {forms.map((form, i) => {
@@ -479,11 +477,15 @@ export default function ModiferRessource({ match }) {
                   id="outlined-basic"
                   label="Technologies"
                   size="small"
-                  name="name"
+                  name="titre"
                   variant="outlined"
                   fullWidth
                   value={form.name}
-                  onChange={(e) => handleInputChangeForms(e, i)}
+                  onChange={(e) => {
+                    handleInputChange(e, i);
+                    setFormsEror("");
+                    setDoErr(false);
+                  }}
                 />
                 <br />
                 <TextField
@@ -496,7 +498,7 @@ export default function ModiferRessource({ match }) {
                   name="niveau"
                   variant="outlined"
                   value={form.niveau}
-                  onChange={(e) => handleInputChangeForms(e, i)}
+                  onChange={(e) => handleInputChange(e, i)}
                 >
                   <MenuItem key="0" value="NE">
                     NE - Non Exigé
@@ -530,13 +532,14 @@ export default function ModiferRessource({ match }) {
               <AddIcon />
             </IconButton>
             Ajouter une Méthode
+            <div style={{ color: "red" }}>{FormsMethodesEror}</div>
           </Grid>
 
           {formsMethodes.map((form, i) => {
             return (
               <>
                 <Grid item xs={12}>
-                  <b className={classes.Btext}> Méthodes {i + 1}:</b>
+                  <b className={classes.Btext}> Méthode {i + 1} :</b>
                   <br />
                   <hr className={classes.hr}></hr>
                   <br />
@@ -545,11 +548,15 @@ export default function ModiferRessource({ match }) {
                     id="outlined-basic"
                     label="Méthode"
                     size="small"
-                    name="name"
+                    name="titre"
                     variant="outlined"
                     fullWidth
                     value={form.name}
-                    onChange={(e) => handleInputChangeMethodes(e, i)}
+                    onChange={(e) => {
+                      handleInputChangeMethodes(e, i);
+                      setFormsMethodesEror("");
+                      setDoErr(false);
+                    }}
                   />
                   <br />
                   <TextField
@@ -600,12 +607,13 @@ export default function ModiferRessource({ match }) {
               <AddIcon />
             </IconButton>
             Ajouter un outil
+            <div style={{ color: "red" }}>{FormsOutilsEror}</div>
           </Grid>
 
           {formsOutils.map((form, i) => {
             return (
               <Grid item xs={12}>
-                <b className={classes.Btext}> Outil {i + 1}:</b>
+                <b className={classes.Btext}> outil {i + 1} :</b>
                 <br />
                 <hr className={classes.hr}></hr>
                 <br />
@@ -614,11 +622,14 @@ export default function ModiferRessource({ match }) {
                   id="outlined-basic"
                   label="Outil"
                   size="small"
-                  name="name"
+                  name="titre"
                   variant="outlined"
                   fullWidth
                   value={form.name}
-                  onChange={(e) => handleInputChangeOutils(e, i)}
+                  onChange={(e) => {
+                    handleInputChangeOutils(e, i);
+                    setFormsOutilsEror("");
+                  }}
                 />
                 <br />
                 <TextField
@@ -662,12 +673,12 @@ export default function ModiferRessource({ match }) {
           <Grid item xs={12}>
             <Button
               size="small"
-              type="submit"
               variant="contained"
+              type="submit"
               className={classes.btnAjouter}
               color="primary"
             >
-              Modifer
+              Ajouter
             </Button>
             <Button
               size="small"

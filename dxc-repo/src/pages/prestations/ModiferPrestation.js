@@ -79,7 +79,7 @@ export default function ModiferPrestation({ match }) {
     console.log("id", id);
     clienteAxios
       .get(
-        `https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`,
+        `http://localhost:9002/DXC/prestations/Prestation/${id}`,
       )
       .then((resp) => {
         console.log("--------------------*>", resp.data);
@@ -254,7 +254,7 @@ export default function ModiferPrestation({ match }) {
   useEffect(() => {
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites",
+        "http://localhost:9006/dxc/activites/allNotAffectedActivites",
       )
       .then((resp) => {
         //console.log("rerpprpprppr", resp.data);

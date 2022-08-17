@@ -25,7 +25,7 @@ export function createNewCapabiliteAction(capabilite) {
     dispatch(newCapabilite());
     clienteAxios
       .post(
-        "https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/addCapabilite",
+        "https://localhost:9008/DXC/capabilites/addCapabilite",
         capabilite,
       )
       .then((res) => {
@@ -76,7 +76,7 @@ export function getCapabilitesAction() {
     // interroger l'API
     clienteAxios
       .get(
-        "https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/allCapabilites",
+        "https://localhost:9008/DXC/capabilites/allCapabilites",
       )
       .then((resp) => {
         console.log("===================>", resp);
@@ -110,7 +110,7 @@ export function getCapabiliteAction(id) {
     //obtenir l'api de  le CAPABILITE
     clienteAxios
       .get(
-        `https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/Capabilite/${id}`,
+        `https://localhost:9008/DXC/capabilites/Capabilite/${id}`,
       )
       .then((resp) => {
         // console.log("reponse data",resp.data);
@@ -144,7 +144,7 @@ export function editCapabiliteAction(capabilite) {
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
       .put(
-        `https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/updateCapabilite`,
+        `https://localhost:9008/DXC/capabilites/updateCapabilite`,
         capabilite,
       )
       .then((resp) => {

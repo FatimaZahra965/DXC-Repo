@@ -51,7 +51,7 @@ export default function Capabilites() {
     // loadCapabilites();
     clienteAxios
       .get(
-        "https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/allCapabilites",
+        "https://localhost:9008/DXC/capabilites/allCapabilites",
       )
       .then((resp) => {
         // console.log("===================>", resp);

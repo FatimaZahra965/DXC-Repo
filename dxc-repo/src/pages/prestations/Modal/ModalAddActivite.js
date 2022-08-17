@@ -28,7 +28,7 @@ export default function ModalAddActivite(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     clienteAxios
-      .get("https://dxcrepo-activite.azurewebsites.net/dxc/activites/allNotAffectedActivites")
+      .get("http://localhost:9006/dxc/activites/allNotAffectedActivites")
       .then((resp) => {
         console.log("rerpprpprppr", resp.data);
         setPresActivites(resp.data);
@@ -46,7 +46,7 @@ export default function ModalAddActivite(props) {
     console.log("data ---------->", data);
     clienteAxios
       .put(
-        `https://dxcrepo-activite.azurewebsites.net/dxc/activites/affectActivite/${data.idActivite}/${data.idPrestation}`,
+        `http://localhost:9006/dxc/activites/affectActivite/${data.idActivite}/${data.idPrestation}`,
         data,
       )
       .then((res) => {

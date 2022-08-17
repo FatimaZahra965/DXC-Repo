@@ -27,7 +27,7 @@ function CapabiliteDetail({ match }) {
     console.log("-----------------> match.params", match.params.id);
     axios
       .get(
-        `https://dxcrepo-capabilite.azurewebsites.net/DXC/capabilites/Capabilite/` +
+        `https://localhost:9008/DXC/capabilites/Capabilite/` +
           match.params.id,
         {
           headers: { "Access-Control-Allow-Origin": "*" },

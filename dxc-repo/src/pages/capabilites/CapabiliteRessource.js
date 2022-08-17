@@ -36,7 +36,7 @@ export default function CapabiliteRessource() {
   useEffect(() => {
     axios
       .get(
-        `https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/capabilite/` +
+        `https://localhost:9000/DXC/ressource/capabilite/` +
           RessourcesToShow.idCapabilite,
       )
       .then(function (res) {
@@ -66,7 +66,7 @@ export default function CapabiliteRessource() {
   const getActivite = (id) => {
     axios
       .get(
-        `https://dxcrepo-activite.azurewebsites.net/dxc/activites/activite/ressource/` +
+        `http://localhost:9006/dxc/activites/activite/ressource/` +
           id,
       )
       .then(function (res) {

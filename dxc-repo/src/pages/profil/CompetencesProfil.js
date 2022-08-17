@@ -21,7 +21,7 @@ function CompetencesProfil(props) {
 
     axios
       .get(
-        "https://dxcrepo-competance.azurewebsites.net/DXC/competances/Competance/type/Compétences techniques",
+        "https://localhost:9005/DXC/competances/Competance/type/Compétences techniques",
         {
           headers: { "Access-Control-Allow-Origin": "*" },
         },

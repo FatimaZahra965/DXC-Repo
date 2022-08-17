@@ -15,7 +15,7 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import { BrowserRouter } from "react-router-dom";
 
-export default function App() {
+ export default function App() {
   // global
   var { isAuthenticated } = useUserState();
 

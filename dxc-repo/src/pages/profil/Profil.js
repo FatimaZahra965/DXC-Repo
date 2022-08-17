@@ -17,7 +17,7 @@ function Profil({match}) {
     const showRessource = (value) => dispatch(showIdRessources(value));
     useEffect(() => {
         clienteAxios
-        .get(`https://dxcrepo-ressource.azurewebsites.net/DXC/ressource/${id}`)
+        .get(`https://localhost:9000/DXC/ressource/${id}`)
         .then((resp) => {
           // console.log("ressource by id",resp.data);
           setRessourcedate(resp.data);

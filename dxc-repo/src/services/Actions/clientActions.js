@@ -23,7 +23,7 @@ export function createNewClientAction(client) {
     dispatch(newClient());
 
     clienteAxios
-      .post("https://dxcrepo-client.azurewebsites.net/DXC/clients/addClient", client)
+      .post("https://localhost:9004/DXC/clients/addClient", client)
       .then((res) => {
         console.log(res);
         //si se inserta correctamente
@@ -62,7 +62,7 @@ export function getClientsAction() {
 
     //interroger l'API
     clienteAxios
-      .get("https://dxcrepo-client.azurewebsites.net/DXC/clients/allClients")
+      .get("https://localhost:9004/DXC/clients/allClients")
       .then((resp) => {
         //console.log(resp);
         dispatch(downloadClientsSuccessful(resp.data));
@@ -94,7 +94,7 @@ export function getClientAcoution(id) {
 
     //obtenir l'api de  le client
     clienteAxios
-      .get(`https://dxcrepo-client.azurewebsites.net/DXC/clients/Client/${id}`)
+      .get(`https://localhost:9004/DXC/clients/Client/${id}`)
       .then((resp) => {
         console.log(resp.data);
         dispatch(getClientEditSuccess(resp.data));
@@ -127,7 +127,7 @@ export function editClientAction(client) {
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
 
-      .put(`https://dxcrepo-client.azurewebsites.net/DXC/clients/updateClient`, client)
+      .put(`https://localhost:9004/DXC/clients/updateClient`, client)
       .then((resp) => {
         //console.log(resp);
         dispatch(editClientSuccess(resp.data));

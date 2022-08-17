@@ -78,7 +78,7 @@ export default function ModifierActivite({ match }) {
   useEffect(() => {
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/Activite/" +
+        "http://localhost:9006/dxc/activites/Activite/" +
           id,
       )
       .then(function (response) {

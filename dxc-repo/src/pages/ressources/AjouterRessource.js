@@ -1,76 +1,66 @@
-import { useStyles } from '@material-ui/pickers/views/Calendar/SlideTransition';
-import React, { Component } from 'react'
 
-export default class AjouterRessource1 extends Component {
+import React, { useState } from "react";
+import FirstForm from "./FirstForm";
+import SecondForm from "./SecondForm";
+import ThirdForm from "./ThirdForm";
 
-    state = {
-        step: 1,
-        Matricule: '',
-        Prenom: '',
-        Nom: '',
-        Genre: '',
-        TypeRessource: '',
-        DateNaissance: '',
-        DateEmbauche: '',
-        DateDebut: '',
-        DateFin: '',
-        Description: '',
-        Status: '',
-        Profil: ''
-    }
 
-    prevStep = () => {
-        this.setState({ step: 1 });
-      }
+function AjouterRessource({form}) {
 
-    nextStep = () => {
-        const { TypeRessource } = this.state;
-        if (TypeRessource === "interne"){
-            this.setState({ step: 2});
-        } else if (TypeRessource === "externe"){
-            this.setState({ step: 3});
-        }
-      } 
-      
-    handleChange = input => e => {
-        this.setState({ [input]: e.target.value });
-      }  
+  const initState = {
+    step: 1,
+    Matricule: '',
+    Prenom: '',
+    Nom: '',
+    Genre: '',
+    TypeRessource: '',
+    DateNaissance: '',
+    DateEmbauche: '',
+    DateDebut: '',
+    DateFin: '',
+    Description: '',
+    Status: '',
+    Profil: '',
+    Technologies: {
+      Titre: '',
+      Niveau: '',
+    },
+    Methodes: {
+      Titre: '',
+      Niveau: '',
+    },
+    Outils: {
+      Titre: '',
+      Niveau: '',
+    },  
+  }
 
-  render() {
+  const [state, setState] = useState(initState);
 
-    const { step } = this.state;
-    const { Matricule, Prenom, Nom, Genre, TypeRessource, DateNaissance, DateEmbauche, DateDebut, DateFin, Description, Status, Profil } = this.state;
-    const values = { Matricule, Prenom, Nom, Genre, TypeRessource, DateNaissance, DateEmbauche, DateDebut, DateFin, Description, Status, Profil }
-
-    switch (step) {
-        case 1 :
-            return (
-                <generalDetails
-                nextStep = { this.nextStep}
-                handleChange = { this.handleChange}
-                values= { values}
-                />
-            )
-        case 2 :
-            return (
-                <interneDetails
-                prevStep = { this.prevStep}
-                handleChange = { this.handleChange}
-                values = { values}
-                />
-            )
-        case 3 : 
-            return (
-                <externeDetails
-                prevStep = { this.prevStep}
-                handleChange = { this.handleChange}
-                values = { values}
-                />
-            )
-        default:            
-    }
+  if (state !== undefined && state["step"] === 2 && state["TypeRessource"] === "interne") { 
     return (
-      <div>AjouterRessource1</div>
+      <div >
+        <h2>Ajouter une Ressource interne </h2>
+        <SecondForm state={state} setState={setState} />
+      </div>
     )
+  } else if (state !== undefined && state["step"] === 3 && state["TypeRessource"] === "externe") {
+    return (
+      <div >
+        <h2>Ajouter une Ressource externe </h2>
+        <ThirdForm state={state} setState={setState} />
+      </div>
+    )
+  } else {    
+  return (
+    <div >
+      <h2>Ajouter une Ressource </h2>
+      <FirstForm state={state} setState={setState}/>
+    </div>
+  ) 
   }
 }
+
+
+export default AjouterRessource;
+

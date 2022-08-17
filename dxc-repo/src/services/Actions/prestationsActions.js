@@ -27,13 +27,13 @@ export function createNewPrestationAction(prestation) {
     dispatch(newPrestation());
     clienteAxios
       .post(
-        "https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/addPrestation",
+        "http://localhost:9002/DXC/prestations/addPrestation",
         prestation,
       )
       .then((res) => {
         clienteAxios
           .put(
-            `https://dxcrepo-activite.azurewebsites.net/dxc/activites/affectActivite/${prestation.idActivite}/${res.data.id}`,
+            `http://localhost:9006/dxc/activites/affectActivite/${prestation.idActivite}/${res.data.id}`,
           )
           .then((result) => {
             console.log(res);
@@ -96,7 +96,7 @@ export function getPrestationsAction() {
 
     axios
       .get(
-        "https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/allPrestations",
+        "http://localhost:9002/DXC/prestations/allPrestations",
       )
       .then((resp) => {
         console.log("all prestations ----->", resp.data);
@@ -134,7 +134,7 @@ export function editPrestationAction(prestation) {
     //interrogez l'API et envoyez une méthode put à mettre à jour
     clienteAxios
       .put(
-        `https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/updatePrestation`,
+        `http://localhost:9002/DXC/prestations/updatePrestation`,
         prestation,
       )
       .then((resp) => {
@@ -174,7 +174,7 @@ export function getPrestationAction(id) {
     //obtenir le produit de l'api
     clienteAxios
       .get(
-        `https://dxcrepo-prestation.azurewebsites.net/DXC/prestations/Prestation/${id}`,
+        `http://localhost:9002/DXC/prestations/Prestation/${id}`,
       )
       .then((resp) => {
         console.log(resp.data);
@@ -193,7 +193,7 @@ export function getPrestationActivites() {
 
     clienteAxios
       .get(
-        "https://dxcrepo-activite.azurewebsites.net/dxc/activites/allPrestationActivites",
+        "http://localhost:9006/dxc/activites/allPrestationActivites",
       )
       .then((resp) => {
         console.log(resp.data);

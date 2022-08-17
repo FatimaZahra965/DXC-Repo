@@ -28,7 +28,7 @@ function EditClient(props) {
   const dispatch = useDispatch();
   const getClient = () => {
     axios
-    .get(`https://dxcrepo-client.azurewebsites.net/DXC/clients/Client/`+props.match.params.id)
+    .get(`https://localhost:9004/DXC/clients/Client/`+props.match.params.id)
     .then((resp) => {
       console.log("hhhhkldmdmmdm",resp.data);
       setCurrentClient(resp.data);
